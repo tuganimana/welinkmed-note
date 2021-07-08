@@ -28,7 +28,7 @@ export default function Signin () {
                                 </div>
                                   <span className="text-red-600 text-xs">{errors.username && errors.username.message}</span>
                                 <div className="mb-2">
-                                   <input type="password" {...register('password', { required: '* This field is required', minLength: { value: 8, message: 'The minimum character is 8' } })} placeholder="Password" className="bg-gray-100 appearance-none border-2 border-green-500 rounded-full w-full py-2 px-4 text-gray-900 leading-tight focus:outline-none focus:bg-white focus:border-green-500" />
+                                   <input type="password" {...register('password', { required: '* This field is required', minLength: { value: 6, message: 'The minimum character is 6' } })} placeholder="Password" className="bg-gray-100 appearance-none border-2 border-green-500 rounded-full w-full py-2 px-4 text-gray-900 leading-tight focus:outline-none focus:bg-white focus:border-green-500" />
                                 </div>
                                 <span className="text-red-600 text-xs">{errors.password && errors.password.message}</span>
                                 <div className="mb-4">
