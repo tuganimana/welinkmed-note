@@ -5,8 +5,8 @@ import Alert from './alerts'
 export default function Home () {
   return (
         <>
-     <h1>Home</h1>
-     <Alert message="Failed to create an account"/>
+          <h1>Home</h1>
+          <Alert message="Failed to create an account"/>
         </>
   )
 }
