@@ -1,28 +1,36 @@
 // eslint-disable-next-line no-use-before-define
 import React from 'react'
 import '../../css/dashboard.css'
+import { useForm } from 'react-hook-form'
+import { LoginType } from '../../utils/types'
 export default function Signin () {
+  const { register, handleSubmit, formState: { errors } } = useForm<LoginType>()
+  const handleLogin = async (data:LoginType) => {
+    console.log(data.username)
+  }
   return (<>
-   <div className="bg-gray-100 flex flex-col justify-center items-center   py-10">
+   <div className="bg-gray-100 flex flex-col justify-center items-center h-screen py-10">
        <div className="bgImage max-w-5xl bg-gray-300 h-64 w-full rounded-tl-3xl rounded-br-3xl shadow-2xl">
          <div className="text-center justify-center items-center p-14">
-             <span className="font-bold text-4xl text-gray-400">We Link Med</span>
+             <span className="font-bold text-4xl text-gray-400">WeLink Med</span>
          </div>
        </div>
        <div className="bg-white -mt-24 shadow-2xl rounded-tl-3xl rounded-br-3xl  overflow-hidden">
             <div className="items-center justify-between py-10 px-5 bg-white shadow-2xl rounded-tl-3xl rounded-br-3xl  mx-auto text-center">
                 <div className="px-2 -mt-6">
-                    <div className="text-center">
-                        <h1 className="font-normal text-3xl text-gray-400 font-medium leading-loose my-3 w-full">
+                    <div className="">
+                        <h1 className="font-normal text-center text-3xl text-gray-400 font-medium leading-loose my-3 w-full">
                            Sign In</h1>
-                        <div className="w-full text-center">
-                            <form action="#">
+                        <div className="w-full">
+                            <form onSubmit={ handleSubmit((data) => { handleLogin(data) })}>
                                 <div className="mb-2">
-                                   <input type="text" placeholder="User Name or Email" className="bg-gray-100 appearance-none border-2 border-green-500 rounded-full w-full py-2 px-4 text-gray-900 leading-tight focus:outline-none focus:bg-white focus:border-green-500" />
+                                   <input type="email" {...register('username', { required: '* This field is required' })} placeholder="User Name or Email" className="bg-gray-100 appearance-none border-2 border-green-500 rounded-full w-full py-2 px-4 text-gray-900 leading-tight focus:outline-none focus:bg-white focus:border-green-500" />
                                 </div>
+                                  <span className="text-red-600 text-xs">{errors.username && errors.username.message}</span>
                                 <div className="mb-2">
-                                   <input type="password" placeholder="Password" className="bg-gray-100 appearance-none border-2 border-green-500 rounded-full w-full py-2 px-4 text-gray-900 leading-tight focus:outline-none focus:bg-white focus:border-green-500" />
+                                   <input type="password" {...register('password', { required: '* This field is required', minLength: { value: 8, message: 'The minimum character is 8' } })} placeholder="Password" className="bg-gray-100 appearance-none border-2 border-green-500 rounded-full w-full py-2 px-4 text-gray-900 leading-tight focus:outline-none focus:bg-white focus:border-green-500" />
                                 </div>
+                                <span className="text-red-600 text-xs">{errors.password && errors.password.message}</span>
                                 <div className="mb-4">
                                    <span className=" text-sm mb-4"><a href="" className="text-blue-400">forgot password?</a></span>
                                 </div>
