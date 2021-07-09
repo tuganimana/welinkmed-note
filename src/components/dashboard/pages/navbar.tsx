@@ -9,6 +9,7 @@ export default function Dashboard (props: any) {
                 <Sidebar/>
             </div>
             <div className="lg:w-5/6 bg-green-400">
+                <Sidebar/>
                 <Topbar/>
                 {props.children}
             </div>
