@@ -2,6 +2,11 @@
 import React from 'react'
 export default function Welcome () {
   return (<>
-  <p>welcom</p>
-  </>)
+      <div className="containder p-2">
+        <div className="">
+          <p>welcome</p>
+        </div>
+      </div>
+  </>
+  )
 }
