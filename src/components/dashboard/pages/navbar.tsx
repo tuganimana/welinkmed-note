@@ -8,7 +8,7 @@ export default function Dashboard (props: any) {
                 <Sidebar/>
             </div>
             {/* main body */}
-            <div className="lg:w-4/5 bg-green-400 p-3 lg:p-5">
+            <div className="lg:w-4/5 bg-green-100">
                 {props.children}
             </div>
         </div>
