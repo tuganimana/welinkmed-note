@@ -3,10 +3,13 @@ import React from 'react'
 import '../../css/dashboard.css'
 import { useForm } from 'react-hook-form'
 import { LoginType } from '../../utils/types'
+import { useHistory } from 'react-router-dom'
+import { frontEndPoints } from '../../utils/enums'
 export default function Signin () {
+  const history = useHistory()
   const { register, handleSubmit, formState: { errors } } = useForm<LoginType>()
   const handleLogin = async (data:LoginType) => {
-    console.log(data.username)
+    history.push(frontEndPoints.RESIDENT_ADD)
   }
   return (<>
    <div className="bg-gray-100 flex flex-col justify-center items-center h-screen py-10">
