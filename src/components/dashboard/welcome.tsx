@@ -3,7 +3,7 @@ import React from 'react'
 export default function Welcome () {
   return (<>
   <div className="containder p-2">
-    <div className=""><p>welcome</p></div>
+    <div className=""><p>welcome wchjsdjhcj</p></div>
   </div>
   </>
   )

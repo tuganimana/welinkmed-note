@@ -19,8 +19,7 @@ export default function Signin () {
             <div className="items-center justify-between py-10 px-5 bg-white shadow-2xl rounded-tl-3xl rounded-br-3xl  mx-auto text-center">
                 <div className="px-2 -mt-6">
                     <div className="">
-                        <h1 className="font-normal text-center text-3xl text-gray-400 font-medium leading-loose my-3 w-full">
-                           Sign In</h1>
+                        <h1 className="font-normal text-center text-3xl text-gray-400 font-medium leading-loose my-3 w-full">Sign In</h1>
                         <div className="w-full">
                             <form onSubmit={ handleSubmit((data) => { handleLogin(data) })}>
                                 <div className="mb-2">
