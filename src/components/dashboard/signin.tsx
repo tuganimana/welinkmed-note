@@ -35,7 +35,7 @@ export default function Signin () {
                                    <span className=" text-sm mb-4"><a href="" className="text-blue-400">forgot password?</a></span>
                                 </div>
                                 <div className="mb-4">
-                                   <input type="submit" value="Sign In" placeholder="Password" className="bg-green-500 cursor-pointer appearance-none  rounded-full w-full py-2 px-4 font-medium text-gray-600 leading-tight focus:outline-none hover:bg-green-400 focus:border-green-500" />
+                                   <input type="submit" value="Sign In" placeholder="Password" className="bg-red-400 cursor-pointer appearance-none  rounded-full w-full py-2 px-4 font-medium text-gray-600 leading-tight focus:outline-none hover:bg-green-400 focus:border-green-500" />
                                 </div>
                                 <div className="">
                                     <a href="" className="mr-6">
