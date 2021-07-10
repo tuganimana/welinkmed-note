@@ -23,7 +23,7 @@ export default function Welcome () {
                         <i className="fa fa-plus float-right cursor-pointer p-2 text-gray-500 bg-red-200 rounded-full"></i>
                      </div>
                      <span className="lg:text-xs text-center font-bold cursor-pointer text-gray-800 float-left">Marie Halies lyni</span>
-                      <div className="items-end text-center cursor-pointer hover:bg-gray-600 bg-gray-500 rounded-full">
+                      <div className="items-end text-center cursor-pointer hover:bg-gray-600 bg-gray-400 rounded-full">
                         <span className="text-center font-bold cursor-pointer  text-gray-100">chrestials</span>
                       </div>
                    </div>
