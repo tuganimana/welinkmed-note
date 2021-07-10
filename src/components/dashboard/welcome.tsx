@@ -4,8 +4,22 @@ import pe from '../../images/pe.jpg'
 import chart from '../../images/chart.png'
 // import person1 from '../../images/person1.jpg'
 export default function Welcome () {
+  const resident = [
+    {
+      fullname: 'Anne Marly',
+      houses: ' bench'
+    },
+    {
+      fullname: 'Bianna Mackenz',
+      houses: ' bench'
+    },
+    {
+      fullname: 'Kevin Armony',
+      houses: ' bench'
+    }
+  ]
   return (<>
-      <div className="container p-4">
+      <div className="container p-4 md:mt-8">
         <div className="flex  flex-wrap">
           <div className="lg:w-4/6 w-full p-2 grid">
             <div className="container mb-2">
@@ -13,54 +27,30 @@ export default function Welcome () {
               <a href=""><span className="font-semibold text-md float-right bg-blue-400 text-white hover:bg-blue-500  rounded-lg p-3"><i className="fa fa-plus"></i> Add New</span></a>
             </div>
             <div className="flex flex-wrap space-between">
-              <div className="w-1/2 md:w-1/3 w-full p-1">
-                <div className="bg-gray-100 shadow-2xl rounded-xl flex flex-wrap p-1">
-                   <div className="w-full lg:w-1/2">
-                     <img src={pe} alt="" className="rounded-lg" />
-                   </div>
-                   <div className="w-full lg:w-1/2 grid p-1">
-                     <div className="">
-                        <i className="fa fa-plus float-right cursor-pointer p-2 text-gray-500 bg-red-200 rounded-full"></i>
-                     </div>
-                     <span className="lg:text-xs text-center font-bold cursor-pointer text-gray-800 float-left">Marie Halies lyni</span>
-                      <div className="items-end text-center cursor-pointer hover:bg-gray-600 bg-gray-500 rounded-full">
-                        <span className="text-center font-bold cursor-pointer  text-gray-100">chrestials</span>
-                      </div>
-                   </div>
-                </div>
-              </div>
-              <div className="w-1/2 md:w-1/3 w-full p-1">
-                <div className="bg-gray-100 shadow-2xl rounded-xl flex flex-wrap p-1">
-                   <div className="w-full lg:w-1/2">
-                     <img src={pe} alt="" className="rounded-lg" />
-                   </div>
-                   <div className="w-full lg:w-1/2 grid p-1">
-                     <div className="">
-                        <i className="fa fa-plus float-right cursor-pointer p-2 text-gray-500 bg-red-200 rounded-full"></i>
-                     </div>
-                     <span className="lg:text-xs text-center font-bold cursor-pointer text-gray-800 float-left">Marie Halies lyni</span>
-                      <div className="items-end text-center cursor-pointer hover:bg-gray-600 bg-gray-500 rounded-full">
-                        <span className="text-center font-bold cursor-pointer  text-gray-100">chrestials</span>
-                      </div>
-                   </div>
-                </div>
-              </div>
-              <div className="w-1/2 md:w-1/3 w-full p-1">
-                <div className="bg-gray-100 shadow-2xl rounded-xl flex flex-wrap p-1">
-                   <div className="w-full lg:w-1/2">
-                     <img src={pe} alt="" className="rounded-lg" />
-                   </div>
-                   <div className="w-full lg:w-1/2 grid p-1">
-                     <div className="">
-                        <i className="fa fa-plus float-right cursor-pointer p-2 text-gray-500 bg-red-200 rounded-full"></i>
-                     </div>
-                     <span className="lg:text-xs text-center font-bold cursor-pointer text-gray-800 float-left">Marie Halies lyni</span>
-                      <div className="items-end text-center cursor-pointer hover:bg-gray-600 bg-gray-500 rounded-full">
-                        <span className="text-center font-bold cursor-pointer  text-gray-100">chrestials</span>
-                      </div>
-                   </div>
-                </div>
-              </div>
+              {
+                resident.map((items:any, index) => {
+                  return (
+                  // eslint-disable-next-line react/jsx-key
+                  <div key={index} className="w-1/2 md:w-1/3 w-full p-1">
+                    <div className="bg-gray-100 shadow-2xl rounded-xl flex flex-wrap p-1">
+                       <div className="w-full lg:w-1/2">
+                         <img src={pe} alt="" className="rounded-lg" />
+                       </div>
+                       <div className="w-full lg:w-1/2 grid p-1">
+                         <div className="">
+                            <i className="fa fa-plus float-right cursor-pointer p-2 text-gray-500 bg-red-200 rounded-full"></i>
+                         </div>
+                         <span className="lg:text-xs text-center font-bold cursor-pointer text-gray-800 float-left">{items.fullname}</span>
+                          <div className=" text-center items-end ">
+                            <span className="text-center cursor-pointer hover:bg-gray-600 rounded-full px-4 py-2 bg-gray-500 font-bold cursor-pointer  text-gray-100 mt-2">{items.houses}</span>
+                          </div>
+                       </div>
+                    </div>
+                  </div>
+                  )
+                })
+              }
+
             </div>
             <div className="flex felx-wrap">
               <div className="w-full md:w-2/3 p-1">
