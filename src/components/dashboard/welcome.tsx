@@ -2,7 +2,7 @@
 import React from 'react'
 import pe from '../../images/pe.jpg'
 import chart from '../../images/chart.png'
-
+import { frontEndPoints } from '../../utils/enums'
 export default function Welcome () {
   const resident = [
     {
@@ -24,7 +24,7 @@ export default function Welcome () {
           <div className="lg:w-4/6 w-full p-2 grid">
             <div className="container mb-2">
               <span className="font-semibold text-md float-left">Resident Pannel</span>
-              <a href=""><span className="font-semibold text-md float-right bg-blue-400 text-white hover:bg-blue-500  rounded-lg p-3"><i className="fa fa-plus"></i> Add New</span></a>
+              <a href={frontEndPoints.RESIDENT_ADD}><span className="font-semibold text-md float-right bg-blue-400 text-white hover:bg-blue-500  rounded-lg p-2"><i className="fa fa-plus"></i> Add New Resident</span></a>
             </div>
             <div className="flex flex-wrap space-between">
               {
@@ -63,7 +63,7 @@ export default function Welcome () {
               </div>
             </div>
           </div>
-          <div className="lg:w-2/6 w-full bg-white rounded-lg p-2 grid">
+          <div className="lg:w-2/6 w-full bg-white rounded-lg p-4 grid">
             <div className="p-1">
               <span className="font-bold">General Stracture</span>
               <div className="align-center item-center text-center">

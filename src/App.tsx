@@ -3,7 +3,6 @@ import React from 'react'
 import './App.css'
 import 'antd/dist/antd.css'
 import './css/tailwind.css'
-import 'bootstrap/dist/css/bootstrap.min.css'
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
 import Signin from './components/dashboard/signin'
 import Dashboard from './components/dashboard/pages/navbar'
@@ -25,7 +24,7 @@ function App () {
             <Welcome/>
           </Dashboard>
         </Route>
-        <Route path="/addresident">
+        <Route path="/add-resident">
           <Dashboard>
           <Addresident/>
           </Dashboard>
