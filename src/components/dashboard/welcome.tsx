@@ -2,7 +2,7 @@
 import React from 'react'
 import pe from '../../images/pe.jpg'
 import chart from '../../images/chart.png'
-// import person1 from '../../images/person1.jpg'
+
 export default function Welcome () {
   const resident = [
     {

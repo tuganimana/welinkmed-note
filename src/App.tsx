@@ -18,7 +18,7 @@ function App () {
         <Route path='/signin'>
           <Signin/>
         </Route>
-        <Route path="/resident-add">
+        <Route path="/dashboard">
           <Dashboard>
             <Welcome/>
           </Dashboard>
