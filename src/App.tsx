@@ -17,7 +17,7 @@ function App () {
         <Route exact path='/'>
           <Signin/>
         </Route>
-        <Route path='/Signin'>
+        <Route path='/signin'>
           <Signin/>
         </Route>
         <Route path="/resident-add">
@@ -27,7 +27,6 @@ function App () {
         </Route>
         <Route path="/addresident">
           <Dashboard>
-            <Welcome/>
           <Addresident/>
           </Dashboard>
         </Route>

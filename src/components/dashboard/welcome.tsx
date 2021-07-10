@@ -1,22 +1,110 @@
 // eslint-disable-next-line no-use-before-define
 import React from 'react'
+import pe from '../../images/pe.jpg'
+import chart from '../../images/chart.png'
+// import person1 from '../../images/person1.jpg'
 export default function Welcome () {
+  const resident = [
+    {
+      fullname: 'Anne Marly',
+      houses: ' bench'
+    },
+    {
+      fullname: 'Bianna Mackenz',
+      houses: ' bench'
+    },
+    {
+      fullname: 'Kevin Armony',
+      houses: ' bench'
+    }
+  ]
   return (<>
-    <nav className="flex items-center p-1 bg-white flex-wrap">
-      <a href="#" className="p-2 mr-4 inline-flex items-center">
-        <span className="text-md p-2 hover:shadow-lg rounded font-semibold text-gray-800 border-l-2 border-r-2 hover:bg-red-200 hover:text-gray-900  pr-2 pl-2 border-blue-500"><i className="fa fa-cogs"></i> Maintenance</span>
-      </a>
-      <button className="text-white inline-flex p-3 hover:bg-gray-900 rounded lg:hidden ml-auto hover:text-white outline-none nav-toggler" data-target="#navigation">
-          <i className="material-icons">menu</i>
-      </button>
-      <div className="hidden top-navbar w-full lg:inline-flex lg:flex-grow lg:w-auto" id="navigation">
-        <div className="lg:inline-flex lg:flex-row lg:ml-auto lg:w-auto w-full lg:items-center items-start  flex flex-col lg:h-auto">
-          <a href="#" className="lg:inline-flex lg:w-auto w-full px-3 py-2  rounded text-gray-900 items-center justify-center hover:bg-gray-300 bg-gray-200 hover:text-gray-900">
-            <span className="font-semibold"><i className="fa fa-user mr-2 bg-red-300 p-2 text-white rounded"></i>User Name</span>
-          </a>
+      <div className="container p-4 md:mt-8">
+        <div className="flex  flex-wrap">
+          <div className="lg:w-4/6 w-full p-2 grid">
+            <div className="container mb-2">
+              <span className="font-semibold text-md float-left">Resident Pannel</span>
+              <a href=""><span className="font-semibold text-md float-right bg-blue-400 text-white hover:bg-blue-500  rounded-lg p-3"><i className="fa fa-plus"></i> Add New</span></a>
+            </div>
+            <div className="flex flex-wrap space-between">
+              {
+                resident.map((items:any, index) => {
+                  return (
+                  // eslint-disable-next-line react/jsx-key
+                  <div key={index} className="w-1/2 md:w-1/3 w-full p-1">
+                    <div className="bg-gray-100 shadow-2xl rounded-xl flex flex-wrap p-1">
+                       <div className="w-full lg:w-1/2">
+                         <img src={pe} alt="" className="rounded-lg" />
+                       </div>
+                       <div className="w-full lg:w-1/2 grid p-1">
+                         <div className="">
+                            <i className="fa fa-plus float-right cursor-pointer p-2 text-gray-500 bg-red-200 rounded-full"></i>
+                         </div>
+                         <span className="lg:text-xs text-center font-bold cursor-pointer text-gray-800 float-left">{items.fullname}</span>
+                          <div className=" text-center items-end ">
+                            <span className="text-center cursor-pointer hover:bg-gray-600 rounded-full px-4 py-2 bg-gray-500 font-bold cursor-pointer  text-gray-100 mt-2">{items.houses}</span>
+                          </div>
+                       </div>
+                    </div>
+                  </div>
+                  )
+                })
+              }
+
+            </div>
+            <div className="flex felx-wrap">
+              <div className="w-full md:w-2/3 p-1">
+                <div className="p-24 bg-white rounded-xl">
+                  <span className="font-bold text-xl text-green-400">Latest here!</span>
+                </div>
+              </div>
+              <div className="w-full md:w-1/3 p-2 rounded-xl">
+                <span className="font-bold">Pending</span>
+              </div>
+            </div>
+          </div>
+          <div className="lg:w-2/6 w-full bg-white rounded-lg p-2 grid">
+            <div className="p-1">
+              <span className="font-bold">General Stracture</span>
+              <div className="align-center item-center text-center">
+              <img src={chart} alt="" className="text-center align-cente"/>
+              </div>
+            </div>
+            <div className="grid gap-2">
+              <div className="flex flex-wrap p-1 border-red-300 border-2 rounded-2xl">
+                <div className="w-1/4  p-2 text-center align-center item-center">
+                  <span><i className="fa fa-pie-chart text-4xl text-red-300"></i></span>
+                </div>
+                <div className="w-2/4 p-2 grid">
+                  <span className="font-bold text-lg text-gray-600">Missed Orders</span>
+                  <span className="font-bold text-xs text-red-300">Direct</span>
+                </div>
+                <div className="w-1/4 "><span className="font-bold float-right p-2">12%</span></div>
+              </div>
+              <div className="flex flex-wrap p-1 border-green-400 border-2 rounded-2xl">
+                <div className="w-1/4  p-2 text-center align-center item-center">
+                  <span><i className="fa fa-pie-chart text-4xl text-green-400"></i></span>
+                </div>
+                <div className="w-2/4 p-2 grid">
+                  <span className="font-bold text-lg text-gray-600">Recieved Orders</span>
+                  <span className="font-bold text-xs text-green-400">Direct</span>
+                </div>
+                <div className="w-1/4 "><span className="font-bold float-right p-2">48%</span></div>
+              </div>
+              <div className="flex flex-wrap p-1 border-blue-300 border-2 rounded-2xl">
+                <div className="w-1/4  p-2 text-center align-center item-center">
+                  <span><i className="fa fa-pie-chart text-4xl text-blue-400"></i></span>
+                </div>
+                <div className="w-2/4 p-2 grid">
+                  <span className="font-bold text-lg text-gray-600">On Date</span>
+                  <span className="font-bold text-xs text-blue-400">Direct</span>
+                </div>
+                <div className="w-1/4 "><span className="font-bold float-right p-2">40%</span></div>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
-    </nav>
-
-  </>)
+  </>
+  )
 }

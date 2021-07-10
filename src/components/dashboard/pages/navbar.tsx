@@ -1,14 +1,17 @@
 // eslint-disable-next-line no-use-before-define
 import React from 'react'
 import Sidebar from '../Sidebar'
+import Topbar from './Topbar'
+
 export default function Dashboard (props: any) {
   return (
-        <div className="lg:flex w-full bg-lightBlue gap-5">
-            <div className="lg:w-1/5">
+        <div className="lg:flex w-full bg-lightBlue">
+            <div className="lg:w-1/6 ">
                 <Sidebar/>
             </div>
-            {/* main body */}
-            <div className="lg:w-4/5 bg-green-100">
+            <div className="lg:w-5/6 bg-gray-100">
+                <Topbar/>
+                <hr className="mt-1"/>
                 {props.children}
             </div>
         </div>
