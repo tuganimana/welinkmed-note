@@ -17,8 +17,8 @@ export default function Topbar () {
   return (<>
     <nav className="flex items-center p-1  flex-wrap mt-2">
 
-      <div className="bg-white  ml-2">
-        <input className="w-64 p-2 focus:outline-none"/><span className="bg-blue-400 px-3 py-2  text-gray-100  font-bold"><SearchOutlined className="w-4"/></span>
+      <div className="bg-white rounded-full ml-2">
+        <input className="w-64 p-2 rounded-full focus:outline-none"/><span className="bg-blue-400 rounded-full px-3 py-2  text-gray-100  font-bold"><SearchOutlined className="rounded-full w-4"/></span>
       </div>
       <div className="hidden top-navbar w-full lg:inline-flex lg:flex-grow lg:w-auto" id="navigation">
         <div className="lg:inline-flex lg:flex-row lg:ml-auto lg:w-auto w-full lg:items-center items-start  flex flex-col lg:h-auto">
