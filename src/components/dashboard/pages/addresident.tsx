@@ -1,142 +1,24 @@
 // eslint-disable-next-line no-use-before-define
 import React from 'react'
-import AppBar from '@material-ui/core/AppBar'
-import Tabs from '@material-ui/core/Tabs'
-import Tab from '@material-ui/core/Tab'
-import Typography from '@material-ui/core/Typography'
-import Box from '@material-ui/core/Box'
-
-interface TabPanelProps {
-  children?: React.ReactNode;
-  index: any;
-  value: any;
-}
-
-function TabPanel (props: TabPanelProps) {
-  const { children, value, index, ...other } = props
-
-  return (
-    <div
-      role="tabpanel"
-      hidden={value !== index}
-      id={`simple-tabpanel-${index}`}
-      aria-labelledby={`simple-tab-${index}`}
-      {...other}
-    >
-      {value === index && (
-        <Box p={3}>
-          <Typography>{children}</Typography>
-        </Box>
-      )}
-    </div>
-  )
-}
-
-function a11yProps (index: any) {
-  return {
-    id: `simple-tab-${index}`,
-    'aria-controls': `simple-tabpanel-${index}`
-  }
-}
+import { Tabs } from 'antd'
+import Overview from './overview'
+const { TabPane } = Tabs
 export default function Addresident () {
-  const [value, setValue] = React.useState(0)
-
-  const handleChange = (event: React.ChangeEvent<{}>, newValue: number) => {
-    setValue(newValue)
+  const callback = (key:any) => {
+    console.log(key)
   }
-
   return (
     <>
     <div className="px-2 py-2">
       <h5 className="font-semibold">Edit Resident Information</h5>
     </div>
+    <div className="mx-4">
+    <Tabs defaultActiveKey="1" onChange={callback}>
+    <TabPane tab="Overview" key="1">
+     <Overview/>
+    </TabPane>
+    <TabPane tab="Profile Picture" key="2">
     <div>
-      <AppBar position="static">
-        <Tabs value={value} onChange={handleChange} aria-label="simple tabs example" className="bg-white text-xs text-black">
-          <Tab label="Overview" {...a11yProps(0)} />
-          <Tab label="Images" {...a11yProps(1)} />
-          <Tab label="Medical Info" {...a11yProps(2)} />
-          <Tab label="Insurance Info" {...a11yProps(2)} />
-          <Tab label="Emergency Info" {...a11yProps(2)} />
-        </Tabs>
-      </AppBar>
-      <TabPanel value={value} index={0}>
-        <div className="row">
-          <div className="col-sm-6">
-            <label>Firstname</label>
-            <input type="text" name="" placeholder="type the firstname" className="form-control"/>
-          </div>
-          <div className="col-sm-6">
-            <label>Lastname</label>
-            <input type="text" name="" placeholder="type the lastname" className="form-control"/>
-          </div>
-          <div className="col-sm-6">
-            <label>Resident State</label>
-            <select className="form-control">
-              <option>Select here</option>
-              <option>Newyork</option>
-              <option>Atlanta</option>
-              <option>Maine</option>
-              <option>Texas</option>
-              <option>Georgia</option>
-              <option>Mossachussets</option>
-            </select>
-          </div>
-          <div className="col-sm-6">
-            <label> Religion</label>
-            <input type="text" name="" placeholder="type the religion" className="form-control"/>
-          </div>
-          <div className="col-sm-6">
-            <label>Maritial Status</label>
-            <select className="form-control">
-              <option>Select here</option>
-              <option>Single</option>
-              <option>Divorced</option>
-              <option>None of above</option>
-            </select>
-          </div>
-          <div className="col-sm-6">
-            <label>Date of Birth</label>
-            <input type="date" name="" className="form-control"/>
-          </div>
-          <div className="col-sm-6">
-            <label>Attending Physician</label>
-            <select className="form-control">
-              <option>Select here</option>
-              <option>Karori</option>
-              <option>Kewe</option>
-              <option>None of above</option>
-            </select>
-          </div>
-          <div className="col-sm-6">
-            <label>Added Date</label>
-            <input type="date" className="form-control"/>
-          </div>
-          <div className="col-sm-6">
-            <label>Additional Physician</label>
-            <select className="form-control">
-              <option>Select here</option>
-              <option>Karori</option>
-              <option>Kewe</option>
-              <option>None of above</option>
-            </select>
-          </div>
-          <div className="col-sm-6">
-            <label>Admitting Physician</label>
-            <select className="form-control">
-              <option>Select here</option>
-              <option>Karori</option>
-              <option>Kewe</option>
-              <option>None of above</option>
-            </select>
-          </div>
-          <div className="mb-4">
-               <input type="submit" value="Add Resident" className="bg-red-400 cursor-pointer appearance-none  rounded-full w-full ml-32 mt-8 py-2 px-64 font-medium text-gray-600 leading-tight focus:outline-none hover:bg-green-400 focus:border-green-500" />
-          </div>
-        </div>
-      </TabPanel>
-      <TabPanel value={value} index={1}>
-      <div>
               <label className="block text-sm font-medium text-gray-700">
                 Cover photo
               </label>
@@ -157,28 +39,32 @@ export default function Addresident () {
                   </p>
                 </div>
               </div>
+              <div className="mb-4">
+               <input type="submit" value="Save" className="bg-green-400 cursor-pointer appearance-none  rounded-full w-full md:w-64 mt-8 py-2 font-medium text-gray-600 leading-tight focus:outline-none hover:bg-green-400 focus:border-green-500" />
+          </div>
             </div>
-      </TabPanel>
-      <TabPanel value={value} index={2}>
-        <div className="row">
-          <div className="col-sm-12">
+    </TabPane>
+    <TabPane tab="Medication" key="3">
+    <div className="grid md:grid-cols-2 gap-4">
+          <div className="p-2">
             <label>Drugs & medication</label>
-            <input type="text" placeholder="type the medication" className="form-control"/>
+            <input type="text" className="w-full p-2 border"/>
           </div>
-          <div className="col-sm-12">
+          <div className="p-2">
             <label>Medication Type</label>
-            <input type="text" placeholder="type the medication" className="form-control"/>
+            <input type="text" className="w-full p-2 border"/>
           </div>
-          <div className="col-sm-12">
+          <div className="p-2">
             <label>Health A-Z</label>
-            <input type="text" placeholder="type the medication" className="form-control"/>
+            <input type="text" className="w-full p-2 border"/>
           </div>
           <br></br>
           <div className="mb-4">
-                     <input type="submit" value="Add" placeholder="Password" className="bg-red-400 cursor-pointer appearance-none  rounded-full w-full md:ml-32 md:mt-8 md:py-2 px-64 font-medium text-gray-600 leading-tight focus:outline-none hover:bg-green-400 focus:border-green-500" />
+               <input type="submit" value="Save" className="bg-green-400 cursor-pointer appearance-none  rounded-full w-full md:w-64 mt-8 py-2 font-medium text-gray-600 leading-tight focus:outline-none hover:bg-green-400 focus:border-green-500" />
           </div>
         </div>
-      </TabPanel>
+    </TabPane>
+  </Tabs>
     </div>
     </>
   )
