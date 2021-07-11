@@ -8,6 +8,7 @@ import Signin from './components/dashboard/signin'
 import Dashboard from './components/dashboard/pages/navbar'
 import Welcome from './components/dashboard/welcome'
 import Addresident from './components/dashboard/pages/addresident'
+import ResidentInfo from './components/dashboard/pages/residentinfo'
 function App () {
   return (
     <>
@@ -27,6 +28,11 @@ function App () {
         <Route path="/add-resident">
           <Dashboard>
           <Addresident/>
+          </Dashboard>
+        </Route>
+        <Route path="/resident-info">
+          <Dashboard>
+          <ResidentInfo/>
           </Dashboard>
         </Route>
       </Switch>
