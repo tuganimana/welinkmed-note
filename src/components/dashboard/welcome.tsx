@@ -2,6 +2,7 @@
 import React from 'react'
 import pe from '../../images/pe.jpg'
 import chart from '../../images/chart.png'
+import person1 from '../../images/person1.jpg'
 import { frontEndPoints } from '../../utils/enums'
 export default function Welcome () {
   const resident = [
@@ -16,6 +17,20 @@ export default function Welcome () {
     {
       fullname: 'Kevin Armony',
       houses: ' bench'
+    }
+  ]
+  const clients = [
+    {
+      fullname: 'Mikey Diaz',
+      houses: 'bench'
+    },
+    {
+      fullname: 'Neymar Santos',
+      houses: 'bench'
+    },
+    {
+      fullname: 'leo Martinez',
+      houses: 'bench'
     }
   ]
   return (<>
@@ -34,7 +49,9 @@ export default function Welcome () {
                   <div key={index} className="w-1/2 md:w-1/3 w-full p-1">
                     <div className="bg-gray-100 shadow-2xl rounded-xl flex flex-wrap p-1">
                        <div className="w-full lg:w-1/2">
+                         <a href="/resident-info">
                          <img src={pe} alt="" className="rounded-lg" />
+                         </a>
                        </div>
                        <div className="w-full lg:w-1/2 grid p-1">
                          <div className="">
@@ -42,7 +59,9 @@ export default function Welcome () {
                          </div>
                          <span className="lg:text-xs text-center font-bold cursor-pointer text-gray-800 float-left">{items.fullname}</span>
                           <div className=" text-center items-end ">
+                            <a href="/resident-info">
                             <span className="text-center cursor-pointer hover:bg-gray-600 rounded-full px-4 py-2 bg-gray-500 font-bold cursor-pointer  text-gray-100 mt-2">{items.houses}</span>
+                            </a>
                           </div>
                        </div>
                     </div>
@@ -52,14 +71,33 @@ export default function Welcome () {
               }
 
             </div>
-            <div className="flex felx-wrap">
-              <div className="w-full md:w-2/3 p-1">
-                <div className="p-24 bg-white rounded-xl">
-                  <span className="font-bold text-xl text-green-400">Latest here!</span>
+            <div className="flex flex-wrap">
+              <div className="w-full md:w-2/3 p-24 bg-white rounded-xl">
+                <span className="font-bold">Recent recorded / table</span>
+                <div>
                 </div>
               </div>
               <div className="w-full md:w-1/3 p-2 rounded-xl">
-                <span className="font-bold">Pending</span>
+                <span className="font-bold">Recents clients added</span>
+                <div className="grid gap-2 p-1 rounded-xl">
+                  {
+                    clients.map((clientitem:any, index) => {
+                      return (
+                        <div key={index} className="flex flex-wrap p-1 border-gray-400 border-b-2 rounded-full">
+                          <div className="w-1/4   text-center align-center item-center">
+                            <span>
+                              <img src={person1} alt="" className="rounded-full" />
+                            </span>
+                          </div>
+                          <div className="w-3/4 p-2 grid">
+                            <span className="font-bold text-xs text-gray-600">{clientitem.fullname}</span>
+                            <span className="font-bold text-xs text-green-500">Bench</span>
+                          </div>
+                        </div>
+                      )
+                    })
+                  }
+                </div>
               </div>
             </div>
           </div>
@@ -105,6 +143,6 @@ export default function Welcome () {
           </div>
         </div>
       </div>
-  </>
+      </>
   )
 }
