@@ -9,7 +9,7 @@ export default function Signin () {
   const history = useHistory()
   const { register, handleSubmit, formState: { errors } } = useForm<LoginType>()
   const handleLogin = async (data:LoginType) => {
-    history.push(frontEndPoints.RESIDENT_ADD)
+    history.push(frontEndPoints.DASHBOARD)
   }
   return (<>
    <div className="bg-gray-100 flex flex-col justify-center items-center h-screen py-10">

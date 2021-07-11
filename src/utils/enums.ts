@@ -1,6 +1,6 @@
 /* eslint-disable no-unused-vars */
 export enum frontEndPoints {
-    RESIDENT_ADD ='/resident-add',
+    RESIDENT_ADD ='/add-resident',
     DASHBOARD='/dashboard',
     LOGIN='/'
  }
