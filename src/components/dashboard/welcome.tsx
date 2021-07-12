@@ -71,7 +71,7 @@ export default function Welcome () {
               }
 
             </div>
-            <div className="flex flex-wrap">
+            <div className="flex flex-wrap mt-8">
               <div className="w-full md:w-2/3 p-24 bg-white rounded-xl">
                 <span className="font-bold">Recent recorded / table</span>
                 <div>
@@ -101,7 +101,7 @@ export default function Welcome () {
               </div>
             </div>
           </div>
-          <div className="lg:w-2/6 w-full bg-white rounded-lg p-4 grid">
+          <div className="lg:w-2/6 w-full bg-white rounded-lg p-4  mt-8 grid">
             <div className="p-1">
               <span className="font-bold">General Stracture</span>
               <div className="align-center item-center text-center">

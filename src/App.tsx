@@ -9,6 +9,7 @@ import Dashboard from './components/dashboard/pages/navbar'
 import Welcome from './components/dashboard/welcome'
 import Addresident from './components/dashboard/pages/addresident'
 import ResidentInfo from './components/dashboard/pages/residentinfo'
+import UserMaintenance from './components/dashboard/pages/usermaintenance'
 function App () {
   return (
     <>
@@ -33,6 +34,11 @@ function App () {
         <Route path="/resident-info">
           <Dashboard>
           <ResidentInfo/>
+          </Dashboard>
+        </Route>
+        <Route path="/user-maintenance">
+          <Dashboard>
+          <UserMaintenance/>
           </Dashboard>
         </Route>
       </Switch>
