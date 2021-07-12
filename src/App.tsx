@@ -10,6 +10,8 @@ import Welcome from './components/dashboard/welcome'
 import Addresident from './components/dashboard/pages/addresident'
 import Orderdetail from './components/dashboard/pages/orderdetail'
 import ResidentInfo from './components/dashboard/pages/residentinfo'
+import Home from './components/home/pages/homenavbar'
+import Body from './components/home/pages/body'
 function App () {
   return (
     <>
@@ -25,6 +27,11 @@ function App () {
           <Dashboard>
             <Welcome/>
           </Dashboard>
+        </Route>
+        <Route path="/body">
+          <Home>
+            <Body/>
+          </Home>
         </Route>
         <Route path="/add-resident">
           <Dashboard>
