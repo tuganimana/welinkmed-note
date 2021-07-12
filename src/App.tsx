@@ -8,6 +8,7 @@ import Signin from './components/dashboard/signin'
 import Dashboard from './components/dashboard/pages/navbar'
 import Welcome from './components/dashboard/welcome'
 import Addresident from './components/dashboard/pages/addresident'
+import Orderdetail from './components/dashboard/pages/orderdetail'
 import ResidentInfo from './components/dashboard/pages/residentinfo'
 import Home from './components/home/pages/homenavbar'
 import Body from './components/home/pages/body'
@@ -37,9 +38,14 @@ function App () {
           <Addresident/>
           </Dashboard>
         </Route>
+        <Route path="/order-detail">
+          <Dashboard>
+            <Orderdetail/>
+          </Dashboard>
+        </Route>
         <Route path="/resident-info">
           <Dashboard>
-          <ResidentInfo/>
+            <ResidentInfo/>
           </Dashboard>
         </Route>
       </Switch>

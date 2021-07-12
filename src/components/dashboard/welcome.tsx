@@ -33,6 +33,40 @@ export default function Welcome () {
       houses: 'bench'
     }
   ]
+  const recent = [
+    {
+      Firstname: 'Anne Marly',
+      Lastname: 'bench',
+      Age: '19',
+      Sex: 'Male',
+      House: 'Bench',
+      dob: '17th'
+    },
+    {
+      Firstname: 'Anne Marly',
+      Lastname: 'bench',
+      Age: '19',
+      Sex: 'Male',
+      House: 'Bench',
+      dob: '17th'
+    },
+    {
+      Firstname: 'Anne Marly',
+      Lastname: 'bench',
+      Age: '19',
+      Sex: 'Male',
+      House: 'Bench',
+      dob: '17th'
+    },
+    {
+      Firstname: 'Anne Marly',
+      Lastname: 'bench',
+      Age: '19',
+      Sex: 'Male',
+      House: 'Bench',
+      dob: '17th'
+    }
+  ]
   return (<>
       <div className="container p-4 md:mt-8">
         <div className="flex  flex-wrap">
@@ -71,10 +105,34 @@ export default function Welcome () {
               }
 
             </div>
-            <div className="flex flex-wrap">
-              <div className="w-full md:w-2/3 p-24 bg-white rounded-xl">
-                <span className="font-bold">Recent recorded / table</span>
-                <div>
+            <div className="flex flex-wrap mt-2">
+              <div className="w-full md:w-2/3 p-2 bg-white rounded-xl">
+                <span className="font-bold">Recent recorded</span>
+                <div className="mt-2">
+                <table className="rounded-t-lg w-5/6 mx-auto bg-blue-100 text-gray-800">
+                  <tr className="text-left border-b-2 border-blue-300">
+                    <th className="px-4 py-3">Firstname</th>
+                    <th className="px-4 py-3">Lastname</th>
+                    <th className="px-4 py-3">Age</th>
+                    <th className="px-4 py-3">Sex</th>
+                    <th className="px-4 py-3">House</th>
+                    <th className="px-4 py-3">Sex</th>
+                  </tr>
+                  {
+                recent.map((items:any, index) => {
+                  return (
+                  <tr key={index} className="bg-gray-100 hover:bg-blue-100 border-b border-blue-200">
+                    <td className="px-4 py-3">{items.Firstname}</td>
+                    <td className="px-4 py-3">{items.Lastname}</td>
+                    <td className="px-4 py-3">{items.Age}</td>
+                    <td className="px-4 py-3">{items.Sex}</td>
+                    <td className="px-4 py-3">{items.House}</td>
+                    <td className="px-4 py-3">{items.dob}</td>
+                  </tr>
+                  )
+                })
+                }
+                </table>
                 </div>
               </div>
               <div className="w-full md:w-1/3 p-2 rounded-xl">
