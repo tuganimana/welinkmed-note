@@ -10,9 +10,9 @@ export default function Homenav () {
     setSmall(false)
   }
   return (<>
-  <div className="relative  p-2  shadow-lg">
-  <div className="max-w-7xl mx-auto px-4 sm:px-6">
-    <div className="flex justify-between items-center py-3 border-b-2 border-red-200  md:justify-start md:space-x-10">
+  <div className="relative  p-2 bg-light-blue-600 opacity-100 shadow-lg">
+  <div className="max-w-7xl mx-auto px-4  sm:px-6">
+    <div className="flex justify-between  items-center py-3 border-b-2 border-red-200  md:justify-start md:space-x-10">
       <div className="lg:w-0 lg:flex-1">
         <a href="/" className="flex">
           <h3 className="text-red-500 font-bold">WE<span className="text-green-500">LINK</span></h3>
