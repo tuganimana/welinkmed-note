@@ -6,7 +6,7 @@ export default function Sidebar () {
   <div className="md:flex flex-col md:flex-row md:min-h-screen w-full">
     <div className="flex flex-col w-full md:w-full text-gray-700 bg-green-400 text-gray-200 flex-shrink-0">
       <div className="flex-shrink-0 px-8 py-4 flex flex-row items-center justify-between py-4">
-        <a href="#" className="text-lg mb-16 font-semibold tracking-widest text-gray-900 uppercase rounded-lg text-white focus:outline-none focus:shadow-outline">We Link Med </a>
+        <a href="/" className="text-lg mb-16 font-semibold tracking-widest text-gray-900 uppercase rounded-lg text-white focus:outline-none focus:shadow-outline">We Link Med </a>
       </div>
       <hr className="text-2 text-gray-600 font-bold"/>
         <nav className="flex-grow w-full md:block px-4 pb-4 md:pb-0 md:overflow-y-auto py-2">

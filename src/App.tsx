@@ -10,6 +10,7 @@ import Welcome from './components/dashboard/welcome'
 import Addresident from './components/dashboard/pages/addresident'
 import Orderdetail from './components/dashboard/pages/orderdetail'
 import ResidentInfo from './components/dashboard/pages/residentinfo'
+import UserMaintenance from './components/dashboard/pages/usermaintenance'
 import Home from './components/home/pages/homenavbar'
 import Body from './components/home/pages/body'
 function App () {
@@ -46,6 +47,11 @@ function App () {
         <Route path="/resident-info">
           <Dashboard>
             <ResidentInfo/>
+          </Dashboard>
+        </Route>
+        <Route path="/user-maintenance">
+          <Dashboard>
+          <UserMaintenance/>
           </Dashboard>
         </Route>
       </Switch>

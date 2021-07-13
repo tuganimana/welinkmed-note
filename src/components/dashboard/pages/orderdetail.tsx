@@ -1,6 +1,7 @@
 // eslint-disable-next-line no-use-before-define
 import React from 'react'
 import { Tabs, Select } from 'antd'
+import Sig from './editsig'
 const { TabPane } = Tabs
 const { Option } = Select
 export default function Orderdetail () {
@@ -30,7 +31,7 @@ export default function Orderdetail () {
   return (
     <>
     <div className="px-2 py-2">
-    <h5 className="font-semibold text-blue-400 mt-4 text-2xl">Order Detail<span className="text-sm font-normal text-gray-400"> / Castro, Jennifer</span></h5>
+    <h5 className="font-semibold text-blue-400 mt-4 text-2xl">Order Maintenance<span className="text-sm font-normal text-gray-400"> / Castro, Jennifer</span></h5>
        </div>
     <div className="mx-4">
     <Tabs defaultActiveKey="1" onChange={callback}>
@@ -121,9 +122,9 @@ export default function Orderdetail () {
         </div>
       </div>
     </TabPane>
-    <TabPane tab="Order Sign" key="2">
+    <TabPane tab="Add Sig" key="2">
     <div>
-    <div className=""><button className="bg-blue-400 hover:bg-blue-500 p-2 pl-12 pr-12 rounded-lg float-right m-1">Add sign</button></div>
+    <div className=""><Sig/></div>
     <table className="rounded-t-lg w-full mx-auto bg-gray-200 text-gray-800">
       <tr className="text-left border-b-2 border-blue-300">
         <th className="px-4 py-3">Sig#</th>

@@ -105,7 +105,7 @@ export default function Welcome () {
               }
 
             </div>
-            <div className="flex flex-wrap mt-2">
+            <div className="flex flex-wrap md:mt-16 mt-4">
               <div className="w-full md:w-2/3 p-2 bg-white rounded-xl">
                 <span className="font-bold">Recent recorded</span>
                 <div className="mt-2">
@@ -136,12 +136,12 @@ export default function Welcome () {
                 </div>
               </div>
               <div className="w-full md:w-1/3 p-2 rounded-xl">
-                <span className="font-bold">Recents clients added</span>
+                <span className="font-bold px-2">Recents clients added</span>
                 <div className="grid gap-2 p-1 rounded-xl">
                   {
                     clients.map((clientitem:any, index) => {
                       return (
-                        <div key={index} className="flex flex-wrap p-1 border-gray-400 border-b-2 rounded-full">
+                        <div key={index} className="flex flex-wrap p-1 border-gray-400 border-b-2 rounded-xl">
                           <div className="w-1/4   text-center align-center item-center">
                             <span>
                               <img src={person1} alt="" className="rounded-full" />
@@ -159,7 +159,7 @@ export default function Welcome () {
               </div>
             </div>
           </div>
-          <div className="lg:w-2/6 w-full bg-white rounded-lg p-4 grid">
+          <div className="lg:w-2/6 w-full bg-white rounded-lg p-4  md:mt-16 mt-4 grid">
             <div className="p-1">
               <span className="font-bold">General Stracture</span>
               <div className="align-center item-center text-center">
