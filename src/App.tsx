@@ -20,7 +20,9 @@ function App () {
     <Router>
       <Switch>
         <Route exact path='/'>
-          <Signin/>
+        <Home>
+            <Body/>
+          </Home>
         </Route>
         <Route path='/signin'>
           <Signin/>
@@ -29,11 +31,6 @@ function App () {
           <Dashboard>
             <Welcome/>
           </Dashboard>
-        </Route>
-        <Route path="/body">
-          <Home>
-            <Body/>
-          </Home>
         </Route>
         <Route path="/add-resident">
           <Dashboard>
