@@ -13,6 +13,7 @@ import ResidentInfo from './components/dashboard/pages/residentinfo'
 import UserMaintenance from './components/dashboard/pages/usermaintenance'
 import Home from './components/home/pages/homenavbar'
 import Body from './components/home/pages/body'
+import Orderedit from './components/dashboard/pages/orderedit'
 function App () {
   return (
     <>
@@ -42,6 +43,11 @@ function App () {
         <Route path="/order-detail">
           <Dashboard>
             <Orderdetail/>
+          </Dashboard>
+        </Route>
+        <Route path="/order-edit">
+          <Dashboard>
+            <Orderedit/>
           </Dashboard>
         </Route>
         <Route path="/resident-info">
