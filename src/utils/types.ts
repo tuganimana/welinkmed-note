@@ -12,3 +12,13 @@ export interface RegisterType {
   category:string;
   gender:string;
 }
+export interface SigType {
+  status:string;
+  instruction:string;
+  quantity:number;
+  administation:string;
+  schedule:string;
+  behavioral:string;
+  clinicalAlert:string;
+  reason:string;
+}

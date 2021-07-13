@@ -12,6 +12,9 @@ export default function Topbar () {
     <Menu.Item key="0">
       <a href={frontEndPoints.USER_MAINTENANCE}>User maintenance</a>
     </Menu.Item>
+    <Menu.Item key="0">
+      <a href={frontEndPoints.ORDER}>Order maintenance</a>
+    </Menu.Item>
   </Menu>
   )
   return (<>
