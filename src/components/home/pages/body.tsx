@@ -59,7 +59,7 @@ export default function Body () {
   <div className="md:pr-24 xm:pr-2  md:pl-24 flex flex-wrap bg-red-900">
        <div className="w-ful md:w-1/3 p-4 md:p-4">
            <div className="text-center justify-center pt-16">
-             <span className="text-white text-4xl">We Proved a good services for you!</span>
+             <span className="text-white font-bold text-5xl">OUR PRODUCTS</span>
            </div>
        </div>
        <div className="w-ful md:w-2/3 flex flex-wrap p-4">
@@ -91,10 +91,11 @@ export default function Body () {
         }
         </div>
       </div>
-      <div className="md:pr-24 xm:pr-2  p-4 md:pl-24 bg-gray-200">
+      <div className=" p-4 md:pl-24 bg-gray-200">
+        <div className="md:max-w-7xl mx-auto">
           <div className="text-center pt-8 grid item-center">
             <span className="text-4xl text-red-700 font-bold">Our Creative for you</span>
-            <span className="text-lg text-gray-500 mt-4">we have more  Creative for you impresive Creative, impresive have  Creative more impresive Creative for  impresivey awasome impresive and reality that can hejww s you to impresive jksdd everything anyway</span>
+            <span className="text-2xl p-4 text-gray-500 mt-4">we have more  Creative for you impresive Creative, impresive have  Creative more impresive Creative for  impresivey awasome impresive and reality that can hejww s you to impresive jksdd everything anyway</span>
           </div>
           <div className="flex flex-wrap">
           {
@@ -105,7 +106,7 @@ export default function Body () {
               <div>
                 <img src={group1} alt=" random imgee" className="w-full object-cover object-center rounded-3xl shadow-xl" />
               <div className="relative px-6 -mt-16  ">
-                <div className="bg-white grid p-3 item-center text-center rounded-3xl shadow-lg">
+                <div className="bg-white opacity-70 rounded-xl grid p-3 item-center text-center shadow-lg">
                   <span className="text-red-900 text-lg font-semibold">{workitem.title}</span>
                   <span className="text-xs font-normal text-gray-600">{workitem.descrip}</span>
                   <span className="text-md mt-2 text-red-800 font-medium">{workitem.caption}</span>
@@ -117,6 +118,7 @@ export default function Body () {
           )
         })
         }
+          </div>
           </div>
       </div>
       <div className="bgImageWeb">
@@ -130,6 +132,7 @@ export default function Body () {
       </div>
 
       <div className="md:pr-24 xm:pr-2  md:pl-24 bg-gray-200">
+        <div className="md:max-w-7xl mx-auto">
           <div className="text-center pt-8 grid item-center">
             <span className="text-4xl text-red-700 font-bold">Contact Us</span>
             <span className="text-lg text-gray-500 mt-4">For more infomation , You can use the following to text to us, Thank you.....!</span>
@@ -144,27 +147,28 @@ export default function Body () {
               </div>
             </div>
             <div className="w-full md:w-1/2 p-2">
-              <div className="p-6 bg-gray-100 rounded-3xl">
+              <div className="p-6 bg-gray-100 rounded-xl">
                 <h2 className="text-3xl font-semibold text-red-800">Message</h2>
                 <form action="#">
                   <div className="w-full mt-3">
-                    <input type="text" placeholder="Full Name" className="bg-white appearance-none border-2 border-red-200 rounded-full w-full py-4 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-red-300 "/>
+                    <input type="text" placeholder="Full Name" className="bg-white appearance-none border-2 border-red-200  w-full py-4 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-red-300 "/>
                   </div>
                   <div className="w-full mt-3">
-                    <input type="text" placeholder="Phone number" className="bg-white appearance-none border-2 border-red-200 rounded-full w-full py-4 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-red-300 "/>
+                    <input type="text" placeholder="Phone number" className="bg-white appearance-none border-2 border-red-200  w-full py-4 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-red-300 "/>
                   </div>
                   <div className="w-full mt-3">
-                    <input type="text" placeholder="Email Address" className="bg-white appearance-none border-2 border-red-200 rounded-full w-full py-4 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-red-300 "/>
+                    <input type="text" placeholder="Email Address" className="bg-white appearance-none border-2 border-red-200 w-full py-4 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-red-300 "/>
                   </div>
                   <div className="w-full mt-3">
-                    <textarea placeholder="Text You Message Here..." className="bg-white appearance-none border-2 border-red-200 rounded-full w-full py-4 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-red-300 "></textarea>
+                    <textarea placeholder="Text You Message Here..." className="bg-white appearance-none border-2 border-red-200  w-full py-4 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-red-300 "></textarea>
                   </div>
                   <div className="w-full mt-3">
-                    <input type="submit" value="Send Message" className="bg-red-800 text-white font-medium text-lg rounded-full hover:bg-red-700 cursor-pointer w-full py-4 px-4 leading-tight focus:outline-none focus:bg-white focus:border-red-300 "/>
+                    <input type="submit" value="Send Message" className="bg-red-800 text-white font-medium text-lg rounded-xl hover:bg-red-700 cursor-pointer w-full py-4 px-4 leading-tight focus:outline-none focus:bg-white focus:border-red-300 "/>
                   </div>
                 </form>
               </div>
             </div>
+          </div>
           </div>
       </div>
       <footer className="bgImageWeb footer relative border-b-2 border-blue-700">
