@@ -10,16 +10,16 @@ export default function Homenav () {
     setSmall(false)
   }
   return (<>
-  <div className="relative  p-2 bg-light-blue-600 opacity-100 shadow-lg">
-  <div className="max-w-7xl mx-auto px-4  sm:px-6">
+  <div className="fixed relative  p-2  shadow-sm">
+  <div className="fixed left-0 right-0 bg-white">
     <div className="flex justify-between  items-center py-3 border-b-2 border-red-200  md:justify-start md:space-x-10">
       <div className="lg:w-0 lg:flex-1">
-        <a href="/" className="flex">
-          <h3 className="text-red-500 font-bold">WE<span className="text-green-500">LINK</span></h3>
+        <a href="/" className="flex no-underline">
+          <h3 className="text-red-500 no-underline font-bold">WELINK</h3>
         </a>
       </div>
       <div className="-mr-2 -my-2 md:hidden">
-        <button type="button" onClick={handleClick} className="inline-flex items-center justify-center p-2 rounded-md text-yellow-400 hover:text-yellow-600 hover:bg-yellow-100 focus:outline-none focus:bg-yellow-100 focus:text-yellow-600 transition duration-150 ease-in-out">
+        <button type="button" onClick={handleClick} className="inline-flex items-center justify-center p-2 rounded-md text-red-500 hover:text-yellow-600 hover:bg-yellow-100 focus:outline-none focus:bg-yellow-100 focus:text-yellow-600 transition duration-150 ease-in-out">
           {/* <!-- Heroicon name: menu --> */}
           <svg className="h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h16M4 18h16" />
@@ -30,19 +30,19 @@ export default function Homenav () {
       <nav className="hidden md:flex space-x-10">
         <div className="relative">
         </div>
-        <a href="/" className=" text-sm leading-6 font-medium text-gray-600 hover:text-red-500 focus:outline-none focus:text-yellow-700 transition ease-in-out duration-150">
+        <a href="/" className=" text-sm leading-6 no-underline font-medium text-red-500 hover:text-red-500 focus:outline-none focus:text-yellow-700 transition ease-in-out duration-150">
           Home
         </a>
-        <a href="/about-us" className="text-sm leading-6 font-medium text-gray-600 hover:text-red-500 focus:outline-none focus:text-yellow-700 transition ease-in-out duration-150">
+        <a href="/about-us" className="text-sm leading-6 no-underline font-medium text-red-500 hover:text-red-500 focus:outline-none focus:text-yellow-700 transition ease-in-out duration-150">
           About
         </a>
-        <a href="/scriptures" className="text-sm leading-6 font-medium text-gray-600 hover:text-red-500 focus:outline-none focus:text-yellow-700 transition ease-in-out duration-150">
+        <a href="/scriptures" className="text-sm leading-6 no-underline font-medium text-red-500 hover:text-red-500 focus:outline-none focus:text-yellow-700 transition ease-in-out duration-150">
           Pricing
         </a>
-        <a href="/sermons" className="text-sm leading-6 font-medium text-gray-600 hover:text-red-500 focus:outline-none focus:text-yellow-700 transition ease-in-out duration-150">
+        <a href="/sermons" className="text-sm leading-6 no-underline font-medium text-red-500 hover:text-red-500 focus:outline-none focus:text-yellow-700 transition ease-in-out duration-150">
           Services
         </a>
-        <a href="/events" className="text-sm leading-6 font-medium text-gray-600 hover:text-red-500 focus:outline-none focus:text-yellow-700 transition ease-in-out duration-150">
+        <a href="/events" className="text-sm leading-6 no-underline font-medium text-red-500 hover:text-red-500 focus:outline-none focus:text-yellow-700 transition ease-in-out duration-150">
          Contact us
         </a>
         <div className="relative">
@@ -64,7 +64,7 @@ export default function Homenav () {
              <h4 className="text-red-500 font-bold">WE<span className="text-green-500">LINK</span></h4>
               </div>
               <div className="-mr-2">
-                <button type="button" onClick={handleSmall} className="inline-flex items-center justify-center p-2 rounded-md text-yellow-400 hover:text-yellow-600 hover:bg-yellow-100 focus:outline-none focus:bg-yellow-100 focus:text-yellow-600 transition duration-150 ease-in-out">
+                <button type="button" onClick={handleSmall} className="inline-flex items-center justify-center p-2 rounded-md text-red-500 hover:text-yellow-600 hover:bg-yellow-100 focus:outline-none focus:bg-yellow-100 focus:text-yellow-600 transition duration-150 ease-in-out">
                   <svg className="h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12" />
                 </svg>
