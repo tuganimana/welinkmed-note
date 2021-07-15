@@ -1,7 +1,10 @@
 // eslint-disable-next-line no-use-before-define
 import React from 'react'
+import tab from '../../../images/tab3.jpg'
 import group from '../../../images/group2.jpg'
 import group1 from '../../../images/group1.jpg'
+import { Carousel } from 'react-bootstrap'
+
 export default function Body () {
   const services = [
     {
@@ -43,7 +46,60 @@ export default function Body () {
     }
   ]
   return (
-  <>
+      <>
+      <div className="slides">
+      <Carousel>
+  <Carousel.Item interval={1000}>
+    <img
+      className="d-block w-100  bgimg"
+      src={tab}
+      alt="First slide"
+    />
+    <Carousel.Caption className="slide">
+      <h3 className="text-red-800">Medical Care</h3>
+      <p className="">Nulla vitae elit libero, a pharetra augue mollis interdum.
+      Here are a few examples to help you get an idea of how to build components like this using Tailwind.</p>
+      <button className="mb-64 bg-red-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+        Read more
+      </button>
+    </Carousel.Caption>
+  </Carousel.Item>
+  <Carousel.Item interval={500}>
+    <img
+      className="d-block w-100 bgimg"
+      src={tab}
+      alt="Second slide"
+    />
+    <Carousel.Caption>
+      <h3 className="text-red-800">Hospital Services</h3>
+      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+      Nulla vitae elit libero, a pharetra augue mollis interdum.
+      Here are a few examples to help you get an idea of how to build components like this using Tailwind.
+      </p>
+      <button className="mb-64 bg-red-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+        Read more
+      </button>
+    </Carousel.Caption>
+  </Carousel.Item>
+  <Carousel.Item>
+    <img
+      className="d-block w-100 bgimg"
+      src={tab}
+      alt="Third slide"
+    />
+    <Carousel.Caption>
+      <h3 className="text-red-800">Pharmarcy services</h3>
+      <p>Praesent commodo cursus magna, vel scelerisque nisl consectetur.
+      Nulla vitae elit libero, a pharetra augue mollis interdum.
+      Here are a few examples to help you get an idea of how to build components like this using Tailwind.
+      </p>
+      <button className="mb-64 bg-red-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+        Read more
+      </button>
+    </Carousel.Caption>
+  </Carousel.Item>
+</Carousel>
+      </div>
   <div className="md:pr-24 xm:pr-2  md:pl-24 flex flex-wrap bg-gray-200">
        <div className="w-ful md:w-1/2 p-4 md:p-4">
            <div className="">
@@ -215,5 +271,5 @@ export default function Body () {
         </div>
         </div>
     </footer>
-  </>)
+      </>)
 }
