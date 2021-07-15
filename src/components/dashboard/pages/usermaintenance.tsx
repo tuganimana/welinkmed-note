@@ -20,7 +20,6 @@ export default function UserMaintenance () {
   ]
   return (
     <>
-
     <div className="px-2 py-2">
       <h5 className="font-semibold px-4">User Maintenance</h5>
     </div>
