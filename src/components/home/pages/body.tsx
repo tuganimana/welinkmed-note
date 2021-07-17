@@ -75,8 +75,8 @@ export default function Body () {
                  <img src={group} alt=" random imgee" className="w-full object-cover object-center rounded-3xl shadow-md" />
                <div data-aos="fade-down"
             data-aos-easing="linear"
-            data-aos-duration="500" className="relative -mt-16  ">
-                 <div className="bg-white p-4 item-center text-center rounded-b-3xl  shadow-lg">
+            data-aos-duration="500" className="relative -mt-8  ">
+                 <div className="bg-white p-4 item-center text-center rounded-b-3xl rounded-t-md  shadow-lg">
                     <h4 className="mt-1 text-xl font-semibold capiltalized leading-tight truncate">{serviceitem.title}</h4>
                  <div className="mt-1">
                    <span className="text-gray-600 text-sm">
@@ -132,7 +132,7 @@ export default function Body () {
           </div>
           </div>
       </div>
-      <div className="bgImageWeb">
+      <div className="bgImageWeb2">
         <div className="md:pl-32 md:pr-32 p-2 bg-red-800 bg-opacity-70">
           <div data-aos="fade-up"
      data-aos-duration="3000" className="md:max-w-7xl mx-auto grid gap-6 w-full pt-24 pb-24">
