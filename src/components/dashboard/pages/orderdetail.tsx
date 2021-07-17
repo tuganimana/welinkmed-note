@@ -16,7 +16,6 @@ export default function Orderdetail () {
   function handleChange (value:any) {
     console.log(`selected ${value}`)
   }
-
   const recent = [
     {
       sign: 'Anne Marly',

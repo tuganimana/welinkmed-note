@@ -115,8 +115,6 @@ export default function Welcome () {
                     <th className="px-4 py-3">Lastname</th>
                     <th className="px-4 py-3">Age</th>
                     <th className="px-4 py-3">Sex</th>
-                    <th className="px-4 py-3">House</th>
-                    <th className="px-4 py-3">Sex</th>
                   </tr>
                   {
                 recent.map((items:any, index) => {
@@ -126,8 +124,6 @@ export default function Welcome () {
                     <td className="px-4 py-3">{items.Lastname}</td>
                     <td className="px-4 py-3">{items.Age}</td>
                     <td className="px-4 py-3">{items.Sex}</td>
-                    <td className="px-4 py-3">{items.House}</td>
-                    <td className="px-4 py-3">{items.dob}</td>
                   </tr>
                   )
                 })
