@@ -7,3 +7,19 @@ export enum frontEndPoints {
     ORDER='/order-detail'
 
  }
+export enum backEndPoints {
+    LOGIN='/api/signin',
+    REGISTER ='/api/register'
+}
+
+export enum httpMethod{
+    POST='POST',
+    GET='GET',
+    PUT='PUT',
+    DELETE='DELETE'
+  }
+export enum welinkTokens{
+    userToken = 'welinkUserToken',
+    accountType = 'accountType',
+    username = 'userName'
+  }

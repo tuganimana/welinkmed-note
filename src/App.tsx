@@ -1,6 +1,8 @@
 // eslint-disable-next-line no-use-before-define
 import React from 'react'
 import './App.css'
+import AOS from 'aos'
+import 'aos/dist/aos.css'
 import 'antd/dist/antd.css'
 import './css/tailwind.css'
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
@@ -11,18 +13,16 @@ import Addresident from './components/dashboard/pages/addresident'
 import Orderdetail from './components/dashboard/pages/orderdetail'
 import ResidentInfo from './components/dashboard/pages/residentinfo'
 import UserMaintenance from './components/dashboard/pages/usermaintenance'
-import Home from './components/home/pages/homenavbar'
 import Body from './components/home/pages/body'
 import Orderedit from './components/dashboard/pages/orderedit'
 function App () {
+  AOS.init()
   return (
     <>
     <Router>
       <Switch>
         <Route exact path='/'>
-        <Home>
             <Body/>
-        </Home>
         </Route>
         <Route path='/signin'>
           <Signin/>

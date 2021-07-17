@@ -11,15 +11,17 @@ export default function Homenav () {
   }
   return (<>
   <div className="fixed relative  p-2  shadow-sm">
-  <div className="fixed left-0 right-0 bg-white">
-    <div className="flex justify-between  items-center py-3 border-b-2 border-red-200  md:justify-start md:space-x-10">
+  <div data-aos="fade-down"
+     data-aos-easing="linear"
+     data-aos-duration="700" className="">
+    <div className="flex justify-between  items-center py-3 md:justify-start md:space-x-10">
       <div className="lg:w-0 lg:flex-1">
         <a href="/" className="flex no-underline">
-          <h3 className="text-red-500 no-underline font-bold">WELINK</h3>
+          <h3 className="text-lg text-white no-underline font-bold">WELINK</h3>
         </a>
       </div>
       <div className="-mr-2 -my-2 md:hidden">
-        <button type="button" onClick={handleClick} className="inline-flex items-center justify-center p-2 rounded-md text-red-500 hover:text-yellow-600 hover:bg-yellow-100 focus:outline-none focus:bg-yellow-100 focus:text-yellow-600 transition duration-150 ease-in-out">
+        <button type="button" onClick={handleClick} className="inline-flex items-center justify-center p-2 rounded-md text-white hover:text-yellow-600 hover:bg-yellow-100 focus:outline-none focus:bg-yellow-100 focus:text-yellow-600 transition duration-150 ease-in-out">
           {/* <!-- Heroicon name: menu --> */}
           <svg className="h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h16M4 18h16" />
@@ -30,20 +32,23 @@ export default function Homenav () {
       <nav className="hidden md:flex space-x-10">
         <div className="relative">
         </div>
-        <a href="/" className=" text-sm leading-6 no-underline font-medium text-red-500 hover:text-red-500 focus:outline-none focus:text-yellow-700 transition ease-in-out duration-150">
+        <a href="/" className=" text-lg font-normal  no-underline font-medium text-white hover:text-gray-200 focus:outline-none focus:text-yellow-700 transition ease-in-out duration-150">
           Home
         </a>
-        <a href="/" className="text-sm leading-6 no-underline font-medium text-red-500 hover:text-red-500 focus:outline-none focus:text-yellow-700 transition ease-in-out duration-150">
-          About
+        <a href="/" className=" text-lg font-normal  no-underline font-medium text-white hover:text-gray-200 focus:outline-none focus:text-yellow-700 transition ease-in-out duration-150">
+          About Us
         </a>
-        <a href="/" className="text-sm leading-6 no-underline font-medium text-red-500 hover:text-red-500 focus:outline-none focus:text-yellow-700 transition ease-in-out duration-150">
-          Pricing
-        </a>
-        <a href="/" className="text-sm leading-6 no-underline font-medium text-red-500 hover:text-red-500 focus:outline-none focus:text-yellow-700 transition ease-in-out duration-150">
+        <a href="/" className=" text-lg font-normal  no-underline font-medium text-white hover:text-gray-200 focus:outline-none focus:text-yellow-700 transition ease-in-out duration-150">
           Services
         </a>
-        <a href="/" className="text-sm leading-6 no-underline font-medium text-red-500 hover:text-red-500 focus:outline-none focus:text-yellow-700 transition ease-in-out duration-150">
-         Contact us
+        <a href="/" className=" text-lg font-normal  no-underline font-medium text-white hover:text-gray-200 focus:outline-none focus:text-yellow-700 transition ease-in-out duration-150">
+          Career
+        </a>
+        <a href="/" className=" text-lg font-normal  no-underline font-medium text-white hover:text-gray-200 focus:outline-none focus:text-yellow-700 transition ease-in-out duration-150">
+          Vision
+        </a>
+        <a href="/" className=" text-lg font-normal  no-underline font-medium text-white hover:text-gray-200 focus:outline-none focus:text-yellow-700 transition ease-in-out duration-150">
+          Contact Us
         </a>
         <div className="relative">
 {/* end  of    toggle (more) */}
@@ -61,7 +66,7 @@ export default function Homenav () {
           <div className="pt-5 pb-6 px-5 space-y-6">
             <div className="flex items-center justify-between">
               <div>
-             <h4 className="text-red-500 font-bold">WE<span className="text-green-500">LINK</span></h4>
+             <h4 className="text-black font-bold">WELINK</h4>
               </div>
               <div className="-mr-2">
                 <button type="button" onClick={handleSmall} className="inline-flex items-center justify-center p-2 rounded-md text-red-500 hover:text-yellow-600 hover:bg-yellow-100 focus:outline-none focus:bg-yellow-100 focus:text-yellow-600 transition duration-150 ease-in-out">
@@ -72,21 +77,21 @@ export default function Homenav () {
             </div>
           </div>
           <div>
-            <nav className="grid gap-y-8">
+            <nav className="grid gap-y-5">
               <a href="/" className="text-sm leading-6 font-medium text-gray-600 hover:text-red-500 focus:outline-none focus:text-yellow-700 transition ease-in-out duration-150">
                Home
               </a>
               <a href="#" className="text-sm leading-6 font-medium text-gray-600 hover:text-red-500 focus:outline-none focus:text-yellow-700 transition ease-in-out duration-150">
-               About
-              </a>
-              <a href="#" className="text-sm leading-6 font-medium text-gray-600 hover:text-red-500 focus:outline-none focus:text-yellow-700 transition ease-in-out duration-150">
-               Pricing
+               About US
               </a>
               <a href="#" className="text-sm leading-6 font-medium text-gray-600 hover:text-red-500 focus:outline-none focus:text-yellow-700 transition ease-in-out duration-150">
                Services
               </a>
               <a href="#" className="text-sm leading-6 font-medium text-gray-600 hover:text-red-500 focus:outline-none focus:text-yellow-700 transition ease-in-out duration-150">
-               Aboutus
+               Career
+              </a>
+              <a href="#" className="text-sm leading-6 font-medium text-gray-600 hover:text-red-500 focus:outline-none focus:text-yellow-700 transition ease-in-out duration-150">
+               Contact Us
               </a>
 
             </nav>
