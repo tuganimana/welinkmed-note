@@ -19,7 +19,7 @@ function App () {
     <>
     <Router>
       <Switch>
-        <Route exact path='/body'>
+        <Route exact path='/'>
         <Home>
             <Body/>
           </Home>
