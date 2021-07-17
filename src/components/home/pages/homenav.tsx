@@ -33,16 +33,16 @@ export default function Homenav () {
         <a href="/" className=" text-sm leading-6 no-underline font-medium text-red-500 hover:text-red-500 focus:outline-none focus:text-yellow-700 transition ease-in-out duration-150">
           Home
         </a>
-        <a href="/about-us" className="text-sm leading-6 no-underline font-medium text-red-500 hover:text-red-500 focus:outline-none focus:text-yellow-700 transition ease-in-out duration-150">
+        <a href="/" className="text-sm leading-6 no-underline font-medium text-red-500 hover:text-red-500 focus:outline-none focus:text-yellow-700 transition ease-in-out duration-150">
           About
         </a>
-        <a href="/scriptures" className="text-sm leading-6 no-underline font-medium text-red-500 hover:text-red-500 focus:outline-none focus:text-yellow-700 transition ease-in-out duration-150">
+        <a href="/" className="text-sm leading-6 no-underline font-medium text-red-500 hover:text-red-500 focus:outline-none focus:text-yellow-700 transition ease-in-out duration-150">
           Pricing
         </a>
-        <a href="/sermons" className="text-sm leading-6 no-underline font-medium text-red-500 hover:text-red-500 focus:outline-none focus:text-yellow-700 transition ease-in-out duration-150">
+        <a href="/" className="text-sm leading-6 no-underline font-medium text-red-500 hover:text-red-500 focus:outline-none focus:text-yellow-700 transition ease-in-out duration-150">
           Services
         </a>
-        <a href="/events" className="text-sm leading-6 no-underline font-medium text-red-500 hover:text-red-500 focus:outline-none focus:text-yellow-700 transition ease-in-out duration-150">
+        <a href="/" className="text-sm leading-6 no-underline font-medium text-red-500 hover:text-red-500 focus:outline-none focus:text-yellow-700 transition ease-in-out duration-150">
          Contact us
         </a>
         <div className="relative">

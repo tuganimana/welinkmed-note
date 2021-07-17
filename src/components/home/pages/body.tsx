@@ -2,7 +2,6 @@
 import React from 'react'
 import group from '../../../images/group2.jpg'
 import group1 from '../../../images/group1.jpg'
-
 export default function Body () {
   const services = [
     {
@@ -44,35 +43,39 @@ export default function Body () {
     }
   ]
   return (
-      <>
-  <div className="md:pr-24 xm:pr-2  md:pl-24 flex flex-wrap bg-gray-200">
-       <div className="w-ful md:w-1/2 p-4 md:p-4">
+  <>
+  <div className="bg-gray-200">
+    <div className="container  mx-auto md:p-8">
+    <div className="grid md:grid-cols-2 gap-3 ">
+       <div className="p-4">
            <div className="">
-             <img src={group} className="rounded-3xl shadow-2xl" alt=""/>
+             <img src={group} className="rounded-3xl w-full shadow-2xl" alt=""/>
            </div>
        </div>
-       <div className="w-ful md:w-1/2 p-4 grid gap-0">
-         <span className="font-bold w-24 pt-2 text-4xl md:mt-8 border-t-2 border-blue-400">About</span>
-         <span className="text-md text-gray-600 font-medium">Our customers don’t just love us, they rave about us. Hear what real WeLink customers have to say about our Wireless Fiber internet service. Fast and reliable service without all the hidden fees, pricing games, or gimmicks.Our customers don’t just love us, they rave about us. Hear what real WeLink customers have to say about our Wireless Fiber internet service. Fast and reliable service without all the hidden fees, pricing games, or gimmicks.Our customers don’t just love us, they rave about us. Hear what real WeLink customers have to say about our Wireless Fiber internet service. Fast and reliable service without all the hidden fees, pricing games, or gimmicks.</span>
-         <span> <button className="bg-red-800 hover:bg-red-700 p-2 pr-8 pl-8 text-white rounded-3xl">Read More</button></span>
+       <div className="p-4">
+         <p className="font-bold w-24 pt-2 text-4xl md:mt-8 border-t-2 border-blue-400 mb-4">About</p>
+         <p className="text-md text-gray-600 leading-loose py-4 font-medium">Our customers don’t just love us, they rave about us. Hear what real WeLink customers have to say about our Wireless Fiber internet service. Fast and reliable service without all the hidden fees, pricing games, or gimmicks.Our customers don’t just love us, they rave about us. Hear what real WeLink customers have to say about our Wireless Fiber internet service. Fast and reliable service without all the hidden fees, pricing games, or gimmicks.Our customers don’t just love us, they rave about us. Hear what real WeLink customers have to say about our Wireless Fiber internet service. Fast and reliable service without all the hidden fees, pricing games, or gimmicks.</p>
+         <p> <button className="bg-red-800 hover:bg-red-700 p-2 pr-8 pl-8 text-white rounded-3xl">Read More</button></p>
        </div>
+  </div>
+    </div>
   </div>
   <div className="md:pr-24 xm:pr-2  md:pl-24 flex flex-wrap bg-red-900">
        <div className="w-ful md:w-1/3 p-4 md:p-4">
-           <div className="text-center justify-center pt-16">
-             <span className="text-white font-bold text-5xl">OUR PRODUCTS</span>
+           <div className="text-center md:mt-16 py-32">
+             <span className="text-white font-bold  text-5xl">OUR PRODUCTS</span>
            </div>
        </div>
        <div className="w-ful md:w-2/3 flex flex-wrap p-4">
        {
         services.map((serviceitem:any, index) => {
           return (
-            <div key={index} className="w-full md:w-1/3 p-2" data-scrollreveal="enter top over 0.4s after 0.1s">
+            <div key={index} className="w-full md:w-1/2 p-2" data-scrollreveal="enter top over 0.4s after 0.1s">
              <div className="wrapper antialiased text-gray-900">
                <div>
                  <img src={group} alt=" random imgee" className="w-full object-cover object-center rounded-3xl shadow-md" />
                <div className="relative -mt-16  ">
-                 <div className="bg-white p-4 item-center text-center rounded-3xl shadow-lg">
+                 <div className="bg-white p-4 item-center text-center rounded-b-3xl  shadow-lg">
                     <h4 className="mt-1 text-xl font-semibold capiltalized leading-tight truncate">{serviceitem.title}</h4>
                  <div className="mt-1">
                    <span className="text-gray-600 text-sm">
@@ -80,7 +83,7 @@ export default function Body () {
                     </span>
                  </div>
                  <div className="mt-2">
-                   <a href="" className="bg-red-700 hover:bg-red-600 pr-6 pl-6 pt-1 pb-1 rounded-xl text-white font-medium hover:text-white w-full">View more</a>
+                   <a href="" className="bg-red-700 hover:bg-red-600 pr-6 pl-6 pt-1 pb-1 shadow-xl text-white font-medium hover:text-white w-full">View more</a>
                  </div>
                  </div>
                </div>
@@ -216,5 +219,5 @@ export default function Body () {
         </div>
         </div>
     </footer>
-      </>)
+  </>)
 }
