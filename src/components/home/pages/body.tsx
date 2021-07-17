@@ -1,4 +1,4 @@
-/ eslint-disable-next-line no-use-before-define
+// eslint-disable-next-line no-use-before-define
 import React from 'react'
 import tab from '../../../images/tab3.jpg'
 import group from '../../../images/group2.jpg'
