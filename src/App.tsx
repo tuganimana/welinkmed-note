@@ -22,7 +22,7 @@ function App () {
         <Route exact path='/'>
         <Home>
             <Body/>
-          </Home>
+        </Home>
         </Route>
         <Route path='/signin'>
           <Signin/>
