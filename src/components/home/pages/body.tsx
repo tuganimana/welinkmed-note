@@ -2,6 +2,7 @@
 import React from 'react'
 import group from '../../../images/group2.jpg'
 import group1 from '../../../images/group1.jpg'
+import Slider from './slider'
 export default function Body () {
   const services = [
     {
@@ -44,6 +45,7 @@ export default function Body () {
   ]
   return (
   <>
+  <Slider/>
   <div className="bg-gray-200">
     <div className="container  mx-auto md:p-8">
     <div className="grid md:grid-cols-2 gap-3 ">
