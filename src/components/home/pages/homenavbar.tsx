@@ -6,7 +6,6 @@ export default function Home (props: any) {
   return (
         <div className=" w-full bg-lightBlue">
                 <Homenav/>
-                <hr className="mt-1"/>
                 {props.children}
             </div>
   )

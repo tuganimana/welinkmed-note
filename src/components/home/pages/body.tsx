@@ -57,7 +57,7 @@ export default function Body () {
   </div>
     </div>
   </div>
-  <div className="bgImageWeb1">
+  <div className="bgImageWeb1 bg-fixed">
   <div className="bg-red-900 bg-opacity-70">
   <div className="md:max-w-7xl mx-auto md:pl-24 md:pr-24 flex flex-wrap">
        <div className="w-ful md:w-1/2 p-4 md:p-4">
