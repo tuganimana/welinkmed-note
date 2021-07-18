@@ -12,13 +12,7 @@ export default function Body () {
     },
     {
       title: 'Link Med',
-      _descrip: 'we link med to you everywhre you are to be ba round to hav be in around round',
-      get descrip() {
-        return this._descrip
-      },
-      set descrip(value) {
-        this._descrip = value
-      },
+      descrip: 'we link med to you everywhre you are to be ba round to hav be in around round',
       caption: 'bench'
     },
     {
