@@ -1,6 +1,6 @@
 // eslint-disable-next-line no-use-before-define
 import React, { useState } from 'react'
-
+import { frontEndPoints } from '../../../utils/enums'
 export default function Homenav () {
   const [small, setSmall] = useState(false)
   const handleClick = () => {
@@ -10,14 +10,14 @@ export default function Homenav () {
     setSmall(false)
   }
   return (<>
-  <div className="fixed relative  p-2  shadow-sm">
+  <div className=" relative w-full  p-2  shadow-sm">
   <div data-aos="fade-down"
      data-aos-easing="linear"
      data-aos-duration="700" className="">
     <div className="flex justify-between  items-center py-3 md:justify-start md:space-x-10">
       <div className="lg:w-0 lg:flex-1">
         <a href="/" className="flex no-underline">
-          <h3 className="text-lg text-white no-underline font-bold">WELINK</h3>
+          <h3 className="text-lg text-white no-underline font-bold">Welink</h3>
         </a>
       </div>
       <div className="-mr-2 -my-2 md:hidden">
@@ -47,11 +47,11 @@ export default function Homenav () {
         <a href="/" className=" text-lg font-normal  no-underline font-medium text-white hover:text-gray-200 focus:outline-none focus:text-yellow-700 transition ease-in-out duration-150">
           Vision
         </a>
-        <a href="/" className=" text-lg font-normal  no-underline font-medium text-white hover:text-gray-200 focus:outline-none focus:text-yellow-700 transition ease-in-out duration-150">
-          Contact Us
+        <a href={frontEndPoints.LOGIN} className="bg-red-600 px-6  rounded-full text-lg font-normal  no-underline font-medium text-white hover:text-gray-200 focus:outline-none focus:text-yellow-700 transition ease-in-out duration-150">
+          free trial
         </a>
         <div className="relative">
-{/* end  of    toggle (more) */}
+{/* end of toggle (more) */}
 
         </div>
       </nav>
@@ -66,7 +66,7 @@ export default function Homenav () {
           <div className="pt-5 pb-6 px-5 space-y-6">
             <div className="flex items-center justify-between">
               <div>
-             <h4 className="text-black font-bold">WELINK</h4>
+             <h4 className="text-black font-bold">Welink</h4>
               </div>
               <div className="-mr-2">
                 <button type="button" onClick={handleSmall} className="inline-flex items-center justify-center p-2 rounded-md text-red-500 hover:text-yellow-600 hover:bg-yellow-100 focus:outline-none focus:bg-yellow-100 focus:text-yellow-600 transition duration-150 ease-in-out">
@@ -90,8 +90,8 @@ export default function Homenav () {
               <a href="#" className="text-sm leading-6 font-medium text-gray-600 hover:text-red-500 focus:outline-none focus:text-yellow-700 transition ease-in-out duration-150">
                Career
               </a>
-              <a href="#" className="text-sm leading-6 font-medium text-gray-600 hover:text-red-500 focus:outline-none focus:text-yellow-700 transition ease-in-out duration-150">
-               Contact Us
+              <a href="#" className="text-sm  leading-6 font-medium text-gray-600 hover:text-red-500 focus:outline-none focus:text-yellow-700 transition ease-in-out duration-150">
+              Start trial
               </a>
 
             </nav>

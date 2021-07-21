@@ -2,6 +2,7 @@
 import React from 'react'
 import { Carousel } from 'antd'
 import Homenav from './homenav'
+import { frontEndPoints } from '../../../utils/enums'
 export default function Slider () {
   const home = [
     {
@@ -22,21 +23,21 @@ export default function Slider () {
   ]
   return (
       <>
-  <div className="mx-auto">
+  <div className="mx-auto w-full">
     <Carousel autoplay>
     {
       home.map((homeitem:any, index) => {
         return (
           <div key={index} className="bgImageWeb h-screen">
-            <div className="md:pl-32 md:pr-32 p-4 bg-red-800 h-screen bg-opacity-70">
+            <div className="md:pl-32 md:pr-32 p-4 w-full bg-red-800 h-screen bg-opacity-70">
               <Homenav/>
               <div data-aos="fade-right"
      data-aos-offset="300"
-     data-aos-easing="ease-in-sine" className="md:max-w-7xl  mx-auto grid gap-6 w-full pt-24 pb-24">
+     data-aos-easing="ease-in-sine" className="container md:mt-64 mx-auto grid gap-6 w-full pt-24 ">
                 <span className="text-5xl md:w-1/2 font-bold text-white">{homeitem.title}</span>
                 <span className="text-md md:w-1/2 font-bold text-gray-100">{homeitem.descrip}</span>
                 <span>
-                  <button className="bg-red-700 text-white font-semibold hover:bg-red-800 font-medium p-3 pl-12 pr-12 m-2 rounded-full">Get Started</button>
+                 <a href={frontEndPoints.LOGIN}><button className="bg-red-700 text-white font-semibold hover:bg-red-800 font-medium p-3 pl-12 pr-12 m-2 rounded-full">Get Started</button></a>
                   <button className="bg-gray-100 text-red-600 font-semibold hover:bg-gray-200 font-medium p-3 pl-12 pr-12 m-2 rounded-full">Read More</button>
                 </span>
               </div>
