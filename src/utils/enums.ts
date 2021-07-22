@@ -2,14 +2,16 @@
 export enum frontEndPoints {
     RESIDENT_ADD ='/add-resident',
     DASHBOARD='/dashboard',
-    LOGIN='/',
+    LOGIN='/signin',
     USER_MAINTENANCE='/user-maintenance',
-    ORDER='/order-detail'
+    ORDER='/order-detail',
+    HOME='/'
 
  }
+
 export enum backEndPoints {
-    LOGIN='/api/signin',
-    REGISTER ='/api/register'
+    LOGIN='/api/login',
+    REGISTER ='/api/create'
 }
 
 export enum httpMethod{
