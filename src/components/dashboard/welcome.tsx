@@ -111,7 +111,7 @@ export default function Welcome () {
                          <span className="lg:text-xs text-center font-bold cursor-pointer text-gray-800 float-left">{items.fullname}</span>
                           <div className=" text-center items-end ">
                             <a href="/resident-info">
-                            <span className="text-center cursor-pointer hover:bg-gray-600 rounded-full px-4 py-2 bg-gray-500 font-bold cursor-pointer  text-gray-100 mt-2">{items.houses}</span>
+                            <span className="text-center w-full cursor-pointer hover:bg-green-800 rounded-full px-4 py-2 bg-green-600 font-bold cursor-pointer  text-gray-100 mt-2">{items.houses}</span>
                             </a>
                           </div>
                        </div>
@@ -124,13 +124,15 @@ export default function Welcome () {
             </div>
             <div className="flex flex-wrap md:mt-16 mt-4">
               <div className="w-full md:w-2/3 p-2 bg-white rounded-xl">
-                <span className="font-bold">Recent recorded</span>
+                <span className="font-bold p-2 text-blue-400">Recent recorded</span>
                 <div className="mt-2">
                 <table className="rounded-t-lg w-5/6 mx-auto bg-blue-100 text-gray-800">
                   <tr className="text-left border-b-2 border-blue-300">
                     <th className="px-4 py-3">Firstname</th>
                     <th className="px-4 py-3">Lastname</th>
                     <th className="px-4 py-3">Age</th>
+                    <th className="px-4 py-3">Sex</th>
+                    <th className="px-4 py-3">Sex</th>
                     <th className="px-4 py-3">Sex</th>
                   </tr>
                   {
@@ -141,6 +143,8 @@ export default function Welcome () {
                     <td className="px-4 py-3">{items.Lastname}</td>
                     <td className="px-4 py-3">{items.Age}</td>
                     <td className="px-4 py-3">{items.Sex}</td>
+                    <td className="px-4 py-3">{items.Sex}</td>
+                    <td className="px-4 py-3">{items.Sex}</td>
                   </tr>
                   )
                 })
@@ -149,12 +153,12 @@ export default function Welcome () {
                 </div>
               </div>
               <div className="w-full md:w-1/3 p-2 rounded-xl">
-                <span className="font-bold px-2">Recents clients added</span>
+                <span className="font-bold px-2 text-green-600">Recents clients added</span>
                 <div className="grid gap-2 p-1 rounded-xl">
                   {
                     clients.map((clientitem:any, index) => {
                       return (
-                        <div key={index} className="flex flex-wrap p-1 border-gray-400 border-b-2 rounded-xl">
+                        <div key={index} className="flex flex-wrap p-1 border-green-700 border-b-2 rounded-xl">
                           <div className="w-1/4   text-center align-center item-center">
                             <span>
                               <img src={person1} alt="" className="rounded-full" />

@@ -1,15 +1,35 @@
 // eslint-disable-next-line no-use-before-define
-import React from 'react'
+import React, { useState } from 'react'
 import '../../css/dashboard.css'
 import { useForm } from 'react-hook-form'
 import { LoginType } from '../../utils/types'
 import { useHistory } from 'react-router-dom'
-import { frontEndPoints } from '../../utils/enums'
+import { frontEndPoints, welinkTokens } from '../../utils/enums'
+import { useApi } from '../../utils/api'
+import Alert from '../alerts'
 export default function Signin () {
   const history = useHistory()
   const { register, handleSubmit, formState: { errors } } = useForm<LoginType>()
+  const [loading, setLoading] = useState(false)
+  const [errorMessage, setErrormessage] = useState('')
   const handleLogin = async (data:LoginType) => {
-    history.push(frontEndPoints.DASHBOARD)
+    setLoading(true)
+    const api = await useApi.loginApiRequest(data.username, data.password)
+    const myaccount = api?.token || 'undefined'
+    console.log(myaccount)
+
+    if (myaccount === 'undefined') {
+      setErrormessage(api.messages)
+      setLoading(false)
+    } else {
+      localStorage.setItem(welinkTokens.userToken, api.token)
+      setTimeout(() => {
+        setLoading(false)
+        history.push(frontEndPoints.DASHBOARD)
+        setErrormessage(api.message)
+      }, 2000)
+    }
+    //
   }
   return (<>
    <div className="bg-gray-100 flex flex-col justify-center items-center h-screen py-10">
@@ -24,6 +44,7 @@ export default function Signin () {
                     <div className="">
                         <h1 className="font-normal text-center text-3xl text-gray-400 font-medium leading-loose my-3 w-full">Sign In</h1>
                         <div className="w-full">
+                          <Alert message={errorMessage}/>
                             <form onSubmit={ handleSubmit((data) => { handleLogin(data) })}>
                                 <div className="mb-2">
                                    <input type="email" {...register('username', { required: '* This field is required' })} placeholder="User Name or Email" className="bg-gray-100 appearance-none border-2 border-green-500 rounded-full w-full py-2 px-4 text-gray-900 leading-tight focus:outline-none focus:bg-white focus:border-green-500" />
@@ -37,7 +58,7 @@ export default function Signin () {
                                    <span className=" text-sm mb-4"><a href="" className="text-blue-400">forgot password?</a></span>
                                 </div>
                                 <div className="mb-4">
-                                   <input type="submit" value="Sign In" placeholder="Password" className="bg-red-400 cursor-pointer appearance-none  rounded-full w-full py-2 px-4 font-medium text-gray-600 leading-tight focus:outline-none hover:bg-green-400 focus:border-green-500" />
+                                  {loading ? <span>Logging.....</span> : <input type="submit" value="Sign In" placeholder="Password" className="bg-red-400 cursor-pointer appearance-none  rounded-full w-full py-2 px-4 font-medium text-gray-600 leading-tight focus:outline-none hover:bg-green-400 focus:border-green-500" />}
                                 </div>
                                 <div className="">
                                     <a href="" className="mr-6">

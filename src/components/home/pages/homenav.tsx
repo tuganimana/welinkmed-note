@@ -28,7 +28,6 @@ export default function Homenav () {
           </svg>
         </button>
       </div>
-
       <nav className="hidden md:flex space-x-10">
         <div className="relative">
         </div>
@@ -51,7 +50,7 @@ export default function Homenav () {
           free trial
         </a>
         <div className="relative">
-{/* end  of    toggle (more) */}
+{/* end of toggle (more) */}
 
         </div>
       </nav>

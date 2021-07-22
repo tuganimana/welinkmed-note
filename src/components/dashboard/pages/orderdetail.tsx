@@ -2,6 +2,7 @@
 import React from 'react'
 import { Tabs, Select } from 'antd'
 import Sig from './editsig'
+import Routofadmin from './routofadmin'
 const { TabPane } = Tabs
 const { Option } = Select
 export default function Orderdetail () {
@@ -35,8 +36,13 @@ export default function Orderdetail () {
     <div className="mx-4">
     <Tabs defaultActiveKey="1" onChange={callback}>
     <TabPane tab="Order Detail" key="1">
-    <div className="p-4 mb-14 bg-white rounded-xl shadows-xl mx-4">
+      <form action="">
+        <div className="p-4 mb-14 bg-white rounded-xl shadows-xl mx-4">
     <div className="grid md:grid-cols-2 gap-4">
+    <div className="p-2">
+            <label className="text-md">Routine Med Order</label>
+            <input type="text" name="" className="w-full p-2 border"/>
+          </div>
       <div className="p-2">
             <label>Ordered Type (required)</label>
             <select className="w-full p-2 border">
@@ -58,16 +64,7 @@ export default function Orderdetail () {
           </div>
           <div className="p-2">
             <label>Rout Of Administration ( Required)</label>
-            <Select
-              mode="multiple"
-              allowClear
-              style={{ width: '100%' }}
-              placeholder="Please select"
-              defaultValue={['Aron10']}
-              onChange={handleChange}
-            >
-              {children}
-            </Select>
+            <Routofadmin/>
           </div>
         <div className="p-2">
           <label>Physician( Required)</label>
@@ -120,6 +117,7 @@ export default function Orderdetail () {
           </div>
         </div>
       </div>
+      </form>
     </TabPane>
     <TabPane tab="Add Sig" key="2">
     <div>
