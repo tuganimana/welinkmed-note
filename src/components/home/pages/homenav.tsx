@@ -51,7 +51,7 @@ export default function Homenav () {
           free trial
         </a>
         <div className="relative">
-{/* end  of    toggle (more) */}
+{/* end of toggle (more) */}
 
         </div>
       </nav>

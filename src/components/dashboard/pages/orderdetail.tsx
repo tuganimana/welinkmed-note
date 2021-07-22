@@ -2,6 +2,7 @@
 import React from 'react'
 import { Tabs, Select } from 'antd'
 import Sig from './editsig'
+import Routofadmin from './routofadmin'
 const { TabPane } = Tabs
 const { Option } = Select
 export default function Orderdetail () {
@@ -58,16 +59,7 @@ export default function Orderdetail () {
           </div>
           <div className="p-2">
             <label>Rout Of Administration ( Required)</label>
-            <Select
-              mode="multiple"
-              allowClear
-              style={{ width: '100%' }}
-              placeholder="Please select"
-              defaultValue={['Aron10']}
-              onChange={handleChange}
-            >
-              {children}
-            </Select>
+            <Routofadmin/>
           </div>
         <div className="p-2">
           <label>Physician( Required)</label>
