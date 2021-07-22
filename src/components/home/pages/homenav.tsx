@@ -28,7 +28,6 @@ export default function Homenav () {
           </svg>
         </button>
       </div>
-
       <nav className="hidden md:flex space-x-10">
         <div className="relative">
         </div>
