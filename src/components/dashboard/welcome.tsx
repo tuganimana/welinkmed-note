@@ -73,7 +73,8 @@ export default function Welcome () {
           <div className="lg:w-4/6 w-full p-2 grid">
             <div className="container mb-2">
               <span className="font-semibold text-md float-left">Resident Pannel</span>
-              <a href={frontEndPoints.RESIDENT_ADD}><span className="font-semibold text-md float-right bg-blue-400 text-white hover:bg-blue-500  rounded-lg p-2"><i className="fa fa-plus"></i> Add New Resident</span></a>
+              <a href={frontEndPoints.RESIDENT_ADD}><span className="font-semibold text-md float-right bg-blue-400 text-white hover:bg-blue-500 ml-1  rounded-lg p-2"><i className="fa fa-plus"></i> Add New Resident</span></a>
+              <a href={frontEndPoints.ORDER}><span className="font-semibold text-md float-right bg-blue-400 text-white hover:bg-blue-500 rounded-lg p-2"><i className="fa fa-plus"></i> Add Order Maintance</span></a>
             </div>
             <div className="flex flex-wrap space-between">
               {
