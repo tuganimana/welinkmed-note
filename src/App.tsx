@@ -12,9 +12,11 @@ import Welcome from './components/dashboard/welcome'
 import Addresident from './components/dashboard/pages/addresident'
 import Orderdetail from './components/dashboard/pages/orderdetail'
 import ResidentInfo from './components/dashboard/pages/residentinfo'
+import { Example } from './components/dashboard/pages/print'
 import UserMaintenance from './components/dashboard/pages/usermaintenance'
 import Body from './components/home/pages/body'
 import Orderedit from './components/dashboard/pages/orderedit'
+import Medicationdue from './components/dashboard/pages/medicationdue'
 function App () {
   AOS.init()
   return (
@@ -47,6 +49,11 @@ function App () {
             <Orderedit/>
           </Dashboard>
         </Route>
+        <Route path="/medication-due">
+          <Dashboard>
+            <Medicationdue/>
+          </Dashboard>
+        </Route>
         <Route path="/resident-info">
           <Dashboard>
             <ResidentInfo/>
@@ -55,6 +62,11 @@ function App () {
         <Route path="/user-maintenance">
           <Dashboard>
           <UserMaintenance/>
+          </Dashboard>
+        </Route>
+        <Route path="/marPdf">
+          <Dashboard>
+        <Example/>
           </Dashboard>
         </Route>
       </Switch>
