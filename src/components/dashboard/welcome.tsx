@@ -1,10 +1,22 @@
 // eslint-disable-next-line no-use-before-define
 import React from 'react'
+import { Menu, Dropdown } from 'antd'
+import { PlusOutlined } from '@ant-design/icons'
 import pe from '../../images/pe.jpg'
 import chart from '../../images/chart.png'
 import person1 from '../../images/person1.jpg'
 import { frontEndPoints } from '../../utils/enums'
 export default function Welcome () {
+  const menu = (
+    <Menu>
+      <Menu.Item key="0">
+        <a href={frontEndPoints.RESIDENT_ADD}>Add New Resident</a>
+      </Menu.Item>
+      <Menu.Item key="0">
+        <a href={frontEndPoints.ORDER}>Order maintenance</a>
+      </Menu.Item>
+    </Menu>
+  )
   const resident = [
     {
       fullname: 'Anne Marly',
@@ -71,9 +83,14 @@ export default function Welcome () {
       <div className="container p-4 md:mt-8">
         <div className="flex  flex-wrap">
           <div className="lg:w-4/6 w-full p-2 grid">
-            <div className="container mb-2">
-              <span className="font-semibold text-md float-left">Resident Pannel</span>
-              <a href={frontEndPoints.RESIDENT_ADD}><span className="font-semibold text-md float-right bg-blue-400 text-white hover:bg-blue-500  rounded-lg p-2"><i className="fa fa-plus"></i> Add New Resident</span></a>
+            <div className="hidden top-navbar w-full lg:inline-flex lg:flex-grow lg:w-auto" id="navigation">
+        <div className="lg:inline-flex lg:flex-row lg:ml-auto lg:w-auto w-full lg:items-center items-start  flex flex-col lg:h-auto">
+        <Dropdown overlay={menu} trigger={['click']}>
+            <a className="ant-dropdown-link bg-red-400  px-2 text-center py-2 rounded-xl mr-4" onClick={e => e.preventDefault()}>
+            <span className="text-white hover:text-black  pr-8 pl-2 border-blue-500"> Add New</span> <PlusOutlined className="text-white"/>
+            </a>
+       </Dropdown>
+        </div>
             </div>
             <div className="flex flex-wrap space-between">
               {
