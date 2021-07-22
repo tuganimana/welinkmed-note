@@ -36,8 +36,13 @@ export default function Orderdetail () {
     <div className="mx-4">
     <Tabs defaultActiveKey="1" onChange={callback}>
     <TabPane tab="Order Detail" key="1">
-    <div className="p-4 mb-14 bg-white rounded-xl shadows-xl mx-4">
+      <form action="">
+        <div className="p-4 mb-14 bg-white rounded-xl shadows-xl mx-4">
     <div className="grid md:grid-cols-2 gap-4">
+    <div className="p-2">
+            <label className="text-md">Routine Med Order</label>
+            <input type="text" name="" className="w-full p-2 border"/>
+          </div>
       <div className="p-2">
             <label>Ordered Type (required)</label>
             <select className="w-full p-2 border">
@@ -112,6 +117,7 @@ export default function Orderdetail () {
           </div>
         </div>
       </div>
+      </form>
     </TabPane>
     <TabPane tab="Add Sig" key="2">
     <div>
