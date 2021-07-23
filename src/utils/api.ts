@@ -40,5 +40,15 @@ class Api {
       // throw new Error(`Could not Login due to ${error.message}`)
     }
   }
+
+  // medication due
+  public async medicationRequest (title:string, description:string) {
+    try {
+      const res = await this.axiosConnect(axios.post, backEndPoints.MEDICATION, { title, description })
+      return res
+    } catch (error) {
+      console.log(`failed to add medication: ${error.message}`)
+    }
+  }
 }
 export const useApi = new Api()

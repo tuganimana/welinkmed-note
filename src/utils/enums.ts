@@ -11,7 +11,8 @@ export enum frontEndPoints {
 
 export enum backEndPoints {
     LOGIN='/api/login',
-    REGISTER ='/api/create'
+    REGISTER ='/api/create',
+    MEDICATION='/api/medication'
 }
 
 export enum httpMethod{

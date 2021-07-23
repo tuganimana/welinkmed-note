@@ -21,3 +21,10 @@ export interface SigType {
   clinicalAlert:string;
   reason:string;
 }
+
+export interface MedicationType {
+  name:string;
+  description:string;
+  dosage:string;
+  medicationType:string;
+}
