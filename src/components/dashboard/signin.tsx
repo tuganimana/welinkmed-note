@@ -4,7 +4,7 @@ import '../../css/dashboard.css'
 import { useForm } from 'react-hook-form'
 import { LoginType } from '../../utils/types'
 import { useHistory } from 'react-router-dom'
-import { frontEndPoints, welinkTokens } from '../../utils/enums'
+import { frontEndPoints, welinkTokens, accountCategory } from '../../utils/enums'
 import { useApi } from '../../utils/api'
 import Alert from '../alerts'
 export default function Signin () {
@@ -16,8 +16,10 @@ export default function Signin () {
     setLoading(true)
     const api = await useApi.loginApiRequest(data.username, data.password)
     const myaccount = api?.token || 'undefined'
-    console.log(myaccount)
-
+    const jwt = require('jsonwebtoken')
+    const decoded = jwt.decode(myaccount)
+    const { accountType } = decoded
+    console.log(accountType)
     if (myaccount === 'undefined') {
       setErrormessage(api.messages)
       setLoading(false)
@@ -25,8 +27,13 @@ export default function Signin () {
       localStorage.setItem(welinkTokens.userToken, api.token)
       setTimeout(() => {
         setLoading(false)
-        history.push(frontEndPoints.DASHBOARD)
-        setErrormessage(api.message)
+        if (accountType === accountCategory.ADMIN) {
+          history.push(frontEndPoints.ADMIN)
+          setErrormessage(api.message)
+        } else if (accountType === accountCategory.CLIENTS) {
+          history.push(frontEndPoints.DASHBOARD)
+          setErrormessage(api.message)
+        }
       }, 2000)
     }
     //
