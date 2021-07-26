@@ -3,31 +3,60 @@ import React, { useState } from 'react'
 import { Select } from 'antd'
 import { useForm } from 'react-hook-form'
 import { ResidentType } from '../../../utils/types'
+import { useApi } from '../../../utils/api'
 const { Option } = Select
 export default function Overview () {
   const { register, handleSubmit, formState: { errors } } = useForm<ResidentType>()
   const [attendingPhysician, setAttending] = useState('')
+  const [additional, setAdditional] = useState('')
+  const [loading, setLoading] = useState(false)
+  const [messaging, setMessaging] = useState('')
   const children = []
-  for (let i = 10; i < 36; i++) {
-    children.push(<Option value={i.toString(36) + i} key={i.toString(36) + i}>{i.toString(36) + i}</Option>)
-  }
+  children.push(<Option value="" >Select</Option>)
 
   function handleChange (value:any) {
-    console.log(`selected ${value}`)
+    setAdditional(value)
   }
   function handleAttending (value:any) {
     setAttending(value)
   }
-  const registerResident =(data:any) =>{
-
+  const registerResident = async (data:any) => {
+    setLoading(true)
+    try {
+      const response = await useApi.residentRegiterRequest(
+        data.firstName,
+        data.lastName,
+        data.residentSate,
+        data.religion,
+        data.maritialStatus,
+        data.dateOfBirth,
+        attendingPhysician,
+        data.addedDate,
+        additional,
+        data.admittingPhysician
+      )
+      if (response === 'undefined') {
+        setMessaging(response.message)
+        setLoading(false)
+      }
+      setTimeout(() => {
+        setMessaging(response.message)
+        setLoading(false)
+      }, 2000)
+    } catch (error) {
+      setMessaging('new resident can not be added')
+      setLoading(false)
+    }
   }
   return (
         <>
          <div className="p-4 bg-white rounded-xl shadows-xl mx-4">
+          <span className="bg-yellow-200 px-4 w-full rounded-xl py-2">{messaging}</span>
+           <form onSubmit={handleSubmit((data) => registerResident(data))}>
     <div className="grid md:grid-cols-2 gap-4">
           <div className="p-2">
             <label className="text-md">Firstname</label>
-            <input type="text" {...register('firstName', { required: '* This field is required' })} name="" className="w-full p-2 border"/>
+            <input type="text" {...register('firstName', { required: '* This field is required' })} className="w-full p-2 border"/>
             <span className="text-red-600 text-xs">{errors.firstName && errors.firstName.message}</span>
           </div>
           <div className="p-2">
@@ -38,7 +67,6 @@ export default function Overview () {
           <div className="p-2">
             <label>Resident State</label>
             <select {...register('residentSate')}className="w-full p-2 border">
-              <option>Select here</option>
               <option value="Newyork">Newyork</option>
               <option value="Antlanta">Atlanta</option>
               <option value="Maine">Maine</option>
@@ -63,7 +91,7 @@ export default function Overview () {
           </div>
           <div className="p-2">
             <label>Date of Birth</label>
-            <input type="date" name="" className="w-full p-2 border"/>
+            <input type="date" {...register('dateOfBirth')} name="" className="w-full p-2 border"/>
           </div>
           <div className="p-2">
             <label>Attending Physician</label>
@@ -90,17 +118,13 @@ export default function Overview () {
           </div>
           <div className="p-2">
             <label>Admitting Physician</label>
-            <select className="w-full p-2 borderl">
-              <option>Select here</option>
-              <option>Karori</option>
-              <option>Kewe</option>
-              <option>None of above</option>
-            </select>
+            <input type="text" {...register('admittingPhysician')} className="w-full p-2 border"/>
           </div>
           <div className="mb-4">
-               <input type="submit" value="Add Resident" className="bg-green-400 cursor-pointer appearance-none  rounded-full w-full md:w-64 mt-8 py-2 font-medium text-gray-600 leading-tight focus:outline-none hover:bg-green-400 focus:border-green-500" />
+             {loading ? <span className='px-8 bg-green-400 cursor-pointer appearance-none  rounded-full w-full md:w-64 mt-8 py-2 font-medium text-gray-600 leading-tight focus:outline-none hover:bg-green-400 focus:border-green-500'>Adding.....</span> : <input type="submit" value="Add Resident" className="bg-green-400 cursor-pointer appearance-none  rounded-full w-full md:w-64 mt-8 py-2 font-medium text-gray-600 leading-tight focus:outline-none hover:bg-green-400 focus:border-green-500" />}
           </div>
         </div>
+        </form>
       </div>
         </>
   )
