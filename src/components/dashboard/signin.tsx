@@ -4,7 +4,7 @@ import '../../css/dashboard.css'
 import { useForm } from 'react-hook-form'
 import { LoginType } from '../../utils/types'
 import { useHistory } from 'react-router-dom'
-import { frontEndPoints, welinkTokens } from '../../utils/enums'
+import { frontEndPoints, welinkTokens, accountCategory } from '../../utils/enums'
 import { useApi } from '../../utils/api'
 import Alert from '../alerts'
 export default function Signin () {
@@ -12,21 +12,48 @@ export default function Signin () {
   const { register, handleSubmit, formState: { errors } } = useForm<LoginType>()
   const [loading, setLoading] = useState(false)
   const [errorMessage, setErrormessage] = useState('')
+  const existingToken = localStorage.getItem(welinkTokens.userToken)
+  if (existingToken) {
+    const category = localStorage.getItem(welinkTokens.accountType)
+    switch (category) {
+      case accountCategory.ADMIN:
+        history.push(frontEndPoints.DASHBOARD)
+        break
+      case accountCategory.CLIENTS:
+        history.push(frontEndPoints.USERADMIN)
+        break
+      case accountCategory.ROOT:
+        history.push(frontEndPoints.ROOT)
+        break
+    }
+  }
   const handleLogin = async (data:LoginType) => {
     setLoading(true)
     const api = await useApi.loginApiRequest(data.username, data.password)
     const myaccount = api?.token || 'undefined'
-    console.log(myaccount)
+    const jwt = require('jsonwebtoken')
 
     if (myaccount === 'undefined') {
       setErrormessage(api.messages)
       setLoading(false)
     } else {
+      const decoded = jwt.decode(myaccount)
+      const { accountType } = decoded
+
       localStorage.setItem(welinkTokens.userToken, api.token)
+      localStorage.setItem(welinkTokens.accountType, accountType)
       setTimeout(() => {
         setLoading(false)
-        history.push(frontEndPoints.DASHBOARD)
-        setErrormessage(api.message)
+        if (accountType === accountCategory.ADMIN) {
+          history.push(frontEndPoints.DASHBOARD)
+          setErrormessage(api.message)
+        } else if (accountType === accountCategory.CLIENTS) {
+          history.push(frontEndPoints.USERADMIN)
+          setErrormessage(api.message)
+        } else if (accountType === accountCategory.ROOT) {
+          history.push(frontEndPoints.ROOT)
+          setErrormessage(api.message)
+        }
       }, 2000)
     }
     //

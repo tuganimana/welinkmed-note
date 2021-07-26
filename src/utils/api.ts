@@ -9,7 +9,7 @@ class Api {
     const headers = {
       'Content-Type': 'application/json',
       Accept: 'application/json',
-      Authorization
+      Authorization: Authorization
     }
     try {
       return method(urlPath, body, headers)
