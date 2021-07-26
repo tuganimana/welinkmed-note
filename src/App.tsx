@@ -17,6 +17,8 @@ import UserMaintenance from './components/dashboard/pages/usermaintenance'
 import Body from './components/home/pages/body'
 import Orderedit from './components/dashboard/pages/orderedit'
 import Medicationdue from './components/dashboard/pages/medicationdue'
+import ClientDashboard from './components/dashboard/clients/navbar'
+import ClientWelcome from './components/dashboard/clients/clientwelcome'
 function App () {
   AOS.init()
   return (
@@ -69,6 +71,13 @@ function App () {
         <Example/>
           </Dashboard>
         </Route>
+        {/* ========================================START CLIENT EDNPOINT============================ */}
+        <Route path="/user-dashboard">
+          <ClientDashboard>
+            <ClientWelcome/>
+          </ClientDashboard>
+        </Route>
+        {/* =======================END POINT========================= */}
       </Switch>
     </Router>
     </>
