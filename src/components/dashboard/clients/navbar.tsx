@@ -1,15 +1,14 @@
 // eslint-disable-next-line no-use-before-define
 import React from 'react'
-import Sidebar from '../Sidebar'
+import Sidebar from './Sidebar'
 import Topbar from './Topbar'
 import { useHistory } from 'react-router-dom'
-
 import { frontEndPoints, welinkTokens, accountCategory } from '../../../utils/enums'
-export default function Dashboard (props: any) {
+export default function ClientDashboard (props: any) {
   const history = useHistory()
   const accountType = localStorage.getItem(welinkTokens.accountType)
   const token = localStorage.getItem(welinkTokens.userToken)
-  if (accountType === null || accountType !== accountCategory.ADMIN || token === null) {
+  if (accountType === null || accountType !== accountCategory.CLIENTS || token === null) {
     localStorage.removeItem(welinkTokens.userToken)
     localStorage.removeItem(welinkTokens.accountType)
     history.push(frontEndPoints.LOGIN)

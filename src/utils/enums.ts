@@ -2,11 +2,12 @@
 export enum frontEndPoints {
     RESIDENT_ADD ='/add-resident',
     DASHBOARD='/dashboard',
-    ADMIN='/organization',
+    USERADMIN='/user-dashboard',
     LOGIN='/signin',
     USER_MAINTENANCE='/user-maintenance',
     ORDER='/order-detail',
-    HOME='/'
+    HOME='/',
+    ROOT='/root-dashboard'
 
  }
 
