@@ -32,7 +32,6 @@ export default function Signin () {
     const api = await useApi.loginApiRequest(data.username, data.password)
     const myaccount = api?.token || 'undefined'
     const jwt = require('jsonwebtoken')
-
     if (myaccount === 'undefined') {
       setErrormessage(api.messages)
       setLoading(false)
