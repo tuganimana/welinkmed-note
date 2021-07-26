@@ -28,3 +28,16 @@ export interface MedicationType {
   dosage:string;
   medicationType:string;
 }
+
+export interface ResidentType {
+  firstName:string;
+  lastName:string;
+  residentSate: string;
+  religion: string;
+  maritialStatus: string;
+  dateOfBirth: string;
+  attendingPhysician: string;
+  addedDate: string;
+  additionalPhysician: string;
+  admittingPhysician: string;
+}
