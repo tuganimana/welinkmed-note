@@ -82,5 +82,23 @@ class Api {
       console.log(`failed to add medication: ${error.message}`)
     }
   }
+
+  public async residentProfileRequest (profile:string) {
+    try {
+      const res = await this.axiosConnect(axios.put, backEndPoints.RESIDENT_PROFILE)
+      return res
+    } catch (err) {
+      console.log(`failed to update profile : ${err.message}`)
+    }
+  }
+
+  public async allResidentRequest () {
+    try {
+      const res = await this.axiosConnect(axios.get, backEndPoints.CREATE_RESIDENT)
+      return res
+    } catch (err) {
+      console.log(`failed to fetch : ${err.message}`)
+    }
+  }
 }
 export const useApi = new Api()
