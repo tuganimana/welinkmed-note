@@ -1,11 +1,12 @@
 // eslint-disable-next-line no-use-before-define
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { Menu, Dropdown } from 'antd'
 import { PlusOutlined } from '@ant-design/icons'
 import pe from '../../images/pe.jpg'
 import chart from '../../images/chart.png'
 import person1 from '../../images/person1.jpg'
 import { frontEndPoints } from '../../utils/enums'
+import { useApi } from '../../utils/api'
 export default function Welcome () {
   const menu = (
     <Menu>
@@ -17,34 +18,14 @@ export default function Welcome () {
       </Menu.Item>
     </Menu>
   )
-  const resident = [
-    {
-      fullname: 'Anne Marly',
-      houses: ' bench'
-    },
-    {
-      fullname: 'Bianna Mackenz',
-      houses: ' bench'
-    },
-    {
-      fullname: 'Kevin Armony',
-      houses: ' bench'
+  const [clients, setRecents] = useState([])
+  useEffect(() => {
+    const fetchData = async () => {
+      const response = await useApi.allResidentRequest()
+      setRecents(response.data)
     }
-  ]
-  const clients = [
-    {
-      fullname: 'Mikey Diaz',
-      houses: 'bench'
-    },
-    {
-      fullname: 'Neymar Santos',
-      houses: 'bench'
-    },
-    {
-      fullname: 'leo Martinez',
-      houses: 'bench'
-    }
-  ]
+    fetchData()
+  }, [])
   const recent = [
     {
       Firstname: 'Anne Marly',
@@ -94,7 +75,7 @@ export default function Welcome () {
             </div>
             <div className="flex flex-wrap space-between">
               {
-                resident.map((items:any, index) => {
+                clients.map((items:any, index) => {
                   return (
                   // eslint-disable-next-line react/jsx-key
                   <div key={index} className="w-1/2 md:w-1/3 w-full p-1">
@@ -108,7 +89,7 @@ export default function Welcome () {
                          <div className="">
                             <i className="fa fa-plus float-right cursor-pointer p-2 text-gray-500 bg-red-200 rounded-full"></i>
                          </div>
-                         <span className="lg:text-xs text-center font-bold cursor-pointer text-gray-800 float-left">{items.fullname}</span>
+                         <span className="lg:text-xs text-center font-bold cursor-pointer text-gray-800 float-left">{items.firstName} {items.lastName}</span>
                           <div className=" text-center items-end ">
                             <a href="/resident-info">
                             <span className="text-center w-full cursor-pointer hover:bg-green-800 rounded-full px-4 py-2 bg-green-600 font-bold cursor-pointer  text-gray-100 mt-2">{items.houses}</span>
