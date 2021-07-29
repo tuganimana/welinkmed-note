@@ -16,7 +16,9 @@ export enum backEndPoints {
     LOGIN='/api/login',
     REGISTER ='/api/create',
     CREATE_MEDICATION='/api/createMedication',
-    CREATE_RESIDENT='/api/resident'
+    CREATE_RESIDENT='/api/resident',
+    CREATE_RESIDENT='/api/resident',
+    RESIDENT_PROFILE='/api/resident/profile'
 }
 
 export enum httpMethod{
@@ -28,7 +30,8 @@ export enum httpMethod{
 export enum welinkTokens{
     userToken = 'welinkUserToken',
     accountType = 'accountType',
-    username = 'userName'
+    username = 'userName',
+    userID='id'
   }
 
 export enum accountCategory{

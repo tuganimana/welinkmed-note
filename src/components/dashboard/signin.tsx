@@ -37,10 +37,11 @@ export default function Signin () {
       setLoading(false)
     } else {
       const decoded = jwt.decode(myaccount)
-      const { accountType } = decoded
+      const { accountType, id } = decoded
 
       localStorage.setItem(welinkTokens.userToken, api.token)
       localStorage.setItem(welinkTokens.accountType, accountType)
+      localStorage.setItem(welinkTokens.userID, id)
       setTimeout(() => {
         setLoading(false)
         if (accountType === accountCategory.ADMIN) {
