@@ -7,9 +7,11 @@ class Api {
     const Authorization = localStorage.getItem(welinkTokens.userToken)
     const urlPath = apiBaseUrl + endpoint
     const headers = {
-      'Content-Type': 'application/json',
-      Accept: 'application/json',
-      Authorization: Authorization
+      headers: {
+        'Content-Type': 'application/json',
+        Accept: 'application/json',
+        Authorization: `Bearer ${Authorization}`
+      }
     }
     try {
       return method(urlPath, body, headers)
@@ -45,6 +47,36 @@ class Api {
   public async medicationRequest (NameMedication:string, Dosage:string, MedicationType:string, StartDate:string, EndDate:string) {
     try {
       const res = await this.axiosConnect(axios.post, backEndPoints.CREATE_MEDICATION, { NameMedication, Dosage, MedicationType, StartDate, EndDate })
+      return res
+    } catch (error) {
+      console.log(`failed to add medication: ${error.message}`)
+    }
+  }
+
+  public async residentRegiterRequest (
+    firstName:string,
+    lastName:string,
+    residentSate:string,
+    religion:string,
+    maritialStatus: string,
+    dateOfBirth: string,
+    attendingPhysician: string,
+    addedDate: string,
+    additionalPhysician: string,
+    admittingPhysician: string) {
+    try {
+      const res = await this.axiosConnect(axios.post, backEndPoints.CREATE_RESIDENT, {
+        firstName,
+        lastName,
+        residentSate,
+        religion,
+        maritialStatus,
+        dateOfBirth,
+        attendingPhysician,
+        addedDate,
+        additionalPhysician,
+        admittingPhysician
+      })
       return res
     } catch (error) {
       console.log(`failed to add medication: ${error.message}`)

@@ -75,9 +75,9 @@ export default function Medicationdue () {
           <div className="p-2">
             <label>Types of Medication (Optional)</label>
             <select {...register('MedicationType', { required: false })} className="w-full p-2 borderl">
-            <option>Select here</option>
-              <option>Injection</option>
-              <option>Tablets</option>
+            <option value="select">Select here</option>
+              <option value="injection">Injection</option>
+              <option value="tablets">Tablets</option>
             </select>
           </div>
           <div className="p-2">
