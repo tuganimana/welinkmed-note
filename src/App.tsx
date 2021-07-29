@@ -56,7 +56,7 @@ function App () {
             <Medicationdue/>
           </Dashboard>
         </Route>
-        <Route path="/resident-info">
+        <Route path="/resident-info/:residentid">
           <Dashboard>
             <ResidentInfo/>
           </Dashboard>

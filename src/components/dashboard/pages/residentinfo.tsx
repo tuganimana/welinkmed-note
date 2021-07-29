@@ -1,12 +1,15 @@
 // eslint-disable-next-line no-use-before-define
 import React, { useState } from 'react'
 import { Tabs, Statistic, Input, Modal } from 'antd'
+import { useParams } from 'react-router-dom'
 import person1 from '../../../images/person1.jpg'
 import pill from '../../../images/Pills.jpg'
 import pill1 from '../../../images/Pills1.jpg'
 import pill2 from '../../../images/Pills2.jpg'
 const { TabPane } = Tabs
-export default function ResidentInfo () {
+export default function ResidentInfo (props:any) {
+  const { residentId } : any = useParams()
+  console.log(residentId)
   const { Countdown } = Statistic
   const deadline = Date.now() + 1000 * 60 * 60 * 24 * 2 + 1000 * 30
   function onFinish () { console.log('finished!') }

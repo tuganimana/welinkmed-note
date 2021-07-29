@@ -4,6 +4,7 @@ import '../../css/dashboard.css'
 import { useForm } from 'react-hook-form'
 import { LoginType } from '../../utils/types'
 import { useHistory } from 'react-router-dom'
+import { Spin } from 'antd'
 import { frontEndPoints, welinkTokens, accountCategory } from '../../utils/enums'
 import { useApi } from '../../utils/api'
 import Alert from '../alerts'
@@ -58,6 +59,7 @@ export default function Signin () {
     }
     //
   }
+  if (loading) return (<><div className='justify-center pt-96 mx-auto items-center text-center'><Spin size='large' tip='signin.....'/></div></>)
   return (<>
    <div className="bg-gray-100 flex flex-col justify-center items-center h-screen py-10">
        <div className="bgImage max-w-5xl bg-gray-300 h-64 w-full rounded-tl-3xl rounded-br-3xl shadow-2xl">
