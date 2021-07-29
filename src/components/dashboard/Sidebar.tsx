@@ -22,7 +22,7 @@ export default function Sidebar () {
     <div className="flex flex-col w-full md:w-full text-gray-700 bg-blue-400 text-gray-200 flex-shrink-0">
       <div className="flex-shrink-0 px-8 py-4 flex flex-row items-center justify-between py-4">
         <div className="">
-        <a href="/" className="text-lg mb-16 font-semibold tracking-widest text-gray-900 uppercase rounded-lg text-white focus:outline-none focus:shadow-outline">We Link Med </a>
+        <a href={frontEndPoints.DASHBOARD} className="text-lg mb-16 font-semibold tracking-widest text-gray-900 uppercase rounded-lg text-white focus:outline-none focus:shadow-outline">We Link Med </a>
         </div>
         <div className="md:hidden">
         <button type="button" onClick={handleClick} className="inline-flex items-center justify-center p-2 rounded-md text-white hover:text-yellow-600 hover:bg-yellow-100 focus:outline-none focus:bg-yellow-100 focus:text-yellow-600 transition duration-150 ease-in-out">

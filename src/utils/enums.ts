@@ -7,7 +7,8 @@ export enum frontEndPoints {
     USER_MAINTENANCE='/user-maintenance',
     ORDER='/order-detail',
     HOME='/',
-    ROOT='/root-dashboard'
+    ROOT='/root-dashboard',
+    RESIDENT_INFO='/resident-infos'
 
  }
 
