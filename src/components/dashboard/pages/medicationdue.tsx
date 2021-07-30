@@ -1,10 +1,14 @@
 // eslint-disable-next-line no-use-before-define
-import React from 'react'
+import React, { useState } from 'react'
 import { Tabs, Select } from 'antd'
 import Sig from './editsig'
 import { useApi } from '../../../utils/api'
 import { MedicationType } from '../../../utils/types'
+import { useHistory } from 'react-router-dom'
 import { useForm } from 'react-hook-form'
+
+import { frontEndPoints } from '../../../utils/enums'
+import Alert from '../../alerts'
 const { TabPane } = Tabs
 const { Option } = Select
 
@@ -30,10 +34,26 @@ export default function Medicationdue () {
       endDate: '17/12/2001'
     }
   ]
+  const history = useHistory()
   const { register, handleSubmit, formState: { errors } } = useForm<MedicationType>()
+  const [loading, setLoading] = useState(false)
+  const [errorMessage, setErrormessage] = useState('')
   const addMedication = async (data:any) => {
-    const medResponse = await useApi.medicationRequest('hello', 'kir')
+    setLoading(true)
+    const medResponse = await useApi.medicationRequest(data.NameMedication, data.Dosage, data.MedicationType, data.StartDate, data.EndDate)
+    const mymedication = medResponse?.token || 'undefined'
     console.log(medResponse)
+    if (mymedication === 'undefined') {
+      setErrormessage(medResponse.messages)
+      setLoading(false)
+    } else {
+      setTimeout(() => {
+        setLoading(false)
+        history.push(frontEndPoints.MEDICATION)
+        setErrormessage(medResponse.message)
+      }, 2000)
+    }
+    //
   }
   return (
     <>
@@ -43,25 +63,27 @@ export default function Medicationdue () {
     <div className="mx-4">
     <Tabs defaultActiveKey="1" onChange={callback}>
     <TabPane tab="Medication Due" key="1">
+    <Alert message={errorMessage}/>
       <form onSubmit={ handleSubmit((data) => { addMedication(data) })}>
     <div className="p-4 mb-14 bg-white rounded-xl shadows-xl mx-4">
     <div className="grid md:grid-cols-2 gap-4">
           <div className="p-2">
             <label className="text-md">Name of Medication</label>
-            <input type="text" {...register('name', { required: 'This field is required' })} className="w-full p-2 border"/>
-            <span className="text-red-600 text-xs">{errors.name && errors.name.message}</span>
+            <input type="text" {...register('NameMedication', { required: 'This field is required' })} className="w-full p-2 border"/>
+            <span className="text-red-600 text-xs">{errors.NameMedication && errors.NameMedication.message}</span>
           </div>
           <div className="p-2">
             <label>Types of Medication (Optional)</label>
-            <select {...register('medicationType', { required: false })} className="w-full p-2 borderl">
-            <option>Select here</option>
-              <option>Injection</option>
-              <option>Tablets</option>
+            <select {...register('MedicationType', { required: false })} className="w-full p-2 borderl">
+            <option value="select">Select here</option>
+              <option value="injection">Injection</option>
+              <option value="tablets">Tablets</option>
             </select>
           </div>
           <div className="p-2">
             <label>Dosage ( Required)</label>
-          <input type="text" className="w-full px-2 py-2"/>
+          <input type="text" {...register('Dosage', { required: 'This field is required' })} className="w-full p-2 border"/>
+          <span className="text-red-600 text-xs">{errors.Dosage && errors.Dosage.message}</span>
           </div>
         <div className="p-2">
           <label>Physician( Required)</label>
@@ -70,7 +92,7 @@ export default function Medicationdue () {
             allowClear
             style={{ width: '100%' }}
             placeholder="Please select"
-            defaultValue={['Aron10']}
+            defaultValue={['Doctor Seth']}
             onChange={handleChange}
           >
             {children}
@@ -78,15 +100,19 @@ export default function Medicationdue () {
         </div>
           <div className="p-2">
             <label>Start Date </label>
-            <input type="date" name="" className="w-full p-2 border"/>
+            <input type="date" {...register('StartDate', { required: 'This field is required' })} className="w-full p-2 border"/>
+            <span className="text-red-600 text-xs">{errors.StartDate && errors.StartDate.message}</span>
           </div>
           <div className="p-2">
             <label>End Date</label>
-            <input type="date" className="w-full p-2 border"/>
+            <input type="date" {...register('EndDate', { required: 'This field is required' })} className="w-full p-2 border"/>
+            <span className="text-red-600 text-xs">{errors.EndDate && errors.EndDate.message}</span>
+          </div>
+          <div className="mb-4">
+          {loading ? <span>Sending.....</span> : <input type="submit" value="SEND" className="bg-red-400 cursor-pointer appearance-none  rounded-full w-full py-2 px-4 ml-32 font-medium text-gray-600 leading-tight focus:outline-none hover:bg-green-400 focus:border-green-500" />}
           </div>
         </div>
       </div>
-      <input type="submit"/>
       </form>
     </TabPane>
     <TabPane tab="Add Sig" key="2">

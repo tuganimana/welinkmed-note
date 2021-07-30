@@ -44,9 +44,9 @@ class Api {
   }
 
   // medication due
-  public async medicationRequest (title:string, description:string) {
+  public async medicationRequest (NameMedication:string, Dosage:string, MedicationType:string, StartDate:string, EndDate:string) {
     try {
-      const res = await this.axiosConnect(axios.post, backEndPoints.MEDICATION, { title, description })
+      const res = await this.axiosConnect(axios.post, backEndPoints.CREATE_MEDICATION, { NameMedication, Dosage, MedicationType, StartDate, EndDate })
       return res
     } catch (error) {
       console.log(`failed to add medication: ${error.message}`)

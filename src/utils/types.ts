@@ -23,10 +23,11 @@ export interface SigType {
 }
 
 export interface MedicationType {
-  name:string;
-  description:string;
-  dosage:string;
-  medicationType:string;
+  NameMedication:string;
+  Dosage:string;
+  MedicationType:string;
+  StartDate:string;
+  EndDate:string;
 }
 
 export interface ResidentType {

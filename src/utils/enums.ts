@@ -6,6 +6,7 @@ export enum frontEndPoints {
     LOGIN='/signin',
     USER_MAINTENANCE='/user-maintenance',
     ORDER='/order-detail',
+    MEDICATION='/medication-due',
     HOME='/',
     ROOT='/root-dashboard',
     RESIDENT_INFO='/resident-infos'
@@ -15,7 +16,7 @@ export enum frontEndPoints {
 export enum backEndPoints {
     LOGIN='/api/login',
     REGISTER ='/api/create',
-    MEDICATION='/api/medication',
+    CREATE_MEDICATION='/api/createMedication',
     CREATE_RESIDENT='/api/resident',
     RESIDENT_PROFILE='/api/resident/profile'
 }
