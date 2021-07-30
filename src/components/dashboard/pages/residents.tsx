@@ -7,7 +7,7 @@ import pill from '../../../images/Pills.jpg'
 import pill1 from '../../../images/Pills1.jpg'
 import pill2 from '../../../images/Pills2.jpg'
 const { TabPane } = Tabs
-export default function ResidentInfo (props:any) {
+export default function ViewResidents () {
   const { residentId } : any = useParams()
   console.log(residentId)
   const { Countdown } = Statistic

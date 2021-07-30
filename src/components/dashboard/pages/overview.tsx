@@ -4,6 +4,7 @@ import { Select } from 'antd'
 import { useForm } from 'react-hook-form'
 import { ResidentType } from '../../../utils/types'
 import { useApi } from '../../../utils/api'
+import Alert from '../../alerts'
 const { Option } = Select
 export default function Overview () {
   const { register, handleSubmit, formState: { errors } } = useForm<ResidentType>()
@@ -51,7 +52,7 @@ export default function Overview () {
   return (
         <>
          <div className="p-4 bg-white rounded-xl shadows-xl mx-4">
-          <span className="bg-yellow-200 px-4 w-full rounded-xl py-2">{messaging}</span>
+         <Alert message={messaging}/>
            <form onSubmit={handleSubmit((data) => registerResident(data))}>
     <div className="grid md:grid-cols-2 gap-4">
           <div className="p-2">

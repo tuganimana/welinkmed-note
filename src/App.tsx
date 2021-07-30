@@ -11,7 +11,7 @@ import Dashboard from './components/dashboard/pages/navbar'
 import Welcome from './components/dashboard/welcome'
 import Addresident from './components/dashboard/pages/addresident'
 import Orderdetail from './components/dashboard/pages/orderdetail'
-import ResidentInfo from './components/dashboard/pages/residentinfo'
+import ViewResidents from './components/dashboard/pages/residents'
 import { Example } from './components/dashboard/pages/print'
 import UserMaintenance from './components/dashboard/pages/usermaintenance'
 import Body from './components/home/pages/body'
@@ -19,6 +19,8 @@ import Orderedit from './components/dashboard/pages/orderedit'
 import Medicationdue from './components/dashboard/pages/medicationdue'
 import ClientDashboard from './components/dashboard/clients/navbar'
 import ClientWelcome from './components/dashboard/clients/clientwelcome'
+import NotFound from './components/dashboard/404'
+import Editresident from './components/dashboard/pages/editresident'
 function App () {
   AOS.init()
   return (
@@ -56,14 +58,19 @@ function App () {
             <Medicationdue/>
           </Dashboard>
         </Route>
-        <Route path="/resident-info/:residentid">
+        <Route path="/resident-infos/:residentid">
           <Dashboard>
-            <ResidentInfo/>
+            <ViewResidents/>
           </Dashboard>
         </Route>
         <Route path="/user-maintenance">
           <Dashboard>
           <UserMaintenance/>
+          </Dashboard>
+        </Route>
+        <Route path="/edit-residents">
+          <Dashboard>
+          <Editresident/>
           </Dashboard>
         </Route>
         <Route path="/marPdf">
@@ -78,6 +85,7 @@ function App () {
           </ClientDashboard>
         </Route>
         {/* =======================END POINT========================= */}
+        <Route component={NotFound} />
       </Switch>
     </Router>
     </>
