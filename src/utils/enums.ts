@@ -4,6 +4,7 @@ export enum frontEndPoints {
     DASHBOARD='/dashboard',
     USERADMIN='/user-dashboard',
     LOGIN='/signin',
+    CREATE_USER='/urser-add',
     USER_MAINTENANCE='/user-maintenance',
     ORDER='/order-detail',
     MEDICATION='/medication-due',

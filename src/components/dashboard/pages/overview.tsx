@@ -52,7 +52,7 @@ export default function Overview () {
   return (
         <>
          <div className="p-4 bg-white rounded-xl shadows-xl mx-4">
-         <Alert message={messaging}/>
+          <Alert message={messaging}/>
            <form onSubmit={handleSubmit((data) => registerResident(data))}>
     <div className="grid md:grid-cols-2 gap-4">
           <div className="p-2">

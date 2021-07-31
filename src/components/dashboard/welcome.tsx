@@ -1,107 +1,54 @@
 // eslint-disable-next-line no-use-before-define
 import React from 'react'
-import { Menu, Dropdown } from 'antd'
-import { PlusOutlined } from '@ant-design/icons'
+import { UserAddOutlined, DollarCircleOutlined, AreaChartOutlined, FolderAddOutlined } from '@ant-design/icons'
 import chart from '../../images/chart.png'
-import { frontEndPoints } from '../../utils/enums'
+
 import Residents from './pages/clients'
+import { frontEndPoints } from '../../utils/enums'
 
 export default function Welcome () {
-  const menu = (
-    <Menu>
-      <Menu.Item key="0">
-        <a href={frontEndPoints.RESIDENT_ADD}>Add New Resident</a>
-      </Menu.Item>
-      <Menu.Item key="0">
-        <a href={frontEndPoints.ORDER}>Order maintenance</a>
-      </Menu.Item>
-    </Menu>
-  )
-
-  const recent = [
-    {
-      Firstname: 'Anne Marly',
-      Lastname: 'bench',
-      Age: '19',
-      Sex: 'Male',
-      House: 'Bench',
-      dob: '17th'
-    },
-    {
-      Firstname: 'Anne Marly',
-      Lastname: 'bench',
-      Age: '19',
-      Sex: 'Male',
-      House: 'Bench',
-      dob: '17th'
-    },
-    {
-      Firstname: 'Anne Marly',
-      Lastname: 'bench',
-      Age: '19',
-      Sex: 'Male',
-      House: 'Bench',
-      dob: '17th'
-    },
-    {
-      Firstname: 'Anne Marly',
-      Lastname: 'bench',
-      Age: '19',
-      Sex: 'Male',
-      House: 'Bench',
-      dob: '17th'
-    }
-  ]
   return (<>
       <div className="container p-4 md:mt-8">
         <div className="flex  flex-wrap">
           <div className="lg:w-4/6 w-full p-2 grid">
             <div className="hidden top-navbar w-full lg:inline-flex lg:flex-grow lg:w-auto" id="navigation">
         <div className="lg:inline-flex lg:flex-row lg:ml-auto lg:w-auto w-full lg:items-center items-start  flex flex-col lg:h-auto">
-        <Dropdown overlay={menu} trigger={['click']}>
-            <a className="ant-dropdown-link bg-red-400  px-2 text-center py-2 rounded-xl mr-4" onClick={e => e.preventDefault()}>
-            <span className="text-white hover:text-black  pr-8 pl-2 border-blue-500"> Add New</span> <PlusOutlined className="text-white"/>
-            </a>
-       </Dropdown>
         </div>
             </div>
-         <Residents/>
-            <div className="flex flex-wrap md:mt-16 mt-4">
-              <div className="w-full md:w-2/3 p-2 bg-white rounded-xl">
-                <span className="font-bold p-2 text-blue-400">Recent recorded</span>
-                <div className="mt-2">
-                <table className="rounded-t-lg w-5/6 mx-auto bg-blue-100 text-gray-800">
-                  <tr className="text-left border-b-2 border-blue-300">
-                    <th className="px-4 py-3">Firstname</th>
-                    <th className="px-4 py-3">Lastname</th>
-                    <th className="px-4 py-3">Age</th>
-                    <th className="px-4 py-3">Sex</th>
-                    <th className="px-4 py-3">Sex</th>
-                    <th className="px-4 py-3">Sex</th>
-                  </tr>
-                  {
-                recent.map((items:any, index) => {
-                  return (
-                  <tr key={index} className="bg-gray-100 hover:bg-blue-100 border-b border-blue-200">
-                    <td className="px-4 py-3">{items.Firstname}</td>
-                    <td className="px-4 py-3">{items.Lastname}</td>
-                    <td className="px-4 py-3">{items.Age}</td>
-                    <td className="px-4 py-3">{items.Sex}</td>
-                    <td className="px-4 py-3">{items.Sex}</td>
-                    <td className="px-4 py-3">{items.Sex}</td>
-                  </tr>
-                  )
-                })
-                }
-                </table>
+            <div className="mb-4 bg-white rounded-xl mx-2 ">
+              <div className="grid  md:grid-cols-3 gap-4 p-3">
+             <a href={frontEndPoints.RESIDENT_ADD}><div className="p-3 bg-blue-200 text-gray-600 flex flex-wrap font-bold rounded-xl shadow">
+                <div className="bg-white rounded-full h-8 w-8 items-center"><UserAddOutlined className="ml-2" /></div>
+                <span className="inline-block mt-2 mx-3"> Add user</span>
                 </div>
-              </div>
-              <div className="w-full md:w-1/3 p-2 rounded-xl">
-                <span className="font-bold px-2 text-green-600">Recents clients added</span>
-                <div className="grid gap-2 p-1 rounded-xl">
+                </a>
+                <a href={frontEndPoints.RESIDENT_ADD}><div className="p-3 bg-red-200 text-gray-600 flex flex-wrap font-bold rounded-xl shadow">
+                <div className="bg-white rounded-full h-8 w-8 items-center"><UserAddOutlined className="ml-2" /></div>
+                <span className="inline-block mt-2 mx-3"> Add residents</span>
+                </div>
+                </a>
+                <a href={frontEndPoints.ORDER}><div className="p-3 bg-green-200 text-gray-600 flex flex-wrap font-bold rounded-xl shadow">
+                <div className="bg-white rounded-full h-8 w-8 items-center"><FolderAddOutlined className="ml-2" /></div>
+                <span className="inline-block mt-2 mx-3"> Add order</span>
+                </div>
+                </a>
+                <div className="p-3 bg-gray-200 text-gray-600 flex flex-wrap font-bold rounded-xl shadow">
+                <div className="bg-white rounded-full h-8 w-8 items-center"><AreaChartOutlined className="ml-2" /></div>
+                <span className="inline-block mt-2 mx-3"> Reports</span>
+                </div>
+                <div className="p-3 bg-yellow-200 text-gray-600 flex flex-wrap font-bold rounded-xl shadow">
+                <div className="bg-white rounded-full h-8 w-8 items-center"><AreaChartOutlined className="ml-2" /></div>
+                <span className="inline-block mt-2 mx-3"> MRN</span>
+                </div>
+                <div className="p-3 bg-blue-200 text-gray-600 flex flex-wrap font-bold rounded-xl shadow">
+                <div className="bg-white rounded-full h-8 w-8 items-center"><DollarCircleOutlined size={40} className="ml-2" /></div>
+                <span className="inline-block mt-2 mx-3"> Payments</span>
                 </div>
               </div>
             </div>
+            <div className="">
+         <Residents/>
+         </div>
           </div>
           <div className="lg:w-2/6 w-full bg-white rounded-lg p-4  md:mt-16 mt-4 grid">
             <div className="p-1">
