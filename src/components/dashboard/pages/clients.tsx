@@ -9,6 +9,8 @@ import { frontEndPoints } from '../../../utils/enums'
 export default function Residents () {
   const [clients, setRecents] = useState([])
   const [loading, setLoading] = useState(false)
+  const [currentClient, setCurrentpage] = useState(1)
+  const [postsPerPage, setPostsPerPage] = useState(10)
   useEffect(() => {
     setLoading(true)
 
@@ -23,11 +25,15 @@ export default function Residents () {
         console.log(`${error}`)
       })
   }, [])
+  const indexOfLastPage = currentClient * postsPerPage
+  const indexOfFirstPost = indexOfLastPage - postsPerPage
+  const currentClients = clients.slice(indexOfFirstPost, indexOfLastPage)
+
   if (loading) return (<><div className='justify-center  mx-auto items-center text-center'><Spin tip='fetching.....'/></div></>)
   return (<>
        <div className="flex flex-wrap space-between">
               {
-                clients.map((items:any, index) => {
+                currentClients.map((items:any, index) => {
                   const urlPath = `${frontEndPoints.RESIDENT_INFO}/${items.residentId}`
                   return (
                   // eslint-disable-next-line react/jsx-key
