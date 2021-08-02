@@ -21,6 +21,7 @@ import ClientDashboard from './components/dashboard/clients/navbar'
 import ClientWelcome from './components/dashboard/clients/clientwelcome'
 import NotFound from './components/dashboard/404'
 import Editresident from './components/dashboard/pages/editresident'
+import Addclient from './components/dashboard/clients/addclient'
 function App () {
   AOS.init()
   return (
@@ -82,6 +83,11 @@ function App () {
         <Route path="/user-dashboard">
           <ClientDashboard>
             <ClientWelcome/>
+          </ClientDashboard>
+        </Route>
+        <Route path="/addclient">
+          <ClientDashboard>
+            <Addclient/>
           </ClientDashboard>
         </Route>
         {/* =======================END POINT========================= */}

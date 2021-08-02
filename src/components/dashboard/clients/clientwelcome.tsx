@@ -1,12 +1,28 @@
 // eslint-disable-next-line no-use-before-define
 import React from 'react'
-import { Progress } from 'antd'
+import { Dropdown, Progress, Menu } from 'antd'
+import { PlusOutlined } from '@ant-design/icons'
+import { frontEndPoints } from '../../../utils/enums'
 export default function ClientWelcome () {
+  const menu = (
+    <Menu>
+      <Menu.Item key="0">
+        <a href={frontEndPoints.ADDCLIENT}>Add New Client</a>
+      </Menu.Item>
+    </Menu>
+  )
   return (<>
       <div className="container p-4 md:mt-8">
         <div className="flex  flex-wrap">
           <div className="lg:w-4/6 w-full p-2 grid">
             <div className="hidden top-navbar w-full lg:inline-flex lg:flex-grow lg:w-auto" id="navigation">
+            <div className="lg:inline-flex lg:flex-row lg:ml-auto lg:w-auto w-full lg:items-center items-start  flex flex-col lg:h-auto">
+        <Dropdown overlay={menu} trigger={['click']}>
+            <a className="ant-dropdown-link  px-2 text-center py-2 rounded-xl mr-4" onClick={e => e.preventDefault()}>
+            <span className="text-red-700 hover:text-black  pr-8 pl-2 border-blue-500"> Add New</span> <PlusOutlined className="text-red-700"/>
+            </a>
+       </Dropdown>
+        </div>
             </div>
             <div className="flex flex-wrap space-between">
                   <div className="w-1/2 md:w-1/3 w-full p-1">
