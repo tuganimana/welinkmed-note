@@ -70,7 +70,7 @@ export default function UserMaintenance () {
           </div>
           <div className="p-2">
             <label>Lastname</label>
-            <input type="text" {...register('lastname', { required: '* This field is required' })} name="" className="w-full p-2 border"/>
+            <input type="text" {...register('lastname', { required: '* This field is required' })} className="w-full p-2 border"/>
             <span className="text-red-600 text-xs">{errors.lastname && errors.lastname.message}</span>
           </div>
       </div>
@@ -82,7 +82,7 @@ export default function UserMaintenance () {
           </div>
           <div className="p-2">
             <label>Category</label>
-            <input type="text" {...register('category', { required: '* This field is required' })} name="" className="w-full p-2 border"/>
+            <input type="text" {...register('category', { required: '* This field is required' })} className="w-full p-2 border"/>
             <span className="text-red-600 text-xs">{errors.category && errors.category.message}</span>
           </div>
       </div>
