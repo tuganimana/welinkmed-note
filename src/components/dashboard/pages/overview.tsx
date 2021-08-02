@@ -68,7 +68,7 @@ export default function Overview () {
           </div>
           <div className="p-2">
             <label>Lastname</label>
-            <input type="text" {...register('lastName', { required: 'This field is required' })} className="w-full p-2 border"/>
+            <input type="text" {...register('lastName', { required: 'This field is  required' })} className="w-full p-2 border"/>
             <span className="text-red-600 text-xs">{errors.lastName && errors.lastName.message}</span>
           </div>
           <div className="p-2">

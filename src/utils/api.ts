@@ -102,5 +102,27 @@ class Api {
       console.log(`failed to fetch : ${err.message}`)
     }
   }
+
+  public async UserRegisterRequest (
+    firstName: string,
+    lastName:string,
+    email: string,
+    password: string,
+    category: string,
+    origanization: string) {
+    try {
+      const res = await this.axiosConnect(axios.post, backEndPoints.REGISTER, {
+        firstName,
+        lastName,
+        email,
+        password,
+        category,
+        origanization
+      })
+      return res
+    } catch (error) {
+      console.log(`failed to add new user: ${error.message}`)
+    }
+  }
 }
 export const useApi = new Api()
