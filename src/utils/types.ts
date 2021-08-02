@@ -42,3 +42,7 @@ export interface ResidentType {
   additionalPhysician: string;
   admittingPhysician: string;
 }
+
+export interface SearchType {
+  search:string;
+}
