@@ -54,21 +54,12 @@ export default function Overview () {
             <input type="date" name="" className="w-full p-2 border"/>
           </div>
           <div className="p-2">
-            <label>Attending Physician</label>
-            <Select
-      mode="multiple"
-      allowClear
-      style={{ width: '100%' }}
-      placeholder="Please select"
-      defaultValue={['Aron10']}
-      onChange={handleChange}
-    >
-      {children}
-    </Select>
+            <label>Phonenumber</label>
+            <input type="text" className="w-full p-2 border"/>
           </div>
           <div className="p-2">
-            <label>Added Date</label>
-            <input type="date" className="w-full p-2 border"/>
+            <label>Email</label>
+            <input type="text" className="w-full p-2 border" placeholder="welink@gmail.com"/>
           </div>
           <div className="p-2">
             <label>Additional Physician</label>
@@ -82,18 +73,6 @@ export default function Overview () {
     >
       {children}
     </Select>
-          </div>
-          <div className="p-2">
-            <label>Admitting Physician</label>
-            <select className="w-full p-2 borderl">
-              <option>Select here</option>
-              <option>Karori</option>
-              <option>Kewe</option>
-              <option>None of above</option>
-            </select>
-          </div>
-          <div className="mb-4">
-               <input type="submit" value="Add Resident" className="bg-green-400 cursor-pointer appearance-none  rounded-full w-full md:w-64 mt-8 py-2 font-medium text-gray-600 leading-tight focus:outline-none hover:bg-green-400 focus:border-green-500" />
           </div>
         </div>
       </div>

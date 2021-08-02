@@ -8,6 +8,7 @@ export enum frontEndPoints {
     USER_MAINTENANCE='/user-maintenance',
     ORDER='/order-detail',
     MEDICATION='/medication-due',
+    ADDCLIENT='/addclient',
     HOME='/',
     ROOT='/root-dashboard',
     RESIDENT_INFO='/resident-infos'
