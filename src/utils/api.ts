@@ -63,7 +63,8 @@ class Api {
     attendingPhysician: string,
     addedDate: string,
     additionalPhysician: string,
-    admittingPhysician: string) {
+    admittingPhysician: string,
+    userId?:string) {
     try {
       const res = await this.axiosConnect(axios.post, backEndPoints.CREATE_RESIDENT, {
         firstName,
@@ -75,7 +76,8 @@ class Api {
         attendingPhysician,
         addedDate,
         additionalPhysician,
-        admittingPhysician
+        admittingPhysician,
+        userId
       })
       return res
     } catch (error) {

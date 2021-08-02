@@ -1,16 +1,19 @@
 // eslint-disable-next-line no-use-before-define
 import React, { useEffect, useState } from 'react'
-import { Spin } from 'antd'
+import { Spin, Pagination } from 'antd'
 import pe from '../../../images/pe.jpg'
 import ruser from '../../../images/users.png'
 import { useApi } from '../../../utils/api'
 import { frontEndPoints } from '../../../utils/enums'
-
+import { useForm } from 'react-hook-form'
+import { SearchType } from '../../../utils/types'
 export default function Residents () {
   const [clients, setRecents] = useState([])
   const [loading, setLoading] = useState(false)
-  const [currentClient, setCurrentpage] = useState(1)
-  const [postsPerPage, setPostsPerPage] = useState(10)
+  const [newclient, setCurrentClients] = useState(1)
+  const [postsPerPage] = useState(12)
+  const [search, setSearch] = useState('')
+  const { register, handleSubmit, formState: { errors } } = useForm<SearchType>()
   useEffect(() => {
     setLoading(true)
 
@@ -18,19 +21,41 @@ export default function Residents () {
       if (response) {
         setLoading(false)
         setRecents(response.data)
-        console.log(response.data)
       }
     })
       .catch((error) => {
         console.log(`${error}`)
       })
   }, [])
-  const indexOfLastPage = currentClient * postsPerPage
+  const indexOfLastPage = newclient * postsPerPage
   const indexOfFirstPost = indexOfLastPage - postsPerPage
   const currentClients = clients.slice(indexOfFirstPost, indexOfLastPage)
-
+  const paginate = (pageNumber:any) => {
+    setCurrentClients(pageNumber)
+  }
   if (loading) return (<><div className='justify-center  mx-auto items-center text-center'><Spin tip='fetching.....'/></div></>)
+
+  const handleSearch = (data:any) => {
+    setSearch(data.search)
+    setRecents(clients.filter((newdata:any) => {
+      return newdata.firstName.toLowerCase().match(data.search.toLowerCase())
+    }))
+  }
+  console.log(search)
   return (<>
+    <form onSubmit={ handleSubmit((data) => handleSearch(data))}>
+      <div className="flex flex-wrap">
+    <div className="w-4/5  py-3 rounded">  <input {...register('search', { required: 'Please add type something' })}
+    className="w-full px-4 py-3 rounded"
+    placeholder="Search by Firstname"
+    /></div>
+      <div className="w-1/5 py-3 rounded">  <input type="submit"
+       value="search"
+       className="bg-green-400 px-4 py-3 w-full rounded-r-2xl"
+       /></div>
+      <span className="text-red-600 text-xs">{errors.search && errors.search.message}</span>
+      </div>
+    </form>
        <div className="flex flex-wrap space-between">
               {
                 currentClients.map((items:any, index) => {
@@ -60,7 +85,12 @@ export default function Residents () {
                   )
                 })
               }
-
             </div>
+            <Pagination
+             defaultCurrent={1}
+             total={clients.length}
+             defaultPageSize={postsPerPage}
+             onChange={paginate}
+             />
     </>)
 }
