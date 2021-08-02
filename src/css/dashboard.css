@@ -1,5 +1,25 @@
-/*sign in css .......................*/
+/*.... style/ sign in.......................*/
 .bgImage{
     background-image: url(../images/bg2.jpg);
-    background-repeat: initial;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+.bgImageWeb{
+    background-image: url(../images/group3.jpg);
+    background-size: 100%;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+.bgImageWeb1{
+    background-image: url(../images/group2.jpg);
+    background-size: 100%;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+.bgImageWeb2{
+    background-image: url(../images/group1.jpg);
+    background-size: 100%;
+    background-repeat: no-repeat;
+    background-size: cover;
+
 }

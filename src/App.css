@@ -36,3 +36,21 @@
     transform: rotate(360deg);
   }
 }
+
+.bgimg{
+  background-color: red;
+  opacity: 0.5;
+}
+.slides{
+  margin-top: -20px;
+}
+.navubar{
+  background-color: white;
+  opacity: 0.5;
+}
+.slide{
+  margin-top: -20%;
+}
+.yes{
+  padding-top: -80%;
+}
