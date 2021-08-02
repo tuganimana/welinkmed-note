@@ -3,9 +3,9 @@ import { backEndPoints, welinkTokens } from './enums'
 const axios = require('axios').default
 
 class Api {
-  public async axiosConnect (method:any, endpoint:backEndPoints, body?:object) {
+  public async axiosConnect (method:any, endpoint:backEndPoints, body?:object, postid?:string) {
     const Authorization = localStorage.getItem(welinkTokens.userToken)
-    const urlPath = apiBaseUrl + endpoint
+    const urlPath = apiBaseUrl + endpoint + postid
     const headers = {
       headers: {
         'Content-Type': 'application/json',
@@ -35,10 +35,10 @@ class Api {
   //    let's call  api here
   public async loginApiRequest (email:string, password:string) {
     try {
-      const res = await this.axiosConnect(axios.post, backEndPoints.LOGIN, { email, password })
+      const res = await this.axiosConnect(axios.post, backEndPoints.LOGIN, { email, password }, '')
       return res
     } catch (error) {
-      console.log(`could not Login due: ${error.message}`)
+      console.log(`could not Login due: ${error}`)
       // throw new Error(`Could not Login due to ${error.message}`)
     }
   }
@@ -46,7 +46,7 @@ class Api {
   // medication due
   public async medicationRequest (NameMedication:string, Dosage:string, MedicationType:string, StartDate:string, EndDate:string) {
     try {
-      const res = await this.axiosConnect(axios.post, backEndPoints.CREATE_MEDICATION, { NameMedication, Dosage, MedicationType, StartDate, EndDate })
+      const res = await this.axiosConnect(axios.post, backEndPoints.CREATE_MEDICATION, { NameMedication, Dosage, MedicationType, StartDate, EndDate }, '')
       return res
     } catch (error) {
       console.log(`failed to add medication: ${error.message}`)
@@ -78,10 +78,10 @@ class Api {
         additionalPhysician,
         admittingPhysician,
         userId
-      })
+      }, '')
       return res
     } catch (error) {
-      console.log(`failed to add medication: ${error.message}`)
+      console.log(`failed to add medication: ${error}`)
     }
   }
 
@@ -90,13 +90,13 @@ class Api {
       const res = await this.axiosConnect(axios.put, backEndPoints.RESIDENT_PROFILE)
       return res
     } catch (err) {
-      console.log(`failed to update profile : ${err.message}`)
+      console.log(`failed to update profile : ${err}`)
     }
   }
 
   public async allResidentRequest () {
     try {
-      const res = await this.axiosConnect(axios.get, backEndPoints.CREATE_RESIDENT)
+      const res = await this.axiosConnect(axios.get, backEndPoints.CREATE_RESIDENT, {}, '')
       return res
     } catch (err) {
       console.log(`failed to fetch : ${err.message}`)
@@ -118,10 +118,19 @@ class Api {
         password,
         category,
         origanization
-      })
+      }, '')
       return res
     } catch (error) {
       console.log(`failed to add new user: ${error.message}`)
+    }
+  }
+
+  public async residentProfileUpdateRequest (parameter:string, profile:FormData) {
+    try {
+      const res = await this.axiosConnect(axios.put, backEndPoints.RESIDENT_PROFILE, profile, parameter)
+      return res
+    } catch (error) {
+      console.log(`failed update picture: ${error}`)
     }
   }
 }

@@ -68,7 +68,7 @@ function App () {
           <UserMaintenance/>
           </Dashboard>
         </Route>
-        <Route path="/edit-residents">
+        <Route path="/resident-edit/:residentid">
           <Dashboard>
           <Editresident/>
           </Dashboard>

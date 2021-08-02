@@ -10,7 +10,8 @@ export enum frontEndPoints {
     MEDICATION='/medication-due',
     HOME='/',
     ROOT='/root-dashboard',
-    RESIDENT_INFO='/resident-infos'
+    RESIDENT_INFO='/resident-infos',
+    RESIDENT_EDIT='/resident-edit'
 
  }
 
