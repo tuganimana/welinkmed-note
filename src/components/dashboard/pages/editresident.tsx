@@ -23,6 +23,9 @@ export default function Editresident () {
       setLoading(true)
       setMessage(response.message)
     }
+    setTimeout(() => {
+      setLoading(false)
+    }, 2000)
   }
   if (loading) return (<><div className='justify-center  mx-auto items-center text-center'><Spin tip='editing.....'/></div></>)
   return (

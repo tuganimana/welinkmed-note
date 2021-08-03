@@ -12,7 +12,8 @@ export enum frontEndPoints {
     HOME='/',
     ROOT='/root-dashboard',
     RESIDENT_INFO='/resident-infos',
-    RESIDENT_EDIT='/resident-edit'
+    RESIDENT_EDIT='/resident-edit',
+    MAR ='/user-mar'
 
  }
 

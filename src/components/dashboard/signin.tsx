@@ -30,32 +30,37 @@ export default function Signin () {
   }
   const handleLogin = async (data:LoginType) => {
     setLoading(true)
-    const api = await useApi.loginApiRequest(data.username, data.password)
-    const myaccount = api?.token || 'undefined'
-    const jwt = require('jsonwebtoken')
-    if (myaccount === 'undefined') {
-      setErrormessage(api.messages)
-      setLoading(false)
-    } else {
-      const decoded = jwt.decode(myaccount)
-      const { accountType, id } = decoded
-
-      localStorage.setItem(welinkTokens.userToken, api.token)
-      localStorage.setItem(welinkTokens.accountType, accountType)
-      localStorage.setItem(welinkTokens.userID, id)
-      setTimeout(() => {
+    try {
+      const api = await useApi.loginApiRequest(data.username, data.password)
+      const myaccount = api?.token || 'undefined'
+      const jwt = require('jsonwebtoken')
+      if (myaccount === 'undefined') {
+        setErrormessage(api.messages)
         setLoading(false)
-        if (accountType === accountCategory.ADMIN) {
-          history.push(frontEndPoints.DASHBOARD)
-          setErrormessage(api.message)
-        } else if (accountType === accountCategory.CLIENTS) {
-          history.push(frontEndPoints.USERADMIN)
-          setErrormessage(api.message)
-        } else if (accountType === accountCategory.ROOT) {
-          history.push(frontEndPoints.ROOT)
-          setErrormessage(api.message)
-        }
-      }, 2000)
+      } else {
+        const decoded = jwt.decode(myaccount)
+        const { accountType, id } = decoded
+
+        localStorage.setItem(welinkTokens.userToken, api.token)
+        localStorage.setItem(welinkTokens.accountType, accountType)
+        localStorage.setItem(welinkTokens.userID, id)
+        setTimeout(() => {
+          setLoading(false)
+          if (accountType === accountCategory.ADMIN) {
+            history.push(frontEndPoints.DASHBOARD)
+            setErrormessage(api.message)
+          } else if (accountType === accountCategory.CLIENTS) {
+            history.push(frontEndPoints.USERADMIN)
+            setErrormessage(api.message)
+          } else if (accountType === accountCategory.ROOT) {
+            history.push(frontEndPoints.ROOT)
+            setErrormessage(api.message)
+          }
+        }, 2000)
+      }
+    } catch (error) {
+      setLoading(false)
+      setErrormessage('Account signin fails')
     }
     //
   }

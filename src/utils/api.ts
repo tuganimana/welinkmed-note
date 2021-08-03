@@ -109,7 +109,8 @@ class Api {
     email: string,
     password: string,
     category: string,
-    origanization: string) {
+    origanization: string,
+    addedby:string) {
     try {
       const res = await this.axiosConnect(axios.post, backEndPoints.REGISTER, {
         firstName,
@@ -117,7 +118,8 @@ class Api {
         email,
         password,
         category,
-        origanization
+        origanization,
+        addedby
       }, '')
       return res
     } catch (error) {

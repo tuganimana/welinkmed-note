@@ -33,7 +33,7 @@ export default function Residents () {
   const paginate = (pageNumber:any) => {
     setCurrentClients(pageNumber)
   }
-  if (loading) return (<><div className='justify-center  mx-auto items-center text-center'><Spin tip='fetching.....'/></div></>)
+  if (loading) return (<><div className='justify-center  mx-auto items-center text-center'><Spin tip='Fetching.....'/></div></>)
 
   const handleSearch = (data:any) => {
     setSearch(data.search)
