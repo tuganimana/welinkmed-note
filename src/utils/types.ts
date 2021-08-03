@@ -9,7 +9,7 @@ export interface RegisterType {
   email:string;
   password:string;
   category:string;
-  origanization:string;
+  organization:string;
 }
 export interface SigType {
   status:string;

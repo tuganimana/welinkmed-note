@@ -19,7 +19,7 @@ export default function UserMaintenance () {
         data.email,
         data.password,
         data.category,
-        data.origanization
+        data.organization
       )
       if (response === 'undefined') {
         setMessaging(response.message)
@@ -89,8 +89,8 @@ export default function UserMaintenance () {
       <div className="grid md:grid-cols-2 gap-4">
           <div className="p-2">
             <label className="text-md">Origanization</label>
-            <input type="text" {...register('origanization', { required: '* This field is required' })} className="w-full p-2 border"/>
-            <span className="text-red-600 text-xs">{errors.origanization && errors.origanization.message}</span>
+            <input type="text" {...register('organization', { required: '* This field is required' })} className="w-full p-2 border"/>
+            <span className="text-red-600 text-xs">{errors.organization && errors.organization.message}</span>
           </div>
       </div>
       <div className="grid md:grid-cols-2 gap-4">
