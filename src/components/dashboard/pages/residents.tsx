@@ -1,15 +1,17 @@
 // eslint-disable-next-line no-use-before-define
 import React, { useState } from 'react'
 import { Tabs, Statistic, Input, Modal } from 'antd'
+import { EditOutlined } from '@ant-design/icons'
 import { useParams } from 'react-router-dom'
 import person1 from '../../../images/person1.jpg'
 import pill from '../../../images/Pills.jpg'
 import pill1 from '../../../images/Pills1.jpg'
 import pill2 from '../../../images/Pills2.jpg'
+import { frontEndPoints } from '../../../utils/enums'
 const { TabPane } = Tabs
 export default function ViewResidents () {
-  const { residentId } : any = useParams()
-  console.log(residentId)
+  const { residentid } : any = useParams()
+
   const { Countdown } = Statistic
   const deadline = Date.now() + 1000 * 60 * 60 * 24 * 2 + 1000 * 30
   function onFinish () { console.log('finished!') }
@@ -38,6 +40,7 @@ export default function ViewResidents () {
     }, 2000)
   }
   const { TextArea } = Input
+  const urlPath = `${frontEndPoints.RESIDENT_EDIT}/${residentid}`
   return (
     <>
     <div className="p-2">
@@ -58,6 +61,10 @@ export default function ViewResidents () {
                 <span className="text-md"><span className="font-bold"><i className="fa fa-user-md  text-yellow-600  rounded p-2"></i>Allergies:</span> noe </span>
             </div>
         </div>
+        </div>
+        <div className="w-full md:w-1/2 w-full p-1">
+              <a href={urlPath}><div className="float-right"> <span className="bg-gray-600  font-bold px-4 text-gray-100 py-2 w-64">
+              <EditOutlined/> Edit resident infos</span> </div></a>
         </div>
     </div>
 

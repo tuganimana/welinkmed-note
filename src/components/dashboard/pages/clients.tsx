@@ -60,11 +60,13 @@ export default function Residents () {
               {
                 currentClients.map((items:any, index) => {
                   const urlPath = `${frontEndPoints.RESIDENT_INFO}/${items.residentId}`
+                  // items.profile.substring(8)
                   return (
                   // eslint-disable-next-line react/jsx-key
                   <div key={index} className="w-1/2 md:w-1/3  p-1">
                     <div className="bg-gray-100 shadow-xl rounded-xl flex flex-wrap p-1">
                        <div className="w-full lg:w-1/2">
+
                          <a href={urlPath}>
                          {items.profile === null ? <img src={ruser} alt="" className="rounded-l-xl w-full" /> : <img src={pe} alt="" className="rounded-l-xl w-full" />}
                          </a>

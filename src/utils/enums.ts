@@ -11,7 +11,8 @@ export enum frontEndPoints {
     ADDCLIENT='/addclient',
     HOME='/',
     ROOT='/root-dashboard',
-    RESIDENT_INFO='/resident-infos'
+    RESIDENT_INFO='/resident-infos',
+    RESIDENT_EDIT='/resident-edit'
 
  }
 
