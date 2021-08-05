@@ -1,6 +1,6 @@
 // eslint-disable-next-line no-use-before-define
 import React, { useState } from 'react'
-import { Modal, InputNumber, Space, Button, TimePicker, DatePicker, Form } from 'antd'
+import { Modal, InputNumber, Checkbox, Space, Button, TimePicker, DatePicker, Form } from 'antd'
 import { MinusCircleOutlined, PlusOutlined } from '@ant-design/icons'
 export default function Routofadmin () {
   const { RangePicker } = DatePicker
@@ -19,6 +19,11 @@ export default function Routofadmin () {
       setConfirmLoading(false)
     }, 2000)
   }
+  const MonthOptions = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
+  const DateOptions = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12', '13', '14', '15', '16', '17', '18', '19', '20', '21', '22', '23', '24', '25', '26', '27', '28', '29', '30', '31']
+  function onChange (checkedValues: any) {
+    console.log('checked = ', checkedValues)
+  }
   return (
         <>
           <Form >
@@ -32,15 +37,7 @@ export default function Routofadmin () {
             onCancel={() => setVisible(false)}
             width={1000}
           >
-           <div className="grid md:grid-cols-3">
-           <div className="p-2">
-            <label>Status(*required)</label>
-            <select className="w-full p-2 border">
-              <option>Select here</option>
-              <option>Active</option>
-              <option>DCd</option>
-            </select>
-          </div>
+           <div className="grid md:grid-cols-2">
           <div className="p-2">
           <label>Administration Type</label>
           <select className="w-full p-2 border">
@@ -53,12 +50,17 @@ export default function Routofadmin () {
             <RangePicker />
           </Form.Item>
           </div>
+          <div className="p-2"><label>Select a month</label><br/>
+          <Checkbox.Group className="bg-red-200 p-2 rounded text-blue-400 font-bold" options={MonthOptions} defaultValue={['Jan']} onChange={onChange} />
+          </div>
+          </div>
+           <div className="grid md:grid-cols-1">
+          <div className="p-2"><label>Select a Date</label><br/>
+          <Checkbox.Group className="bg-red-200 p-2 rounded text-blue-400 font-bold" options={DateOptions} defaultValue={['Jan']} onChange={onChange} /></div>
+          </div>
+          <div className="grid md:grid-cols-3">
           <div className="p-2">
           <label>Dose</label>
-          <InputNumber min={1} max={100000} className="w-full p-1" defaultValue={1} />
-          </div>
-          <div className="p-2">
-          <label>Quantity per Dose</label>
           <InputNumber min={1} max={100000} className="w-full p-1" defaultValue={1} />
           </div>
           <div className="p-2">

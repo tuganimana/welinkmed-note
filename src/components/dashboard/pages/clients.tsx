@@ -1,12 +1,12 @@
 // eslint-disable-next-line no-use-before-define
 import React, { useEffect, useState } from 'react'
 import { Spin, Pagination } from 'antd'
-import pe from '../../../images/pe.jpg'
 import ruser from '../../../images/users.png'
 import { useApi } from '../../../utils/api'
 import { frontEndPoints } from '../../../utils/enums'
 import { useForm } from 'react-hook-form'
 import { SearchType } from '../../../utils/types'
+import { apiBaseUrl } from '../../../utils/env'
 export default function Residents () {
   const [clients, setRecents] = useState([])
   const [loading, setLoading] = useState(false)
@@ -33,7 +33,7 @@ export default function Residents () {
   const paginate = (pageNumber:any) => {
     setCurrentClients(pageNumber)
   }
-  if (loading) return (<><div className='justify-center  mx-auto items-center text-center'><Spin tip='fetching.....'/></div></>)
+  if (loading) return (<><div className='justify-center  mx-auto items-center text-center'><Spin tip='Fetching.....'/></div></>)
 
   const handleSearch = (data:any) => {
     setSearch(data.search)
@@ -60,7 +60,7 @@ export default function Residents () {
               {
                 currentClients.map((items:any, index) => {
                   const urlPath = `${frontEndPoints.RESIDENT_INFO}/${items.residentId}`
-                  // items.profile.substring(8)
+                  const imagePath = `${apiBaseUrl}/${items.profile}`
                   return (
                   // eslint-disable-next-line react/jsx-key
                   <div key={index} className="w-1/2 md:w-1/3  p-1">
@@ -68,7 +68,7 @@ export default function Residents () {
                        <div className="w-full lg:w-1/2">
 
                          <a href={urlPath}>
-                         {items.profile === null ? <img src={ruser} alt="" className="rounded-l-xl w-full" /> : <img src={pe} alt="" className="rounded-l-xl w-full" />}
+                         {items.profile === null ? <img src={ruser} alt="" className="rounded-l-xl w-full" /> : <img src={imagePath} alt="" className="rounded-l-xl w-full" />}
                          </a>
                        </div>
                        <div className="w-full lg:w-1/2 grid p-1">

@@ -5,11 +5,13 @@ import { useForm } from 'react-hook-form'
 import { RegisterType } from '../../../utils/types'
 import { useApi } from '../../../utils/api'
 import Alert from '../../alerts'
+import { welinkTokens } from '../../../utils/enums'
 const { TabPane } = Tabs
 export default function UserMaintenance () {
   const { register, handleSubmit, formState: { errors } } = useForm<RegisterType>()
   const [loading, setLoading] = useState(false)
   const [messaging, setMessaging] = useState('')
+  const userId = localStorage.getItem(welinkTokens.userID) || ''
   const registerUser = async (data:any) => {
     setLoading(true)
     try {
@@ -19,8 +21,10 @@ export default function UserMaintenance () {
         data.email,
         data.password,
         data.category,
-        data.organization
+        data.origanization,
+        userId
       )
+      console.log(response)
       if (response === 'undefined') {
         setMessaging(response.message)
         setLoading(false)
@@ -82,8 +86,11 @@ export default function UserMaintenance () {
           </div>
           <div className="p-2">
             <label>Category</label>
-            <input type="text" {...register('category', { required: '* This field is required' })} className="w-full p-2 border"/>
             <span className="text-red-600 text-xs">{errors.category && errors.category.message}</span>
+            <select {...register('category', { required: '* This field is required' })} className="w-full p-2 border">
+            <option value="Clients">User</option>
+            <option value="Admin">Admin</option>
+            </select>
           </div>
       </div>
       <div className="grid md:grid-cols-2 gap-4">

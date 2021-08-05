@@ -46,3 +46,29 @@ export interface ResidentType {
 export interface SearchType {
   search:string;
 }
+
+export interface OrderType {
+  routineMedOrder:string;
+  orderType:string;
+  description:string;
+  generic:string;
+  physicians:string;
+  orderStatus:string;
+  lastRefill:string;
+  rxNumber:number;
+  ndc:string;
+  externalId:string;
+  previousId:string;
+  barcode:string;
+}
+
+export interface RoutineAdminType {
+  administrationType: string;
+  startDate: string;
+  endDate: string;
+  month: string;
+  dates: string;
+  dose: string;
+  dosePerday: string;
+  timesPerday: string;
+}

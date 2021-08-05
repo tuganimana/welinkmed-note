@@ -16,6 +16,7 @@ export default function Editresident () {
   const [messaging, setMessage] = useState('')
   const updateProfile = async (event:any) => {
     event.preventDefault()
+    setLoading(true)
     const data = new FormData()
     data.append('profile', profile)
     const response = await useApi.residentProfileUpdateRequest(`/${residentid}`, data)
@@ -23,8 +24,11 @@ export default function Editresident () {
       setLoading(true)
       setMessage(response.message)
     }
+    setTimeout(() => {
+      setLoading(false)
+    }, 2000)
   }
-  if (loading) return (<><div className='justify-center  mx-auto items-center text-center'><Spin tip='editing.....'/></div></>)
+  if (loading) return (<><div className='justify-center mt-64 mx-auto items-center text-center'><Spin tip='editing.....'/></div></>)
   return (
     <>
     <div className="px-2 py-2">

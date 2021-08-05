@@ -109,7 +109,8 @@ class Api {
     email: string,
     password: string,
     category: string,
-    organization: string) {
+    origanization: string,
+    addedby:string) {
     try {
       const res = await this.axiosConnect(axios.post, backEndPoints.REGISTER, {
         firstName,
@@ -117,11 +118,78 @@ class Api {
         email,
         password,
         category,
-        organization
-      })
+        origanization,
+        addedby
+      }, '')
       return res
     } catch (error) {
       console.log(`failed to add new user: ${error.message}`)
+    }
+  }
+
+  public async OrderCreate (
+    routineMedOrder:string,
+    orderType:string,
+    description:string,
+    generic:string,
+    physicians:string,
+    orderStatus:string,
+    lastRefill:string,
+    rxNumber:number,
+    ndc:string,
+    externalId:string,
+    previousId:string,
+    barcode:string,
+    addedby:string) {
+    try {
+      const res = await this.axiosConnect(axios.post, backEndPoints.CREATE_ORDER, {
+        routineMedOrder,
+        orderType,
+        description,
+        generic,
+        physicians,
+        orderStatus,
+        lastRefill,
+        rxNumber,
+        ndc,
+        externalId,
+        previousId,
+        barcode,
+        addedby
+      }, '')
+      return res
+    } catch (error) {
+      console.log(`failed to add new Order: ${error.message}`)
+    }
+  }
+
+  public async RourineAdmin (
+    administrationType: string,
+    startDate: string,
+    endDate: string,
+    month: string,
+    dates: string,
+    dose: string,
+    dosePerday: string,
+    timesPerday: string,
+    order: string,
+    addedby:string) {
+    try {
+      const res = await this.axiosConnect(axios.post, backEndPoints.ROUTINE_ADMIN, {
+        administrationType,
+        startDate,
+        endDate,
+        month,
+        dates,
+        dose,
+        dosePerday,
+        timesPerday,
+        order,
+        addedby
+      }, '')
+      return res
+    } catch (error) {
+      console.log(`failed to add ROutine to Order failed: ${error.message}`)
     }
   }
 

@@ -12,7 +12,8 @@ export enum frontEndPoints {
     HOME='/',
     ROOT='/root-dashboard',
     RESIDENT_INFO='/resident-infos',
-    RESIDENT_EDIT='/resident-edit'
+    RESIDENT_EDIT='/resident-edit',
+    MAR ='/user-mar'
 
  }
 
@@ -21,8 +22,11 @@ export enum backEndPoints {
     REGISTER ='/api/create',
     CREATE_MEDICATION='/api/createMedication',
     CREATE_RESIDENT='/api/resident',
-    RESIDENT_PROFILE='/api/resident/profile'
-}
+    RESIDENT_PROFILE='/api/resident/profile',
+    CREATE_ORDER='/api/creatorder',
+    ROUTINE_ADMIN='/api/routineadmin'
+
+  }
 
 export enum httpMethod{
     POST='POST',

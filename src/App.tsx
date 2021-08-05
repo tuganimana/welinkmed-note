@@ -74,7 +74,7 @@ function App () {
           <Editresident/>
           </Dashboard>
         </Route>
-        <Route path="/marPdf">
+        <Route path="/user-mar">
           <Dashboard>
         <Example/>
           </Dashboard>
