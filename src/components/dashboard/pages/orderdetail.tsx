@@ -1,5 +1,5 @@
 // eslint-disable-next-line no-use-before-define
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { Modal, Tabs, Select, Space, Button, Form } from 'antd'
 import { MinusCircleOutlined, PlusOutlined } from '@ant-design/icons'
 import { useForm } from 'react-hook-form'
@@ -16,6 +16,17 @@ export default function Orderdetail () {
   }
   const [visible, setVisible] = useState(false)
   const [confirmLoading, setConfirmLoading] = useState(false)
+  const [orders, setOrders] = useState([])
+  useEffect(() => {
+    const callOrder = async () => {
+      const response = await useApi.AllOrderRequest()
+      if (response) {
+        setOrders(response.data)
+        console.log(orders)
+      }
+    }
+    callOrder()
+  }, [])
   const handleOk = () => {
     setConfirmLoading(true)
     setTimeout(() => {

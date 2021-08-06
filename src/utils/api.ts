@@ -103,6 +103,15 @@ class Api {
     }
   }
 
+  public async AllOrderRequest () {
+    try {
+      const res = await this.axiosConnect(axios.get, backEndPoints.CREATE_ORDER, {}, '')
+      return res
+    } catch (err) {
+      console.log(`failed to fetch : ${err}`)
+    }
+  }
+
   public async UserRegisterRequest (
     firstName: string,
     lastName:string,

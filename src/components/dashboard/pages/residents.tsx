@@ -41,6 +41,7 @@ export default function ViewResidents () {
   }
   const { TextArea } = Input
   const urlPath = `${frontEndPoints.RESIDENT_EDIT}/${residentid}`
+
   return (
     <>
     <div className="p-2">
