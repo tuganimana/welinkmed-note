@@ -23,7 +23,7 @@ export enum backEndPoints {
     CREATE_MEDICATION='/api/createMedication',
     CREATE_RESIDENT='/api/resident',
     RESIDENT_PROFILE='/api/resident/profile',
-    CREATE_ORDER='/api/creatorder',
+    CREATE_ORDER='/api/createorder',
     ROUTINE_ADMIN='/api/routineadmin'
 
   }
