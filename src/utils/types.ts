@@ -60,6 +60,15 @@ export interface OrderType {
   externalId:string;
   previousId:string;
   barcode:string;
+  administrationType: string;
+  startDate: string;
+  endDate: string;
+  programAdminister: string;
+  month: string;
+  dates: string;
+  dose: string;
+  dosePerday: string;
+  timesPerday: string;
 }
 
 export interface RoutineAdminType {

@@ -140,6 +140,15 @@ class Api {
     externalId:string,
     previousId:string,
     barcode:string,
+    administrationType: string,
+    startDate: string,
+    endDate: string,
+    programAdminster: string,
+    month: string,
+    dates: string,
+    dose: string,
+    dosePerday: string,
+    timesPerday: string,
     addedby:string) {
     try {
       const res = await this.axiosConnect(axios.post, backEndPoints.CREATE_ORDER, {
@@ -155,6 +164,15 @@ class Api {
         externalId,
         previousId,
         barcode,
+        administrationType,
+        startDate,
+        endDate,
+        programAdminster,
+        month,
+        dates,
+        dose,
+        dosePerday,
+        timesPerday,
         addedby
       }, '')
       return res

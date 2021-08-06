@@ -1,17 +1,31 @@
 // eslint-disable-next-line no-use-before-define
 import React, { useState } from 'react'
-import { Tabs, Select } from 'antd'
+import { Modal, Tabs, Select, Space, Button, Form } from 'antd'
+import { MinusCircleOutlined, PlusOutlined } from '@ant-design/icons'
 import { useForm } from 'react-hook-form'
 import { OrderType } from '../../../utils/types'
 import { welinkTokens } from '../../../utils/enums'
 import { useApi } from '../../../utils/api'
 import Sig from './editsig'
-import Routofadmin from './routofadmin'
 import Alert from '../../alerts'
-const jwt = require('jsonwebtoken')
 const { TabPane } = Tabs
 const { Option } = Select
 export default function Orderdetail () {
+  const config = {
+    rules: [{ type: 'object' as const, required: true, message: 'Please select time!' }]
+  }
+  const [visible, setVisible] = useState(false)
+  const [confirmLoading, setConfirmLoading] = useState(false)
+  const handleOk = () => {
+    setConfirmLoading(true)
+    setTimeout(() => {
+      setVisible(false)
+      setConfirmLoading(false)
+    }, 2000)
+  }
+  function handleChange (value: any) {
+    console.log(`selected ${value}`)
+  }
   const callback = (key:any) => {
     console.log(key)
   }
@@ -34,9 +48,7 @@ export default function Orderdetail () {
     setAttending(value)
   }
   const { register, handleSubmit, formState: { errors } } = useForm<OrderType>()
-  const tokens = localStorage.getItem(welinkTokens.userToken) || null
-  const decoded = jwt.decode(tokens)
-  const { id } = decoded
+  const userId = localStorage.getItem(welinkTokens.userID) || ''
   const CreateOrder = async (data:any) => {
     setLoading(true)
     try {
@@ -53,8 +65,18 @@ export default function Orderdetail () {
         data.externalId,
         data.previousId,
         data.barcode,
-        id
+        data.administrationType,
+        data.startDate,
+        data.endDate,
+        data.programAdminster,
+        data.month,
+        data.dates,
+        data.dose,
+        data.dosePerday,
+        data.timesPerday,
+        userId
       )
+      console.log(response)
       if (response === 'undefined') {
         setMessaging(response.message)
         setLoading(false)
@@ -71,7 +93,7 @@ export default function Orderdetail () {
   return (
     <>
     <div className="px-2 py-2">
-    <h5 className="font-semibold text-blue-400 mt-4 text-2xl">Order Maintenance<span className="text-sm font-normal text-gray-400"> / Castro, Jennifer</span></h5>
+    <h5 className="font-semibold text-blue-400 mt-4 text-2xl">Order Maintenance<span className="text-sm font-normal text-gray-400"></span></h5>
        </div>
     <div className="mx-4">
     <Tabs defaultActiveKey="1" onChange={callback}>
@@ -107,8 +129,138 @@ export default function Orderdetail () {
             <span className="text-red-600 text-xs">{errors.generic && errors.generic.message}</span>
           </div>
           <div className="p-2">
-            <label>Rout Of Administration ( Required)</label>
-            <Routofadmin/>
+            <label>Routine Of Administration ( Required)</label><br/>
+            <button onClick={() => setVisible(true)} className="bg-gray-200 p-2 w-full">add routine</button>
+            <Modal
+            title="Routine of administrator"
+            centered
+            visible={visible}
+            onOk={handleOk}
+            confirmLoading={confirmLoading}
+            onCancel={() => setVisible(false)}
+            width={1000}
+          >
+           <Alert message={messaging}/>
+           <div className="grid md:grid-cols-2">
+          <div className="p-2">
+          <label>Administration Type</label>
+          <select {...register('administrationType')} className="w-full p-2 border">
+              <option>Route</option>
+              <option>PRN</option>
+            </select>
+          </div>
+          <div className="p-2">
+            <label>Start Date</label><br/>
+            <input type="date" {...register('startDate')} className="w-full p-2 border"/>
+          </div>
+          <div className="p-2">
+            <label>End Date</label><br/>
+            <input type="date" {...register('endDate')} className="w-full p-2 border"/>
+          </div>
+          <div className="p-2">
+            <label>Program Administer</label><br/>
+          <select {...register('programAdminister')} className="w-full p-2 border">
+              <option>Monthly</option>
+              <option>Weekly</option>
+              <option>Daily</option>
+            </select>
+          </div>
+          </div>
+           <div className="grid md:grid-cols-2">
+          <div className="p-2">
+            <label>Select a month</label><br/>
+            <Select {...register('month')} mode="tags" style={{ width: '100%' }} onChange={handleChange} tokenSeparators={[',']}>
+            <option value="Jan">Jan</option>
+            <option value="Feb">Feb</option>
+            <option value="Mar">Mar</option>
+            <option value="Apr">Apr</option>
+            <option value="May">May</option>
+            <option value="Jun">Jun</option>
+            <option value="Jul">Jul</option>
+            <option value="Aug">Aug</option>
+            <option value="Sep">Sep</option>
+            <option value="Oct">Oct</option>
+            <option value="Nov">Nov</option>
+            <option value="Dec">Dec</option>
+          </Select>
+          </div>
+          <div className="p-2"><label>Select a Date</label><br/>
+            <Select {...register('dates')} mode="tags" style={{ width: '100%' }} onChange={handleChange} tokenSeparators={[',']}>
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+            <option value="5">5</option>
+            <option value="6">6</option>
+            <option value="7">7</option>
+            <option value="8">8</option>
+            <option value="9">9</option>
+            <option value="10">10</option>
+            <option value="11">11</option>
+            <option value="12">12</option>
+            <option value="13">13</option>
+            <option value="14">14</option>
+            <option value="15">15</option>
+            <option value="16">16</option>
+            <option value="17">17</option>
+            <option value="18">18</option>
+            <option value="19">19</option>
+            <option value="20">20</option>
+            <option value="21">21</option>
+            <option value="22">22</option>
+            <option value="23">23</option>
+            <option value="24">24</option>
+            <option value="25">25</option>
+            <option value="26">26</option>
+            <option value="27">27</option>
+            <option value="28">28</option>
+            <option value="29">29</option>
+            <option value="30">30</option>
+            <option value="31">31</option>
+          </Select>
+          </div>
+          </div>
+          <div className="grid md:grid-cols-2">
+          <div className="p-2">
+          <label>Dose</label>
+          <input type="number" {...register('dose', { required: '* This field is required' })} className="w-full p-2 border"/>
+          <span className="text-red-600 text-xs">{errors.dose && errors.dose.message}</span>
+         </div>
+          <div className="p-2">
+          <label>Dose Per day</label>
+          <input type="number" {...register('dosePerday', { required: '* This field is required' })} className="w-full p-2 border"/>
+          <span className="text-red-600 text-xs">{errors.dosePerday && errors.dosePerday.message}</span>
+        </div>
+          <div className="p-2">
+          <Form >
+          <Form.Item name="time-picker" {...config}>
+          <label>Times Per day</label> <br/>
+          <input type="time" {...register('timesPerday')} className="w-full p-2 border"/>
+          </Form.Item>
+          <Form.List name="dynamic_form_nest_item">
+        {(fields, { add, remove }) => (
+          <>
+            {fields.map(({ key, name, fieldKey, ...restField }) => (
+            <Space key={key} style={{ display: 'flex', marginBottom: 8 }} align="baseline">
+              <Form.Item name="time-picker" {...config}>
+              <label>Times Per day</label> <br/>
+          <input type="time" className="w-full p-2 border"/>
+              </Form.Item>
+                <MinusCircleOutlined onClick={() => remove(name)} />
+              </Space>
+            ))}
+            <Form.Item>
+              <Button type="dashed" onClick={() => add()} block icon={<PlusOutlined />}>
+                Add New Time field
+              </Button>
+            </Form.Item>
+          </>
+        )}
+      </Form.List>
+      </Form>
+          </div>
+          </div>
+          </Modal>
           </div>
         <div className="p-2">
           <label>Physician( Required)</label>
