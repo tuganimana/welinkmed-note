@@ -7,6 +7,7 @@ import { OrderType } from '../../../utils/types'
 import { welinkTokens } from '../../../utils/enums'
 import { useApi } from '../../../utils/api'
 import Sig from './editsig'
+import Allorders from './orderall'
 import Alert from '../../alerts'
 const { TabPane } = Tabs
 const { Option } = Select
@@ -40,16 +41,6 @@ export default function Orderdetail () {
   const callback = (key:any) => {
     console.log(key)
   }
-  const recent = [
-    {
-      sign: 'Anne Marly',
-      admin: 'bench',
-      instruction: '19',
-      status: 'Male',
-      approval: 'Bench',
-      source: '17th'
-    }
-  ]
   const children = []
   children.push(<Option value="" key="1" >Select</Option>)
   const [Physician, setAttending] = useState('')
@@ -327,32 +318,12 @@ export default function Orderdetail () {
       </div>
       </form>
     </TabPane>
-    <TabPane tab="Add Sig" key="2">
+    <TabPane tab="All Orders" key="2">
     <div>
-    <div className=""><Sig/></div>
-    <table className="rounded-t-lg w-full mx-auto bg-gray-200 text-gray-800">
-      <tr className="text-left border-b-2 border-blue-300">
-        <th className="px-4 py-3">Sig#</th>
-        <th className="px-4 py-3">Admin Type</th>
-        <th className="px-4 py-3">Instructions</th>
-        <th className="px-4 py-3">Status</th>
-        <th className="px-4 py-3">Aproval Status</th>
-        <th className="px-4 py-3">Source</th>
-        <th className="px-4 py-3"></th>
-      </tr>
-      {
-    recent.map((items:any, index) => (
-      <tr key={index} className="bg-gray-100 hover:bg-gray-200 border-b border-blue-200">
-        <td className="px-4 py-3">{items.sign}</td>
-        <td className="px-4 py-3">{items.admin}</td>
-        <td className="px-4 py-3">{items.instruction}</td>
-        <td className="px-4 py-3">{items.status}</td>
-        <td className="px-4 py-3">{items.approval}</td>
-        <td className="px-4 py-3">{items.source}</td>
-        <td className="px-4 py-3"><button className="bg-blue-400 hover:bg-blue-500 p-2 rounded-lg">Review</button> <button className="bg-blue-400 hover:bg-blue-500 p-2 rounded-lg">Recent Admins</button></td>
-      </tr>))
-      }
-    </table>
+    <div className="">
+      <Sig/>
+      </div><br/>
+    <Allorders />
     </div>
     </TabPane>
   </Tabs>
