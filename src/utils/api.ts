@@ -52,6 +52,7 @@ class Api {
       console.log(`failed to add medication: ${error.message}`)
     }
   }
+  // start RESIDENT API request
 
   public async residentRegiterRequest (
     firstName:string,
@@ -85,6 +86,48 @@ class Api {
     }
   }
 
+  public async residentUpdateRequest (
+    firstName:string,
+    lastName:string,
+    residentSate:string,
+    religion:string,
+    maritialStatus: string,
+    dateOfBirth: string,
+    attendingPhysician: string,
+    addedDate: string,
+    additionalPhysician: string,
+    admittingPhysician: string,
+    userId?:string,
+    parameter?:string) {
+    try {
+      const res = await this.axiosConnect(axios.put, backEndPoints.CREATE_RESIDENT, {
+        firstName,
+        lastName,
+        residentSate,
+        religion,
+        maritialStatus,
+        dateOfBirth,
+        attendingPhysician,
+        addedDate,
+        additionalPhysician,
+        admittingPhysician,
+        userId
+      }, parameter)
+      return res
+    } catch (error) {
+      console.log(`failed to update: ${error}`)
+    }
+  }
+
+  public async residentProfileUpdateRequest (parameter:string, profile:FormData) {
+    try {
+      const res = await this.axiosConnect(axios.put, backEndPoints.RESIDENT_PROFILE, profile, parameter)
+      return res
+    } catch (error) {
+      console.log(`failed update picture: ${error}`)
+    }
+  }
+
   public async residentProfileRequest (profile:string) {
     try {
       const res = await this.axiosConnect(axios.put, backEndPoints.RESIDENT_PROFILE)
@@ -94,6 +137,16 @@ class Api {
     }
   }
 
+  public async getSingleresident (parameter:string) {
+    try {
+      const res = await this.axiosConnect(axios.get, backEndPoints.CREATE_RESIDENT, {}, parameter)
+      return res
+    } catch (err) {
+      console.log(`Fetched : ${err}`)
+    }
+  }
+
+  // ================END resident api
   public async allResidentRequest () {
     try {
       const res = await this.axiosConnect(axios.get, backEndPoints.CREATE_RESIDENT, {}, '')
@@ -217,15 +270,6 @@ class Api {
       return res
     } catch (error) {
       console.log(`failed to add ROutine to Order failed: ${error.message}`)
-    }
-  }
-
-  public async residentProfileUpdateRequest (parameter:string, profile:FormData) {
-    try {
-      const res = await this.axiosConnect(axios.put, backEndPoints.RESIDENT_PROFILE, profile, parameter)
-      return res
-    } catch (error) {
-      console.log(`failed update picture: ${error}`)
     }
   }
 }
