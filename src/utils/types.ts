@@ -65,6 +65,7 @@ export interface OrderType {
   endDate: string;
   programAdminister: string;
   month: string;
+  weekly:string;
   dates: string;
   dose: string;
   dosePerday: string;
