@@ -12,6 +12,7 @@ export default function UserMaintenance () {
   const [loading, setLoading] = useState(false)
   const [messaging, setMessaging] = useState('')
   const userId = localStorage.getItem(welinkTokens.userID) || ''
+  const [success, setSuccess] = useState(false)
   const registerUser = async (data:any) => {
     setLoading(true)
     try {
@@ -25,15 +26,18 @@ export default function UserMaintenance () {
         userId
       )
       console.log(response)
-      if (response === 'undefined') {
+      if (response !== 'undefined') {
         setMessaging(response.message)
-        setLoading(false)
+        setLoading(true)
+        setSuccess(false)
       }
       setTimeout(() => {
         setMessaging(response.message)
+        setSuccess(false)
         setLoading(false)
       }, 2000)
     } catch (error) {
+      setSuccess(false)
       setMessaging('New User can not be added')
       setLoading(false)
     }
@@ -64,7 +68,7 @@ export default function UserMaintenance () {
     <Tabs defaultActiveKey="1" onChange={callback}>
     <TabPane tab="User Detail" key="1">
     <div className="p-4 bg-white rounded-xl shadows-xl">
-    <Alert message={messaging}/>
+    <Alert message={messaging} success={success}/>
           <form onSubmit={handleSubmit((data) => registerUser(data))}>
       <div className="grid md:grid-cols-2 gap-4">
           <div className="p-2">

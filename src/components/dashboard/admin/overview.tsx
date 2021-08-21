@@ -16,6 +16,7 @@ export default function Overview () {
   const [messaging, setMessaging] = useState('')
   const tokens = localStorage.getItem(welinkTokens.userToken) || null
   const decoded = jwt.decode(tokens)
+  const [success, setSuccess] = useState(false)
   const { id } = decoded
   const children = []
   children.push(<Option value="" key="1" >Select</Option>)
@@ -45,13 +46,16 @@ export default function Overview () {
       if (response === 'undefined') {
         setMessaging(response.message)
         setLoading(false)
+        setSuccess(true)
       }
       setTimeout(() => {
         setMessaging(response.message)
+        setSuccess(true)
         setLoading(false)
       }, 2000)
     } catch (error) {
       setMessaging('new resident can not be added')
+      setSuccess(false)
       setLoading(false)
     }
   }
@@ -59,7 +63,7 @@ export default function Overview () {
   return (
         <>
          <div className="p-4 bg-white rounded-xl shadows-xl mx-4">
-          <Alert message={messaging}/>
+          <Alert message={messaging} success={success}/>
            <form onSubmit={handleSubmit((data) => registerResident(data))}>
     <div className="grid md:grid-cols-2 gap-4">
           <div className="p-2">

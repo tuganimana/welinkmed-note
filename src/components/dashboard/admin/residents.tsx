@@ -1,6 +1,6 @@
 // eslint-disable-next-line no-use-before-define
 import React, { useState, useEffect } from 'react'
-import { Tabs, Statistic, Input, Modal, Spin } from 'antd'
+import { Tabs, Input, Modal, Spin } from 'antd'
 import { EditOutlined } from '@ant-design/icons'
 import { useParams } from 'react-router-dom'
 import ruser from '../../../images/users.png'
@@ -13,16 +13,7 @@ import { apiBaseUrl } from '../../../utils/env'
 const { TabPane } = Tabs
 export default function ViewResidents () {
   const { residentid } : any = useParams()
-
-  const { Countdown } = Statistic
-  const deadline = Date.now() + 1000 * 60 * 60 * 24 * 2 + 1000 * 30
-  function onFinish () { console.log('finished!') }
   const callback = (key:any) => { console.log(key) }
-  function overChange (val: any) {
-    if (4.95 * 1000 > val && val > 5 * 1000) {
-      console.log('changed!')
-    }
-  }
   const [visible, setVisible] = useState(false)
   const [confirmLoading, setConfirmLoading] = useState(false)
   const handleOk = () => {
@@ -64,6 +55,10 @@ export default function ViewResidents () {
       })
   }, [])
   const imagePath = `${apiBaseUrl}/${profile}`
+  const handleAdminister = async () => {
+    const response = await useApi.administerRequest('HD', 1, 'yywh-xs', 'wgg', '10:00')
+    console.log(response)
+  }
   if (loading) return (<><div className='justify-center mt-64 mx-auto items-center text-center'><Spin tip='Fetching.....'/></div></>)
   return (
     <>
@@ -109,12 +104,11 @@ export default function ViewResidents () {
             </div>
             <div className="w-1/4 gap-1 grid">
              <span className="font-bold text-lg text-gray-600">
-                 <button className="bg-blue-400 w-full hover:bg-blue-500 text-white font-bold p-2 rounded-xl">
-                 <Countdown value={deadline} onFinish={onFinish} />Administer</button>
+                 <button onClick={handleAdminister} className="bg-blue-400 w-full hover:bg-blue-500 text-white font-bold p-2 rounded-xl">
+                 Administer</button>
              </span>
              <span className="font-bold text-lg text-gray-600">
                  <button onClick={() => setVisible(true)} className="bg-yellow-600 w-full hover:bg-yellow-500 text-white font-bold p-2 rounded-xl">
-                 <Countdown onChange={overChange} value={Date.now() + 3 * 1000} />
                  Late Administer
                  </button>
                  <Modal

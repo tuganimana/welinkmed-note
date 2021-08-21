@@ -20,12 +20,6 @@ export default function Editresidents () {
   const tokens = localStorage.getItem(welinkTokens.userToken) || null
   const decoded = jwt.decode(tokens)
   const { id } = decoded
-  function handleChange (value:any) {
-    setAdditional(value)
-  }
-  function handleAttending (value:any) {
-    setAttending(value)
-  }
   const [firstname, setFirstname] = useState('')
   const [lastname, setLastname] = useState('')
   const [residentState, setResidentState] = useState('')
@@ -34,7 +28,7 @@ export default function Editresidents () {
   const [dateOfBirth, setDateOfBirth] = useState('')
   const [physician, setPhysician] = useState('')
   const [addedDate, setAddedDate] = useState('')
-  const [admittingphysician, setAdmittingPhysician] = useState('')
+  const [admittingPhysician, setAdmittingPhysician] = useState('')
   useEffect(() => {
     setLoading(true)
     useApi.getSingleresident(`/${residentid}`)
@@ -49,6 +43,7 @@ export default function Editresidents () {
           setDateOfBirth(res.data.dateOfBirth)
           setPhysician(res.data.physician)
           setAddedDate(res.data.addedDate)
+          setAdditional(res.data.additional)
           setAdmittingPhysician(res.data.admittingPhysician)
         }
         setLoading(false)
@@ -66,24 +61,23 @@ export default function Editresidents () {
       const response = await useApi.residentUpdateRequest(
         firstname,
         lastname,
-        data.residentSate,
-        data.religion,
+        residentState,
+        religion,
         data.maritialStatus,
-        data.dateOfBirth,
+        dateOfBirth,
         attendingPhysician,
-        data.addedDate,
+        addedDate,
         additional,
-        data.admittingPhysician,
+        admittingPhysician,
         id,
         `/${residentid}`
       )
-      console.log(response)
       if (response === 'undefined') {
         setMessaging('Failed')
         setLoading(false)
       }
       setTimeout(() => {
-        setMessaging('Update failed')
+        setMessaging(response.message)
         setLoading(false)
       }, 2000)
     } catch (error) {
@@ -96,7 +90,7 @@ export default function Editresidents () {
         <>
          <div className="p-4 bg-white rounded-xl shadows-xl mx-4">
           <Alert message={messaging}/>
-           <form onSubmit={handleSubmit((data) => registerResident(data))}>
+          <form >
     <div className="grid md:grid-cols-2 gap-4">
           <div className="p-2">
             <label className="text-md">Firstname</label>
@@ -110,7 +104,7 @@ export default function Editresidents () {
           </div>
           <div className="p-2">
             <label>Resident State</label>
-            <select {...register('residentSate')}className="w-full p-2 border">
+            <select onChange={(e:any) => setResidentState(e.target.value)} className="w-full p-2 border">
               <option value={residentState}>{residentState}</option>
               <option value="Newyork">Newyork</option>
               <option value="Antlanta">Atlanta</option>
@@ -122,11 +116,11 @@ export default function Editresidents () {
           </div>
           <div className="p-2">
             <label> Religion</label>
-            <input type="text" value={religion} {...register('religion')} className="w-full p-2 border" />
+            <input type="text" value={religion} onChange={(e:any) => setReligion(e.target.value)} className="w-full p-2 border" />
           </div>
           <div className="p-2">
             <label>Maritial Status</label>
-            <select {...register('maritialStatus')} className="w-full p-2 border">
+            <select onChange={(e:any) => setMartialStatus(e.target.value)} className="w-full p-2 border">
               <option value={martialStatus}>{martialStatus}</option>
               <option value="Single">Single</option>
               <option value="Divorced">Divorced</option>
@@ -136,37 +130,26 @@ export default function Editresidents () {
           </div>
           <div className="p-2">
             <label>Date of Birth</label>
-            <input type="date" value={dateOfBirth} {...register('dateOfBirth')} name="" className="w-full p-2 border"/>
+            <input type="date" value={dateOfBirth} onChange={(e:any) => setDateOfBirth(e.target.value)} className="w-full p-2 border"/>
           </div>
           <div className="p-2">
             <label>Attending Physician</label>
-            <Select mode="tags" style={{ width: '100%' }} placeholder="Attending Physician" onChange={handleAttending}>
-    {children}
-  </Select>
+            <input type="text" value={attendingPhysician} onChange={(e:any) => setAttending(e.target.value)} className="w-full p-2 border"/>
           </div>
           <div className="p-2">
             <label>Added Date</label>
-            <input type="date" value={addedDate} {...register('addedDate')} className="w-full p-2 border"/>
+            <input type="date" value={addedDate} onChange={(e:any) => setAddedDate(e.target.value)} className="w-full p-2 border"/>
           </div>
           <div className="p-2">
             <label>Additional Physician</label>
-            <Select
-      mode="tags"
-      allowClear
-      style={{ width: '100%' }}
-      placeholder="Please select"
-      defaultValue={['Aron10']}
-      onChange={handleChange}
-    >
-      {children}
-    </Select>
+            <input type="text" value={additional} onChange={(e:any) => setAdditional(e.target.value)} className="w-full p-2 border"/>
           </div>
           <div className="p-2">
             <label>Admitting Physician</label>
-            <input type="text" value={admittingphysician} {...register('admittingPhysician')} className="w-full p-2 border"/>
+            <input type="text" value={admittingPhysician} onChange={(e:any) => setAdmittingPhysician(e.target.value)} className="w-full p-2 border"/>
           </div>
           <div className="mb-4">
-             {loading ? <span className='px-8 bg-green-400 cursor-pointer appearance-none  rounded-full w-full md:w-64 mt-8 py-2 font-medium text-gray-600 leading-tight focus:outline-none hover:bg-green-400 focus:border-green-500'>Updating.....</span> : <input type="submit" value="Update Resident" className="bg-green-400 cursor-pointer appearance-none  rounded-full w-full md:w-64 mt-8 py-2 font-medium text-gray-600 leading-tight focus:outline-none hover:bg-green-400 focus:border-green-500" />}
+             {loading ? <span className='px-8 bg-green-400 cursor-pointer appearance-none  rounded-full w-full md:w-64 mt-8 py-2 font-medium text-gray-600 leading-tight focus:outline-none hover:bg-green-400 focus:border-green-500'>Updating.....</span> : <input type="submit" onClick={registerResident} value="Update Resident" className="bg-green-400 cursor-pointer appearance-none  rounded-full w-full md:w-64 mt-8 py-2 font-medium text-gray-600 leading-tight focus:outline-none hover:bg-green-400 focus:border-green-500" />}
           </div>
         </div>
         </form>
