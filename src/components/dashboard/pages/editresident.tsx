@@ -1,10 +1,11 @@
 // eslint-disable-next-line no-use-before-define
 import React, { useState } from 'react'
 import { Tabs, Spin } from 'antd'
-import Overview from './overview'
+
 import { useApi } from '../../../utils/api'
 import { useParams } from 'react-router-dom'
 import Alert from '../../alerts'
+import Editresidents from './updateresident'
 const { TabPane } = Tabs
 export default function Editresident () {
   const { residentid } : any = useParams()
@@ -37,7 +38,7 @@ export default function Editresident () {
     <div className="mx-4">
     <Tabs defaultActiveKey="1" onChange={callback}>
     <TabPane tab="Overview" key="1">
-     <Overview/>
+     <Editresidents/>
     </TabPane>
     <TabPane tab="Profile Picture" key="2">
     <div>
@@ -70,26 +71,7 @@ export default function Editresident () {
           </form>
             </div>
     </TabPane>
-    <TabPane tab="Medication" key="3">
-    <div className="grid md:grid-cols-2 gap-4">
-          <div className="p-2">
-            <label>Drugs & medication</label>
-            <input type="text" className="w-full p-2 border"/>
-          </div>
-          <div className="p-2">
-            <label>Medication Type</label>
-            <input type="text" className="w-full p-2 border"/>
-          </div>
-          <div className="p-2">
-            <label>Health A-Z</label>
-            <input type="text" className="w-full p-2 border"/>
-          </div>
-          <br></br>
-          <div className="mb-4">
-               <input type="submit" value="Save" className="bg-green-400 cursor-pointer appearance-none  rounded-full w-full md:w-64 mt-8 py-2 font-medium text-gray-600 leading-tight focus:outline-none hover:bg-green-400 focus:border-green-500" />
-          </div>
-        </div>
-    </TabPane>
+
   </Tabs>
     </div>
     </>
