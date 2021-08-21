@@ -344,7 +344,7 @@ export default function Orderdetail () {
             {fields.map((field, index) => (
               <Form.Item
                 {...(index === 0 ? formItemLayout : formItemLayoutWithOutLabel)}
-                label={index === 0 ? 'Passengers' : ''}
+                label={index === 0 ? 'Times' : ''}
                 required={false}
                 key={field.key}
               >

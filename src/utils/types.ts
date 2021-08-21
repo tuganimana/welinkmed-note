@@ -70,6 +70,7 @@ export interface OrderType {
   dose: string;
   dosePerday: string;
   timesPerday: string;
+  allergies?:string;
 }
 
 export interface RoutineAdminType {
@@ -81,4 +82,13 @@ export interface RoutineAdminType {
   dose: string;
   dosePerday: string;
   timesPerday: string;
+}
+
+export interface AdministerType {
+  initial:string,
+  days:number,
+  residentId:string,
+  orderId:string,
+  time:string,
+  latedescription?:string
 }

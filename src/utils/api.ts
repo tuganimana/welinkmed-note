@@ -156,6 +156,29 @@ class Api {
     }
   }
 
+  public async administerRequest (
+    initial:string,
+    days:number,
+    residentId:string,
+    orderId:string,
+    time:string,
+    latedescription?:string
+  ) {
+    try {
+      const response = await this.axiosConnect(axios.post, backEndPoints.CREATE_ADMINISTER, {
+        initial,
+        days,
+        residentId,
+        orderId,
+        time,
+        latedescription
+      }, '')
+      return response
+    } catch (err) {
+      console.log(err)
+    }
+  }
+
   public async AllOrderRequest () {
     try {
       const res = await this.axiosConnect(axios.get, backEndPoints.CREATE_ORDER, {}, '')
