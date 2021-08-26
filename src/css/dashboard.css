@@ -6,10 +6,17 @@
 }
 .bgImageWeb{
     background-image: url(../images/group3.jpg);
-    background-size: 100%;
+    width: 100%;
     background-repeat: no-repeat;
     background-size: cover;
 }
+
+.myContainer{
+    height: 300px;
+    width: 100%;
+    background-image: url(../images/group3.jpg);
+}
+
 .bgImageWeb1{
     background-image: url(../images/group2.jpg);
     background-size: 100%;

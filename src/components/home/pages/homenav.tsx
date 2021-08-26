@@ -1,6 +1,7 @@
 // eslint-disable-next-line no-use-before-define
 import React, { useState } from 'react'
 import { frontEndPoints } from '../../../utils/enums'
+import '../../../css/tailwind.css'
 export default function Homenav () {
   const [small, setSmall] = useState(false)
   const handleClick = () => {
@@ -9,8 +10,10 @@ export default function Homenav () {
   const handleSmall = () => {
     setSmall(false)
   }
-  return (<>
-  <div className=" relative w-full  p-2  shadow-sm">
+  return (
+  <>
+  {/* Navbar on web view */}
+  <div className="relative p-2  shadow-sm">
   <div data-aos="fade-down"
      data-aos-easing="linear"
      data-aos-duration="700" className="">
@@ -22,7 +25,6 @@ export default function Homenav () {
       </div>
       <div className="-mr-2 -my-2 md:hidden">
         <button type="button" onClick={handleClick} className="inline-flex items-center justify-center p-2 rounded-md text-white hover:text-yellow-600 hover:bg-yellow-100 focus:outline-none focus:bg-yellow-100 focus:text-yellow-600 transition duration-150 ease-in-out">
-          {/* <!-- Heroicon name: menu --> */}
           <svg className="h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h16M4 18h16" />
           </svg>
@@ -50,12 +52,11 @@ export default function Homenav () {
           free trial
         </a>
         <div className="relative">
-{/* end of toggle (more) */}
-
         </div>
       </nav>
     </div>
   </div>
+
 {/* navbar of small devise */}
 
   {small
@@ -102,6 +103,5 @@ export default function Homenav () {
     : <span></span>}
 
 </div>
-
-          </>)
+</>)
 }
