@@ -3,7 +3,7 @@ import React from 'react'
 import { UserAddOutlined, DollarCircleOutlined, AreaChartOutlined, FolderAddOutlined } from '@ant-design/icons'
 import chart from '../../images/chart.png'
 
-import Residents from './pages/clients'
+import Residents from './admin/clients'
 import { frontEndPoints } from '../../utils/enums'
 
 export default function Welcome () {

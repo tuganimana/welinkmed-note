@@ -25,7 +25,8 @@ export enum backEndPoints {
     RESIDENT_PROFILE='/api/resident/profile',
     CREATE_ORDER='/api/createorder',
     ADDCLIENT='/api/Addclient',
-    ROUTINE_ADMIN='/api/routineadmin'
+    ROUTINE_ADMIN='/api/routineadmin',
+    CREATE_ADMINISTER= '/api/administer'
 
   }
 
