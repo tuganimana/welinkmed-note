@@ -43,6 +43,18 @@ export interface ResidentType {
   admittingPhysician: string;
 }
 
+export interface ClientType {
+  firstName:string;
+  lastName:string;
+  residentSate: string;
+  religion: string;
+  maritialStatus: string;
+  dateOfBirth: string;
+  attendingPhysician: string;
+  email: string;
+  phonenumber: string;
+}
+
 export interface SearchType {
   search:string;
 }

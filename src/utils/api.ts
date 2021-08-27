@@ -119,15 +119,6 @@ class Api {
     }
   }
 
-  public async residentProfileUpdateRequest (parameter:string, profile:FormData) {
-    try {
-      const res = await this.axiosConnect(axios.put, backEndPoints.RESIDENT_PROFILE, profile, parameter)
-      return res
-    } catch (error) {
-      console.log(`failed update picture: ${error}`)
-    }
-  }
-
   public async residentProfileRequest (profile:string) {
     try {
       const res = await this.axiosConnect(axios.put, backEndPoints.RESIDENT_PROFILE)
@@ -295,6 +286,54 @@ class Api {
       return res
     } catch (error) {
       console.log(`failed to add ROutine to Order failed: ${error.message}`)
+    }
+  }
+
+  public async clientRequest (
+    firstName:string,
+    lastName:string,
+    residentSate:string,
+    religion:string,
+    maritialStatus: string,
+    dateOfBirth: string,
+    phonenumber: string,
+    email: string,
+    attendingPhysician: string,
+    userId?:string) {
+    try {
+      const res = await this.axiosConnect(axios.post, backEndPoints.ADDCLIENT, {
+        firstName,
+        lastName,
+        residentSate,
+        religion,
+        maritialStatus,
+        dateOfBirth,
+        phonenumber,
+        email,
+        attendingPhysician,
+        userId
+      }, '')
+      return res
+    } catch (error) {
+      console.log(`failed to add client: ${error}`)
+    }
+  }
+
+  public async allclientRequest () {
+    try {
+      const res = await this.axiosConnect(axios.get, backEndPoints.ADDCLIENT, {}, '')
+      return res
+    } catch (err) {
+      console.log(`failed to fetch : ${err.message}`)
+    }
+  }
+
+  public async residentProfileUpdateRequest (parameter:string, profile:FormData) {
+    try {
+      const res = await this.axiosConnect(axios.put, backEndPoints.RESIDENT_PROFILE, profile, parameter)
+      return res
+    } catch (error) {
+      console.log(`failed update picture: ${error}`)
     }
   }
 }
