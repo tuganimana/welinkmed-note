@@ -81,3 +81,15 @@ export interface RoutineAdminType {
   dosePerday: string;
   timesPerday: string;
 }
+
+export interface ClientType {
+  firstName:string;
+  lastName:string;
+  residentSate: string;
+  religion: string;
+  maritialStatus: string;
+  dateOfBirth: string;
+  phonenumber: string;
+  email: string;
+  attendingPhysician: string;
+}

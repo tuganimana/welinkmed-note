@@ -1,7 +1,8 @@
 // eslint-disable-next-line no-use-before-define
 import React from 'react'
-import { Dropdown, Progress, Menu } from 'antd'
-import { PlusOutlined } from '@ant-design/icons'
+import Residents from './clients'
+import { UserAddOutlined, DollarCircleOutlined, AreaChartOutlined, FolderAddOutlined, PlusOutlined } from '@ant-design/icons'
+import { Dropdown, Menu } from 'antd'
 import { frontEndPoints } from '../../../utils/enums'
 export default function ClientWelcome () {
   const menu = (
@@ -24,70 +25,40 @@ export default function ClientWelcome () {
        </Dropdown>
         </div>
             </div>
-            <div className="flex flex-wrap space-between">
-                  <div className="w-1/2 md:w-1/3 w-full p-1">
-                    <div className="bg-white shadow-2xl p-4">
-                       <div className="">
-                         <h3 className="text-green-500 text-4xl text-center"><i className="fa fa-bar-chart" aria-hidden="true"></i></h3>
-                         <h5 className="text-center text-lg font-bold">32 Dosages</h5>
-                       </div>
-                    </div>
-                  </div>
-                  <div className="w-1/2 md:w-1/3 w-full p-1">
-                    <div className="bg-white shadow-2xl p-4">
-                       <div className="">
-                         <h3 className="text-yellow-500 text-4xl text-center"><i className="fa fa-clock-o" aria-hidden="true"></i></h3>
-                         <h5 className="text-center text-lg font-bold">2 times/day</h5>
-                       </div>
-                    </div>
-                  </div>
-                  <div className="w-1/2 md:w-1/3 w-full p-1">
-                    <div className="bg-white shadow-2xl p-4">
-                       <div className="">
-                         <h3 className="text-red-500 text-4xl text-center"><i className="fa fa-calendar-check-o" aria-hidden="true"></i></h3>
-                         <h5 className="text-center text-lg font-bold">9 Days</h5>
-                       </div>
-                    </div>
-                  </div>
+            <div className="mb-4 bg-white rounded-xl mx-2 ">
+              <div className="grid  md:grid-cols-3 gap-4 p-3">
+             <a href={frontEndPoints.USER_MAINTENANCE}><div className="p-3 bg-blue-200 text-gray-600 flex flex-wrap font-bold rounded-xl shadow">
+                <div className="bg-white rounded-full h-8 w-8 items-center"><UserAddOutlined className="ml-2" /></div>
+                <span className="inline-block mt-2 mx-3"> Add user</span>
+                </div>
+                </a>
+                <a href={frontEndPoints.RESIDENT_ADD}><div className="p-3 bg-red-200 text-gray-600 flex flex-wrap font-bold rounded-xl shadow">
+                <div className="bg-white rounded-full h-8 w-8 items-center"><UserAddOutlined className="ml-2" /></div>
+                <span className="inline-block mt-2 mx-3"> Add residents</span>
+                </div>
+                </a>
+                <a href={frontEndPoints.ORDER}><div className="p-3 bg-green-200 text-gray-600 flex flex-wrap font-bold rounded-xl shadow">
+                <div className="bg-white rounded-full h-8 w-8 items-center"><FolderAddOutlined className="ml-2" /></div>
+                <span className="inline-block mt-2 mx-3"> Add order</span>
+                </div>
+                </a>
+                <div className="p-3 bg-gray-200 text-gray-600 flex flex-wrap font-bold rounded-xl shadow">
+                <div className="bg-white rounded-full h-8 w-8 items-center"><AreaChartOutlined className="ml-2" /></div>
+                <span className="inline-block mt-2 mx-3"> Reports</span>
+                </div>
+                <a href={frontEndPoints.MAR} ><div className="p-3 bg-yellow-200 text-gray-600 flex flex-wrap font-bold rounded-xl shadow">
+                <div className="bg-white rounded-full h-8 w-8 items-center"><AreaChartOutlined className="ml-2" /></div>
+                <span className="inline-block mt-2 mx-3"> MRN</span>
+                </div>
+                </a>
+                <div className="p-3 bg-blue-200 text-gray-600 flex flex-wrap font-bold rounded-xl shadow">
+                <div className="bg-white rounded-full h-8 w-8 items-center"><DollarCircleOutlined size={40} className="ml-2" /></div>
+                <span className="inline-block mt-2 mx-3"> Payments</span>
+                </div>
+              </div>
             </div>
-            <div className="flex flex-wrap md:mt-16 mt-4">
-              <div className="w-full md:w-3/3 p-2 bg-white rounded-xl">
-                <span className="font-bold p-2 text-green-00">Medication Progress recorded</span>
-                <div className="mt-8">
-                <div className="flex flex-wrap p-1">
-                <div className="w-1/4  p-2 text-center align-center item-center">
-                  <span>Amoxicilyn</span>
-                </div>
-                <div className="w-3/4 p-2 grid">
-                <Progress percent={30} />
-                 </div>
-              </div>
-              <div className="flex flex-wrap p-1">
-                <div className="w-1/4  text-center align-center item-center">
-                  <span>Amoxicilyn</span>
-                </div>
-                <div className="w-3/4 p-2 grid">
-                <Progress percent={50} status="active" />
-                 </div>
-              </div>
-              <div className="flex flex-wrap p-1">
-                <div className="w-1/4  text-center align-center item-center">
-                  <span>Paracetamol</span>
-                </div>
-                <div className="w-3/4 p-2 grid">
-                <Progress percent={70} status="exception" />
-                 </div>
-              </div>
-              <div className="flex flex-wrap p-1">
-                <div className="w-1/4  text-center align-center item-center">
-                  <span>Injection due</span>
-                </div>
-                <div className="w-3/4 p-2 grid">
-                <Progress percent={100} />
-                 </div>
-              </div>
-                </div>
-              </div>
+            <div className="">
+              <Residents/>
             </div>
           </div>
           <div className="lg:w-2/6 w-full bg-white rounded-lg md:mt16 mt-4 grid">
@@ -128,7 +99,7 @@ export default function ClientWelcome () {
                 </div>
               </div>
               <div className="text-center item-center">
-              <span className="font-bold text-green-500 "><a href="#">Load more</a></span>
+              <span className="font-bold text-green-500 "><a href="#">Load More</a></span>
             </div>
             </div>
           </div>
