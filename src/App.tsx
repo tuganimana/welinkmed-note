@@ -13,7 +13,7 @@ import Welcome from './components/dashboard/welcome'
 import Addresident from './components/dashboard/admin/addresident'
 import Orderdetail from './components/dashboard/admin/orderdetail'
 import ViewResidents from './components/dashboard/admin/residents'
-import { Example } from './components/dashboard/admin/print'
+import MarComponent from './components/dashboard/admin/MarComponent'
 import UserMaintenance from './components/dashboard/admin/usermaintenance'
 import Body from './components/home/pages/body'
 import Orderedit from './components/dashboard/admin/orderedit'
@@ -77,7 +77,7 @@ function App () {
         </Route>
         <Route path="/user-mar">
           <Dashboard>
-        <Example/>
+        <MarComponent/>
           </Dashboard>
         </Route>
         {/* ========================================START CLIENT EDNPOINT============================ */}
