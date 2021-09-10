@@ -43,12 +43,12 @@ export default function Orderdetail () {
   }
   const children = []
   children.push(<Option value="" key="1" >Select</Option>)
-  const [Physician, setAttending] = useState('')
+  // const [Physician, setAttending] = useState('')
   const [loading, setLoading] = useState(false)
   const [messaging, setMessaging] = useState('')
-  function handleAttending (value:any) {
-    setAttending(value)
-  }
+  // function handleAttending (value:any) {
+  //   setAttending(value)
+  // }
   const { register, handleSubmit, formState: { errors } } = useForm<OrderType>()
   const userId = localStorage.getItem(welinkTokens.userID) || ''
   const CreateOrder = async (data:any) => {
@@ -59,7 +59,7 @@ export default function Orderdetail () {
         data.orderType,
         data.description,
         data.generic,
-        Physician,
+        data.physicians,
         data.orderStatus,
         data.lastRefill,
         data.rxNumber,
@@ -132,7 +132,56 @@ export default function Orderdetail () {
           </div>
           <div className="p-2">
             <label>Routine Of Administration ( Required)</label><br/>
-            <button onClick={() => setVisible(true)} className="bg-gray-200 p-2 w-full">add routine</button>
+            <input type="text" className="w-full p-2 border"/>
+          </div>
+        <div className="p-2">
+          <label>Physician( Required)</label>
+          <input type="text" {...register('physicians', { required: '* This field is required' })} className="w-full p-2 border"/>
+        </div>
+          <div className="p-2">
+            <label>Order Status (Required)</label>
+            <select {...register('orderStatus')} className="w-full p-2 borderl">
+              <option>Select here</option>
+              <option>Active</option>
+              <option>DCd</option>
+            </select>
+          </div>
+          <div className="p-2">
+            <label>Last Refill Request</label>
+            <input type="text" {...register('lastRefill', { required: '* This field is required' })} className="w-full p-2 border"/>
+            <span className="text-red-600 text-xs">{errors.lastRefill && errors.lastRefill.message}</span>
+          </div>
+          <div className="p-2">
+            <label>RX Number(optional)</label>
+            <input type="text" {...register('rxNumber', { required: '* This field is required' })} className="w-full p-2 border"/>
+            <span className="text-red-600 text-xs">{errors.rxNumber && errors.rxNumber.message}</span>
+          </div>
+          <div className="p-2">
+            <label>NDC</label>
+            <input type="text" {...register('ndc', { required: '* This field is required' })} className="w-full p-2 border"/>
+            <span className="text-red-600 text-xs">{errors.ndc && errors.ndc.message}</span>
+          </div>
+          <div className="p-2">
+            <label>External ID</label>
+            <input type="text" {...register('externalId', { required: '* This field is required' })} className="w-full p-2 border"/>
+            <span className="text-red-600 text-xs">{errors.externalId && errors.externalId.message}</span>
+          </div>
+          <div className="p-2">
+            <label>Previos ID</label>
+            <input type="text" {...register('previousId', { required: '* This field is required' })} className="w-full p-2 border"/>
+            <span className="text-red-600 text-xs">{errors.previousId && errors.previousId.message}</span>
+          </div>
+          <div className="p-2">
+            <label>Barcode Can be Scanned</label>
+            <select {...register('barcode')} className="w-full p-2 borderl">
+              <option>Select here</option>
+              <option>Active</option>
+              <option>DCd</option>
+            </select>
+          </div>
+          <div className="p-2">
+            <label>Specify to Routine</label>
+          <button onClick={() => setVisible(true)} className="bg-gray-200 p-2 w-full">Add</button>
             <Modal
             title="Routine of administrator"
             centered
@@ -142,7 +191,6 @@ export default function Orderdetail () {
             onCancel={() => setVisible(false)}
             width={1000}
           >
-           <Alert message={messaging}/>
            <div className="grid md:grid-cols-2">
           <div className="p-2">
           <label>Administration Type</label>
@@ -263,53 +311,6 @@ export default function Orderdetail () {
           </div>
           </div>
           </Modal>
-          </div>
-        <div className="p-2">
-          <label>Physician( Required)</label>
-          <Select mode="tags" style={{ width: '100%' }} placeholder="Attending Physician" onChange={handleAttending}>
-    {children}
-  </Select>
-        </div>
-          <div className="p-2">
-            <label>Order Status (Required)</label>
-            <select {...register('orderStatus')} className="w-full p-2 borderl">
-              <option>Select here</option>
-              <option>Active</option>
-              <option>DCd</option>
-            </select>
-          </div>
-          <div className="p-2">
-            <label>Last Refill Request</label>
-            <input type="text" {...register('lastRefill', { required: '* This field is required' })} className="w-full p-2 border"/>
-            <span className="text-red-600 text-xs">{errors.lastRefill && errors.lastRefill.message}</span>
-          </div>
-          <div className="p-2">
-            <label>RX Number(optional)</label>
-            <input type="text" {...register('rxNumber', { required: '* This field is required' })} className="w-full p-2 border"/>
-            <span className="text-red-600 text-xs">{errors.rxNumber && errors.rxNumber.message}</span>
-          </div>
-          <div className="p-2">
-            <label>NDC</label>
-            <input type="text" {...register('ndc', { required: '* This field is required' })} className="w-full p-2 border"/>
-            <span className="text-red-600 text-xs">{errors.ndc && errors.ndc.message}</span>
-          </div>
-          <div className="p-2">
-            <label>External ID</label>
-            <input type="text" {...register('externalId', { required: '* This field is required' })} className="w-full p-2 border"/>
-            <span className="text-red-600 text-xs">{errors.externalId && errors.externalId.message}</span>
-          </div>
-          <div className="p-2">
-            <label>Previos ID</label>
-            <input type="text" {...register('previousId', { required: '* This field is required' })} className="w-full p-2 border"/>
-            <span className="text-red-600 text-xs">{errors.previousId && errors.previousId.message}</span>
-          </div>
-          <div className="p-2">
-            <label>Barcode Can be Scanned</label>
-            <select {...register('barcode')} className="w-full p-2 borderl">
-              <option>Select here</option>
-              <option>Active</option>
-              <option>DCd</option>
-            </select>
           </div>
           </div>
           <div className="p-2">
