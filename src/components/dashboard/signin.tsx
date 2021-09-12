@@ -78,7 +78,7 @@ export default function Signin () {
                     <div className="">
                         <h1 className="font-normal text-center text-3xl text-gray-400 font-medium leading-loose my-3 w-full">Sign In</h1>
                         <div className="w-full">
-                          <Alert message={errorMessage}/>
+                          <Alert message={errorMessage} success={false}/>
                             <form onSubmit={ handleSubmit((data) => { handleLogin(data) })}>
                                 <div className="mb-2">
                                    <input type="email" {...register('username', { required: '* This field is required' })} placeholder="User Name or Email" className="bg-gray-100 appearance-none border-2 border-green-500 rounded-full w-full py-2 px-4 text-gray-900 leading-tight focus:outline-none focus:bg-white focus:border-green-500" />

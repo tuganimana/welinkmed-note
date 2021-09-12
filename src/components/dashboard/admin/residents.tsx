@@ -1,26 +1,19 @@
 // eslint-disable-next-line no-use-before-define
-import React, { useState } from 'react'
-import { Tabs, Statistic, Input, Modal } from 'antd'
+import React, { useState, useEffect } from 'react'
+import { Tabs, Input, Modal, Spin } from 'antd'
 import { EditOutlined } from '@ant-design/icons'
 import { useParams } from 'react-router-dom'
-import person1 from '../../../images/person1.jpg'
+import ruser from '../../../images/users.png'
 import pill from '../../../images/Pills.jpg'
 import pill1 from '../../../images/Pills1.jpg'
 import pill2 from '../../../images/Pills2.jpg'
 import { frontEndPoints } from '../../../utils/enums'
+import { useApi } from '../../../utils/api'
+import { apiBaseUrl } from '../../../utils/env'
 const { TabPane } = Tabs
 export default function ViewResidents () {
   const { residentid } : any = useParams()
-
-  const { Countdown } = Statistic
-  const deadline = Date.now() + 1000 * 60 * 60 * 24 * 2 + 1000 * 30
-  function onFinish () { console.log('finished!') }
   const callback = (key:any) => { console.log(key) }
-  function overChange (val: any) {
-    if (4.95 * 1000 > val && val > 5 * 1000) {
-      console.log('changed!')
-    }
-  }
   const [visible, setVisible] = useState(false)
   const [confirmLoading, setConfirmLoading] = useState(false)
   const handleOk = () => {
@@ -41,23 +34,49 @@ export default function ViewResidents () {
   }
   const { TextArea } = Input
   const urlPath = `${frontEndPoints.RESIDENT_EDIT}/${residentid}`
-
+  const [fullname, setFullname] = useState('')
+  const [profile, setProfile] = useState('')
+  const [loading, setLoading] = useState(false)
+  const [dob, setDob] = useState('')
+  useEffect(() => {
+    setLoading(true)
+    useApi.getSingleresident(`/${residentid}`)
+      .then((res:any) => {
+        if (res) {
+          setLoading(false)
+          setFullname(`${res.data.firstName} ${res.data.lastName}`)
+          setProfile(res.data.profile)
+          setDob(res.data.dateOfBirth)
+        }
+        setLoading(false)
+      })
+      .catch((error) => {
+        console.log(`${error}`)
+      })
+  }, [])
+  const imagePath = `${apiBaseUrl}/${profile}`
+  const handleAdminister = async () => {
+    const response = await useApi.administerRequest('HD', 1, 'yywh-xs', 'wgg', '10:00')
+    console.log(response)
+  }
+  if (loading) return (<><div className='justify-center mt-64 mx-auto items-center text-center'><Spin tip='Fetching.....'/></div></>)
   return (
     <>
     <div className="p-2">
     <div className="px-2 py-2">
       <h5 className="font-semibold">Resident Information</h5>
     </div>
-    <div className="flex flex-wrap">
+
+               <div className="flex flex-wrap">
         <div className="w-full md:w-1/2 w-full p-1 shadow-md">
         <div className="bg-gray-100  rounded-xl flex flex-wrap p-1">
             <div className="w-full lg:w-1/2">
-                <img src={person1} alt="" className="rounded" />
+            {profile === null ? <img src={ruser} alt="" className="rounded-l-xl w-full" /> : <img src={imagePath} alt="" className="rounded-l-xl w-full" />}
             </div>
             <div className="w-full lg:w-1/2 grid p-2 ">
-                <span className="font-bold text-xl">Mike Rickson</span>
+                <span className="font-bold text-xl">{fullname}</span>
                 <span className="text-md"><span className="font-bold"><i className="fa fa-home  text-blue-500  rounded p-2"></i>Room:</span> Bench home </span>
-                <span className="text-md"><span className="font-bold"><i className="fa fa-calendar  text-yellow-500  rounded p-2"></i>DOB:</span> 14th july 1989 </span>
+                <span className="text-md"><span className="font-bold"><i className="fa fa-calendar  text-yellow-500  rounded p-2"></i>DOB:</span> {dob} </span>
                 <span className="text-md"><span className="font-bold"><i className="fa fa-calendar-check-o  text-green-600  rounded p-2"></i>Age:</span> 41 </span>
                 <span className="text-md"><span className="font-bold"><i className="fa fa-user-md  text-yellow-600  rounded p-2"></i>Allergies:</span> noe </span>
             </div>
@@ -85,12 +104,11 @@ export default function ViewResidents () {
             </div>
             <div className="w-1/4 gap-1 grid">
              <span className="font-bold text-lg text-gray-600">
-                 <button className="bg-blue-400 w-full hover:bg-blue-500 text-white font-bold p-2 rounded-xl">
-                 <Countdown value={deadline} onFinish={onFinish} />Administer</button>
+                 <button onClick={handleAdminister} className="bg-blue-400 w-full hover:bg-blue-500 text-white font-bold p-2 rounded-xl">
+                 Administer</button>
              </span>
              <span className="font-bold text-lg text-gray-600">
                  <button onClick={() => setVisible(true)} className="bg-yellow-600 w-full hover:bg-yellow-500 text-white font-bold p-2 rounded-xl">
-                 <Countdown onChange={overChange} value={Date.now() + 3 * 1000} />
                  Late Administer
                  </button>
                  <Modal
@@ -181,7 +199,8 @@ export default function ViewResidents () {
     </TabPane>
   </Tabs>
     </div>
-    </div>
+               </div>
+
     </>
   )
 }

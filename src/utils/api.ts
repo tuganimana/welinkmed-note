@@ -52,6 +52,7 @@ class Api {
       console.log(`failed to add medication: ${error.message}`)
     }
   }
+  // start RESIDENT API request
 
   public async residentRegiterRequest (
     firstName:string,
@@ -85,6 +86,39 @@ class Api {
     }
   }
 
+  public async residentUpdateRequest (
+    firstName:string,
+    lastName:string,
+    residentSate:string,
+    religion:string,
+    maritialStatus: string,
+    dateOfBirth: string,
+    attendingPhysician: string,
+    addedDate: string,
+    additionalPhysician: string,
+    admittingPhysician: string,
+    userId?:string,
+    parameter?:string) {
+    try {
+      const res = await this.axiosConnect(axios.put, backEndPoints.CREATE_RESIDENT, {
+        firstName,
+        lastName,
+        residentSate,
+        religion,
+        maritialStatus,
+        dateOfBirth,
+        attendingPhysician,
+        addedDate,
+        additionalPhysician,
+        admittingPhysician,
+        userId
+      }, parameter)
+      return res
+    } catch (error) {
+      console.log(`failed to update: ${error}`)
+    }
+  }
+
   public async residentProfileRequest (profile:string) {
     try {
       const res = await this.axiosConnect(axios.put, backEndPoints.RESIDENT_PROFILE)
@@ -94,12 +128,45 @@ class Api {
     }
   }
 
+  public async getSingleresident (parameter:string) {
+    try {
+      const res = await this.axiosConnect(axios.get, backEndPoints.CREATE_RESIDENT, {}, parameter)
+      return res
+    } catch (err) {
+      console.log(`Fetched : ${err}`)
+    }
+  }
+
+  // ================END resident api
   public async allResidentRequest () {
     try {
       const res = await this.axiosConnect(axios.get, backEndPoints.CREATE_RESIDENT, {}, '')
       return res
     } catch (err) {
       console.log(`failed to fetch : ${err.message}`)
+    }
+  }
+
+  public async administerRequest (
+    initial:string,
+    days:number,
+    residentId:string,
+    orderId:string,
+    time:string,
+    latedescription?:string
+  ) {
+    try {
+      const response = await this.axiosConnect(axios.post, backEndPoints.CREATE_ADMINISTER, {
+        initial,
+        days,
+        residentId,
+        orderId,
+        time,
+        latedescription
+      }, '')
+      return response
+    } catch (err) {
+      console.log(err)
     }
   }
 
@@ -154,6 +221,7 @@ class Api {
     endDate: string,
     programAdminster: string,
     month: string,
+    weekly:string,
     dates: string,
     dose: string,
     dosePerday: string,
@@ -178,6 +246,7 @@ class Api {
         endDate,
         programAdminster,
         month,
+        weekly,
         dates,
         dose,
         dosePerday,
@@ -217,6 +286,45 @@ class Api {
       return res
     } catch (error) {
       console.log(`failed to add ROutine to Order failed: ${error.message}`)
+    }
+  }
+
+  public async clientRequest (
+    firstName:string,
+    lastName:string,
+    residentSate:string,
+    religion:string,
+    maritialStatus: string,
+    dateOfBirth: string,
+    phonenumber: string,
+    email: string,
+    attendingPhysician: string,
+    userId?:string) {
+    try {
+      const res = await this.axiosConnect(axios.post, backEndPoints.ADDCLIENT, {
+        firstName,
+        lastName,
+        residentSate,
+        religion,
+        maritialStatus,
+        dateOfBirth,
+        phonenumber,
+        email,
+        attendingPhysician,
+        userId
+      }, '')
+      return res
+    } catch (error) {
+      console.log(`failed to add client: ${error}`)
+    }
+  }
+
+  public async allclientRequest () {
+    try {
+      const res = await this.axiosConnect(axios.get, backEndPoints.ADDCLIENT, {}, '')
+      return res
+    } catch (err) {
+      console.log(`failed to fetch : ${err.message}`)
     }
   }
 

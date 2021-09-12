@@ -43,6 +43,18 @@ export interface ResidentType {
   admittingPhysician: string;
 }
 
+export interface ClientType {
+  firstName:string;
+  lastName:string;
+  residentSate: string;
+  religion: string;
+  maritialStatus: string;
+  dateOfBirth: string;
+  attendingPhysician: string;
+  email: string;
+  phonenumber: string;
+}
+
 export interface SearchType {
   search:string;
 }
@@ -65,10 +77,12 @@ export interface OrderType {
   endDate: string;
   programAdminister: string;
   month: string;
+  weekly:string;
   dates: string;
   dose: string;
   dosePerday: string;
   timesPerday: string;
+  allergies?:string;
 }
 
 export interface RoutineAdminType {
@@ -80,4 +94,13 @@ export interface RoutineAdminType {
   dose: string;
   dosePerday: string;
   timesPerday: string;
+}
+
+export interface AdministerType {
+  initial:string,
+  days:number,
+  residentId:string,
+  orderId:string,
+  time:string,
+  latedescription?:string
 }
