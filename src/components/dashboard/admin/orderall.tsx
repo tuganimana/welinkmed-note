@@ -45,12 +45,12 @@ export default function Allorders () {
             <th className="px-4 py-3">startDate</th>
             <th className="px-4 py-3">endDate</th>
             <th className="px-4 py-3">programAdminster</th>
+            <th className="px-4 py-3">month</th>
             <th className="px-4 py-3">dates</th>
             <th className="px-4 py-3">dose</th>
             <th className="px-4 py-3">dosePerday</th>
             <th className="px-4 py-3">timesPerday</th>
             <th className="px-4 py-3">addedby</th>
-            <th className="px-4 py-3">month</th>
           </tr>
           {
         orders.map((items:any, index) => (

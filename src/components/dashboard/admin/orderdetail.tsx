@@ -221,7 +221,6 @@ export default function Orderdetail () {
             onCancel={() => setVisible(false)}
             width={1000}
           >
-           <Alert message={messaging}/>
            <div className="grid md:grid-cols-2">
           <div className="p-2">
           <label>Administration Type</label>
