@@ -61,6 +61,7 @@ export default function Residents () {
                 currentClients.map((items:any, index) => {
                   const urlPath = `${frontEndPoints.RESIDENT_INFO}/${items.residentId}`
                   const imagePath = `${apiBaseUrl}/${items.profile}`
+                  const urlOrder = `${frontEndPoints.ORDER}/${items.residentId}`
                   return (
                   // eslint-disable-next-line react/jsx-key
                   <div key={index} className="w-1/2 md:w-1/3  p-1">
@@ -73,7 +74,7 @@ export default function Residents () {
                        </div>
                        <div className="w-full lg:w-1/2 grid p-1">
                          <div className="">
-                      <img src="https://img.icons8.com/emoji/24/000000/pill-emoji.png" className="inset-x-0 float-right"/>
+                      <a href={urlOrder}><img src="https://img.icons8.com/emoji/24/000000/pill-emoji.png" className="inset-x-0 float-right"/></a>
                          </div>
                          <span className="lg:text-xs text-center font-bold cursor-pointer text-gray-800 float-left">{items.firstName} {items.lastName}</span>
                           <div className=" text-center items-end ">

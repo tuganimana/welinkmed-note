@@ -77,12 +77,16 @@ export interface OrderType {
   endDate: string;
   programAdminister: string;
   month: string;
-  weekly:string;
+  week:string;
   dates: string;
   dose: string;
   dosePerday: string;
   timesPerday: string;
+  morningTimes:string;
+  noonTimes:string;
+  nightTimes:string;
   allergies?:string;
+  residentid:string;
 }
 
 export interface RoutineAdminType {

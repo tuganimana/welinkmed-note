@@ -45,7 +45,7 @@ function App () {
           <Addresident/>
           </Dashboard>
         </Route>
-        <Route path="/order-detail">
+        <Route path="/order-detail/:residentid">
           <Dashboard>
             <Orderdetail/>
           </Dashboard>

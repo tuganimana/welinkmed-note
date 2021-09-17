@@ -221,12 +221,17 @@ class Api {
     endDate: string,
     programAdminster: string,
     month: string,
-    weekly:string,
+    week:string,
     dates: string,
     dose: string,
     dosePerday: string,
-    timesPerday: string,
-    addedby:string) {
+    morningTimes?:string,
+    noonTimes?:string,
+    nightTimes?:string,
+    timesPerday?:string,
+    addedby?:string,
+    organization?:string,
+    residentid?:string) {
     try {
       const res = await this.axiosConnect(axios.post, backEndPoints.CREATE_ORDER, {
         routineMedOrder,
@@ -246,16 +251,21 @@ class Api {
         endDate,
         programAdminster,
         month,
-        weekly,
+        week,
         dates,
         dose,
         dosePerday,
+        morningTimes,
+        noonTimes,
+        nightTimes,
         timesPerday,
-        addedby
+        addedby,
+        organization,
+        residentid
       }, '')
       return res
     } catch (error) {
-      console.log(`failed to add new Order: ${error.message}`)
+      console.log(`failed to add new Order: ${error}`)
     }
   }
 

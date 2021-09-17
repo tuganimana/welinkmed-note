@@ -1,6 +1,6 @@
 // eslint-disable-next-line no-use-before-define
 import React from 'react'
-import { UserAddOutlined, DollarCircleOutlined, AreaChartOutlined, FolderAddOutlined } from '@ant-design/icons'
+import { UserAddOutlined, DollarCircleOutlined, AreaChartOutlined } from '@ant-design/icons'
 import chart from '../../images/chart.png'
 
 import Residents from './admin/clients'
@@ -27,18 +27,13 @@ export default function Welcome () {
                 <span className="inline-block mt-2 mx-3"> Add residents</span>
                 </div>
                 </a>
-                <a href={frontEndPoints.ORDER}><div className="p-3 bg-green-200 text-gray-600 flex flex-wrap font-bold rounded-xl shadow">
-                <div className="bg-white rounded-full h-8 w-8 items-center"><FolderAddOutlined className="ml-2" /></div>
-                <span className="inline-block mt-2 mx-3"> Add order</span>
-                </div>
-                </a>
                 <div className="p-3 bg-gray-200 text-gray-600 flex flex-wrap font-bold rounded-xl shadow">
                 <div className="bg-white rounded-full h-8 w-8 items-center"><AreaChartOutlined className="ml-2" /></div>
                 <span className="inline-block mt-2 mx-3"> Reports</span>
                 </div>
                 <a href={frontEndPoints.MAR} ><div className="p-3 bg-yellow-200 text-gray-600 flex flex-wrap font-bold rounded-xl shadow">
                 <div className="bg-white rounded-full h-8 w-8 items-center"><AreaChartOutlined className="ml-2" /></div>
-                <span className="inline-block mt-2 mx-3"> MRN</span>
+                <span className="inline-block mt-2 mx-3"> MAR</span>
                 </div>
                 </a>
                 <div className="p-3 bg-blue-200 text-gray-600 flex flex-wrap font-bold rounded-xl shadow">

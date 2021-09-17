@@ -1,7 +1,7 @@
 // eslint-disable-next-line no-use-before-define
 import React, { useState, useEffect } from 'react'
-import { Modal, Tabs, Select, Button, Form, Input } from 'antd'
-import { MinusCircleOutlined, PlusOutlined } from '@ant-design/icons'
+import { Modal, Tabs, Select } from 'antd'
+// import { MinusCircleOutlined, PlusOutlined } from '@ant-design/icons'
 import { useForm } from 'react-hook-form'
 import { OrderType } from '../../../utils/types'
 import { welinkTokens } from '../../../utils/enums'
@@ -9,13 +9,14 @@ import { useApi } from '../../../utils/api'
 import Sig from './editsig'
 import Allorders from './orderall'
 import Alert from '../../alerts'
+import { useParams } from 'react-router-dom'
 const { TabPane } = Tabs
 const { Option } = Select
 export default function Orderdetail () {
+  const { residentid } : any = useParams()
   const [visible, setVisible] = useState(false)
   const [confirmLoading, setConfirmLoading] = useState(false)
   const [orders, setOrders] = useState([])
-  const [times, setTimes] = useState('')
   const [week, setWeek] = useState('')
   useEffect(() => {
     const callOrder = async () => {
@@ -38,9 +39,7 @@ export default function Orderdetail () {
   const callback = (key:any) => {
     console.log(key)
   }
-  const onFinish = (values:any) => {
-    setTimes(values.names)
-  }
+
   function handleChangeweek (value: any) {
     setWeek(value)
   }
@@ -88,9 +87,14 @@ export default function Orderdetail () {
         dates,
         data.dose,
         data.dosePerday,
-        times,
-        userId
+        data.morningTimes,
+        data.noonTimes,
+        data.nightTimes,
+        data.timesPerday,
+        userId,
+        residentid
       )
+      console.log(response)
       if (response === 'undefined') {
         setMessaging(response.message)
         setLoading(false)
@@ -104,22 +108,7 @@ export default function Orderdetail () {
       setLoading(false)
     }
   }
-  const formItemLayout = {
-    labelCol: {
-      xs: { span: 24 },
-      sm: { span: 4 }
-    },
-    wrapperCol: {
-      xs: { span: 24 },
-      sm: { span: 20 }
-    }
-  }
-  const formItemLayoutWithOutLabel = {
-    wrapperCol: {
-      xs: { span: 24, offset: 0 },
-      sm: { span: 20, offset: 4 }
-    }
-  }
+
   return (
     <>
     <div className="px-2 py-2">
@@ -163,9 +152,7 @@ export default function Orderdetail () {
           </div>
         <div className="p-2">
           <label>Physician( Required)</label>
-          <Select mode="tags" style={{ width: '100%' }} placeholder="Attending Physician" onChange={handleAttending}>
-    {children}
-  </Select>
+          <input type="text" className="w-full p-2 border" placeholder="Attending Physician" onChange={handleAttending} />
         </div>
           <div className="p-2">
             <label>Order Status (Required)</label>
@@ -182,7 +169,7 @@ export default function Orderdetail () {
           </div>
           <div className="p-2">
             <label>RX Number(optional)</label>
-            <input type="text" {...register('rxNumber', { required: '* This field is required' })} className="w-full p-2 border"/>
+            <input type="number" {...register('rxNumber', { required: '* This field is required' })} className="w-full p-2 border"/>
             <span className="text-red-600 text-xs">{errors.rxNumber && errors.rxNumber.message}</span>
           </div>
           <div className="p-2">
@@ -210,8 +197,8 @@ export default function Orderdetail () {
           </div>
           </div>
           <div className="p-2">
-            <label>Add sig</label><br/>
-            <button onClick={() => setVisible(true)} className="bg-gray-200 p-2 w-full">How to take medication</button>
+            <label>How to take an order </label><br/>
+            <span onClick={() => setVisible(true)} className="bg-blue-200 p-2 mt-2  w-full">How to take medication</span>
             <Modal
             title="Routine of administrator"
             centered
@@ -248,7 +235,8 @@ export default function Orderdetail () {
           </div>
           </div>
            <div className="grid md:grid-cols-2">
-         <div className="p-2"><label>Week day</label><br/>
+           {program === 'Weekly'
+             ? <div className="p-2"><label>Week day</label><br/>
             <Select mode="tags" style={{ width: '100%' }} onChange={handleChangeweek} tokenSeparators={[',']}>
             <option value="Monday">Monday</option>
             <option value="Tuesday">Tuesday</option>
@@ -259,7 +247,10 @@ export default function Orderdetail () {
             <option value="Sunday">Sunday</option>
           </Select>
           </div>
-         <div className="p-2">
+             : <span></span>
+             }
+          {program === 'Monthly'
+            ? <div className="p-2">
 
             <label>Select a month</label><br/>
             <Select mode="tags" style={{ width: '100%' }} onChange={handleChange} tokenSeparators={[',']}>
@@ -277,7 +268,9 @@ export default function Orderdetail () {
             <option value="Dec">Dec</option>
           </Select>
           </div>
-        <div className="p-2"><label>Select a Date</label><br/>
+            : <span></span>}
+          {program === 'Monthly'
+            ? <div className="p-2"><label>Select a Date</label><br/>
             <Select mode="tags" style={{ width: '100%' }} onChange={handleChangeDate} tokenSeparators={[',']}>
             <option value="1">1</option>
             <option value="2">2</option>
@@ -312,6 +305,8 @@ export default function Orderdetail () {
             <option value="31">31</option>
           </Select>
           </div>
+            : <span></span>
+}
 
           </div>
           <div className="grid md:grid-cols-2">
@@ -326,73 +321,22 @@ export default function Orderdetail () {
           <span className="text-red-600 text-xs">{errors.dosePerday && errors.dosePerday.message}</span>
         </div>
           <div className="p-2">
-          <Form name="dynamic_form_item" {...formItemLayoutWithOutLabel} onFinish={onFinish}>
-      <Form.List
-        name="names"
-        rules={[
-          {
-            validator: async (_, names) => {
-              if (!names || names.length < 1) {
-                return Promise.reject(new Error(' Add time time'))
-              }
-            }
-          }
-        ]}
-      >
-        {(fields, { add, remove }, { errors }) => (
-          <>
-            {fields.map((field, index) => (
-              <Form.Item
-                {...(index === 0 ? formItemLayout : formItemLayoutWithOutLabel)}
-                label={index === 0 ? 'Times' : ''}
-                required={false}
-                key={field.key}
-              >
-                <Form.Item
-                  {...field}
-                  validateTrigger={['onChange', 'onBlur']}
-                  rules={[
-                    {
-                      required: true,
-                      whitespace: true,
-                      message: "Please input passenger's name or delete this field."
-                    }
-                  ]}
-                  noStyle
-                >
-                  <Input type="time" placeholder="time" style={{ width: '100%' }} />
-                </Form.Item>
-                {fields.length > 1
-                  ? (
-                  <MinusCircleOutlined
-                    className="dynamic-delete-button"
-                    onClick={() => remove(field.name)}
-                  />
-                    )
-                  : null}
-              </Form.Item>
-            ))}
-            <Form.Item>
-              <Button
-                type="dashed"
-                onClick={() => add()}
-                style={{ width: '60%' }}
-                icon={<PlusOutlined />}
-              >
-                Add field
-              </Button>
-              <Form.ErrorList errors={errors} />
-            </Form.Item>
-          </>
-        )}
-      </Form.List>
-      <Form.Item>
-        <Button type="primary" htmlType="submit">
-          Submit
-        </Button>
-      </Form.Item>
+          <label>Morning Time</label>
+          <input type="time" {...register('morningTimes')} className="w-full p-2 border"/>
+          </div>
+          <div className="p-2">
+          <label>Noon Time</label>
+          <input type="time" {...register('noonTimes')} className="w-full p-2 border"/>
+          </div>
+          <div className="p-2">
+          <label>Night Time</label>
+          <input type="time" {...register('nightTimes')} className="w-full p-2 border"/>
 
-    </Form>
+          </div>
+          <div className="p-2">
+          <label>Other time</label>
+          <input type="time" {...register('timesPerday')} className="w-full p-2 border"/>
+
           </div>
           </div>
           </Modal>
