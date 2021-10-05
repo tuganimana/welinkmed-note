@@ -346,5 +346,16 @@ class Api {
       console.log(`failed update picture: ${error}`)
     }
   }
+
+  // DUE MEDICATION
+  public async dueMedication (addedby:string) {
+    try {
+      const res = await this.axiosConnect(axios.get, backEndPoints.CREATE_MEDICATION, {}, addedby)
+      return res
+    } catch (error) {
+      console.log(`failed update picture: ${error}`)
+    }
+  }
 }
+
 export const useApi = new Api()

@@ -1,14 +1,11 @@
 // eslint-disable-next-line no-use-before-define
-import React, { useState } from 'react'
-import { Tabs, Select } from 'antd'
+import React, { useState, useEffect } from 'react'
+import { Tabs, Select, Spin } from 'antd'
 import Sig from './editsig'
 import { useApi } from '../../../utils/api'
-import { MedicationType } from '../../../utils/types'
-import { useHistory } from 'react-router-dom'
-import { useForm } from 'react-hook-form'
-
-import { frontEndPoints } from '../../../utils/enums'
-import Alert from '../../alerts'
+// import { MedicationType } from '../../../utils/types'
+// import { useHistory } from 'react-router-dom'
+import { welinkTokens } from '../../../utils/enums'
 const { TabPane } = Tabs
 const { Option } = Select
 
@@ -20,10 +17,6 @@ export default function Medicationdue () {
   for (let i = 10; i < 36; i++) {
     children.push(<Option value={i.toString(36) + i} key={i.toString(36) + i}>{i.toString(36) + i}</Option>)
   }
-
-  function handleChange (value:any) {
-    console.log(`selected ${value}`)
-  }
   const recent = [
     {
       nameMedication: 'parastemol',
@@ -34,27 +27,29 @@ export default function Medicationdue () {
       endDate: '17/12/2001'
     }
   ]
-  const history = useHistory()
-  const { register, handleSubmit, formState: { errors } } = useForm<MedicationType>()
+  // const history = useHistory()
+
   const [loading, setLoading] = useState(false)
   const [errorMessage, setErrormessage] = useState('')
-  const addMedication = async (data:any) => {
+  const [medication, setMedication] = useState([])
+  const userid = localStorage.getItem(welinkTokens.userID)
+
+  useEffect(() => {
     setLoading(true)
-    const medResponse = await useApi.medicationRequest(data.NameMedication, data.Dosage, data.MedicationType, data.StartDate, data.EndDate)
-    const mymedication = medResponse?.token || 'undefined'
-    console.log(medResponse)
-    if (mymedication === 'undefined') {
-      setErrormessage(medResponse.messages)
-      setLoading(false)
-    } else {
-      setTimeout(() => {
+    useApi.dueMedication(`/${userid}`).then((res) => {
+      if (res) {
         setLoading(false)
-        history.push(frontEndPoints.MEDICATION)
-        setErrormessage(medResponse.message)
-      }, 2000)
-    }
-    //
-  }
+        setMedication(res.data)
+      }
+      setLoading(false)
+    })
+      .catch((error) => {
+        console.log(`${error}`)
+        setErrormessage(error.message)
+      })
+  }, [])
+  console.log(errorMessage)
+  if (loading) return (<><div className='justify-center mt-64 mx-auto items-center text-center'><Spin tip='Fetching.....'/></div></>)
   return (
     <>
     <div className="px-2 py-2">
@@ -63,57 +58,18 @@ export default function Medicationdue () {
     <div className="mx-4">
     <Tabs defaultActiveKey="1" onChange={callback}>
     <TabPane tab="Medication Due" key="1">
-    <Alert message={errorMessage}/>
-      <form onSubmit={ handleSubmit((data) => { addMedication(data) })}>
-    <div className="p-4 mb-14 bg-white rounded-xl shadows-xl mx-4">
-    <div className="grid md:grid-cols-2 gap-4">
-          <div className="p-2">
-            <label className="text-md">Name of Medication</label>
-            <input type="text" {...register('NameMedication', { required: 'This field is required' })} className="w-full p-2 border"/>
-            <span className="text-red-600 text-xs">{errors.NameMedication && errors.NameMedication.message}</span>
-          </div>
-          <div className="p-2">
-            <label>Types of Medication (Optional)</label>
-            <select {...register('MedicationType', { required: false })} className="w-full p-2 borderl">
-            <option value="select">Select here</option>
-              <option value="injection">Injection</option>
-              <option value="tablets">Tablets</option>
-            </select>
-          </div>
-          <div className="p-2">
-            <label>Dosage ( Required)</label>
-          <input type="text" {...register('Dosage', { required: 'This field is required' })} className="w-full p-2 border"/>
-          <span className="text-red-600 text-xs">{errors.Dosage && errors.Dosage.message}</span>
-          </div>
-        <div className="p-2">
-          <label>Physician( Required)</label>
-          <Select
-            mode="multiple"
-            allowClear
-            style={{ width: '100%' }}
-            placeholder="Please select"
-            defaultValue={['Doctor Seth']}
-            onChange={handleChange}
-          >
-            {children}
-          </Select>
-        </div>
-          <div className="p-2">
-            <label>Start Date </label>
-            <input type="date" {...register('StartDate', { required: 'This field is required' })} className="w-full p-2 border"/>
-            <span className="text-red-600 text-xs">{errors.StartDate && errors.StartDate.message}</span>
-          </div>
-          <div className="p-2">
-            <label>End Date</label>
-            <input type="date" {...register('EndDate', { required: 'This field is required' })} className="w-full p-2 border"/>
-            <span className="text-red-600 text-xs">{errors.EndDate && errors.EndDate.message}</span>
-          </div>
-          <div className="mb-4">
-          {loading ? <span>Sending.....</span> : <input type="submit" value="SEND" className="bg-red-400 cursor-pointer appearance-none  rounded-full w-full py-2 px-4 ml-32 font-medium text-gray-600 leading-tight focus:outline-none hover:bg-green-400 focus:border-green-500" />}
-          </div>
-        </div>
+      <div className="p-4 mb-14 bg-white rounded-xl shadows-xl mx-4">
+         <div className="grid md:grid-cols-4 gap-3">
+          {medication.map((items, index) => {
+            return (
+              <div key={index} className="p-2 rounded-3xl shadow-xl">
+                 <p>Welcome</p>
+              </div>
+            )
+          })}
+
+         </div>
       </div>
-      </form>
     </TabPane>
     <TabPane tab="Add Sig" key="2">
     <div>
