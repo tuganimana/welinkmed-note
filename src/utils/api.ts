@@ -5,12 +5,13 @@ const axios = require('axios').default
 class Api {
   public async axiosConnect (method:any, endpoint:backEndPoints, body?:object, postid?:string) {
     const Authorization = localStorage.getItem(welinkTokens.userToken)
+    console.log(Authorization)
     const urlPath = apiBaseUrl + endpoint + postid
     const headers = {
       headers: {
         'Content-Type': 'application/json',
         Accept: 'application/json',
-        Authorization: `Bearer ${Authorization}`
+        Authorization: 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImluZm9Ad2VsaW5rLmNvIiwiZmlyc3ROYW1lIjoiV2VsaW5rIGxsYyIsImxhc3ROYW1lIjoiR3JvdXAiLCJpZCI6IjMxYjE3N2UxLWNmN2ItNGVkNy1iZjk5LTA2YTA2NDU0ZmIwNSIsImFjY291bnRUeXBlIjoiUm9vdCIsImlhdCI6MTYzMzYxNzI5OCwiZXhwIjoxNjMzNzAzNjk4fQ.K4-vFwWYhCkPTn8UZ3UvVQ6PO_HS1cDqs2cs3xXuZIA'
       }
     }
     try {
@@ -351,6 +352,16 @@ class Api {
   public async dueMedication (addedby:string) {
     try {
       const res = await this.axiosConnect(axios.get, backEndPoints.CREATE_MEDICATION, {}, addedby)
+      return res
+    } catch (error) {
+      console.log(`failed update picture: ${error}`)
+    }
+  }
+
+  // GET ALL USERS
+  public async getAllUser () {
+    try {
+      const res = await this.axiosConnect(axios.get, backEndPoints.REGISTER, {}, '')
       return res
     } catch (error) {
       console.log(`failed update picture: ${error}`)

@@ -6,6 +6,7 @@ export enum frontEndPoints {
     LOGIN='/signin',
     CREATE_USER='/urser-add',
     USER_MAINTENANCE='/user-maintenance',
+    ROOT_MAINTENANCE='/root-maintenance',
     ORDER='/order-detail',
     MEDICATION='/medication-due',
     ADDCLIENT='/addclient',

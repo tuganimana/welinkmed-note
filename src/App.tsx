@@ -23,6 +23,9 @@ import ClientWelcome from './components/dashboard/clients/clientwelcome'
 import NotFound from './components/dashboard/404'
 import Editresident from './components/dashboard/admin/editresident'
 import Addclient from './components/dashboard/clients/addclient'
+import WelcomeRoot from './components/dashboard/welcomeroot'
+import DashboardRoot from './components/dashboard/rootuser/navbar'
+import UserMaintenanceRoot from './components/dashboard/rootuser/usermaintenance'
 function App () {
   AOS.init()
   return (
@@ -40,6 +43,18 @@ function App () {
             <Welcome/>
           </Dashboard>
         </Route>
+  {/* ROOT */}
+        <Route path="/root-dashboard">
+          <DashboardRoot>
+            <WelcomeRoot/>
+          </DashboardRoot>
+        </Route>
+        <Route path="/root-maintenance">
+          <DashboardRoot>
+          <UserMaintenanceRoot/>
+          </DashboardRoot>
+        </Route>
+  {/* END ROOT */}
         <Route path="/add-resident">
           <Dashboard>
           <Addresident/>
