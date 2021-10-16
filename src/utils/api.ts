@@ -5,17 +5,17 @@ const axios = require('axios').default
 class Api {
   public async axiosConnect (method:any, endpoint:backEndPoints, body?:object, postid?:string) {
     const Authorization = localStorage.getItem(welinkTokens.userToken)
-    console.log(Authorization)
     const urlPath = apiBaseUrl + endpoint + postid
     const headers = {
       headers: {
-        'Content-Type': 'application/json',
+        'Access-Control-Allow-Origin': '*',
+        'Content-Type': 'application/json;charset=UTF-8',
         Accept: 'application/json',
-        Authorization: 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImluZm9Ad2VsaW5rLmNvIiwiZmlyc3ROYW1lIjoiV2VsaW5rIGxsYyIsImxhc3ROYW1lIjoiR3JvdXAiLCJpZCI6IjMxYjE3N2UxLWNmN2ItNGVkNy1iZjk5LTA2YTA2NDU0ZmIwNSIsImFjY291bnRUeXBlIjoiUm9vdCIsImlhdCI6MTYzMzYxNzI5OCwiZXhwIjoxNjMzNzAzNjk4fQ.K4-vFwWYhCkPTn8UZ3UvVQ6PO_HS1cDqs2cs3xXuZIA'
+        Authorization: `Bearer ${Authorization}`
       }
     }
     try {
-      return method(urlPath, body, headers)
+      return method(urlPath, headers, body)
         .then((res:any) => {
           return res.data
         })
@@ -33,14 +33,39 @@ class Api {
     }
   }
 
+  public async apiConnect (method:any, endpoint:backEndPoints, body?:object) {
+    const Authorization = localStorage.getItem(welinkTokens.userToken)
+    const urlPath = apiBaseUrl + endpoint
+    const headers = {
+      headers: {
+        'Content-Type': 'application/json',
+        Accept: 'application/json',
+        Authorization: `Bearer ${Authorization}`
+      }
+    }
+    try {
+      return axios({
+        method: method,
+        url: urlPath,
+        body: body,
+        headers: headers
+      })
+    } catch (err) {
+      throw new Error(`Error-${err.message}`)
+    }
+  }
+
   //    let's call  api here
   public async loginApiRequest (email:string, password:string) {
+    const data = {
+      email: email,
+      password: password
+    }
     try {
-      const res = await this.axiosConnect(axios.post, backEndPoints.LOGIN, { email, password }, '')
+      const res = await this.apiConnect('POST', backEndPoints.LOGIN, data)
       return res
     } catch (error) {
-      console.log(`could not Login due: ${error}`)
-      // throw new Error(`Could not Login due to ${error.message}`)
+      throw new Error(`Could not Login due to ${error.message}`)
     }
   }
 

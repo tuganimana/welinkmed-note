@@ -32,10 +32,11 @@ export default function Signin () {
     setLoading(true)
     try {
       const api = await useApi.loginApiRequest(data.username, data.password)
-      const myaccount = api?.token || 'undefined'
+      console.log(api.data)
+      const myaccount = api.data?.token || 'undefined'
       const jwt = require('jsonwebtoken')
       if (myaccount === 'undefined') {
-        setErrormessage(api.messages)
+        setErrormessage(api.data.messages)
         setLoading(false)
       } else {
         const decoded = jwt.decode(myaccount)
@@ -54,13 +55,14 @@ export default function Signin () {
             setErrormessage(api.message)
           } else if (accountType === accountCategory.ROOT) {
             history.push(frontEndPoints.ROOT)
-            setErrormessage(api.message)
+            setErrormessage(api.data.message)
           }
         }, 2000)
       }
     } catch (error) {
+      console.log(error)
       setLoading(false)
-      setErrormessage('Account signin fails')
+      setErrormessage('Account login fails')
     }
     //
   }
