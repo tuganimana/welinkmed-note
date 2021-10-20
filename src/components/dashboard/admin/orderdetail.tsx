@@ -4,8 +4,9 @@ import { Modal, Tabs, Select } from 'antd'
 // import { MinusCircleOutlined, PlusOutlined } from '@ant-design/icons'
 import { useForm } from 'react-hook-form'
 import { OrderType } from '../../../utils/types'
-import { welinkTokens } from '../../../utils/enums'
+import { backEndPoints, welinkTokens } from '../../../utils/enums'
 import { useApi } from '../../../utils/api'
+import { api } from '../../../utils/apiRequest'
 import Sig from './editsig'
 import Allorders from './orderall'
 import Alert from '../../alerts'
@@ -61,48 +62,49 @@ export default function Orderdetail () {
     setDates(value)
   }
   const { register, handleSubmit, formState: { errors } } = useForm<OrderType>()
-  const userId = localStorage.getItem(welinkTokens.userID) || ''
+  const user = localStorage.getItem(welinkTokens.userID) || ''
   const CreateOrder = async (data:any) => {
     setLoading(true)
+    const response = await api.post(backEndPoints.CREATE_ORDER, {
+      routineMedOrder: data.routineMedOrder.toString(),
+      orderType: data.orderType.toString(),
+      description: data.description.toString(),
+      generic: data.generic.toString(),
+      physicians: Physician.toString(),
+      orderStatus: data.orderStatus.toString(),
+      lastRefill: data.lastRefill.toString(),
+      rxNumber: data.rxNumber.toString(),
+      ndc: data.ndc.toString(),
+      externalId: data.externalId.toString(),
+      previousId: data.previousId.toString(),
+      barcode: data.barcode.toString(),
+      administrationType: data.administrationType.toString(),
+      startDate: data.startDate.toString(),
+      endDate: data.endDate.toString(),
+      programAdminster: program.toString(),
+      mponth: month.toString(),
+      week: week.toString(),
+      dates: dates.toString(),
+      dose: data.dose.toString(),
+      dosePerday: data.dosePerday.toString(),
+      morningTimes: data.morningTimes.toString(),
+      noonTimes: data.noonTimes.toString(),
+      nightTimes: data.nightTimes.toString(),
+      timesPerday: data.timesPerday.toString(),
+      addedby: user,
+      organization: user.toString(),
+      residentid: residentid.toString()
+    })
     try {
-      const response = await useApi.OrderCreate(
-        data.routineMedOrder,
-        data.orderType,
-        data.description,
-        data.generic,
-        Physician,
-        data.orderStatus,
-        data.lastRefill,
-        data.rxNumber,
-        data.ndc,
-        data.externalId,
-        data.previousId,
-        data.barcode,
-        data.administrationType,
-        data.startDate,
-        data.endDate,
-        program,
-        month,
-        week,
-        dates,
-        data.dose,
-        data.dosePerday,
-        data.morningTimes,
-        data.noonTimes,
-        data.nightTimes,
-        data.timesPerday,
-        userId,
-        residentid
-      )
-      console.log(response)
-      if (response === 'undefined') {
-        setMessaging(response.message)
+      if (response.status === 201) {
+        setMessaging(response.data.message)
         setLoading(false)
+      } else {
+        setTimeout(() => {
+          setMessaging(response.data.message)
+          setLoading(false)
+        }, 2000)
       }
-      setTimeout(() => {
-        setMessaging(response.message)
-        setLoading(false)
-      }, 2000)
     } catch (error) {
       setMessaging('new order can not be added')
       setLoading(false)
@@ -132,7 +134,7 @@ export default function Orderdetail () {
               <option>Select here</option>
               <option>Medication</option>
               <option>Non-Facility Administrede</option>
-              <option>Oter</option>
+              <option>Other</option>
               <option>Treatement</option>
               <option>Resident Co-Sign</option>
             </select>
@@ -144,7 +146,7 @@ export default function Orderdetail () {
           </div>
           <div className="p-2">
             <label>Generic (Optional)</label>
-            <input type="text" {...register('generic', { required: '* This field is required' })} className="w-full p-2 border"/>
+            <input type="text" {...register('generic')} className="w-full p-2 border"/>
             <span className="text-red-600 text-xs">{errors.generic && errors.generic.message}</span>
           </div>
           <div className="p-2">
@@ -341,7 +343,10 @@ export default function Orderdetail () {
           </Modal>
           </div>
           <div className="p-2">
-          {loading ? <span className='px-8 bg-green-400 cursor-pointer appearance-none  rounded-full w-full md:w-64 mt-8 py-2 font-medium text-gray-600 leading-tight focus:outline-none hover:bg-green-400 focus:border-green-500'>Adding.....</span> : <input type="submit" value="Add Order" className="bg-green-400 cursor-pointer appearance-none  rounded-full w-full md:w-64 mt-8 py-2 font-medium text-gray-600 leading-tight focus:outline-none hover:bg-green-400 focus:border-green-500" />}
+          {loading
+            ? <button type="submit" className='px-8 bg-green-400 cursor-pointer appearance-none  rounded-full w-full md:w-64 mt-8 py-2 font-medium text-gray-600 leading-tight focus:outline-none hover:bg-green-400 focus:border-green-500'>
+            Adding.....</button>
+            : <input type="submit" value="Add Order" className="bg-green-400 cursor-pointer appearance-none  rounded-full w-full md:w-64 mt-8 py-2 font-medium text-gray-600 leading-tight focus:outline-none hover:bg-green-400 focus:border-green-500" />}
           </div>
       </div>
       </form>

@@ -41,7 +41,7 @@ export default function Residents () {
       return newdata.firstName.toLowerCase().match(data.search.toLowerCase())
     }))
   }
-  console.log(search)
+
   return (<>
     <form onSubmit={ handleSubmit((data) => handleSearch(data))}>
       <div className="flex flex-wrap">

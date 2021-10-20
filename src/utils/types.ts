@@ -1,6 +1,6 @@
 /* eslint-disable no-unused-vars */
 export interface LoginType {
-  username:string;
+  email:string;
   password:string;
 }
 export interface RegisterType {
@@ -86,6 +86,7 @@ export interface OrderType {
   noonTimes:string;
   nightTimes:string;
   allergies?:string;
+  addedby:string;
   residentid:string;
 }
 

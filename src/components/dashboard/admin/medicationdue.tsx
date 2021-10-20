@@ -2,10 +2,11 @@
 import React, { useState, useEffect } from 'react'
 import { Tabs, Select, Spin } from 'antd'
 import Sig from './editsig'
-import { useApi } from '../../../utils/api'
+import { api } from '../../../utils/apiRequest'
+
 // import { MedicationType } from '../../../utils/types'
 // import { useHistory } from 'react-router-dom'
-import { welinkTokens } from '../../../utils/enums'
+import { welinkTokens, backEndPoints } from '../../../utils/enums'
 const { TabPane } = Tabs
 const { Option } = Select
 
@@ -30,43 +31,52 @@ export default function Medicationdue () {
   // const history = useHistory()
 
   const [loading, setLoading] = useState(false)
-  const [errorMessage, setErrormessage] = useState('')
   const [medication, setMedication] = useState([])
-  const userid = localStorage.getItem(welinkTokens.userID)
 
   useEffect(() => {
     setLoading(true)
-    useApi.dueMedication(`/${userid}`).then((res) => {
-      if (res) {
+    const getData = async () => {
+      const userId = localStorage.getItem(welinkTokens.userID) || null
+      const urlPath = `${backEndPoints.EXPIRED_ORDERS}/${userId}`
+      const response = await api.get(urlPath)
+      if (response.status === 201) {
         setLoading(false)
-        setMedication(res.data)
+        setMedication(response.data.data)
       }
-      setLoading(false)
-    })
-      .catch((error) => {
-        console.log(`${error}`)
-        setErrormessage(error.message)
-      })
+    }
+    getData()
   }, [])
-  console.log(errorMessage)
+
   if (loading) return (<><div className='justify-center mt-64 mx-auto items-center text-center'><Spin tip='Fetching.....'/></div></>)
   return (
     <>
     <div className="px-2 py-2">
-    <h5 className="font-semibold text-blue-400 mt-4 text-2xl">Medication Due<span className="text-sm font-normal text-gray-400"> / Castro, Jennifer</span></h5>
+    <h5 className="font-semibold text-blue-400 mt-4 text-2xl">Expired orders<span className="text-sm font-normal text-gray-400"> / Castro, Jennifer</span></h5>
        </div>
     <div className="mx-4">
     <Tabs defaultActiveKey="1" onChange={callback}>
     <TabPane tab="Medication Due" key="1">
       <div className="p-4 mb-14 bg-white rounded-xl shadows-xl mx-4">
-         <div className="grid md:grid-cols-4 gap-3">
-          {medication.map((items, index) => {
-            return (
+         <div className="grid md:grid-cols-3 gap-3">
+          {medication.length > 0
+            ? medication.map((items:any, index) => {
+              console.log(items.residentid.firstName)
+              return (
               <div key={index} className="p-2 rounded-3xl shadow-xl">
-                 <p>Welcome</p>
+                 <div className="flex flex-wrap rounded-r-3xl ">
+                   <div className="bg-green-200 flex justify-center p-8 w-1/3">
+                   <img className="h-full round" src="https://img.icons8.com/external-kiranshastry-lineal-color-kiranshastry/50/000000/external-medication-medical-kiranshastry-lineal-color-kiranshastry.png"/>
+                     </div>
+<div className="w-2/3">
+  <p className="p-2">{items.residentid.firstName} {items.residentid.lastName}</p>
+</div>
+                   </div>
               </div>
-            )
-          })}
+              )
+            })
+            : <div>
+              No data found!
+              </div>}
 
          </div>
       </div>

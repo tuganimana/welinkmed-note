@@ -3,7 +3,7 @@ import { backEndPoints, welinkTokens } from './enums'
 const axios = require('axios').default
 
 class Api {
-  public async axiosConnect (method:any, endpoint:backEndPoints, body?:object, postid?:string) {
+  private async axiosConnect (method:any, endpoint:backEndPoints, body?:object, postid?:string) {
     const Authorization = localStorage.getItem(welinkTokens.userToken)
     const urlPath = apiBaseUrl + endpoint + postid
     const headers = {
@@ -33,22 +33,52 @@ class Api {
     }
   }
 
-  public async apiConnect (method:any, endpoint:backEndPoints, body?:object) {
+  private async connect (endpoint: backEndPoints, method: any, body?: object) {
     const Authorization = localStorage.getItem(welinkTokens.userToken)
+    const url = apiBaseUrl + endpoint
+    const headers = {
+      'Content-Type': 'application/json;charset=UTF-8',
+      'Access-Control-Allow-Origin': '*',
+      Accept: 'application/json',
+      Authorization: `Bearer ${Authorization}`
+    }
+    try {
+      const request = await axios({
+        method: method,
+        url: url,
+        data: body,
+        headers: headers
+      })
+      if (request.status.toString().startsWith('4') || request.status.toString().startsWith('5')) {
+        console.error(` error returned by the API: ${request.statusText}`)
+        throw new Error(request.statusText)
+      }
+      return request.data
+    } catch (error) {
+      console.log(`There was an error connecting to the API: ${error.message}`)
+      throw new Error(error.message)
+    }
+  }
+
+  public async apiConnect (method:any, endpoint:backEndPoints, body?:object) {
+    const token = localStorage.getItem(welinkTokens.userToken)
     const urlPath = apiBaseUrl + endpoint
     const headers = {
       headers: {
-        'Content-Type': 'application/json',
+        'Access-Control-Allow-Origin': '*',
+        'Content-Type': 'application/json;charset=UTF-8',
         Accept: 'application/json',
-        Authorization: `Bearer ${Authorization}`
+        // eslint-disable-next-line quote-props
+        Authorization: `Bearer ${token}`
       }
     }
     try {
       return axios({
         method: method,
         url: urlPath,
-        body: body,
-        headers: headers
+        headers: headers,
+        data: body,
+        responseType: 'json'
       })
     } catch (err) {
       throw new Error(`Error-${err.message}`)
@@ -58,8 +88,8 @@ class Api {
   //    let's call  api here
   public async loginApiRequest (email:string, password:string) {
     const data = {
-      email: email,
-      password: password
+      email: email.toString(),
+      password: password.toString()
     }
     try {
       const res = await this.apiConnect('POST', backEndPoints.LOGIN, data)
@@ -93,7 +123,7 @@ class Api {
     admittingPhysician: string,
     userId?:string) {
     try {
-      const res = await this.axiosConnect(axios.post, backEndPoints.CREATE_RESIDENT, {
+      const res = await this.apiConnect('POST', backEndPoints.CREATE_RESIDENT, {
         firstName,
         lastName,
         residentSate,
@@ -105,7 +135,7 @@ class Api {
         additionalPhysician,
         admittingPhysician,
         userId
-      }, '')
+      })
       return res
     } catch (error) {
       console.log(`failed to add medication: ${error}`)
@@ -126,7 +156,7 @@ class Api {
     userId?:string,
     parameter?:string) {
     try {
-      const res = await this.axiosConnect(axios.put, backEndPoints.CREATE_RESIDENT, {
+      const res = await this.apiConnect('PUT', backEndPoints.CREATE_RESIDENT, {
         firstName,
         lastName,
         residentSate,
@@ -138,7 +168,7 @@ class Api {
         additionalPhysician,
         admittingPhysician,
         userId
-      }, parameter)
+      })
       return res
     } catch (error) {
       console.log(`failed to update: ${error}`)
@@ -169,7 +199,7 @@ class Api {
       const res = await this.axiosConnect(axios.get, backEndPoints.CREATE_RESIDENT, {}, '')
       return res
     } catch (err) {
-      console.log(`failed to fetch : ${err.message}`)
+      console.log(`failed to fetch : ${JSON.stringify(err.response)}`)
     }
   }
 
@@ -259,7 +289,7 @@ class Api {
     organization?:string,
     residentid?:string) {
     try {
-      const res = await this.axiosConnect(axios.post, backEndPoints.CREATE_ORDER, {
+      const res = await this.connect(backEndPoints.CREATE_ORDER, 'POST', {
         routineMedOrder,
         orderType,
         description,
@@ -288,7 +318,7 @@ class Api {
         addedby,
         organization,
         residentid
-      }, '')
+      })
       return res
     } catch (error) {
       console.log(`failed to add new Order: ${error}`)
@@ -357,7 +387,7 @@ class Api {
 
   public async allclientRequest () {
     try {
-      const res = await this.axiosConnect(axios.get, backEndPoints.ADDCLIENT, {}, '')
+      const res = await this.axiosConnect('GET', backEndPoints.ADDCLIENT, {}, '')
       return res
     } catch (err) {
       console.log(`failed to fetch : ${err.message}`)
@@ -376,10 +406,10 @@ class Api {
   // DUE MEDICATION
   public async dueMedication (addedby:string) {
     try {
-      const res = await this.axiosConnect(axios.get, backEndPoints.CREATE_MEDICATION, {}, addedby)
+      const res = await this.axiosConnect(axios.get, backEndPoints.EXPIRED_ORDERS, {}, addedby)
       return res
     } catch (error) {
-      console.log(`failed update picture: ${error}`)
+      console.log(`failed to fetch expired orders: ${error.message}`)
     }
   }
 

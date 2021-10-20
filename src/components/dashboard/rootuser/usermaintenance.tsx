@@ -219,22 +219,20 @@ export default function UserMaintenanceRoot () {
         <th className="px-4 py-3">Profile</th>
         <th className="px-4 py-3">First Name</th>
         <th className="px-4 py-3">Last Name</th>
-        <th className="px-4 py-3">Gender</th>
-        <th className="px-4 py-3">Dob</th>
-        <th className="px-4 py-3">Phone</th>
+        <th className="px-4 py-3">Organization</th>
+        <th className="px-4 py-3">Category</th>
         <th className="px-4 py-3">Email</th>
         <th className="px-4 py-3">Action</th>
       </tr>
       {
     userData.map((items:any, index) => (
     <tr key={index} className="bg-gray-100 hover:bg-gray-200 border-b border-blue-200">
-        <td className="px-4 py-3">{items.id}</td>
+        <td className="px-4 py-3">{index + 1}</td>
         <td className="px-4 py-3">{items.profile}</td>
-        <td className="px-4 py-3">{items.firstname}</td>
-        <td className="px-4 py-3">{items.lastname}</td>
-        <td className="px-4 py-3">{items.gender}</td>
-        <td className="px-4 py-3">{items.dob}</td>
-        <td className="px-4 py-3">{items.phone}</td>
+        <td className="px-4 py-3">{items.firstName}</td>
+        <td className="px-4 py-3">{items.lastName}</td>
+        <td className="px-4 py-3">{items.organization}</td>
+        <td className="px-4 py-3">{items.category}</td>
         <td className="px-4 py-3">{items.email}</td>
         <td className="px-4 py-3">
           <button className="bg-green-400 text-white hover:bg-green-500 p-2 rounded-lg m-1">View All</button>

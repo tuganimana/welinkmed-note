@@ -31,8 +31,7 @@ export default function Signin () {
   const handleLogin = async (data:LoginType) => {
     setLoading(true)
     try {
-      const api = await useApi.loginApiRequest(data.username, data.password)
-      console.log(api.data)
+      const api = await useApi.loginApiRequest(data.email, data.password)
       const myaccount = api.data?.token || 'undefined'
       const jwt = require('jsonwebtoken')
       if (myaccount === 'undefined') {
@@ -42,7 +41,7 @@ export default function Signin () {
         const decoded = jwt.decode(myaccount)
         const { accountType, id } = decoded
 
-        localStorage.setItem(welinkTokens.userToken, api.token)
+        localStorage.setItem(welinkTokens.userToken, api.data.token)
         localStorage.setItem(welinkTokens.accountType, accountType)
         localStorage.setItem(welinkTokens.userID, id)
         setTimeout(() => {
@@ -83,9 +82,9 @@ export default function Signin () {
                           <Alert message={errorMessage} success={false}/>
                             <form onSubmit={ handleSubmit((data) => { handleLogin(data) })}>
                                 <div className="mb-2">
-                                   <input type="email" {...register('username', { required: '* This field is required' })} placeholder="User Name or Email" className="bg-gray-100 appearance-none border-2 border-green-500 rounded-full w-full py-2 px-4 text-gray-900 leading-tight focus:outline-none focus:bg-white focus:border-green-500" />
+                                   <input type="email" {...register('email', { required: '* This field is required' })} placeholder="User Name or Email" className="bg-gray-100 appearance-none border-2 border-green-500 rounded-full w-full py-2 px-4 text-gray-900 leading-tight focus:outline-none focus:bg-white focus:border-green-500" />
                                 </div>
-                                  <span className="text-red-600 text-xs">{errors.username && errors.username.message}</span>
+                                  <span className="text-red-600 text-xs">{errors.email && errors.email.message}</span>
                                 <div className="mb-2">
                                    <input type="password" {...register('password', { required: '* This field is required', minLength: { value: 6, message: 'The minimum character is 6' } })} placeholder="Password" className="bg-gray-100 appearance-none border-2 border-green-500 rounded-full w-full py-2 px-4 text-gray-900 leading-tight focus:outline-none focus:bg-white focus:border-green-500" />
                                 </div>

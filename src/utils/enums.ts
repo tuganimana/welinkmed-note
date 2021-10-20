@@ -27,7 +27,8 @@ export enum backEndPoints {
     CREATE_ORDER='/api/createorder',
     ADDCLIENT='/api/Addclient',
     ROUTINE_ADMIN='/api/routineadmin',
-    CREATE_ADMINISTER= '/api/administer'
+    CREATE_ADMINISTER= '/api/administer',
+    EXPIRED_ORDERS='/api/expiredorder'
 
   }
 
