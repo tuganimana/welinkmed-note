@@ -28,8 +28,8 @@ export enum backEndPoints {
     ADDCLIENT='/api/Addclient',
     ROUTINE_ADMIN='/api/routineadmin',
     CREATE_ADMINISTER= '/api/administer',
+    DUE_ORDERS='api/checkmedics',
     EXPIRED_ORDERS='/api/expiredorder'
-
   }
 
 export enum httpMethod{
