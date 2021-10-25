@@ -9,6 +9,7 @@ export default function Sidebar () {
   const history = useHistory()
   const [small, setSmall] = useState(false)
   const [expired, setExpired] = useState(0)
+  const [due, setDue] = useState(0)
   const handleClick = () => {
     setSmall(true)
   }
@@ -31,7 +32,7 @@ export default function Sidebar () {
       const userId = localStorage.getItem(welinkTokens.userID) || null
       const urlPath = `${backEndPoints.DUE_ORDERS}/${userId}`
       const response = await api.get(urlPath)
-      console.log(response)
+      setDue(response.data.data.length)
     }
     getData()
     getAllOrder()
@@ -61,8 +62,8 @@ export default function Sidebar () {
               <i className="fa fa-bar-chart mr-2 text-black bg-blue-200 rounded-full p-3"></i>Resident Due </a>
               <a href="/medication-due" className="block p-2 mt-2 text-md font-bold text-gray-600 border-blue-500 rounded-lg hover:shadow-lg bg-blue-300 hover:bg-blue-200 hover:bg-red-200 focus:bg-red-200 focus:text-white hover:text-white text-gray-200
             hover:text-gray-900 focus:text-gray-900 hover:bg-gray-200 focus:bg-gray-200 focus:outline-none focus:shadow-outline">
-              <i className="fa fa-hospital-o  mr-2 text-black bg-yellow-200 rounded-full p-3"></i>Due  Orders<span className="float-right bg-red-200 rounded-full pr-2 pl-2">{expired}</span></a>
-            <a href="/dashboard" className="block p-2 mt-2 text-md font-bold text-gray-600 border-blue-500 mt-4 rounded-lg  hover:shadow-lg bg-blue-300  hover:bg-blue-200
+              <i className="fa fa-hospital-o  mr-2 text-black bg-yellow-200 rounded-full p-3"></i>Due  Orders<span className="float-right bg-red-200 rounded-full pr-2 pl-2">{due}</span></a>
+            <a href={frontEndPoints.DUE_ORDERS} className="block p-2 mt-2 text-md font-bold text-gray-600 border-blue-500 mt-4 rounded-lg  hover:shadow-lg bg-blue-300  hover:bg-blue-200
             focus:bg-red-200 focus:text-white hover:text-white text-gray-200 hover:text-gray-900 focus:text-gray-900 hover:bg-gray-200 focus:bg-gray-200 focus:outline-none focus:shadow-outline">
               <i className="fa fa-medkit  mr-2 text-black bg-red-400 rounded-full p-3"></i>Missed Orders <span className="float-right bg-yellow-200 rounded-full pr-2 pl-2">3</span> </a>
             <a href="/medication-due" className="block p-2 mt-2 text-md font-bold text-gray-600 border-blue-500 rounded-lg hover:shadow-lg bg-blue-300 hover:bg-blue-200 hover:bg-red-200 focus:bg-red-200 focus:text-white hover:text-white text-gray-200

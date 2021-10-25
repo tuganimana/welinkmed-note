@@ -26,6 +26,7 @@ import Addclient from './components/dashboard/clients/addclient'
 import WelcomeRoot from './components/dashboard/welcomeroot'
 import DashboardRoot from './components/dashboard/rootuser/navbar'
 import UserMaintenanceRoot from './components/dashboard/rootuser/usermaintenance'
+import DueOrder from './components/dashboard/admin/dueorder'
 function App () {
   AOS.init()
   return (
@@ -73,6 +74,11 @@ function App () {
         <Route path="/medication-due">
           <Dashboard>
             <Medicationdue/>
+          </Dashboard>
+        </Route>
+        <Route path="/due-orders">
+          <Dashboard>
+            <DueOrder/>
           </Dashboard>
         </Route>
         <Route path="/resident-infos/:residentid">
