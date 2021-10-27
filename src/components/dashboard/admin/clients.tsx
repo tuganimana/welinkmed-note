@@ -2,30 +2,29 @@
 import React, { useEffect, useState } from 'react'
 import { Spin, Pagination } from 'antd'
 import ruser from '../../../images/users.png'
-import { useApi } from '../../../utils/api'
-import { frontEndPoints } from '../../../utils/enums'
+import { backEndPoints, frontEndPoints } from '../../../utils/enums'
 import { useForm } from 'react-hook-form'
 import { SearchType } from '../../../utils/types'
 import { apiBaseUrl } from '../../../utils/env'
+import { api } from '../../../utils/apiRequest'
 export default function Residents () {
   const [clients, setRecents] = useState([])
   const [loading, setLoading] = useState(false)
   const [newclient, setCurrentClients] = useState(1)
   const [postsPerPage] = useState(12)
   const [search, setSearch] = useState('')
+  console.log(search)
   const { register, handleSubmit, formState: { errors } } = useForm<SearchType>()
   useEffect(() => {
     setLoading(true)
-
-    useApi.allResidentRequest().then((response) => {
-      if (response) {
+    const getResident = async () => {
+      const response = await api.get(`${backEndPoints.CREATE_RESIDENT}`)
+      if (response.status === 201) {
         setLoading(false)
-        setRecents(response.data)
+        setRecents(response.data.data)
       }
-    })
-      .catch((error) => {
-        console.log(`${error}`)
-      })
+    }
+    getResident()
   }, [])
   const indexOfLastPage = newclient * postsPerPage
   const indexOfFirstPost = indexOfLastPage - postsPerPage
@@ -41,7 +40,6 @@ export default function Residents () {
       return newdata.firstName.toLowerCase().match(data.search.toLowerCase())
     }))
   }
-  console.log(search)
   return (<>
     <form onSubmit={ handleSubmit((data) => handleSearch(data))}>
       <div className="flex flex-wrap">

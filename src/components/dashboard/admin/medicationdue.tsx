@@ -53,7 +53,6 @@ export default function Medicationdue () {
          <div className="grid md:grid-cols-3 gap-3">
           {medication.length > 0
             ? medication.map((items:any, index) => {
-              console.log(items)
               return (
               <div key={index} className="p-2 rounded-3xl shadow-xl">
                  <div className="flex flex-wrap rounded-r-3xl ">
