@@ -7,9 +7,10 @@ import ruser from '../../../images/users.png'
 import pill from '../../../images/Pills.jpg'
 import pill1 from '../../../images/Pills1.jpg'
 import pill2 from '../../../images/Pills2.jpg'
-import { frontEndPoints } from '../../../utils/enums'
+import { frontEndPoints, welinkTokens, backEndPoints } from '../../../utils/enums'
 import { useApi } from '../../../utils/api'
 import { apiBaseUrl } from '../../../utils/env'
+import { api } from '../../../utils/apiRequest'
 const { TabPane } = Tabs
 export default function ViewResidents () {
   const { residentid } : any = useParams()
@@ -54,11 +55,39 @@ export default function ViewResidents () {
         console.log(`${error}`)
       })
   }, [])
+  // const [medical, setroutineMedOrder] = useState('')
+  // useEffect(() => {
+  //   useApi.checkMedics(`/${residentid}`)
+  //     .then((res:any) => {
+  //       if (res) {
+  //         setroutineMedOrder(res.data)
+  //       }
+  //     })
+  //     .catch((error) => {
+  //       console.log(`${error}`)
+  //     })
+  // }, [])
+  const [MedicalOrder, setMedicalOrder] = useState([])
+
+  useEffect(() => {
+    setLoading(true)
+    const getAllOrder = async () => {
+      const userId = localStorage.getItem(welinkTokens.userID) || null
+      const urlPath = `${backEndPoints.DUE_ORDERS}/${userId}`
+      const response = await api.get(urlPath)
+      console.log(response.status)
+      if (response.status === 200) {
+        setLoading(false)
+        setMedicalOrder(response.data.data)
+      }
+    }
+    getAllOrder()
+  }, [])
   const imagePath = `${apiBaseUrl}/${profile}`
-  const handleAdminister = async () => {
-    const response = await useApi.administerRequest('HD', 1, 'yywh-xs', 'wgg', '10:00')
-    console.log(response)
-  }
+  // const handleAdminister = async () => {
+  //   const response = await useApi.administerRequest('HD', 1, 'yywh-xs', 'wgg', '10:00')
+  //   console.log(response)
+  // }
   if (loading) return (<><div className='justify-center mt-64 mx-auto items-center text-center'><Spin tip='Fetching.....'/></div></>)
   return (
     <>
@@ -66,8 +95,7 @@ export default function ViewResidents () {
     <div className="px-2 py-2">
       <h5 className="font-semibold">Resident Information</h5>
     </div>
-
-               <div className="flex flex-wrap">
+      <div className="flex flex-wrap">
         <div className="w-full md:w-1/2 w-full p-1 shadow-md">
         <div className="bg-gray-100  rounded-xl flex flex-wrap p-1">
             <div className="w-full lg:w-1/2">
@@ -92,42 +120,54 @@ export default function ViewResidents () {
     <div className="mx-4">
     <Tabs defaultActiveKey="1" onChange={callback}>
     <TabPane tab="Administer" key="1">
-        <div className="flex flex-wrap md:w-3/4 p-1 bg-blue-100  border-blue-400 border-2 rounded-xl">
+        <div className="flex flex-wrap md:w-2/3 p-1 bg-blue-100  border-blue-400 border-2 rounded-xl">
             <div className="w-1/4  p-5 text-center align-center item-center">
                 <img src={pill} alt=""/>
             </div>
-            <div className="w-2/4 gap-1 grid">
-            <span className="font-bold text-lg text-gray-600">HYPDROXYNEZ PARM 25 MG CAP</span>
-            <span className="font-bold text-xs text-black-400">Tare 1 Capsulle by mount three times as need for ancety</span>
-            <span className="text-md"><span className="font-bold"><i className="fa fa-calendar  text-gray-400  rounded p-2"></i>Last Administed:</span> 14th july 2021 </span>
-            <span className="text-md"><span className="font-bold"><i className="fa fa-thumb-tack  text-gray-500  rounded p-2"></i>Last Quality:</span> 1 </span>
-            </div>
-            <div className="w-1/4 gap-1 grid">
-             <span className="font-bold text-lg text-gray-600">
-                 <button onClick={handleAdminister} className="bg-blue-400 w-full hover:bg-blue-500 text-white font-bold p-2 rounded-xl">
-                 Administer</button>
-             </span>
-             <span className="font-bold text-lg text-gray-600">
-                 <button onClick={() => setVisible(true)} className="bg-yellow-600 w-full hover:bg-yellow-500 text-white font-bold p-2 rounded-xl">
-                 Late Administer
-                 </button>
-                 <Modal
-                    title="Late To Administer"
-                    centered
-                    visible={visible}
-                    onOk={handleOk}
-                    confirmLoading={confirmLoading}
-                    onCancel={() => setVisible2(false)}
-                    width={700}
-                >
-                <div className="grid">
-                <div className="p-2">
-                    <label>Why do you late not Administer (*required)</label>
-                    <TextArea rows={4} />
-                </div>
+            <div className="w-3/4 gap-1 grid">
+            {
+              MedicalOrder.map((item:any, index) => {
+                return (
+                  <div key={index} className="p-3 flex flex-wrap md:w-4/4 border-b-2 border-blue-400">
+                    <div className="w-3/4 grid gap-1">
+                      <span className="font-bold text-lg text-gray-600">{item.routineMedOrder}</span>
+                      <span className="font-bold text-xs text-black-400">{item.description}</span>
+                      <span className="text-md"><span className="font-bold"><i className="fa fa-calendar  text-gray-400  rounded p-2"></i>Time Per Day:</span>{item.timesPerday}</span>
+                      <span className="text-md"><span className="font-bold"><i className="fa fa-thumb-tack  text-gray-500  rounded p-2"></i>Dose Per Day:</span> {item.dosePerday} </span>
+                      <span className="text-md"><span className="font-bold"><i className="fa fa-clock-o  text-gray-500  rounded p-2"></i></span><b>Morning:</b> {item.morningtimes} &nbsp;&nbsp; <b>Noon:</b> {item.noontimes} &nbsp;&nbsp; <b>Night:</b> {item.nighttimes}</span>
+                     </div>
+                    <div className="w-1/4">
+                      <span className="font-bold text-lg text-gray-600">
+                        <button className="bg-blue-400 w-full hover:bg-blue-500 text-white font-bold p-1 m-1 rounded-xl">
+                          Administer
+                        </button>
+                      </span>
+                      <span className="font-bold text-lg text-gray-600">
+                          <button onClick={() => setVisible(true)} className="bg-yellow-600 w-full hover:bg-yellow-500 text-white font-bold p-1 m-1 rounded-xl">
+                          Late Administer
+                          </button>
+                          <Modal
+                              title="Late To Administer"
+                              centered
+                              visible={visible}
+                              onOk={handleOk}
+                              confirmLoading={confirmLoading}
+                              onCancel={() => setVisible2(false)}
+                              width={700}
+                          >
+                          <div className="grid">
+                          <div className="p-2">
+                              <label>Why do you late not Administer (*required)</label>
+                              <TextArea rows={4} />
+                          </div>
+                              </div>
+                          </Modal>
+                      </span>
                     </div>
-                </Modal>
-             </span>
+                  </div>
+                )
+              })
+            }
             </div>
         </div>
     </TabPane>
