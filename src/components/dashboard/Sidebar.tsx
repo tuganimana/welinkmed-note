@@ -58,7 +58,7 @@ export default function Sidebar () {
         </div>
         <hr className="text-2 text-gray-600 font-bold"/>
           <nav className="hidden md:flex-grow lg:flex-grow w-full md:block px-4 pb-4 md:pb-0 md:overflow-y-auto py-2">
-            <a href="/dashboard" className="block p-2 mt-2 text-md font-bold text-gray-900 border-blue-500 mt-4 rounded-lg  hover:shadow-lg bg-blue-300  hover:bg-blue-200 focus:bg-red-200 focus:text-white hover:text-white text-gray-200 hover:text-gray-900 focus:text-gray-900 hover:bg-gray-200 focus:bg-gray-200 focus:outline-none focus:shadow-outline">
+            <a href={frontEndPoints.RESIDENT_DUE} className="block p-2 mt-2 text-md font-bold text-gray-900 border-blue-500 mt-4 rounded-lg  hover:shadow-lg bg-blue-300  hover:bg-blue-200 focus:bg-red-200 focus:text-white hover:text-white text-gray-200 hover:text-gray-900 focus:text-gray-900 hover:bg-gray-200 focus:bg-gray-200 focus:outline-none focus:shadow-outline">
               <i className="fa fa-bar-chart mr-2 text-black bg-blue-200 rounded-full p-3"></i>Resident Due </a>
               <a href={frontEndPoints.DUE_ORDERS} className="block p-2 mt-2 text-md font-bold text-gray-600 border-blue-500 rounded-lg hover:shadow-lg bg-blue-300 hover:bg-blue-200 hover:bg-red-200 focus:bg-red-200 focus:text-white hover:text-white text-gray-200
             hover:text-gray-900 focus:text-gray-900 hover:bg-gray-200 focus:bg-gray-200 focus:outline-none focus:shadow-outline">

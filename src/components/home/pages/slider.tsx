@@ -7,18 +7,18 @@ import { frontEndPoints } from '../../../utils/enums'
 export default function Slider () {
   const home = [
     {
-      title: 'Your are welcome to WeLinkMed',
-      descrip: 'we link med to you everywhre you are to be ba round to hav be in around round Our customers don’t just love us, they rave about us. Hear what real WeLink customers have to say about our Wireless Fiber internet service. Fast and reliable service without all the hidden fees, pricing games, or gimmicks. ',
+      title: 'Your are welcome to WelinkMed',
+      descrip: 'Access Medication Information   Securely in Real Time  ',
       caption: 'bench'
     },
     {
       title: 'All in our Community WeLinkMed',
-      descrip: 'Our customers don’t just love us, they rave about us. Hear what real WeLink customers have to say about our Wireless Fiber internet service. Fast and reliable service without all the hidden fees, pricing games, or gimmicks. we link med to you everywhre you are to be ba round to hav be in around round',
+      descrip: 'Welinkmed has dramatically reduced medication errors, paperwork inefficiencies and administrative duties',
       caption: 'bench'
     },
     {
       title: 'With Us  WeLinkMed',
-      descrip: 'Hear what real WeLink customers have to say about our Wireless Fiber internet service. Fast and reliable service without all the hidden fees, pricing games, or gimmicks. customers don’t just love us, they rave about us. Hear what real WeLink customers have to say about our Wireless Fiber internet service. Fast and reliable service without all the hidden fees, pricing games, or gimmicks. everywhre you are to be ba round to hav be in around round',
+      descrip: 'Welinkmed offers inclusive medication management solutions for healthcare facilities everywhere.',
       caption: 'bench'
     }
   ]

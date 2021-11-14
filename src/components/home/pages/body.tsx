@@ -6,35 +6,50 @@ import Slider from './slider'
 export default function Body () {
   const services = [
     {
-      title: 'Link Med',
-      descrip: 'we link med to you everywhre you are to be ba round to hav be in around round',
+      title: 'Document med administration with a few clicks',
+      descrip: 'Document med administration with a few clicks',
+      caption: 'WelinkMed'
+    },
+    {
+      title: 'Document treatments, vital signs, and other care items with the same workflow',
+      descrip: 'Document treatments, vital signs, and other care items with the same workflow',
       caption: 'bench'
     },
     {
-      title: 'Link Med',
-      descrip: 'we link med to you everywhre you are to be ba round to hav be in around round',
+      title: 'Eliminate missed/undocumented meds and missed PRN follow-ups',
+      descrip: 'Eliminate missed/undocumented meds and missed PRN follow-ups',
       caption: 'bench'
     },
     {
-      title: 'Link Med',
-      descrip: 'we link med to you everywhre you are to be ba round to hav be in around round',
+      title: 'Speed up med passes by up to 50%',
+      descrip: 'Speed up med passes by up to 50%',
+      caption: 'bench'
+    },
+    {
+      title: 'Pass meds without interruption, even if the internet is down',
+      descrip: 'Pass meds without interruption, even if the internet is down',
+      caption: 'bench'
+    },
+    {
+      title: 'Safely identify residents by their pictures ',
+      descrip: 'Safely identify residents by their pictures ',
       caption: 'bench'
     }
   ]
   const ourwork = [
     {
-      title: 'Creative',
-      descrip: 'We creat awasemo yo acordingl yu nees wud in your how ever to be initialty fro real',
+      title: 'Take paperwork out of medication administration',
+      descrip: 'Enable health care providers and pharmacies to work together to ensure effective electronic medication management, reduce risk and improve resident care',
       caption: 'bench'
     },
     {
-      title: 'Responsive Work',
-      descrip: 'We creat awasemo yo acordingl yu nees wud in your how ever to be initialty fro real',
+      title: 'Ensure Safe Medication Intake',
+      descrip: 'Reduce risk with intuitive and streamlined eMAR that adheres to state regulations and promotes compliance',
       caption: 'bench'
     },
     {
-      title: 'Job for you',
-      descrip: 'We creat awasemo yo acordingl yu nees wud in your how ever to be initialty fro real',
+      title: 'Reduce Paper Documentation',
+      descrip: 'Cut associated processing time and expense with web-based records that eliminate manual medication reconciliation.',
       caption: 'bench'
     }
   ]
@@ -56,7 +71,13 @@ export default function Body () {
         <div className="p-2">
         {/* <div data-aos="zoom-out-left" className="p-4"> */}
          <p className="font-bold w-24 pt-2 text-4xl md:mt-8 border-t-2 border-blue-400 mb-4">About</p>
-         <p data-aos="zoom-out-right" className="text-md text-gray-600 leading-loose py-4 font-medium">Our customers don’t just love us, they rave about us. Hear what real WeLink customers have to say about our Wireless Fiber internet service. Fast and reliable service without all the hidden fees, pricing games, or gimmicks.Our customers don’t just love us, they rave about us. Hear what real WeLink customers have to say about our Wireless Fiber internet service. Fast and reliable service without all the hidden fees, pricing games, or gimmicks.Our customers don’t just love us, they rave about us. Hear what real WeLink customers have to say about our Wireless Fiber internet service. Fast and reliable service without all the hidden fees, pricing games, or gimmicks.</p>
+         <p data-aos="zoom-out-right" className="text-md text-gray-600 leading-loose py-4 font-medium">
+         Access Medication Information
+                   Securely in Real Time
+A Complete Medication Management Solution
+Welinkmed has dramatically reduced medication errors, paperwork inefficiencies and administrative duties. Our portfolio of customers includes senior living facilities, group homes, correctional facilities, behavioral health providers and more.
+
+         </p>
          <p> <button className="bg-red-800 hover:bg-red-700 p-2 pr-8 pl-8 text-white rounded-3xl">Read More</button></p>
        </div>
     </div>
@@ -112,8 +133,8 @@ export default function Body () {
 <div className="md:pl-32 pb-6 md:pr-32 bg-gray-200">
         <div className="md:max-w-7xl mx-auto">
           <div className="text-center pt-8  grid item-center">
-            <span className="text-4xl text-red-700 font-bold">Our Creative for you</span>
-            <span className="text-2xl p-4 text-gray-500 mt-4">we have more  Creative for you impresive Creative, impresive have  Creative more impresive Creative for  impresivey awasome impresive and reality that can hejww s you to impresive jksdd everything anyway</span>
+            <span className="text-4xl text-red-700 font-bold">eMAR</span>
+            <span className="text-2xl p-4 text-gray-500 mt-4">Take paperwork out of medication administration</span>
           </div>
           <div data-aos-offset="200" data-aos-easing="ease-in-sine" data-aos-duration="700" className="flex flex-wrap">
           {
@@ -148,9 +169,9 @@ export default function Body () {
         <div className="md:pl-32 md:pr-32 p-2 bg-red-800 bg-opacity-70">
           <div data-aos="fade-up"
      data-aos-duration="3000" className="md:max-w-7xl mx-auto grid gap-6 w-full pt-24 pb-24">
-            <span className="text-4xl font-bold text-white">Futer is brighter when you are more prepared</span>
-            <span className="text-md font-bold text-gray-100">Futer  acordingl yu nees wud in your how ever to be is brighter when you   acordingl yu nees wud in your how ever to beare more   acordingl yu nees wud in your how ever to beprep  acordingl yu nees wud in your how ever to beared</span>
-            <span><button data-aos="zoom-out" className="bg-gray-100 hover:bg-gray-200 font-medium p-3 pl-6 pr-6 rounded-full">Get Start With Us</button></span>
+            <span className="text-4xl font-bold text-white">Welinkmed Is Customized to Meet Your Specific Needs</span>
+            <span className="text-md font-bold text-gray-100">Welinkmeds pricing is structured as a subscription fee. The cost will vary based on the modules you choose to implement, as well as the total number of service hours you have each month. If you are interested in more specific pricing, we would love to connect you with one of our client representatives who can assess your specific needs and provide you with a quote. </span>
+            <span><button data-aos="zoom-out" className="bg-gray-100 hover:bg-gray-200 font-medium p-3 pl-6 pr-6 rounded-full">Get started</button></span>
           </div>
         </div>
       </div>

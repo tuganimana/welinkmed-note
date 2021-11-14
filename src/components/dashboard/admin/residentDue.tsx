@@ -1,20 +1,16 @@
 // eslint-disable-next-line no-use-before-define
-import React, { useEffect, useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { Spin, Pagination } from 'antd'
 import ruser from '../../../images/users.png'
 import { backEndPoints, frontEndPoints, welinkTokens } from '../../../utils/enums'
-import { useForm } from 'react-hook-form'
-import { SearchType } from '../../../utils/types'
 import { apiBaseUrl } from '../../../utils/env'
 import { api } from '../../../utils/apiRequest'
-export default function Residents () {
+export default function ResidentView () {
   const [clients, setRecents] = useState([])
   const [loading, setLoading] = useState(false)
   const [newclient, setCurrentClients] = useState(1)
   const [postsPerPage] = useState(12)
-  const [search, setSearch] = useState('')
-  console.log(search)
-  const { register, handleSubmit, formState: { errors } } = useForm<SearchType>()
+
   useEffect(() => {
     setLoading(true)
     const getResident = async () => {
@@ -33,29 +29,15 @@ export default function Residents () {
   const paginate = (pageNumber:any) => {
     setCurrentClients(pageNumber)
   }
-  if (loading) return (<><div className='justify-center  mx-auto items-center text-center'><Spin tip='Fetching.....'/></div></>)
+  if (loading) return (<><div className='justify-center  mx-auto items-center pt-24 text-center'><Spin tip='Fetching.....'/></div></>)
 
-  const handleSearch = (data:any) => {
-    setSearch(data.search)
-    setRecents(clients.filter((newdata:any) => {
-      return newdata.firstName.toLowerCase().match(data.search.toLowerCase())
-    }))
-  }
-  return (<>
-    <form onSubmit={ handleSubmit((data) => handleSearch(data))}>
-      <div className="flex flex-wrap">
-    <div className="w-4/5  py-3 rounded">  <input {...register('search', { required: 'Please add type something' })}
-    className="w-full px-4 py-3 rounded"
-    placeholder="Search by Firstname"
-    /></div>
-      <div className="w-1/5 py-3 rounded">  <input type="submit"
-       value="search"
-       className="bg-green-400 px-4 py-3 w-full rounded-r-2xl"
-       /></div>
-      <span className="text-red-600 text-xs">{errors.search && errors.search.message}</span>
-      </div>
-    </form>
-       <div className="flex flex-wrap space-between">
+  return (
+    <>
+    <div className="px-2 py-2">
+      <h5 className="font-bold text-gray-600 px-4 py-4">Resident DUE</h5>
+    </div>
+    <div className=" mx-2 md:mx-4">
+    <div className="flex flex-wrap space-between">
               {
                 currentClients.map((items:any, index) => {
                   const urlPath = `${frontEndPoints.RESIDENT_INFO}/${items.residentId}`
@@ -63,7 +45,7 @@ export default function Residents () {
                   const urlOrder = `${frontEndPoints.ORDER}/${items.residentId}`
                   return (
                   // eslint-disable-next-line react/jsx-key
-                  <div key={index} className="w-1/2 md:w-1/3  p-1">
+                  <div key={index} className="w-1/2 md:w-1/5  p-1">
                     <div className="bg-gray-100 shadow-xl rounded-xl flex flex-wrap p-1">
                        <div className="w-full lg:w-1/2">
 
@@ -94,5 +76,7 @@ export default function Residents () {
              defaultPageSize={postsPerPage}
              onChange={paginate}
              />
-    </>)
+    </div>
+    </>
+  )
 }
