@@ -62,16 +62,16 @@ export default function DueOrder () {
                    <div className="bg-green-200 rounded-l-3xl flex justify-center p-8 w-1/3">
                    <img className="h-full round" src="https://img.icons8.com/external-kiranshastry-lineal-color-kiranshastry/50/000000/external-medication-medical-kiranshastry-lineal-color-kiranshastry.png"/>
                      </div>
-<div className="w-2/3">
-  <p className="p-3 text-md text-gray-600 font-bold">
-    {items.residentid.firstName} {items.residentid.lastName}</p>
-    <div className="px-2 mx-2 mt-2 bg-red-300 text-gray-100 rounded w-64"><p>Morning: {items.morningtimes}</p>
-    <p>After Noon: {items.noontimes}</p>
-    <p className="">Night: {items.nighttimes}</p>
-    </div>
-    <a href={urlPath}><p className="mx-2 mt-2 py-2 text-center w-64 bg-blue-200 rounded text-gray-100 font-bold
-    ">Administer</p></a>
-</div>
+                      <div className="w-2/3">
+                        <p className="p-3 text-md text-gray-600 font-bold">
+                          {items.residentid.firstName} {items.residentid.lastName}</p>
+                          <div className="px-2 mx-2 mt-2 bg-red-300 text-gray-100 rounded w-64"><p>Morning: {items.morningtimes}</p>
+                          <p>After Noon: {items.noontimes}</p>
+                          <p className="">Night: {items.nighttimes}</p>
+                          </div>
+                          <a href={urlPath}><p className="mx-2 mt-2 py-2 text-center w-64 bg-blue-200 rounded text-gray-100 font-bold
+                          ">Administer</p></a>
+                      </div>
                    </div>
               </div>
               )

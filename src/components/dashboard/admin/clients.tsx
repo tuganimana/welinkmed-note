@@ -60,6 +60,7 @@ export default function Residents () {
                   const urlPath = `${frontEndPoints.RESIDENT_INFO}/${items.residentId}`
                   const imagePath = `${apiBaseUrl}/${items.profile}`
                   const urlOrder = `${frontEndPoints.ORDER}/${items.residentId}`
+                  const urlMar = `${frontEndPoints.MAR}/${items.residentId}`
                   return (
                   // eslint-disable-next-line react/jsx-key
                   <div key={index} className="w-1/2 md:w-1/3  p-1">
@@ -70,16 +71,21 @@ export default function Residents () {
                          {items.profile === null ? <img src={ruser} alt="" className="rounded-l-xl w-full" /> : <img src={imagePath} alt="" className="rounded-l-xl w-full" />}
                          </a>
                        </div>
-                       <div className="w-full lg:w-1/2 grid p-1">
-                         <div className="">
-                      <a href={urlOrder}><img src="https://img.icons8.com/emoji/24/000000/pill-emoji.png" className="inset-x-0 float-right"/></a>
-                         </div>
-                         <span className="lg:text-xs text-center font-bold cursor-pointer text-gray-800 float-left">{items.firstName} {items.lastName}</span>
-                          <div className=" text-center items-end ">
-                            <a href={urlPath}>
-                            <span className="text-center w-full cursor-pointer hover:bg-green-800 rounded-full px-4 py-2 bg-green-600 font-bold cursor-pointer text-xs  text-gray-100 mt-2">resident meds</span>
-                            </a>
-                          </div>
+                       <div className="w-full lg:w-1/2 grid gap-4 p-1">
+                        <div className="">
+                          <a href={urlOrder}><img src="https://img.icons8.com/emoji/24/000000/pill-emoji.png" className="inset-x-0 float-right"/></a>
+                        </div>
+                        <span className="lg:text-xs text-center font-bold cursor-pointer text-gray-800 float-left">{items.firstName} {items.lastName}</span>
+                        <div className=" text-center items-end ">
+                          <a href={urlMar}>
+                          <span className="text-center w-full cursor-pointer hover:bg-yellow-400 rounded-full px-4 py-2 bg-yellow-300 font-bold cursor-pointer text-xs  text-gray-900 mt-2">MAR</span>
+                          </a>
+                        </div>
+                        <div className=" text-center items-end ">
+                          <a href={urlPath}>
+                          <span className="text-center w-full cursor-pointer hover:bg-green-800 rounded-full px-4 py-2 bg-green-600 font-bold cursor-pointer text-xs  text-gray-100 mt-2">resident meds</span>
+                          </a>
+                        </div>
                        </div>
                     </div>
                   </div>
