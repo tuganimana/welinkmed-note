@@ -15,7 +15,8 @@ export enum frontEndPoints {
     RESIDENT_INFO='/resident-infos',
     RESIDENT_EDIT='/resident-edit',
     MAR ='/user-mar',
-    DUE_ORDERS='/due-orders'
+    DUE_ORDERS='/due-orders',
+    RESIDENT_DUE='/resident-due'
 
  }
 
@@ -31,7 +32,8 @@ export enum backEndPoints {
     CREATE_ADMINISTER= '/api/administer',
     DUE_ORDERS='api/checkmedics',
     EXPIRED_ORDERS='/api/expiredorder',
-    ADMINISTER='/api/mar-report'
+    ADMINISTER='/api/mar-report',
+    RESIDENT_ORGANIZATION='/api/resident/organization',
   }
 
 export enum httpMethod{

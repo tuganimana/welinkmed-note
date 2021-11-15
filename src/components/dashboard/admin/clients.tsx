@@ -2,7 +2,7 @@
 import React, { useEffect, useState } from 'react'
 import { Spin, Pagination } from 'antd'
 import ruser from '../../../images/users.png'
-import { backEndPoints, frontEndPoints } from '../../../utils/enums'
+import { backEndPoints, frontEndPoints, welinkTokens } from '../../../utils/enums'
 import { useForm } from 'react-hook-form'
 import { SearchType } from '../../../utils/types'
 import { apiBaseUrl } from '../../../utils/env'
@@ -18,7 +18,8 @@ export default function Residents () {
   useEffect(() => {
     setLoading(true)
     const getResident = async () => {
-      const response = await api.get(`${backEndPoints.CREATE_RESIDENT}`)
+      const userID = localStorage.getItem(welinkTokens.userID)
+      const response = await api.get(`${backEndPoints.RESIDENT_ORGANIZATION}/${userID}`)
       if (response.status === 201) {
         setLoading(false)
         setRecents(response.data.data)

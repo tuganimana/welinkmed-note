@@ -27,6 +27,8 @@ import WelcomeRoot from './components/dashboard/welcomeroot'
 import DashboardRoot from './components/dashboard/rootuser/navbar'
 import UserMaintenanceRoot from './components/dashboard/rootuser/usermaintenance'
 import DueOrder from './components/dashboard/admin/dueorder'
+import ResidentView from './components/dashboard/admin/residentDue'
+import { frontEndPoints } from './utils/enums'
 function App () {
   AOS.init()
   return (
@@ -99,6 +101,11 @@ function App () {
         <Route path="/user-mar">
           <Dashboard>
         <MarComponent/>
+          </Dashboard>
+        </Route>
+        <Route path={frontEndPoints.RESIDENT_DUE}>
+          <Dashboard>
+             <ResidentView/>
           </Dashboard>
         </Route>
         {/* ========================================START CLIENT EDNPOINT============================ */}
