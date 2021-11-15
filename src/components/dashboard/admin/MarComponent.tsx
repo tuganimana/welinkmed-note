@@ -1,7 +1,27 @@
 // eslint-disable-next-line no-use-before-define
-import React from 'react'
+import React, { useState, useEffect } from 'react'
+import { backEndPoints } from '../../../utils/enums'
+import { api } from '../../../utils/apiRequest'
 import { Page, Text, View, Document, StyleSheet, PDFViewer } from '@react-pdf/renderer'
 
+// useEffect(() => {
+//   const [fullname, setFullname] = useState('')
+//   const [dob, setDob] = useState('')
+//   const [religion, setReligion] = useState('')
+//   const [attendingPhysician, setAttendingPhysician] = useState('')
+//   useApi.getSingleresident(`/${residentid}`)
+//     .then((res:any) => {
+//       if (res) {
+//         setFullname(`${res.data.firstName} ${res.data.lastName}`)
+//         setDob(res.data.dateOfBirth)
+//         setReligion(res.data.religion)
+//         setAttendingPhysician(res.data.attendingPhysician)
+//       }
+//     })
+//     .catch((error) => {
+//       console.log(`${error}`)
+//     })
+// }, [])
 const styles = StyleSheet.create({
   page: {
     padding: 5,
@@ -158,8 +178,20 @@ const Mardata = [
   }
 ]
 
-const MarComponents = () =>
-<> <Document >
+const MarComponents = () => {
+  const [residentData, setResidentData] = useState([])
+  useEffect(() => {
+    const getRsidentData = async () => {
+      const urlPath = `${backEndPoints.CREATE_RESIDENT}`
+      const response = await api.get(urlPath)
+      console.log(response.status)
+      if (response.status === 200) {
+        setResidentData(response.data.data)
+      }
+    }
+    getRsidentData()
+  }, [])
+  return (<><Document >
     <Page size="A4" orientation="landscape" style={styles.page}>
       <View style={styles.content}>
         <View style={styles.contheader}>
@@ -501,25 +533,31 @@ const MarComponents = () =>
       </View>
         </View>
       </View>
-      <View style={styles.content}>
-        <View style={styles.contButton}>
-          <Text style={styles.buttontitle}>Resident: HODAL BIZIMNGU</Text>
-          <Text style={styles.buttontitle}>DOB: 4/22/1967</Text>
-          <Text style={styles.buttontitle}>Diet: None</Text>
-        </View>
-        <View style={styles.contButton}>
-          <Text style={styles.buttontitle}>MedRecNo:</Text>
-          <Text style={styles.buttontitle}>Physician: Unknown</Text>
-        </View>
-        <View style={styles.contButton}>
-          <Text style={styles.buttontitle}>Benchmark Valley Behavioral Home</Text>
-          <Text style={styles.buttontitle}>Allergies: None</Text>
-        </View>
-        <View style={styles.contButton}>
-          <Text style={styles.buttontitle}>Location: Benchmark Valley Behavioral Home Branham</Text>
-          <Text style={styles.buttontitle}>Diagnosis: None</Text>
-        </View>
-      </View>
+      {
+              residentData.map((item:any, index) => {
+                return (
+                    <View key={index} style={styles.content}>
+                        <View style={styles.contButton}>
+                        <Text style={styles.buttontitle}>Resident: {item.fullname}</Text>
+                        <Text style={styles.buttontitle}>DOB: {item.dob}</Text>
+                        <Text style={styles.buttontitle}>Diet: </Text>
+                        </View>
+                        <View style={styles.contButton}>
+                        <Text style={styles.buttontitle}>MedRecNo:</Text>
+                        <Text style={styles.buttontitle}>Physician: {item.religion}</Text>
+                        </View>
+                        <View style={styles.contButton}>
+                        <Text style={styles.buttontitle}>Benchmark Valley</Text>
+                        <Text style={styles.buttontitle}>Allergies: None</Text>
+                        </View>
+                        <View style={styles.contButton}>
+                        <Text style={styles.buttontitle}>Location: {item.attendingPhysician}</Text>
+                        <Text style={styles.buttontitle}>Diagnosis: None</Text>
+                        </View>
+                    </View>
+                )
+              })
+            }
       <View style={styles.content}>
         <View style={styles.table}>
           <View style={styles.tableRow}>
@@ -1359,7 +1397,8 @@ const MarComponents = () =>
   </Document>
 
   </>
-
+  )
+}
 const MarComponent = () => {
   return (<>
        <PDFViewer width="100%" height="100%">
