@@ -36,6 +36,16 @@ export default function ViewResidents () {
       setConfirmLoading2(false)
     }, 2000)
   }
+  const [isModalVisible, setIsModalVisible] = useState(false)
+  const showModal = () => {
+    setIsModalVisible(true)
+  }
+  const handleO = () => {
+    setIsModalVisible(false)
+  }
+  const handleCancel = () => {
+    setIsModalVisible(false)
+  }
   const { TextArea } = Input
   const urlPath = `${frontEndPoints.RESIDENT_EDIT}/${residentid}`
   const [fullname, setFullname] = useState('')
@@ -86,18 +96,20 @@ export default function ViewResidents () {
     getAllOrder()
   }, [])
   const imagePath = `${apiBaseUrl}/${profile}`
-
   const [messaging, setMessaging] = useState('')
   const [loading1, setLoading1] = useState(false)
   const { register, handleSubmit, formState: { errors } } = useForm<AdministerType>()
   const AdministerOrder = async (data:any) => {
     setLoading1(true)
+    const currentdate = new Date()
+    const currenttime = currentdate.getTime()
+    const currentday = currentdate.getDay()
     const administerPath = `${backEndPoints.ADMINISTER}/${data.orderID.toString()}`
     const response = await api.post(administerPath, {
       initial: data.initial.toString(),
-      time: data.time.toString(),
+      time: currenttime.toString(),
       result: data.result.toString(),
-      date: data.date.toString(),
+      date: currentday.toString(),
       periodValue: data.periodValue.toString(),
       CurrentMonth: data.CurrentMonth.toString(),
       residentID: residentid.toString()
@@ -150,15 +162,16 @@ export default function ViewResidents () {
     <div className="mx-4">
     <Tabs defaultActiveKey="1" onChange={callback}>
     <TabPane tab="Administer" key="1">
-        <div className="flex flex-wrap md:w-3/4 p-1 bg-blue-100  border-blue-400 border-2 rounded-xl">
+        <div className="flex flex-wrap md:w-4/4 p-1 bg-blue-100  border-blue-400 border-2 rounded-xl">
             <div className="w-1/4  p-5 text-center align-center item-center">
                 <img src={pill} alt=""/>
             </div>
             <div className="w-3/4 gap-1 grid">
+                  <div className="flex flex-wrap">
             {
               MedicalOrder.map((item:any, index) => {
                 return (
-                  <div key={index} className="p-3 flex flex-wrap md:w-4/4 border-b-2 border-blue-400">
+                  <div key={index} className="p-3 flex flex-wrap md:w-1/2 border-b-2 border-blue-400">
                     <div className="w-3/4 grid gap-1">
                       <span className="font-bold text-lg text-gray-600">{item.routineMedOrder}</span>
                       <span className="font-bold text-xs text-black-400">{item.description}</span>
@@ -192,29 +205,20 @@ export default function ViewResidents () {
                             <span className="text-red-600 text-xs">{errors.initial && errors.initial.message}</span>
                           </div>
                           <div className="p-2">
-                            <label>time</label>
-                            <input type="time" {...register('time', { required: '* This field is required' })} className="w-full p-2 border"/>
-                            <span className="text-red-600 text-xs">{errors.time && errors.time.message}</span>
-                          </div>
-                          <div className="p-2">
                             <label>Result</label>
                             <input type="text" {...register('result', { required: '* This field is required' })} className="w-full p-2 border"/>
                             <span className="text-red-600 text-xs">{errors.result && errors.result.message}</span>
                           </div>
                           <div className="p-2">
-                            <label>Date</label>
-                            <input type="date" {...register('date', { required: '* This field is required' })} className="w-full p-2 border"/>
-                            <span className="text-red-600 text-xs">{errors.date && errors.date.message}</span>
-                          </div>
-                          <div className="p-2">
                             <label>Period Value</label>
-                            <input type="text" {...register('periodValue', { required: '* This field is required' })} className="w-full p-2 border"/>
-                            <span className="text-red-600 text-xs">{errors.periodValue && errors.periodValue.message}</span>
+                            <select {...register('periodValue', { required: '* This field is required' })} className="w-full p-2 border">
+                              <option value="morning"> Morning: {item.morningtimes} </option>
+                              <option value="noon"> Noon: {item.noontimes} </option>
+                              <option value="might"> Night: {item.nighttimes} </option>
+                            </select>
                           </div>
                           <div className="p-2">
-                            <label>Current Month</label>
-                            <input type="text" {...register('CurrentMonth', { required: '* This field is required' })} className="w-full p-2 border"/>
-                            <span className="text-red-600 text-xs">{errors.CurrentMonth && errors.CurrentMonth.message}</span>
+                            <input type="text" {...register('CurrentMonth', { required: '* This field is required' })} value={item.month} className="w-full p-2 border" hidden/>
                           </div>
                           <div className="p-2">
                           {loading1
@@ -226,15 +230,52 @@ export default function ViewResidents () {
                           </Modal>
                       </span>
                       <span className="font-bold text-lg text-gray-600">
-                          <button className="bg-yellow-600 w-full hover:bg-yellow-500 text-white font-bold p-1 m-1 rounded-xl">
+                          <button onClick={showModal} className="bg-yellow-600 w-full hover:bg-yellow-500 text-white font-bold p-1 m-1 rounded-xl">
                           Late
                           </button>
+                          <Modal title="Late To Administer" visible={isModalVisible} onOk={handleO} onCancel={handleCancel} width={700}>
+                          <form onSubmit={handleSubmit((data) => AdministerOrder(data))}>
+                          <Alert message={messaging}/>
+                         <div className="grid">
+                          <div className="p-2">
+                             <input type="text" {...register('orderID', { required: '* This field is required' })} value={item.residentid.residentId} className="w-full p-2 border" hidden/>
+                          </div>
+                          <div className="p-2">
+                            <label>initial</label>
+                            <input type="text" {...register('initial', { required: '* This field is required' })} className="w-full p-2 border"/>
+                            <span className="text-red-600 text-xs">{errors.initial && errors.initial.message}</span>
+                          </div>
+                          <div className="p-2">
+                            <label>Why do you late (Result)</label>
+                            <input type="text" {...register('result', { required: '* This field is required' })} className="w-full p-2 border"/>
+                            <span className="text-red-600 text-xs">{errors.result && errors.result.message}</span>
+                          </div>
+                          <div className="p-2">
+                            <label>Period Value</label>
+                            <select {...register('periodValue', { required: '* This field is required' })} className="w-full p-2 border">
+                              <option value="morning"> Morning: {item.morningtimes} </option>
+                              <option value="noon"> Noon: {item.noontimes} </option>
+                              <option value="might"> Night: {item.nighttimes} </option>
+                            </select>
+                          </div>
+                          <div className="p-2">
+                            <input type="text" {...register('CurrentMonth', { required: '* This field is required' })} value={item.month} className="w-full p-2 border" hidden/>
+                          </div>
+                          <div className="p-2">
+                          {loading1
+                            ? <button type="submit" className='w-full p-2 text-white bg-blue-400 cursor-pointer'>Saving...</button>
+                            : <button type="submit" className='w-full p-2 text-white bg-blue-400 hover:bg-blue-500 cursor-pointer'>Administer</button>}
+                          </div>
+                          </div>
+                          </form>
+                          </Modal>
                       </span>
                     </div>
                   </div>
                 )
               })
             }
+                  </div>
             </div>
         </div>
     </TabPane>
