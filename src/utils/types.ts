@@ -102,10 +102,12 @@ export interface RoutineAdminType {
 }
 
 export interface AdministerType {
+  orderID:string,
   initial:string,
-  days:number,
-  residentId:string,
-  orderId:string,
-  time:string,
-  latedescription?:string
+  time:number,
+  result:string,
+  date:string,
+  periodValue:string,
+  CurrentMonth:string,
+  residentID:string
 }

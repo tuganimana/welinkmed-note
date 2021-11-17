@@ -413,6 +413,16 @@ class Api {
     }
   }
 
+  // Check MEDICATION
+  public async checkMedics (userId:string) {
+    try {
+      const res = await this.axiosConnect(axios.get, backEndPoints.DUE_ORDERS, {}, userId)
+      return res
+    } catch (error) {
+      console.log(`failed to fetch expired orders: ${error.message}`)
+    }
+  }
+
   // GET ALL USERS
   public async getAllUser () {
     try {
