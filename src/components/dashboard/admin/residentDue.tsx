@@ -15,7 +15,8 @@ export default function ResidentView () {
     setLoading(true)
     const getResident = async () => {
       const userID = localStorage.getItem(welinkTokens.userID)
-      const response = await api.get(`${backEndPoints.RESIDENT_ORGANIZATION}/${userID}`)
+      const response = await api.get(`${backEndPoints.RESIDENT_DUE}/${userID}`)
+      console.log(response)
       if (response.status === 201) {
         setLoading(false)
         setRecents(response.data.data)

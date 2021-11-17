@@ -33,6 +33,7 @@ export enum backEndPoints {
     DUE_ORDERS='api/checkmedics',
     EXPIRED_ORDERS='/api/expiredorder',
     RESIDENT_ORGANIZATION='/api/resident/organization',
+    RESIDENT_DUE='/api/resident/due',
   }
 
 export enum httpMethod{
