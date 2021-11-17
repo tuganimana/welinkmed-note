@@ -31,6 +31,7 @@ export enum backEndPoints {
     ROUTINE_ADMIN='/api/routineadmin',
     CREATE_ADMINISTER= '/api/administer',
     DUE_ORDERS='api/checkmedics',
+    RESIDENT_ORDERS='api/checkmedics/resident',
     EXPIRED_ORDERS='/api/expiredorder',
     ADMINISTER='/api/mar-report',
     RESIDENT_ORGANIZATION='/api/resident/organization',
