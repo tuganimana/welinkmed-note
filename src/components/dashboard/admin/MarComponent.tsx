@@ -1,6 +1,6 @@
 // eslint-disable-next-line no-use-before-define
 import React, { useState, useEffect } from 'react'
-import { backEndPoints } from '../../../utils/enums'
+import { backEndPoints, welinkTokens } from '../../../utils/enums'
 import { api } from '../../../utils/apiRequest'
 import { Page, Text, View, Document, StyleSheet, PDFViewer } from '@react-pdf/renderer'
 
@@ -136,7 +136,7 @@ const styles = StyleSheet.create({
     color: 'black',
     backgroundColor: 'pink',
     padding: 2,
-    fontSize: 7
+    fontSize: 6
   },
   tableCellContentWhite: {
     color: 'black',
@@ -179,17 +179,18 @@ const Mardata = [
 ]
 
 const MarComponents = () => {
-  const [residentData, setResidentData] = useState([])
+  const [MedicalOrder, setMedicalOrder] = useState([])
   useEffect(() => {
-    const getRsidentData = async () => {
-      const urlPath = `${backEndPoints.CREATE_RESIDENT}`
+    const getAllOrder = async () => {
+      const userId = localStorage.getItem(welinkTokens.userID) || null
+      const urlPath = `${backEndPoints.DUE_ORDERS}/${userId}`
       const response = await api.get(urlPath)
       console.log(response.status)
       if (response.status === 200) {
-        setResidentData(response.data.data)
+        setMedicalOrder(response.data.data)
       }
     }
-    getRsidentData()
+    getAllOrder()
   }, [])
   return (<><Document >
     <Page size="A4" orientation="landscape" style={styles.page}>
@@ -223,341 +224,6 @@ const MarComponents = () => {
           <Text style={styles.site}>SITE KEY:</Text>
         </View>
       </View>
-      <View style={styles.content}>
-        <View style={styles.table}>
-          <View style={styles.tableRow}>
-            <View style={styles.tableColTitle}>
-              <Text style={styles.tableCellContent}>Routine Med Order</Text>
-            </View>
-            <View style={styles.tableCol}>
-                <Text style={styles.tableCellContent}>Freq.</Text>
-            </View>
-            <View style={styles.tableCol}>
-                <Text style={styles.tableCell}>1</Text>
-            </View>
-            <View style={styles.tableCol}>
-                <Text style={styles.tableCell}>2</Text>
-            </View>
-            <View style={styles.tableCol}>
-                <Text style={styles.tableCell}>3</Text>
-            </View>
-            <View style={styles.tableCol}>
-                <Text style={styles.tableCell}>4</Text>
-            </View>
-            <View style={styles.tableCol}>
-                <Text style={styles.tableCell}>5</Text>
-            </View>
-            <View style={styles.tableCol}>
-                <Text style={styles.tableCell}>6</Text>
-            </View>
-            <View style={styles.tableCol}>
-                <Text style={styles.tableCell}>7</Text>
-            </View>
-            <View style={styles.tableCol}>
-                <Text style={styles.tableCell}>8</Text>
-            </View>
-            <View style={styles.tableCol}>
-                <Text style={styles.tableCell}>9</Text>
-            </View>
-            <View style={styles.tableCol}>
-                <Text style={styles.tableCell}>10</Text>
-            </View>
-            <View style={styles.tableCol}>
-                <Text style={styles.tableCell}>11</Text>
-            </View>
-            <View style={styles.tableCol}>
-                <Text style={styles.tableCell}>12</Text>
-            </View>
-            <View style={styles.tableCol}>
-                <Text style={styles.tableCell}>13</Text>
-            </View>
-            <View style={styles.tableCol}>
-                <Text style={styles.tableCell}>14</Text>
-            </View>
-            <View style={styles.tableCol}>
-                <Text style={styles.tableCell}>15</Text>
-            </View>
-            <View style={styles.tableCol}>
-                <Text style={styles.tableCell}>16</Text>
-            </View>
-            <View style={styles.tableCol}>
-                <Text style={styles.tableCell}>17</Text>
-            </View>
-            <View style={styles.tableCol}>
-                <Text style={styles.tableCell}>18</Text>
-            </View>
-            <View style={styles.tableCol}>
-                <Text style={styles.tableCell}>19</Text>
-            </View>
-            <View style={styles.tableCol}>
-                <Text style={styles.tableCell}>20</Text>
-            </View>
-            <View style={styles.tableCol}>
-                <Text style={styles.tableCell}>21</Text>
-            </View>
-            <View style={styles.tableCol}>
-                <Text style={styles.tableCell}>22</Text>
-            </View>
-            <View style={styles.tableCol}>
-                <Text style={styles.tableCell}>23</Text>
-            </View>
-            <View style={styles.tableCol}>
-                <Text style={styles.tableCell}>24</Text>
-            </View>
-            <View style={styles.tableCol}>
-                <Text style={styles.tableCell}>25</Text>
-            </View>
-            <View style={styles.tableCol}>
-                <Text style={styles.tableCell}>26</Text>
-            </View>
-            <View style={styles.tableCol}>
-                <Text style={styles.tableCell}>27</Text>
-            </View>
-            <View style={styles.tableCol}>
-                <Text style={styles.tableCell}>28</Text>
-            </View>
-            <View style={styles.tableCol}>
-                <Text style={styles.tableCell}>29</Text>
-            </View>
-            <View style={styles.tableCol}>
-                <Text style={styles.tableCell}>30</Text>
-            </View>
-            <View style={styles.tableCol}>
-                <Text style={styles.tableCell}>31</Text>
-            </View>
-          </View>
-          {
-    Mardata.map((items:any, index) => (
-          <View key={index} style={styles.tableRow}>
-            <View style={styles.tableColTitle}>
-                <Text style={styles.tableCellContent}>{items.routine}</Text>
-            </View>
-            <View style={styles.tableCol}>
-                <Text style={styles.tableCellContentPink}>{items.freq}</Text>
-            </View>
-            <View style={styles.tableCol}>
-                <Text style={styles.tableCellContentWhite}>0</Text>
-            </View>
-            <View style={styles.tableCol}>
-                <Text style={styles.tableCellContentWhite}>0</Text>
-            </View>
-            <View style={styles.tableCol}>
-                <Text style={styles.tableCellContentWhite}>0</Text>
-            </View>
-            <View style={styles.tableCol}>
-                <Text style={styles.tableCellContentWhite}>0</Text>
-            </View>
-            <View style={styles.tableCol}>
-                <Text style={styles.tableCellContentWhite}>0</Text>
-            </View>
-            <View style={styles.tableCol}>
-                <Text style={styles.tableCellContentWhite}>0</Text>
-            </View>
-            <View style={styles.tableCol}>
-                <Text style={styles.tableCellContentWhite}>0</Text>
-            </View>
-            <View style={styles.tableCol}>
-                <Text style={styles.tableCellContentPink}>0</Text>
-            </View>
-            <View style={styles.tableCol}>
-                <Text style={styles.tableCellContentPink}>0</Text>
-            </View>
-            <View style={styles.tableCol}>
-                <Text style={styles.tableCellContentPink}>1</Text>
-            </View>
-            <View style={styles.tableCol}>
-                <Text style={styles.tableCellContentPink}>1</Text>
-            </View>
-            <View style={styles.tableCol}>
-                <Text style={styles.tableCellContentPink}>1</Text>
-            </View>
-            <View style={styles.tableCol}>
-                <Text style={styles.tableCellContentPink}>1</Text>
-            </View>
-            <View style={styles.tableCol}>
-                <Text style={styles.tableCellContentPink}>1</Text>
-            </View>
-            <View style={styles.tableCol}>
-                <Text style={styles.tableCellContentWhite}>0</Text>
-            </View>
-            <View style={styles.tableCol}>
-                <Text style={styles.tableCellContentWhite}>0</Text>
-            </View>
-            <View style={styles.tableCol}>
-                <Text style={styles.tableCellContentWhite}>0</Text>
-            </View>
-            <View style={styles.tableCol}>
-                <Text style={styles.tableCellContentWhite}>0</Text>
-            </View>
-            <View style={styles.tableCol}>
-                <Text style={styles.tableCellContentWhite}>0</Text>
-            </View>
-            <View style={styles.tableCol}>
-                <Text style={styles.tableCellContentWhite}>0</Text>
-            </View>
-            <View style={styles.tableCol}>
-                <Text style={styles.tableCellContentWhite}>0</Text>
-            </View>
-            <View style={styles.tableCol}>
-                <Text style={styles.tableCellContentPink}>0</Text>
-            </View>
-            <View style={styles.tableCol}>
-                <Text style={styles.tableCellContentPink}>0</Text>
-            </View>
-            <View style={styles.tableCol}>
-                <Text style={styles.tableCellContentPink}>0</Text>
-            </View>
-            <View style={styles.tableCol}>
-                <Text style={styles.tableCellContentPink}>0</Text>
-            </View>
-            <View style={styles.tableCol}>
-                <Text style={styles.tableCellContentPink}>0</Text>
-            </View>
-            <View style={styles.tableCol}>
-                <Text style={styles.tableCellContentPink}>0</Text>
-            </View>
-            <View style={styles.tableCol}>
-                <Text style={styles.tableCellContentPink}>0</Text>
-            </View>
-            <View style={styles.tableCol}>
-                <Text style={styles.tableCellContentWhite}>1</Text>
-            </View>
-            <View style={styles.tableCol}>
-                <Text style={styles.tableCellContentWhite}>1</Text>
-            </View>
-            <View style={styles.tableCol}>
-                <Text style={styles.tableCellContentWhite}>1</Text>
-            </View>
-          </View>))
-      }
-      <View style={styles.tableRow}>
-        <View style={styles.tableColTitle}>
-          <Text style={styles.tableCellContent}>Routine Med Order</Text>
-        </View>
-        <View style={styles.tableCol}>
-            <Text style={styles.tableCellContent}>Freq.</Text>
-        </View>
-        <View style={styles.tableCol}>
-            <Text style={styles.tableCell}>1</Text>
-        </View>
-        <View style={styles.tableCol}>
-            <Text style={styles.tableCell}>2</Text>
-        </View>
-        <View style={styles.tableCol}>
-            <Text style={styles.tableCell}>3</Text>
-        </View>
-        <View style={styles.tableCol}>
-            <Text style={styles.tableCell}>4</Text>
-        </View>
-        <View style={styles.tableCol}>
-            <Text style={styles.tableCell}>5</Text>
-        </View>
-        <View style={styles.tableCol}>
-            <Text style={styles.tableCell}>6</Text>
-        </View>
-        <View style={styles.tableCol}>
-            <Text style={styles.tableCell}>7</Text>
-        </View>
-        <View style={styles.tableCol}>
-            <Text style={styles.tableCell}>8</Text>
-        </View>
-        <View style={styles.tableCol}>
-            <Text style={styles.tableCell}>9</Text>
-        </View>
-        <View style={styles.tableCol}>
-            <Text style={styles.tableCell}>10</Text>
-        </View>
-        <View style={styles.tableCol}>
-            <Text style={styles.tableCell}>11</Text>
-        </View>
-        <View style={styles.tableCol}>
-            <Text style={styles.tableCell}>12</Text>
-        </View>
-        <View style={styles.tableCol}>
-            <Text style={styles.tableCell}>13</Text>
-        </View>
-        <View style={styles.tableCol}>
-            <Text style={styles.tableCell}>14</Text>
-        </View>
-        <View style={styles.tableCol}>
-            <Text style={styles.tableCell}>15</Text>
-        </View>
-        <View style={styles.tableCol}>
-            <Text style={styles.tableCell}>16</Text>
-        </View>
-        <View style={styles.tableCol}>
-            <Text style={styles.tableCell}>17</Text>
-        </View>
-        <View style={styles.tableCol}>
-            <Text style={styles.tableCell}>18</Text>
-        </View>
-        <View style={styles.tableCol}>
-            <Text style={styles.tableCell}>19</Text>
-        </View>
-        <View style={styles.tableCol}>
-            <Text style={styles.tableCell}>20</Text>
-        </View>
-        <View style={styles.tableCol}>
-            <Text style={styles.tableCell}>21</Text>
-        </View>
-        <View style={styles.tableCol}>
-            <Text style={styles.tableCell}>22</Text>
-        </View>
-        <View style={styles.tableCol}>
-            <Text style={styles.tableCell}>23</Text>
-        </View>
-        <View style={styles.tableCol}>
-            <Text style={styles.tableCell}>24</Text>
-        </View>
-        <View style={styles.tableCol}>
-            <Text style={styles.tableCell}>25</Text>
-        </View>
-        <View style={styles.tableCol}>
-            <Text style={styles.tableCell}>26</Text>
-        </View>
-        <View style={styles.tableCol}>
-            <Text style={styles.tableCell}>27</Text>
-        </View>
-        <View style={styles.tableCol}>
-            <Text style={styles.tableCell}>28</Text>
-        </View>
-        <View style={styles.tableCol}>
-            <Text style={styles.tableCell}>29</Text>
-        </View>
-        <View style={styles.tableCol}>
-            <Text style={styles.tableCell}>30</Text>
-        </View>
-        <View style={styles.tableCol}>
-            <Text style={styles.tableCell}>31</Text>
-        </View>
-      </View>
-        </View>
-      </View>
-      {
-              residentData.map((item:any, index) => {
-                return (
-                    <View key={index} style={styles.content}>
-                        <View style={styles.contButton}>
-                        <Text style={styles.buttontitle}>Resident: {item.fullname}</Text>
-                        <Text style={styles.buttontitle}>DOB: {item.dob}</Text>
-                        <Text style={styles.buttontitle}>Diet: </Text>
-                        </View>
-                        <View style={styles.contButton}>
-                        <Text style={styles.buttontitle}>MedRecNo:</Text>
-                        <Text style={styles.buttontitle}>Physician: {item.religion}</Text>
-                        </View>
-                        <View style={styles.contButton}>
-                        <Text style={styles.buttontitle}>Benchmark Valley</Text>
-                        <Text style={styles.buttontitle}>Allergies: None</Text>
-                        </View>
-                        <View style={styles.contButton}>
-                        <Text style={styles.buttontitle}>Location: {item.attendingPhysician}</Text>
-                        <Text style={styles.buttontitle}>Diagnosis: None</Text>
-                        </View>
-                    </View>
-                )
-              })
-            }
       <View style={styles.content}>
         <View style={styles.table}>
           <View style={styles.tableRow}>
@@ -662,13 +328,13 @@ const MarComponents = () => {
             </View>
           </View>
           {
-    Mardata.map((items:any, index) => (
+    MedicalOrder.map((items:any, index) => (
           <><View key={index} style={styles.tableRow}>
             <View style={styles.tableColTitle}>
-                <Text style={styles.tableCellContent}>{items.routine}</Text>
+                <Text style={styles.tableCellContent}>{items.routineMedOrder}</Text>
             </View>
             <View style={styles.tableCol}>
-                <Text style={styles.tableCellContentPink}>Date</Text>
+                <Text style={styles.tableCellContentPink}>{items.morningtimes}</Text>
             </View>
             <View style={styles.tableCol}>
                 <Text style={styles.tableCellContentWhite}>0</Text>
@@ -768,7 +434,7 @@ const MarComponents = () => {
                     <Text style={styles.tableCellContent}></Text>
                 </View>
                 <View style={styles.tableCol}>
-                    <Text style={styles.tableCellContentPink}>Time</Text>
+                    <Text style={styles.tableCellContentPink}>{items.noontimes}</Text>
                 </View>
                 <View style={styles.tableCol}>
                     <Text style={styles.tableCellContentWhite}>0</Text>
@@ -869,208 +535,7 @@ const MarComponents = () => {
                     <Text style={styles.tableCellContent}></Text>
                 </View>
                 <View style={styles.tableCol}>
-                    <Text style={styles.tableCellContentPink}>Initial</Text>
-                </View>
-                <View style={styles.tableCol}>
-                    <Text style={styles.tableCellContentWhite}>0</Text>
-                </View>
-                <View style={styles.tableCol}>
-                    <Text style={styles.tableCellContentWhite}>0</Text>
-                </View>
-                <View style={styles.tableCol}>
-                    <Text style={styles.tableCellContentWhite}>0</Text>
-                </View>
-                <View style={styles.tableCol}>
-                    <Text style={styles.tableCellContentWhite}>0</Text>
-                </View>
-                <View style={styles.tableCol}>
-                    <Text style={styles.tableCellContentWhite}>0</Text>
-                </View>
-                <View style={styles.tableCol}>
-                    <Text style={styles.tableCellContentWhite}>0</Text>
-                </View>
-                <View style={styles.tableCol}>
-                    <Text style={styles.tableCellContentWhite}>0</Text>
-                </View>
-                <View style={styles.tableCol}>
-                    <Text style={styles.tableCellContentPink}>0</Text>
-                </View>
-                <View style={styles.tableCol}>
-                    <Text style={styles.tableCellContentPink}>0</Text>
-                </View>
-                <View style={styles.tableCol}>
-                    <Text style={styles.tableCellContentPink}>1</Text>
-                </View>
-                <View style={styles.tableCol}>
-                    <Text style={styles.tableCellContentPink}>1</Text>
-                </View>
-                <View style={styles.tableCol}>
-                    <Text style={styles.tableCellContentPink}>1</Text>
-                </View>
-                <View style={styles.tableCol}>
-                    <Text style={styles.tableCellContentPink}>1</Text>
-                </View>
-                <View style={styles.tableCol}>
-                    <Text style={styles.tableCellContentPink}>1</Text>
-                </View>
-                <View style={styles.tableCol}>
-                    <Text style={styles.tableCellContentWhite}>0</Text>
-                </View>
-                <View style={styles.tableCol}>
-                    <Text style={styles.tableCellContentWhite}>0</Text>
-                </View>
-                <View style={styles.tableCol}>
-                    <Text style={styles.tableCellContentWhite}>0</Text>
-                </View>
-                <View style={styles.tableCol}>
-                    <Text style={styles.tableCellContentWhite}>0</Text>
-                </View>
-                <View style={styles.tableCol}>
-                    <Text style={styles.tableCellContentWhite}>0</Text>
-                </View>
-                <View style={styles.tableCol}>
-                    <Text style={styles.tableCellContentWhite}>0</Text>
-                </View>
-                <View style={styles.tableCol}>
-                    <Text style={styles.tableCellContentWhite}>0</Text>
-                </View>
-                <View style={styles.tableCol}>
-                    <Text style={styles.tableCellContentPink}>0</Text>
-                </View>
-                <View style={styles.tableCol}>
-                    <Text style={styles.tableCellContentPink}>0</Text>
-                </View>
-                <View style={styles.tableCol}>
-                    <Text style={styles.tableCellContentPink}>0</Text>
-                </View>
-                <View style={styles.tableCol}>
-                    <Text style={styles.tableCellContentPink}>0</Text>
-                </View>
-                <View style={styles.tableCol}>
-                    <Text style={styles.tableCellContentPink}>0</Text>
-                </View>
-                <View style={styles.tableCol}>
-                    <Text style={styles.tableCellContentPink}>0</Text>
-                </View>
-                <View style={styles.tableCol}>
-                    <Text style={styles.tableCellContentPink}>0</Text>
-                </View>
-                <View style={styles.tableCol}>
-                    <Text style={styles.tableCellContentWhite}>1</Text>
-                </View>
-                <View style={styles.tableCol}>
-                    <Text style={styles.tableCellContentWhite}>1</Text>
-                </View>
-                <View style={styles.tableCol}>
-                    <Text style={styles.tableCellContentWhite}>1</Text>
-                </View>
-            </View>
-            <View key={index} style={styles.tableRow}>
-                <View style={styles.tableColTitle}>
-                    <Text style={styles.tableCellContent}></Text>
-                </View>
-                <View style={styles.tableCol}>
-                    <Text style={styles.tableCellContentPink}>Result</Text>
-                </View>
-                <View style={styles.tableCol}>
-                    <Text style={styles.tableCellContentWhite}>0</Text>
-                </View>
-                <View style={styles.tableCol}>
-                    <Text style={styles.tableCellContentWhite}>0</Text>
-                </View>
-                <View style={styles.tableCol}>
-                    <Text style={styles.tableCellContentWhite}>0</Text>
-                </View>
-                <View style={styles.tableCol}>
-                    <Text style={styles.tableCellContentWhite}>0</Text>
-                </View>
-                <View style={styles.tableCol}>
-                    <Text style={styles.tableCellContentWhite}>0</Text>
-                </View>
-                <View style={styles.tableCol}>
-                    <Text style={styles.tableCellContentWhite}>0</Text>
-                </View>
-                <View style={styles.tableCol}>
-                    <Text style={styles.tableCellContentWhite}>0</Text>
-                </View>
-                <View style={styles.tableCol}>
-                    <Text style={styles.tableCellContentPink}>0</Text>
-                </View>
-                <View style={styles.tableCol}>
-                    <Text style={styles.tableCellContentPink}>0</Text>
-                </View>
-                <View style={styles.tableCol}>
-                    <Text style={styles.tableCellContentPink}>1</Text>
-                </View>
-                <View style={styles.tableCol}>
-                    <Text style={styles.tableCellContentPink}>1</Text>
-                </View>
-                <View style={styles.tableCol}>
-                    <Text style={styles.tableCellContentPink}>1</Text>
-                </View>
-                <View style={styles.tableCol}>
-                    <Text style={styles.tableCellContentPink}>1</Text>
-                </View>
-                <View style={styles.tableCol}>
-                    <Text style={styles.tableCellContentPink}>1</Text>
-                </View>
-                <View style={styles.tableCol}>
-                    <Text style={styles.tableCellContentWhite}>0</Text>
-                </View>
-                <View style={styles.tableCol}>
-                    <Text style={styles.tableCellContentWhite}>0</Text>
-                </View>
-                <View style={styles.tableCol}>
-                    <Text style={styles.tableCellContentWhite}>0</Text>
-                </View>
-                <View style={styles.tableCol}>
-                    <Text style={styles.tableCellContentWhite}>0</Text>
-                </View>
-                <View style={styles.tableCol}>
-                    <Text style={styles.tableCellContentWhite}>0</Text>
-                </View>
-                <View style={styles.tableCol}>
-                    <Text style={styles.tableCellContentWhite}>0</Text>
-                </View>
-                <View style={styles.tableCol}>
-                    <Text style={styles.tableCellContentWhite}>0</Text>
-                </View>
-                <View style={styles.tableCol}>
-                    <Text style={styles.tableCellContentPink}>0</Text>
-                </View>
-                <View style={styles.tableCol}>
-                    <Text style={styles.tableCellContentPink}>0</Text>
-                </View>
-                <View style={styles.tableCol}>
-                    <Text style={styles.tableCellContentPink}>0</Text>
-                </View>
-                <View style={styles.tableCol}>
-                    <Text style={styles.tableCellContentPink}>0</Text>
-                </View>
-                <View style={styles.tableCol}>
-                    <Text style={styles.tableCellContentPink}>0</Text>
-                </View>
-                <View style={styles.tableCol}>
-                    <Text style={styles.tableCellContentPink}>0</Text>
-                </View>
-                <View style={styles.tableCol}>
-                    <Text style={styles.tableCellContentPink}>0</Text>
-                </View>
-                <View style={styles.tableCol}>
-                    <Text style={styles.tableCellContentWhite}>1</Text>
-                </View>
-                <View style={styles.tableCol}>
-                    <Text style={styles.tableCellContentWhite}>1</Text>
-                </View>
-                <View style={styles.tableCol}>
-                    <Text style={styles.tableCellContentWhite}>1</Text>
-                </View>
-            </View><View key={index} style={styles.tableRow}>
-                <View style={styles.tableColTitle}>
-                    <Text style={styles.tableCellContent}></Text>
-                </View>
-                <View style={styles.tableCol}>
-                    <Text style={styles.tableCellContentPink}>QTY</Text>
+                    <Text style={styles.tableCellContentPink}>{items.nighttimes}</Text>
                 </View>
                 <View style={styles.tableCol}>
                     <Text style={styles.tableCellContentWhite}>0</Text>
@@ -1169,6 +634,31 @@ const MarComponents = () => {
       }
         </View>
       </View>
+      {
+              MedicalOrder.map((item:any, index) => {
+                return (
+                    <View key={index} style={styles.content}>
+                        <View style={styles.contButton}>
+                        <Text style={styles.buttontitle}>Resident: {item.residentid.firstName} {item.residentid.lastName}</Text>
+                        <Text style={styles.buttontitle}>DOB: {item.dateOfBirth}</Text>
+                        <Text style={styles.buttontitle}>Diet: </Text>
+                        </View>
+                        <View style={styles.contButton}>
+                        <Text style={styles.buttontitle}>MedRecNo:</Text>
+                        <Text style={styles.buttontitle}>Physician: {item.attendingPhysician}</Text>
+                        </View>
+                        <View style={styles.contButton}>
+                        <Text style={styles.buttontitle}>Benchmark Valley</Text>
+                        <Text style={styles.buttontitle}>Allergies: None</Text>
+                        </View>
+                        <View style={styles.contButton}>
+                        <Text style={styles.buttontitle}>Location: {item.religion}</Text>
+                        <Text style={styles.buttontitle}>Diagnosis: None</Text>
+                        </View>
+                    </View>
+                )
+              })
+            }
       <View style={styles.content}>
         <View style={styles.tablered}>
           <View style={styles.tableRow}>
