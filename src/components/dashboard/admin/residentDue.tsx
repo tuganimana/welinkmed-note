@@ -15,11 +15,14 @@ export default function ResidentView () {
     setLoading(true)
     const getResident = async () => {
       const userID = localStorage.getItem(welinkTokens.userID)
-      const response = await api.get(`${backEndPoints.RESIDENT_ORGANIZATION}/${userID}`)
-      if (response.status === 201) {
-        setLoading(false)
-        setRecents(response.data.data)
-      }
+      try {
+        const response = await api.get(`${backEndPoints.RESIDENT_DUE}/${userID}`)
+        console.log(response)
+        if (response.data.data !== null) {
+          setLoading(false)
+          setRecents(response.data.data)
+        }
+      } catch (error) { setLoading(false) }
     }
     getResident()
   }, [])

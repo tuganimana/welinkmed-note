@@ -10,7 +10,7 @@ import ruser from '../../../images/users.png'
 import pill from '../../../images/Pills.jpg'
 import pill1 from '../../../images/Pills1.jpg'
 import pill2 from '../../../images/Pills2.jpg'
-import { frontEndPoints, welinkTokens, backEndPoints } from '../../../utils/enums'
+import { frontEndPoints, backEndPoints } from '../../../utils/enums'
 import { useApi } from '../../../utils/api'
 import { apiBaseUrl } from '../../../utils/env'
 import { api } from '../../../utils/apiRequest'
@@ -84,14 +84,14 @@ export default function ViewResidents () {
   useEffect(() => {
     setLoading(true)
     const getAllOrder = async () => {
-      const userId = localStorage.getItem(welinkTokens.userID) || null
-      const urlPath = `${backEndPoints.DUE_ORDERS}/${userId}`
-      const response = await api.get(urlPath)
-      console.log(response.status)
-      if (response.status === 200) {
-        setLoading(false)
-        setMedicalOrder(response.data.data)
-      }
+      const urlPath = `${backEndPoints.RESIDENT_ORDERS}/${residentid}`
+      try {
+        const response = await api.get(urlPath)
+        if (response.data.data !== null) {
+          setLoading(false)
+          setMedicalOrder(response.data.data)
+        }
+      } catch (error) {}
     }
     getAllOrder()
   }, [])
@@ -162,20 +162,22 @@ export default function ViewResidents () {
     <div className="mx-4">
     <Tabs defaultActiveKey="1" onChange={callback}>
     <TabPane tab="Administer" key="1">
-        <div className="flex flex-wrap md:w-4/4 p-1 bg-blue-100  border-blue-400 border-2 rounded-xl">
+      <div className="grid md:grid-cols-2 gap-4">
+      {
+              MedicalOrder.map((item:any, index) => {
+                return (
+        <div key={index} className="flex flex-wrap md:w-4/4 p-1 bg-blue-100  border-blue-400 border-2 rounded-xl">
             <div className="w-1/4  p-5 text-center align-center item-center">
                 <img src={pill} alt=""/>
             </div>
             <div className="w-3/4 gap-1 grid">
                   <div className="flex flex-wrap">
-            {
-              MedicalOrder.map((item:any, index) => {
-                return (
-                  <div key={index} className="p-3 flex flex-wrap md:w-1/2 border-b-2 border-blue-400">
-                    <div className="w-3/4 grid gap-1">
-                      <span className="font-bold text-lg text-gray-600">{item.routineMedOrder}</span>
-                      <span className="font-bold text-xs text-black-400">{item.description}</span>
-                      <span className="text-md"><span className="font-bold"><i className="fa fa-calendar  text-gray-400  rounded p-2"></i>Time Per Day:</span>{item.timesperday}</span>
+
+                  <div className="p-3 flex flex-wrap  border-b-2 border-blue-400">
+                    <div className="w-3/4  gap-1">
+                      <p className="font-bold text-lg text-gray-600">{item.routineMedOrder}</p>
+                      <p className="font-bold text-xs text-black-400">{item.description}</p>
+                      <p className="text-md"><span className="font-bold"><i className="fa fa-calendar  text-gray-400  rounded p-2"></i>Time Per Day:</span>{item.timesperday}</p>
                       <span className="text-md"><span className="font-bold"><i className="fa fa-thumb-tack  text-gray-500  rounded p-2"></i>Dose Per Day:</span> {item.dosePerday} </span>
                       <span className="text-md"><span className="font-bold"><i className="fa fa-clock-o  text-gray-500  rounded p-2"></i></span><b>Morning:</b> {item.morningtimes} &nbsp;&nbsp; <b>Noon:</b> {item.noontimes} &nbsp;&nbsp; <b>Night:</b> {item.nighttimes}</span>
                      </div>
@@ -272,11 +274,15 @@ export default function ViewResidents () {
                       </span>
                     </div>
                   </div>
-                )
-              })
-            }
+
                   </div>
             </div>
+            </div>
+                )
+              }
+              )
+        }
+
         </div>
     </TabPane>
     <TabPane tab="Did not Administer" key="2">

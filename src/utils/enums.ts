@@ -30,10 +30,12 @@ export enum backEndPoints {
     ADDCLIENT='/api/Addclient',
     ROUTINE_ADMIN='/api/routineadmin',
     CREATE_ADMINISTER= '/api/administer',
-    DUE_ORDERS='api/checkmedics',
+    DUE_ORDERS='/api/checkmedics',
+    RESIDENT_ORDERS='/api/checkmedics/resident',
     EXPIRED_ORDERS='/api/expiredorder',
     ADMINISTER='/api/mar-report',
     RESIDENT_ORGANIZATION='/api/resident/organization',
+    RESIDENT_DUE='/api/resident/due',
   }
 
 export enum httpMethod{
