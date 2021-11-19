@@ -1,6 +1,7 @@
 // eslint-disable-next-line no-use-before-define
 import React, { useState, useEffect } from 'react'
-import { backEndPoints, welinkTokens } from '../../../utils/enums'
+import { backEndPoints } from '../../../utils/enums'
+import { useParams } from 'react-router-dom'
 import { api } from '../../../utils/apiRequest'
 import { Page, Text, View, Document, StyleSheet, PDFViewer } from '@react-pdf/renderer'
 
@@ -151,6 +152,7 @@ const styles = StyleSheet.create({
     fontSize: 7
   }
 })
+
 const Mardata = [
   {
     routine: 'Paracotitamor',
@@ -179,16 +181,17 @@ const Mardata = [
 ]
 
 const MarComponents = () => {
+  const { residentid }: { residentid: string} = useParams()
   const [MedicalOrder, setMedicalOrder] = useState([])
   useEffect(() => {
     const getAllOrder = async () => {
-      const userId = localStorage.getItem(welinkTokens.userID) || null
-      const urlPath = `${backEndPoints.DUE_ORDERS}/${userId}`
-      const response = await api.get(urlPath)
-      console.log(response.status)
-      if (response.status === 200) {
-        setMedicalOrder(response.data.data)
-      }
+      const urlPath = `${backEndPoints.RESIDENT_ORDERS}/${residentid}`
+      try {
+        const response = await api.get(urlPath)
+        if (response.data.data !== null) {
+          setMedicalOrder(response.data.data)
+        }
+      } catch (error) {}
     }
     getAllOrder()
   }, [])

@@ -92,7 +92,7 @@ class Api {
       password: password.toString()
     }
     try {
-      const res = await this.apiConnect('GET', backEndPoints.LOGIN, data)
+      const res = await this.apiConnect('POST', backEndPoints.LOGIN, data)
       return res
     } catch (error) {
       throw new Error(`Could not Login due to ${error.message}`)
