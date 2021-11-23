@@ -184,7 +184,7 @@ const MarComponents = () => {
   useEffect(() => {
     const getAllOrder = async () => {
       const { residentid } : any = useParams()
-      const urlPath = `${backEndPoints.RESIDENT_ORDERS}/${residentid}`
+      const urlPath = `${backEndPoints.ADMINIST_MAR}/${residentid}`
       try {
         const response = await api.get(urlPath)
         if (response.data.data !== null) {
@@ -335,28 +335,28 @@ const MarComponents = () => {
             <View key={index}>
             <View style={styles.tableRow}>
             <View style={styles.tableColTitle}>
-                <Text style={styles.tableCellContent}>{items.routineMedOrder}</Text>
+                <Text style={styles.tableCellContent}>{items.orderId}</Text>
             </View>
             <View style={styles.tableCol}>
-                <Text style={styles.tableCellContentPink}>{items.morningtimes}</Text>
+                <Text style={styles.tableCellContentPink}>{items.time}</Text>
             </View>
             <View style={styles.tableCol}>
-                <Text style={styles.tableCellContentWhite}>0</Text>
+                <Text style={styles.tableCellContentWhite}>{items.day1}</Text>
             </View>
             <View style={styles.tableCol}>
-                <Text style={styles.tableCellContentWhite}>0</Text>
+                <Text style={styles.tableCellContentWhite}>{items.day2}</Text>
             </View>
             <View style={styles.tableCol}>
-                <Text style={styles.tableCellContentWhite}>0</Text>
+                <Text style={styles.tableCellContentWhite}>{items.day3}</Text>
             </View>
             <View style={styles.tableCol}>
-                <Text style={styles.tableCellContentWhite}>0</Text>
+                <Text style={styles.tableCellContentWhite}>{items.day4}</Text>
             </View>
             <View style={styles.tableCol}>
-                <Text style={styles.tableCellContentWhite}>0</Text>
+                <Text style={styles.tableCellContentWhite}>{items.day5}</Text>
             </View>
             <View style={styles.tableCol}>
-                <Text style={styles.tableCellContentWhite}>0</Text>
+                <Text style={styles.tableCellContentWhite}>{items.day6}</Text>
             </View>
             <View style={styles.tableCol}>
                 <Text style={styles.tableCellContentWhite}>0</Text>

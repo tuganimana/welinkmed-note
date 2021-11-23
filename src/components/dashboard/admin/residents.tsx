@@ -272,7 +272,7 @@ export default function ViewResidents () {
                           Late
                           </button>
                           <Modal title="Late To Administer" visible={isModalVisible} onOk={handleO} onCancel={handleCancel} width={700}>
-                          <form>
+                          <form onSubmit={handleSubmit((data) => AdministerOrder(data))}>
                           <Alert message={messaging}/>
                          <div className="grid">
                           <div className="p-2">
