@@ -1,8 +1,8 @@
 // eslint-disable-next-line no-use-before-define
 import React, { useState, useEffect } from 'react'
 import { backEndPoints } from '../../../utils/enums'
-import { useParams } from 'react-router-dom'
 import { api } from '../../../utils/apiRequest'
+import { useParams } from 'react-router-dom'
 import { Page, Text, View, Document, StyleSheet, PDFViewer } from '@react-pdf/renderer'
 
 // useEffect(() => {
@@ -179,12 +179,11 @@ const Mardata = [
     freq: 'fre0'
   }
 ]
-
 const MarComponents = () => {
-  const { residentid }: { residentid: string} = useParams()
   const [MedicalOrder, setMedicalOrder] = useState([])
   useEffect(() => {
     const getAllOrder = async () => {
+      const { residentid } : any = useParams()
       const urlPath = `${backEndPoints.RESIDENT_ORDERS}/${residentid}`
       try {
         const response = await api.get(urlPath)
@@ -331,8 +330,10 @@ const MarComponents = () => {
             </View>
           </View>
           {
-    MedicalOrder.map((items:any, index) => (
-          <><View key={index} style={styles.tableRow}>
+    MedicalOrder.map((items:any, index) => {
+      return (
+            <View key={index}>
+            <View style={styles.tableRow}>
             <View style={styles.tableColTitle}>
                 <Text style={styles.tableCellContent}>{items.routineMedOrder}</Text>
             </View>
@@ -633,35 +634,14 @@ const MarComponents = () => {
                 <View style={styles.tableCol}>
                     <Text style={styles.tableCellContentWhite}>1</Text>
                 </View>
-            </View></>))
-      }
+            </View>
+            </View>
+      )
+    }
+    )
+        }
         </View>
       </View>
-      {
-              MedicalOrder.map((item:any, index) => {
-                return (
-                    <View key={index} style={styles.content}>
-                        <View style={styles.contButton}>
-                        <Text style={styles.buttontitle}>Resident: {item.residentid.firstName} {item.residentid.lastName}</Text>
-                        <Text style={styles.buttontitle}>DOB: {item.dateOfBirth}</Text>
-                        <Text style={styles.buttontitle}>Diet: </Text>
-                        </View>
-                        <View style={styles.contButton}>
-                        <Text style={styles.buttontitle}>MedRecNo:</Text>
-                        <Text style={styles.buttontitle}>Physician: {item.attendingPhysician}</Text>
-                        </View>
-                        <View style={styles.contButton}>
-                        <Text style={styles.buttontitle}>Benchmark Valley</Text>
-                        <Text style={styles.buttontitle}>Allergies: None</Text>
-                        </View>
-                        <View style={styles.contButton}>
-                        <Text style={styles.buttontitle}>Location: {item.religion}</Text>
-                        <Text style={styles.buttontitle}>Diagnosis: None</Text>
-                        </View>
-                    </View>
-                )
-              })
-            }
       <View style={styles.content}>
         <View style={styles.tablered}>
           <View style={styles.tableRow}>

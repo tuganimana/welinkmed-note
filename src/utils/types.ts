@@ -101,7 +101,7 @@ export interface RoutineAdminType {
   timesPerday: string;
 }
 
-export interface AdministerType {
+export interface AdministerMarType {
   orderID:string,
   initial:string,
   time:number,
@@ -109,5 +109,6 @@ export interface AdministerType {
   date:string,
   periodValue:string,
   CurrentMonth:string,
-  residentID:string
+  residentID:string,
+  day:string
 }

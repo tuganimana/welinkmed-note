@@ -3,7 +3,7 @@ import React, { useState, useEffect } from 'react'
 import { useForm } from 'react-hook-form'
 import { Tabs, Input, Modal, Spin } from 'antd'
 import { EditOutlined } from '@ant-design/icons'
-import { AdministerType } from '../../../utils/types'
+import { AdministerMarType } from '../../../utils/types'
 import { useParams } from 'react-router-dom'
 import Alert from '../../alerts'
 import ruser from '../../../images/users.png'
@@ -98,21 +98,22 @@ export default function ViewResidents () {
   const imagePath = `${apiBaseUrl}/${profile}`
   const [messaging, setMessaging] = useState('')
   const [loading1, setLoading1] = useState(false)
-  const { register, handleSubmit, formState: { errors } } = useForm<AdministerType>()
+  const { register, handleSubmit, formState: { errors } } = useForm<AdministerMarType>()
   const AdministerOrder = async (data:any) => {
     setLoading1(true)
     const currentdate = new Date()
     const currenttime = currentdate.getTime()
     const currentday = currentdate.getDay()
-    const administerPath = `${backEndPoints.ADMINISTER}/${data.orderID.toString()}`
-    const response = await api.post(administerPath, {
+    const administerPath = `${backEndPoints.ADMINIST_MAR}/${data.orderID.toString()}`
+    const response = await api.put(administerPath, {
       initial: data.initial.toString(),
-      time: currenttime.toString(),
+      time: data.periodValue.toString(),
       result: data.result.toString(),
       date: currentday.toString(),
-      periodValue: data.periodValue.toString(),
+      periodValue: currenttime.toString(),
       CurrentMonth: data.CurrentMonth.toString(),
-      residentID: residentid.toString()
+      residentID: residentid.toString(),
+      day: data.day.toString()
     })
     try {
       if (response.status === 201) {
@@ -207,9 +208,44 @@ export default function ViewResidents () {
                             <span className="text-red-600 text-xs">{errors.initial && errors.initial.message}</span>
                           </div>
                           <div className="p-2">
-                            <label>Result</label>
-                            <input type="text" {...register('result', { required: '* This field is required' })} className="w-full p-2 border"/>
+                            <input type="text" {...register('result', { required: '* This field is required' })} value="yes" className="w-full p-2 border" hidden/>
                             <span className="text-red-600 text-xs">{errors.result && errors.result.message}</span>
+                          </div>
+                          <div className="p-2">
+                            <label>Day</label>
+                            <select {...register('day')} className="w-full p-2 border">
+                              <option value="1">day 1</option>
+                              <option value="2">day 2</option>
+                              <option value="3">day 3</option>
+                              <option value="4">day 4</option>
+                              <option value="5">day 5</option>
+                              <option value="6">day 6</option>
+                              <option value="7">day 7</option>
+                              <option value="8">day 8</option>
+                              <option value="9">day 9</option>
+                              <option value="10">day 10</option>
+                              <option value="11">day 11</option>
+                              <option value="12">day 12</option>
+                              <option value="13">day 13</option>
+                              <option value="14">day 14</option>
+                              <option value="15">day 15</option>
+                              <option value="16">day 16</option>
+                              <option value="17">day 17</option>
+                              <option value="18">day 18</option>
+                              <option value="19">day 19</option>
+                              <option value="20">day 20</option>
+                              <option value="21">day 21</option>
+                              <option value="22">day 22</option>
+                              <option value="23">day 23</option>
+                              <option value="24">day 24</option>
+                              <option value="25">day 25</option>
+                              <option value="26">day 26</option>
+                              <option value="27">day 27</option>
+                              <option value="28">day 28</option>
+                              <option value="29">day 29</option>
+                              <option value="30">day 30</option>
+                              <option value="31">day 31</option>
+                            </select>
                           </div>
                           <div className="p-2">
                             <label>Period Value</label>
@@ -224,7 +260,7 @@ export default function ViewResidents () {
                           </div>
                           <div className="p-2">
                           {loading1
-                            ? <button type="submit" className='w-full p-2 text-white bg-blue-400 cursor-pointer'>Saving...</button>
+                            ? <span className='w-full p-2 text-white bg-blue-400 cursor-pointer'>Saving...</span>
                             : <button type="submit" className='w-full p-2 text-white bg-blue-400 hover:bg-blue-500 cursor-pointer'>Administer</button>}
                           </div>
                           </div>
@@ -236,7 +272,7 @@ export default function ViewResidents () {
                           Late
                           </button>
                           <Modal title="Late To Administer" visible={isModalVisible} onOk={handleO} onCancel={handleCancel} width={700}>
-                          <form onSubmit={handleSubmit((data) => AdministerOrder(data))}>
+                          <form>
                           <Alert message={messaging}/>
                          <div className="grid">
                           <div className="p-2">
@@ -251,6 +287,42 @@ export default function ViewResidents () {
                             <label>Why do you late (Result)</label>
                             <input type="text" {...register('result', { required: '* This field is required' })} className="w-full p-2 border"/>
                             <span className="text-red-600 text-xs">{errors.result && errors.result.message}</span>
+                          </div>
+                          <div className="p-2">
+                            <label>Day</label>
+                            <select {...register('day')} className="w-full p-2 border">
+                              <option value="1">day 1</option>
+                              <option value="2">day 2</option>
+                              <option value="3">day 3</option>
+                              <option value="4">day 4</option>
+                              <option value="5">day 5</option>
+                              <option value="6">day 6</option>
+                              <option value="7">day 7</option>
+                              <option value="8">day 8</option>
+                              <option value="9">day 9</option>
+                              <option value="10">day 10</option>
+                              <option value="11">day 11</option>
+                              <option value="12">day 12</option>
+                              <option value="13">day 13</option>
+                              <option value="14">day 14</option>
+                              <option value="15">day 15</option>
+                              <option value="16">day 16</option>
+                              <option value="17">day 17</option>
+                              <option value="18">day 18</option>
+                              <option value="19">day 19</option>
+                              <option value="20">day 20</option>
+                              <option value="21">day 21</option>
+                              <option value="22">day 22</option>
+                              <option value="23">day 23</option>
+                              <option value="24">day 24</option>
+                              <option value="25">day 25</option>
+                              <option value="26">day 26</option>
+                              <option value="27">day 27</option>
+                              <option value="28">day 28</option>
+                              <option value="29">day 29</option>
+                              <option value="30">day 30</option>
+                              <option value="31">day 31</option>
+                            </select>
                           </div>
                           <div className="p-2">
                             <label>Period Value</label>
