@@ -1,12 +1,14 @@
 // eslint-disable-next-line no-use-before-define
-import React from 'react'
+import React, { useState } from 'react'
 import { UserAddOutlined, DollarCircleOutlined, AreaChartOutlined } from '@ant-design/icons'
-import chart from '../../images/chart.png'
+// import chart from '../../images/chart.png'
+import PieChart from './Chart'
 
 import Residents from './admin/clients'
 import { frontEndPoints } from '../../utils/enums'
 
 export default function Welcome () {
+  const [order] = useState({ missed: 12, received: 48, onDate: 40 })
   return (<>
       <div className="container p-4 md:mt-8">
         <div className="flex  flex-wrap">
@@ -48,9 +50,10 @@ export default function Welcome () {
           </div>
           <div className="lg:w-2/6 w-full bg-white rounded-lg p-4  md:mt-16 mt-4 grid">
             <div className="p-1">
-              <span className="font-bold">General Stracture</span>
+              <span className="font-bold">General Structure</span>
               <div className="align-center item-center text-center">
-              <img src={chart} alt="" className="text-center align-cente"/>
+              {/* <img src={chart} alt="" className="text-center align-cente"/> */}
+              <PieChart />
               </div>
             </div>
             <div className="grid gap-2">
@@ -62,7 +65,7 @@ export default function Welcome () {
                   <span className="font-bold text-lg text-gray-600">Missed Orders</span>
                   <span className="font-bold text-xs text-red-300">Direct</span>
                 </div>
-                <div className="w-1/4 "><span className="font-bold float-right p-2">12%</span></div>
+                <div className="w-1/4 "><span className="font-bold float-right p-2">{order.missed}%</span></div>
               </div>
               <div className="flex flex-wrap p-1 border-green-400 border-2 rounded-2xl">
                 <div className="w-1/4  p-2 text-center align-center item-center">
@@ -72,7 +75,7 @@ export default function Welcome () {
                   <span className="font-bold text-lg text-gray-600">Recieved Orders</span>
                   <span className="font-bold text-xs text-green-400">Direct</span>
                 </div>
-                <div className="w-1/4 "><span className="font-bold float-right p-2">48%</span></div>
+                <div className="w-1/4 "><span className="font-bold float-right p-2">{order.received}%</span></div>
               </div>
               <div className="flex flex-wrap p-1 border-blue-300 border-2 rounded-2xl">
                 <div className="w-1/4  p-2 text-center align-center item-center">
@@ -82,7 +85,7 @@ export default function Welcome () {
                   <span className="font-bold text-lg text-gray-600">On Date</span>
                   <span className="font-bold text-xs text-blue-400">Direct</span>
                 </div>
-                <div className="w-1/4 "><span className="font-bold float-right p-2">40%</span></div>
+                <div className="w-1/4 "><span className="font-bold float-right p-2">{order.onDate}%</span></div>
               </div>
             </div>
           </div>
