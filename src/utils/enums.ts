@@ -36,6 +36,7 @@ export enum backEndPoints {
     ADMINISTER='/api/mar-report',
     RESIDENT_ORGANIZATION='/api/resident/organization',
     RESIDENT_DUE='/api/resident/due',
+    ADMINIST_MAR='/api/administer-mar',
   }
 
 export enum httpMethod{
