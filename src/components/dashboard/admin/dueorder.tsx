@@ -28,12 +28,14 @@ export default function DueOrder () {
     const getAllOrder = async () => {
       const userId = localStorage.getItem(welinkTokens.userID) || null
       const urlPath = `${backEndPoints.DUE_ORDERS}/${userId}`
-      const response = await api.get(urlPath)
-      console.log(response.status)
-      if (response.status === 200) {
-        setLoading(false)
-        setDue(response.data.data)
-      }
+      try {
+        const response = await api.get(urlPath)
+        console.log(response.status)
+        if (response.data.data !== null) {
+          setLoading(false)
+          setDue(response.data.data)
+        }
+      } catch (error) { setLoading(false) }
     }
     getAllOrder()
   }, [])

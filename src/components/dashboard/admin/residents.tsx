@@ -1,7 +1,7 @@
 // eslint-disable-next-line no-use-before-define
 import React, { useState, useEffect } from 'react'
 import { useForm } from 'react-hook-form'
-import { Tabs, Input, Modal, Spin } from 'antd'
+import { Tabs, Input, Modal, Spin, Button } from 'antd'
 import { EditOutlined } from '@ant-design/icons'
 import { AdministerMarType } from '../../../utils/types'
 import { useParams } from 'react-router-dom'
@@ -68,18 +68,7 @@ export default function ViewResidents () {
         console.log(`${error}`)
       })
   }, [])
-  // const [medical, setroutineMedOrder] = useState('')
-  // useEffect(() => {
-  //   useApi.checkMedics(`/${residentid}`)
-  //     .then((res:any) => {
-  //       if (res) {
-  //         setroutineMedOrder(res.data)
-  //       }
-  //     })
-  //     .catch((error) => {
-  //       console.log(`${error}`)
-  //     })
-  // }, [])
+
   const [MedicalOrder, setMedicalOrder] = useState([])
   useEffect(() => {
     setLoading(true)
@@ -98,23 +87,29 @@ export default function ViewResidents () {
   const imagePath = `${apiBaseUrl}/${profile}`
   const [messaging, setMessaging] = useState('')
   const [loading1, setLoading1] = useState(false)
-  const { register, handleSubmit, formState: { errors } } = useForm<AdministerMarType>()
-  const AdministerOrder = async (data:any) => {
+  const [initial, setInitial] = useState('')
+  const [day, setDay] = useState('')
+  const [period, setPeriod] = useState('')
+  const [currentMonth, setCurrentMonth] = useState('')
+  const { register, formState: { errors } } = useForm<AdministerMarType>()
+  const AdministerOrder = async (orderId:any) => {
+    console.log(day)
     setLoading1(true)
     const currentdate = new Date()
     const currenttime = currentdate.getTime()
     const currentday = currentdate.getDay()
-    const administerPath = `${backEndPoints.ADMINIST_MAR}/${data.orderID.toString()}`
+    const administerPath = `${backEndPoints.ADMINIST_MAR}/${orderId.toString()}`
     const response = await api.put(administerPath, {
-      initial: data.initial.toString(),
-      time: data.periodValue.toString(),
-      result: data.result.toString(),
+      initial: initial.toString(),
+      time: period.toString(),
+      result: '',
       date: currentday.toString(),
       periodValue: currenttime.toString(),
-      CurrentMonth: data.CurrentMonth.toString(),
+      CurrentMonth: currentMonth.toString(),
       residentID: residentid.toString(),
-      day: data.day.toString()
+      day: day.toString()
     })
+    console.log(response)
     try {
       if (response.status === 201) {
         setMessaging(response.data.message)
@@ -195,25 +190,30 @@ export default function ViewResidents () {
                               confirmLoading={confirmLoading}
                               onCancel={() => setVisible2(false)}
                               width={700}
+                              footer={[
+                                <Button key="back" onClick={handleCancel}>
+                                  Return
+                                </Button>,
+                                <Button key="submit" type="primary" loading={loading} onClick={() => AdministerOrder(item.orderId)} >
+                                  Administer
+                                </Button>
+
+                              ]}
+
                           >
-                          <form onSubmit={handleSubmit((data) => AdministerOrder(data))}>
+                          <form>
                           <Alert message={messaging}/>
                          <div className="grid">
-                          <div className="p-2">
-                             <input type="text" {...register('orderID', { required: '* This field is required' })} value={item.residentid.residentId} className="w-full p-2 border" hidden/>
-                          </div>
+
                           <div className="p-2">
                             <label>initial</label>
-                            <input type="text" {...register('initial', { required: '* This field is required' })} className="w-full p-2 border"/>
+                            <input type="text" value={initial} onChange={(e:any) => setInitial(e.target.value)} className="w-full p-2 border"/>
                             <span className="text-red-600 text-xs">{errors.initial && errors.initial.message}</span>
                           </div>
-                          <div className="p-2">
-                            <input type="text" {...register('result', { required: '* This field is required' })} value="yes" className="w-full p-2 border" hidden/>
-                            <span className="text-red-600 text-xs">{errors.result && errors.result.message}</span>
-                          </div>
+
                           <div className="p-2">
                             <label>Day</label>
-                            <select {...register('day')} className="w-full p-2 border">
+                            <select onChange={(e:any) => setDay(e.target.value)} className="w-full p-2 border">
                               <option value="1">day 1</option>
                               <option value="2">day 2</option>
                               <option value="3">day 3</option>
@@ -249,19 +249,20 @@ export default function ViewResidents () {
                           </div>
                           <div className="p-2">
                             <label>Period Value</label>
-                            <select {...register('periodValue', { required: '* This field is required' })} className="w-full p-2 border">
-                              <option value="morning"> Morning: {item.morningtimes} </option>
-                              <option value="noon"> Noon: {item.noontimes} </option>
-                              <option value="might"> Night: {item.nighttimes} </option>
+                            <select onChange={(e:any) => setPeriod(e.target.value)} className="w-full p-2 border">
+                              <option value={item.morningtimes}> Morning: {item.morningtimes} </option>
+                              <option value={item.noontimes}> Noon: {item.noontimes} </option>
+                              <option value={item.nighttimes}> Night: {item.nighttimes} </option>
+                              <option value={item.timesperday}> Other: {item.timesperday} </option>
                             </select>
                           </div>
                           <div className="p-2">
-                            <input type="text" {...register('CurrentMonth', { required: '* This field is required' })} value={item.month} className="w-full p-2 border" hidden/>
+                            <input type="text" value={item.month} onChange={(e:any) => setCurrentMonth(e.target.value)} className="w-full p-2 border" hidden/>
                           </div>
                           <div className="p-2">
-                          {loading1
+                          {/* {loading1
                             ? <span className='w-full p-2 text-white bg-blue-400 cursor-pointer'>Saving...</span>
-                            : <button type="submit" className='w-full p-2 text-white bg-blue-400 hover:bg-blue-500 cursor-pointer'>Administer</button>}
+                            : <button type="submit" name="send" className='w-full p-2 text-white bg-blue-400 hover:bg-blue-500 cursor-pointer'>Administer</button>} */}
                           </div>
                           </div>
                           </form>
@@ -272,7 +273,7 @@ export default function ViewResidents () {
                           Late
                           </button>
                           <Modal title="Late To Administer" visible={isModalVisible} onOk={handleO} onCancel={handleCancel} width={700}>
-                          <form onSubmit={handleSubmit((data) => AdministerOrder(data))}>
+                          <form>
                           <Alert message={messaging}/>
                          <div className="grid">
                           <div className="p-2">

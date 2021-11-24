@@ -28,10 +28,14 @@ export default function Medicationdue () {
     const getData = async () => {
       const userId = localStorage.getItem(welinkTokens.userID) || null
       const urlPath = `${backEndPoints.EXPIRED_ORDERS}/${userId}`
-      const response = await api.get(urlPath)
-      if (response.status === 201) {
+      try {
+        const response = await api.get(urlPath)
+        if (response.data.data !== null) {
+          setLoading(false)
+          setMedication(response.data.data)
+        }
+      } catch (error) {
         setLoading(false)
-        setMedication(response.data.data)
       }
     }
     getData()
