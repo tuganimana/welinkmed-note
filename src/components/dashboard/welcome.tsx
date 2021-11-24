@@ -2,7 +2,7 @@
 import React, { useState } from 'react'
 import { UserAddOutlined, DollarCircleOutlined, AreaChartOutlined } from '@ant-design/icons'
 // import chart from '../../images/chart.png'
-import PieChart from './Chart'
+// import PieChart from './Chart'
 
 import Residents from './admin/clients'
 import { frontEndPoints } from '../../utils/enums'
@@ -53,7 +53,7 @@ export default function Welcome () {
               <span className="font-bold">General Structure</span>
               <div className="align-center item-center text-center">
               {/* <img src={chart} alt="" className="text-center align-cente"/> */}
-              <PieChart />
+            {/* <PieChart /> */}
               </div>
             </div>
             <div className="grid gap-2">

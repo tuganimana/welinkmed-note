@@ -179,21 +179,21 @@ const Mardata = [
     freq: 'fre0'
   }
 ]
+const [MedicalOrder, setMedicalOrder] = useState([])
+useEffect(() => {
+  const getAllOrder = async () => {
+    const { residentid } : any = useParams()
+    const urlPath = `${backEndPoints.ADMINIST_MAR}/${residentid}`
+    try {
+      const response = await api.get(urlPath)
+      if (response.data.data !== null) {
+        setMedicalOrder(response.data.data)
+      }
+    } catch (error) {}
+  }
+  getAllOrder()
+}, [])
 const MarComponents = () => {
-  const [MedicalOrder, setMedicalOrder] = useState([])
-  useEffect(() => {
-    const getAllOrder = async () => {
-      const { residentid } : any = useParams()
-      const urlPath = `${backEndPoints.RESIDENT_ORDERS}/${residentid}`
-      try {
-        const response = await api.get(urlPath)
-        if (response.data.data !== null) {
-          setMedicalOrder(response.data.data)
-        }
-      } catch (error) {}
-    }
-    getAllOrder()
-  }, [])
   return (<><Document >
     <Page size="A4" orientation="landscape" style={styles.page}>
       <View style={styles.content}>
@@ -335,307 +335,106 @@ const MarComponents = () => {
             <View key={index}>
             <View style={styles.tableRow}>
             <View style={styles.tableColTitle}>
-                <Text style={styles.tableCellContent}>{items.routineMedOrder}</Text>
+                <Text style={styles.tableCellContent}>{items.orderId}</Text>
             </View>
             <View style={styles.tableCol}>
-                <Text style={styles.tableCellContentPink}>{items.morningtimes}</Text>
+                <Text style={styles.tableCellContentPink}>{items.time}</Text>
             </View>
             <View style={styles.tableCol}>
-                <Text style={styles.tableCellContentWhite}>0</Text>
+                <Text style={styles.tableCellContentWhite}>{items.day1}</Text>
             </View>
             <View style={styles.tableCol}>
-                <Text style={styles.tableCellContentWhite}>0</Text>
+                <Text style={styles.tableCellContentWhite}>{items.day2}</Text>
             </View>
             <View style={styles.tableCol}>
-                <Text style={styles.tableCellContentWhite}>0</Text>
+                <Text style={styles.tableCellContentWhite}>{items.day3}</Text>
             </View>
             <View style={styles.tableCol}>
-                <Text style={styles.tableCellContentWhite}>0</Text>
+                <Text style={styles.tableCellContentWhite}>{items.day4}</Text>
             </View>
             <View style={styles.tableCol}>
-                <Text style={styles.tableCellContentWhite}>0</Text>
+                <Text style={styles.tableCellContentWhite}>{items.day5}</Text>
             </View>
             <View style={styles.tableCol}>
-                <Text style={styles.tableCellContentWhite}>0</Text>
+                <Text style={styles.tableCellContentWhite}>{items.day6}</Text>
             </View>
             <View style={styles.tableCol}>
-                <Text style={styles.tableCellContentWhite}>0</Text>
+                <Text style={styles.tableCellContentWhite}>{items.day7}</Text>
             </View>
             <View style={styles.tableCol}>
-                <Text style={styles.tableCellContentPink}>0</Text>
+                <Text style={styles.tableCellContentPink}>{items.day8}</Text>
             </View>
             <View style={styles.tableCol}>
-                <Text style={styles.tableCellContentPink}>0</Text>
+                <Text style={styles.tableCellContentPink}>{items.day9}</Text>
             </View>
             <View style={styles.tableCol}>
-                <Text style={styles.tableCellContentPink}>1</Text>
+                <Text style={styles.tableCellContentPink}>{items.day10}</Text>
             </View>
             <View style={styles.tableCol}>
-                <Text style={styles.tableCellContentPink}>1</Text>
+                <Text style={styles.tableCellContentPink}>{items.day11}</Text>
             </View>
             <View style={styles.tableCol}>
-                <Text style={styles.tableCellContentPink}>1</Text>
+                <Text style={styles.tableCellContentPink}>{items.day12}</Text>
             </View>
             <View style={styles.tableCol}>
-                <Text style={styles.tableCellContentPink}>1</Text>
+                <Text style={styles.tableCellContentWhite}>{items.day13}</Text>
             </View>
             <View style={styles.tableCol}>
-                <Text style={styles.tableCellContentPink}>1</Text>
+                <Text style={styles.tableCellContentWhite}>{items.day14}</Text>
             </View>
             <View style={styles.tableCol}>
-                <Text style={styles.tableCellContentWhite}>0</Text>
+                <Text style={styles.tableCellContentWhite}>{items.day15}</Text>
             </View>
             <View style={styles.tableCol}>
-                <Text style={styles.tableCellContentWhite}>0</Text>
+                <Text style={styles.tableCellContentWhite}>{items.day16}</Text>
             </View>
             <View style={styles.tableCol}>
-                <Text style={styles.tableCellContentWhite}>0</Text>
+                <Text style={styles.tableCellContentWhite}>{items.day17}</Text>
             </View>
             <View style={styles.tableCol}>
-                <Text style={styles.tableCellContentWhite}>0</Text>
+                <Text style={styles.tableCellContentPink}>{items.day18}</Text>
             </View>
             <View style={styles.tableCol}>
-                <Text style={styles.tableCellContentWhite}>0</Text>
+                <Text style={styles.tableCellContentPink}>{items.day19}</Text>
             </View>
             <View style={styles.tableCol}>
-                <Text style={styles.tableCellContentWhite}>0</Text>
+                <Text style={styles.tableCellContentPink}>{items.day20}</Text>
             </View>
             <View style={styles.tableCol}>
-                <Text style={styles.tableCellContentWhite}>0</Text>
+                <Text style={styles.tableCellContentPink}>{items.day21}</Text>
             </View>
             <View style={styles.tableCol}>
-                <Text style={styles.tableCellContentPink}>0</Text>
+                <Text style={styles.tableCellContentPink}>{items.day22}</Text>
             </View>
             <View style={styles.tableCol}>
-                <Text style={styles.tableCellContentPink}>0</Text>
+                <Text style={styles.tableCellContentPink}>{items.day23}</Text>
             </View>
             <View style={styles.tableCol}>
-                <Text style={styles.tableCellContentPink}>0</Text>
+                <Text style={styles.tableCellContentPink}>{items.day24}</Text>
             </View>
             <View style={styles.tableCol}>
-                <Text style={styles.tableCellContentPink}>0</Text>
+                <Text style={styles.tableCellContentWhite}>{items.day25}</Text>
             </View>
             <View style={styles.tableCol}>
-                <Text style={styles.tableCellContentPink}>0</Text>
+                <Text style={styles.tableCellContentWhite}>{items.day26}</Text>
             </View>
             <View style={styles.tableCol}>
-                <Text style={styles.tableCellContentPink}>0</Text>
+                <Text style={styles.tableCellContentWhite}>{items.day27}</Text>
             </View>
             <View style={styles.tableCol}>
-                <Text style={styles.tableCellContentPink}>0</Text>
+                <Text style={styles.tableCellContentPink}>{items.day28}</Text>
             </View>
             <View style={styles.tableCol}>
-                <Text style={styles.tableCellContentWhite}>1</Text>
+                <Text style={styles.tableCellContentPink}>{items.day29}</Text>
             </View>
             <View style={styles.tableCol}>
-                <Text style={styles.tableCellContentWhite}>1</Text>
+                <Text style={styles.tableCellContentWhite}>{items.day30}</Text>
             </View>
             <View style={styles.tableCol}>
-                <Text style={styles.tableCellContentWhite}>1</Text>
+                <Text style={styles.tableCellContentWhite}>{items.day31}</Text>
             </View>
-        </View><View key={index} style={styles.tableRow}>
-                <View style={styles.tableColTitle}>
-                    <Text style={styles.tableCellContent}></Text>
-                </View>
-                <View style={styles.tableCol}>
-                    <Text style={styles.tableCellContentPink}>{items.noontimes}</Text>
-                </View>
-                <View style={styles.tableCol}>
-                    <Text style={styles.tableCellContentWhite}>0</Text>
-                </View>
-                <View style={styles.tableCol}>
-                    <Text style={styles.tableCellContentWhite}>0</Text>
-                </View>
-                <View style={styles.tableCol}>
-                    <Text style={styles.tableCellContentWhite}>0</Text>
-                </View>
-                <View style={styles.tableCol}>
-                    <Text style={styles.tableCellContentWhite}>0</Text>
-                </View>
-                <View style={styles.tableCol}>
-                    <Text style={styles.tableCellContentWhite}>0</Text>
-                </View>
-                <View style={styles.tableCol}>
-                    <Text style={styles.tableCellContentWhite}>0</Text>
-                </View>
-                <View style={styles.tableCol}>
-                    <Text style={styles.tableCellContentWhite}>0</Text>
-                </View>
-                <View style={styles.tableCol}>
-                    <Text style={styles.tableCellContentPink}>0</Text>
-                </View>
-                <View style={styles.tableCol}>
-                    <Text style={styles.tableCellContentPink}>0</Text>
-                </View>
-                <View style={styles.tableCol}>
-                    <Text style={styles.tableCellContentPink}>1</Text>
-                </View>
-                <View style={styles.tableCol}>
-                    <Text style={styles.tableCellContentPink}>1</Text>
-                </View>
-                <View style={styles.tableCol}>
-                    <Text style={styles.tableCellContentPink}>1</Text>
-                </View>
-                <View style={styles.tableCol}>
-                    <Text style={styles.tableCellContentPink}>1</Text>
-                </View>
-                <View style={styles.tableCol}>
-                    <Text style={styles.tableCellContentPink}>1</Text>
-                </View>
-                <View style={styles.tableCol}>
-                    <Text style={styles.tableCellContentWhite}>0</Text>
-                </View>
-                <View style={styles.tableCol}>
-                    <Text style={styles.tableCellContentWhite}>0</Text>
-                </View>
-                <View style={styles.tableCol}>
-                    <Text style={styles.tableCellContentWhite}>0</Text>
-                </View>
-                <View style={styles.tableCol}>
-                    <Text style={styles.tableCellContentWhite}>0</Text>
-                </View>
-                <View style={styles.tableCol}>
-                    <Text style={styles.tableCellContentWhite}>0</Text>
-                </View>
-                <View style={styles.tableCol}>
-                    <Text style={styles.tableCellContentWhite}>0</Text>
-                </View>
-                <View style={styles.tableCol}>
-                    <Text style={styles.tableCellContentWhite}>0</Text>
-                </View>
-                <View style={styles.tableCol}>
-                    <Text style={styles.tableCellContentPink}>0</Text>
-                </View>
-                <View style={styles.tableCol}>
-                    <Text style={styles.tableCellContentPink}>0</Text>
-                </View>
-                <View style={styles.tableCol}>
-                    <Text style={styles.tableCellContentPink}>0</Text>
-                </View>
-                <View style={styles.tableCol}>
-                    <Text style={styles.tableCellContentPink}>0</Text>
-                </View>
-                <View style={styles.tableCol}>
-                    <Text style={styles.tableCellContentPink}>0</Text>
-                </View>
-                <View style={styles.tableCol}>
-                    <Text style={styles.tableCellContentPink}>0</Text>
-                </View>
-                <View style={styles.tableCol}>
-                    <Text style={styles.tableCellContentPink}>0</Text>
-                </View>
-                <View style={styles.tableCol}>
-                    <Text style={styles.tableCellContentWhite}>1</Text>
-                </View>
-                <View style={styles.tableCol}>
-                    <Text style={styles.tableCellContentWhite}>1</Text>
-                </View>
-                <View style={styles.tableCol}>
-                    <Text style={styles.tableCellContentWhite}>1</Text>
-                </View>
-            </View>
-            <View key={index} style={styles.tableRow}>
-                <View style={styles.tableColTitle}>
-                    <Text style={styles.tableCellContent}></Text>
-                </View>
-                <View style={styles.tableCol}>
-                    <Text style={styles.tableCellContentPink}>{items.nighttimes}</Text>
-                </View>
-                <View style={styles.tableCol}>
-                    <Text style={styles.tableCellContentWhite}>0</Text>
-                </View>
-                <View style={styles.tableCol}>
-                    <Text style={styles.tableCellContentWhite}>0</Text>
-                </View>
-                <View style={styles.tableCol}>
-                    <Text style={styles.tableCellContentWhite}>0</Text>
-                </View>
-                <View style={styles.tableCol}>
-                    <Text style={styles.tableCellContentWhite}>0</Text>
-                </View>
-                <View style={styles.tableCol}>
-                    <Text style={styles.tableCellContentWhite}>0</Text>
-                </View>
-                <View style={styles.tableCol}>
-                    <Text style={styles.tableCellContentWhite}>0</Text>
-                </View>
-                <View style={styles.tableCol}>
-                    <Text style={styles.tableCellContentWhite}>0</Text>
-                </View>
-                <View style={styles.tableCol}>
-                    <Text style={styles.tableCellContentPink}>0</Text>
-                </View>
-                <View style={styles.tableCol}>
-                    <Text style={styles.tableCellContentPink}>0</Text>
-                </View>
-                <View style={styles.tableCol}>
-                    <Text style={styles.tableCellContentPink}>1</Text>
-                </View>
-                <View style={styles.tableCol}>
-                    <Text style={styles.tableCellContentPink}>1</Text>
-                </View>
-                <View style={styles.tableCol}>
-                    <Text style={styles.tableCellContentPink}>1</Text>
-                </View>
-                <View style={styles.tableCol}>
-                    <Text style={styles.tableCellContentPink}>1</Text>
-                </View>
-                <View style={styles.tableCol}>
-                    <Text style={styles.tableCellContentPink}>1</Text>
-                </View>
-                <View style={styles.tableCol}>
-                    <Text style={styles.tableCellContentWhite}>0</Text>
-                </View>
-                <View style={styles.tableCol}>
-                    <Text style={styles.tableCellContentWhite}>0</Text>
-                </View>
-                <View style={styles.tableCol}>
-                    <Text style={styles.tableCellContentWhite}>0</Text>
-                </View>
-                <View style={styles.tableCol}>
-                    <Text style={styles.tableCellContentWhite}>0</Text>
-                </View>
-                <View style={styles.tableCol}>
-                    <Text style={styles.tableCellContentWhite}>0</Text>
-                </View>
-                <View style={styles.tableCol}>
-                    <Text style={styles.tableCellContentWhite}>0</Text>
-                </View>
-                <View style={styles.tableCol}>
-                    <Text style={styles.tableCellContentWhite}>0</Text>
-                </View>
-                <View style={styles.tableCol}>
-                    <Text style={styles.tableCellContentPink}>0</Text>
-                </View>
-                <View style={styles.tableCol}>
-                    <Text style={styles.tableCellContentPink}>0</Text>
-                </View>
-                <View style={styles.tableCol}>
-                    <Text style={styles.tableCellContentPink}>0</Text>
-                </View>
-                <View style={styles.tableCol}>
-                    <Text style={styles.tableCellContentPink}>0</Text>
-                </View>
-                <View style={styles.tableCol}>
-                    <Text style={styles.tableCellContentPink}>0</Text>
-                </View>
-                <View style={styles.tableCol}>
-                    <Text style={styles.tableCellContentPink}>0</Text>
-                </View>
-                <View style={styles.tableCol}>
-                    <Text style={styles.tableCellContentPink}>0</Text>
-                </View>
-                <View style={styles.tableCol}>
-                    <Text style={styles.tableCellContentWhite}>1</Text>
-                </View>
-                <View style={styles.tableCol}>
-                    <Text style={styles.tableCellContentWhite}>1</Text>
-                </View>
-                <View style={styles.tableCol}>
-                    <Text style={styles.tableCellContentWhite}>1</Text>
-                </View>
-            </View>
-            </View>
+        </View>
+        </View>
       )
     }
     )

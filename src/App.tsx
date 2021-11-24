@@ -98,9 +98,9 @@ function App () {
           <Editresident/>
           </Dashboard>
         </Route>
-        <Route path="/user-mar">
+        <Route path="/user-mar/:residentid">
           <Dashboard>
-        <MarComponent/>
+          <MarComponent/>
           </Dashboard>
         </Route>
         <Route path={frontEndPoints.RESIDENT_DUE}>

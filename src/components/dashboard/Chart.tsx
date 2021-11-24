@@ -4,7 +4,7 @@ import Chart from "chart.js/auto"
 import { Pie } from "react-chartjs-2"
 
 
-export default function PieChart(){
+export default function PieChart() {
 	return (
 		<div className="w-3/4 flex items-center justify-center m-auto">
 			<Pie 
