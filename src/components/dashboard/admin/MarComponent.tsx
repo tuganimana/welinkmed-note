@@ -4,7 +4,20 @@ import { backEndPoints } from '../../../utils/enums'
 import { api } from '../../../utils/apiRequest'
 import { useParams } from 'react-router-dom'
 import { Page, Text, View, Document, StyleSheet, PDFViewer } from '@react-pdf/renderer'
-
+const { residentid } : any = useParams()
+const [MedicalOrder, setMedicalOrder] = useState([])
+useEffect(() => {
+  const getAllOrder = async () => {
+    const urlPath = `${backEndPoints.ADMINIST_MAR}/${residentid}`
+    try {
+      const response = await api.get(urlPath)
+      if (response.data.data !== null) {
+        setMedicalOrder(response.data.data)
+      }
+    } catch (error) {}
+  }
+  getAllOrder()
+}, [])
 // useEffect(() => {
 //   const [fullname, setFullname] = useState('')
 //   const [dob, setDob] = useState('')
@@ -180,20 +193,6 @@ const Mardata = [
   }
 ]
 const MarComponents = () => {
-  const [MedicalOrder, setMedicalOrder] = useState([])
-  useEffect(() => {
-    const getAllOrder = async () => {
-      const { residentid } : any = useParams()
-      const urlPath = `${backEndPoints.ADMINIST_MAR}/${residentid}`
-      try {
-        const response = await api.get(urlPath)
-        if (response.data.data !== null) {
-          setMedicalOrder(response.data.data)
-        }
-      } catch (error) {}
-    }
-    getAllOrder()
-  }, [])
   return (<><Document >
     <Page size="A4" orientation="landscape" style={styles.page}>
       <View style={styles.content}>
