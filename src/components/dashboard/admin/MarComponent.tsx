@@ -179,21 +179,21 @@ const Mardata = [
     freq: 'fre0'
   }
 ]
-const [MedicalOrder, setMedicalOrder] = useState([])
-useEffect(() => {
-  const getAllOrder = async () => {
-    const { residentid } : any = useParams()
-    const urlPath = `${backEndPoints.ADMINIST_MAR}/${residentid}`
-    try {
-      const response = await api.get(urlPath)
-      if (response.data.data !== null) {
-        setMedicalOrder(response.data.data)
-      }
-    } catch (error) {}
-  }
-  getAllOrder()
-}, [])
 const MarComponents = () => {
+  const [MedicalOrder, setMedicalOrder] = useState([])
+  useEffect(() => {
+    const getAllOrder = async () => {
+      const { residentid } : any = useParams()
+      const urlPath = `${backEndPoints.ADMINIST_MAR}/${residentid}`
+      try {
+        const response = await api.get(urlPath)
+        if (response.data.data !== null) {
+          setMedicalOrder(response.data.data)
+        }
+      } catch (error) {}
+    }
+    getAllOrder()
+  }, [])
   return (<><Document >
     <Page size="A4" orientation="landscape" style={styles.page}>
       <View style={styles.content}>
