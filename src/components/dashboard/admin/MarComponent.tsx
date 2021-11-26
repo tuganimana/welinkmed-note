@@ -4,6 +4,7 @@ import { backEndPoints } from '../../../utils/enums'
 import { api } from '../../../utils/apiRequest'
 import { useParams } from 'react-router-dom'
 import { Page, Text, View, Document, StyleSheet, PDFViewer } from '@react-pdf/renderer'
+import Administered from './mar/administered'
 const styles = StyleSheet.create({
   page: {
     padding: 5,
@@ -146,13 +147,11 @@ const MarComponents = (props:any) => {
   const [MedicalOrder, setMedicalOrder] = useState([])
   console.log(MedicalOrder)
   const residentid = props.residentid
-  console.log(residentid)
   useEffect(() => {
     const getAllOrder = async () => {
       const urlPath = `${backEndPoints.ADMINIST_MAR}/${residentid}`
       try {
         const response = await api.get(urlPath)
-        console.log(response.data)
         if (response.data !== null) {
           setMedicalOrder(response.data)
         }
@@ -162,12 +161,16 @@ const MarComponents = (props:any) => {
   }, [])
 
   const [Orders, setOrders] = useState([])
-  console.log(Orders)
+
+  // const [OrderAdminId, AdministerOrderId] = useState()
+  // const orderId = OrderAdminId
+  // console.log(orderId)
   useEffect(() => {
     const getOrder = async () => {
       const urlPath = `${backEndPoints.RESIDENT_ORDERS}/${residentid}`
       try {
         const response = await api.get(urlPath)
+        console.log(response)
         if (response.data.data !== null) {
           setOrders(response.data.data)
         }
@@ -175,22 +178,7 @@ const MarComponents = (props:any) => {
     }
     getOrder()
   }, [])
-  const [AdministerOrder, setAdministerOrder] = useState([])
-  const [OrderAdminId, AdministerOrderId] = useState()
-  const orderId = OrderAdminId
-  useEffect(() => {
-    const getAllAdministerOrder = async () => {
-      const urlPath = `${backEndPoints.CHECK_ADMINISTER}/${orderId}`
-      try {
-        const response = await api.get(urlPath)
-        console.log(response.data)
-        if (response.data !== null) {
-          setAdministerOrder(response.data)
-        }
-      } catch (error) {}
-    }
-    getAllAdministerOrder()
-  }, [])
+
   const Mardata = [
     {
       routine: 'Paracotitamor',
@@ -361,114 +349,7 @@ const MarComponents = (props:any) => {
                 <Text style={styles.tableCellContent}>{items.routineMedOrder}</Text>
             </View>
             <View style={styles.tableColData}>
-            {() => AdministerOrderId(items.orderId)}
-          {
-    AdministerOrder.map((item:any, index) => {
-      return (
-        <View key={index}>
-              <View style={styles.tableRow}>
-                <View style={styles.tableCol}>
-                    <Text style={styles.tableCellContentWhite}>{item.time}</Text>
-                </View>
-                <View style={styles.tableCol}>
-                    <Text style={styles.tableCellContentWhite}>1</Text>
-                </View>
-                <View style={styles.tableCol}>
-                    <Text style={styles.tableCellContentWhite}>2</Text>
-                </View>
-                <View style={styles.tableCol}>
-                    <Text style={styles.tableCellContentWhite}>3</Text>
-                </View>
-                <View style={styles.tableCol}>
-                    <Text style={styles.tableCellContentWhite}>4</Text>
-                </View>
-                <View style={styles.tableCol}>
-                    <Text style={styles.tableCellContentWhite}>5</Text>
-                </View>
-                <View style={styles.tableCol}>
-                    <Text style={styles.tableCellContentWhite}>6</Text>
-                </View>
-                <View style={styles.tableCol}>
-                    <Text style={styles.tableCellContentWhite}>7</Text>
-                </View>
-                <View style={styles.tableCol}>
-                    <Text style={styles.tableCellContentWhite}>8</Text>
-                </View>
-                <View style={styles.tableCol}>
-                    <Text style={styles.tableCellContentWhite}>9</Text>
-                </View>
-                <View style={styles.tableCol}>
-                    <Text style={styles.tableCellContentWhite}>10</Text>
-                </View>
-                <View style={styles.tableCol}>
-                    <Text style={styles.tableCellContentWhite}>11</Text>
-                </View>
-                <View style={styles.tableCol}>
-                    <Text style={styles.tableCellContentWhite}>12</Text>
-                </View>
-                <View style={styles.tableCol}>
-                    <Text style={styles.tableCellContentWhite}>13</Text>
-                </View>
-                <View style={styles.tableCol}>
-                    <Text style={styles.tableCellContentWhite}>14</Text>
-                </View>
-                <View style={styles.tableCol}>
-                    <Text style={styles.tableCellContentWhite}>15</Text>
-                </View>
-                <View style={styles.tableCol}>
-                    <Text style={styles.tableCellContentWhite}>16</Text>
-                </View>
-                <View style={styles.tableCol}>
-                    <Text style={styles.tableCellContentWhite}>17</Text>
-                </View>
-                <View style={styles.tableCol}>
-                    <Text style={styles.tableCellContentWhite}>18</Text>
-                </View>
-                <View style={styles.tableCol}>
-                    <Text style={styles.tableCellContentWhite}>19</Text>
-                </View>
-                <View style={styles.tableCol}>
-                    <Text style={styles.tableCellContentWhite}>20</Text>
-                </View>
-                <View style={styles.tableCol}>
-                    <Text style={styles.tableCellContentWhite}>21</Text>
-                </View>
-                <View style={styles.tableCol}>
-                    <Text style={styles.tableCellContentWhite}>22</Text>
-                </View>
-                <View style={styles.tableCol}>
-                    <Text style={styles.tableCellContentWhite}>23</Text>
-                </View>
-                <View style={styles.tableCol}>
-                    <Text style={styles.tableCellContentWhite}>24</Text>
-                </View>
-                <View style={styles.tableCol}>
-                    <Text style={styles.tableCellContentWhite}>25</Text>
-                </View>
-                <View style={styles.tableCol}>
-                    <Text style={styles.tableCellContentWhite}>26</Text>
-                </View>
-                <View style={styles.tableCol}>
-                    <Text style={styles.tableCellContentWhite}>27</Text>
-                </View>
-                <View style={styles.tableCol}>
-                    <Text style={styles.tableCellContentWhite}>28</Text>
-                </View>
-                <View style={styles.tableCol}>
-                    <Text style={styles.tableCellContentWhite}>29</Text>
-                </View>
-                <View style={styles.tableCol}>
-                    <Text style={styles.tableCellContentWhite}>30</Text>
-                </View>
-                <View style={styles.tableCol}>
-                    <Text style={styles.tableCellContentWhite}>31</Text>
-                </View>
-              </View>
-              </View>
-      )
-    }
-    )
-        }
+           <Administered orderId={items.orderId}/>
             </View>
         </View>
         </View>
