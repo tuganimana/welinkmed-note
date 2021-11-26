@@ -1,14 +1,33 @@
 // eslint-disable-next-line no-use-before-define
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { UserAddOutlined, DollarCircleOutlined, AreaChartOutlined } from '@ant-design/icons'
 // import chart from '../../images/chart.png'
-// import PieChart from './Chart'
+import PieChart from './charts/Chart'
 
 import Residents from './admin/clients'
-import { frontEndPoints } from '../../utils/enums'
+import { backEndPoints, frontEndPoints, welinkTokens } from '../../utils/enums'
+import { api } from '../../utils/apiRequest'
 
 export default function Welcome () {
-  const [order] = useState({ missed: 12, received: 48, onDate: 40 })
+  const [due, setDue] = useState(0)
+  const [expired, setExpired] = useState(0)
+  useEffect(() => {
+    const getExpired = async () => {
+      const userId = localStorage.getItem(welinkTokens.userID) || null
+      const urlPath = `${backEndPoints.DUE_ORDERS}/${userId}`
+      const response = await api.get(urlPath)
+
+      setDue(response.data.data.length)
+    }
+    getExpired()
+    const getData = async () => {
+      const userId = localStorage.getItem(welinkTokens.userID) || null
+      const urlPath = `${backEndPoints.EXPIRED_ORDERS}/${userId}`
+      const response = await api.get(urlPath)
+      setExpired(response.data.data.length)
+    }
+    getData()
+  }, [])
   return (<>
       <div className="container p-4 md:mt-8">
         <div className="flex  flex-wrap">
@@ -53,7 +72,7 @@ export default function Welcome () {
               <span className="font-bold">General Structure</span>
               <div className="align-center item-center text-center">
               {/* <img src={chart} alt="" className="text-center align-cente"/> */}
-            {/* <PieChart /> */}
+              <PieChart due={due} expired={expired} />
               </div>
             </div>
             <div className="grid gap-2">
@@ -62,30 +81,20 @@ export default function Welcome () {
                   <span><i className="fa fa-pie-chart text-4xl text-red-300"></i></span>
                 </div>
                 <div className="w-2/4 p-2 grid">
-                  <span className="font-bold text-lg text-gray-600">Missed Orders</span>
+                  <span className="font-bold text-lg text-gray-600">Expired Orders</span>
                   <span className="font-bold text-xs text-red-300">Direct</span>
                 </div>
-                <div className="w-1/4 "><span className="font-bold float-right p-2">{order.missed}%</span></div>
+                <div className="w-1/4 "><span className="font-bold float-right p-2">{expired}</span></div>
               </div>
               <div className="flex flex-wrap p-1 border-green-400 border-2 rounded-2xl">
                 <div className="w-1/4  p-2 text-center align-center item-center">
                   <span><i className="fa fa-pie-chart text-4xl text-green-400"></i></span>
                 </div>
                 <div className="w-2/4 p-2 grid">
-                  <span className="font-bold text-lg text-gray-600">Recieved Orders</span>
+                  <span className="font-bold text-lg text-gray-600">Due Orders</span>
                   <span className="font-bold text-xs text-green-400">Direct</span>
                 </div>
-                <div className="w-1/4 "><span className="font-bold float-right p-2">{order.received}%</span></div>
-              </div>
-              <div className="flex flex-wrap p-1 border-blue-300 border-2 rounded-2xl">
-                <div className="w-1/4  p-2 text-center align-center item-center">
-                  <span><i className="fa fa-pie-chart text-4xl text-blue-400"></i></span>
-                </div>
-                <div className="w-2/4 p-2 grid">
-                  <span className="font-bold text-lg text-gray-600">On Date</span>
-                  <span className="font-bold text-xs text-blue-400">Direct</span>
-                </div>
-                <div className="w-1/4 "><span className="font-bold float-right p-2">{order.onDate}%</span></div>
+                <div className="w-1/4 "><span className="font-bold float-right p-2">{due}</span></div>
               </div>
             </div>
           </div>
