@@ -1,9 +1,7 @@
 // eslint-disable-next-line no-use-before-define
 import React, { useState, useEffect } from 'react'
-import { useForm } from 'react-hook-form'
 import { Tabs, Input, Modal, Spin, Button } from 'antd'
 import { EditOutlined } from '@ant-design/icons'
-import { AdministerMarType } from '../../../utils/types'
 import { useParams } from 'react-router-dom'
 import Alert from '../../alerts'
 import ruser from '../../../images/users.png'
@@ -22,6 +20,7 @@ export default function ViewResidents () {
   const [confirmLoading, setConfirmLoading] = useState(false)
   const handleOk = () => {
     setConfirmLoading(true)
+    setVisible(false)
     setTimeout(() => {
       setVisible(false)
       setConfirmLoading(false)
@@ -86,34 +85,67 @@ export default function ViewResidents () {
   }, [])
   const imagePath = `${apiBaseUrl}/${profile}`
   const [messaging, setMessaging] = useState('')
-  const [loading1, setLoading1] = useState(false)
   const [initial, setInitial] = useState('')
   const [day, setDay] = useState('')
   const [period, setPeriod] = useState('')
-  const [currentMonth, setCurrentMonth] = useState('')
-  const { register, formState: { errors } } = useForm<AdministerMarType>()
-  const AdministerOrder = async (orderId:any) => {
-    console.log(day)
-    setLoading1(true)
+  const AdministerOrder = async (orderId:any, result:any) => {
+    setLoading(true)
+    console.log(period)
     const currentdate = new Date()
-    const currenttime = currentdate.getTime()
-    const currentday = currentdate.getDay()
+    const currentMonth = currentdate.getMonth() + 1
+    const todayDate = currentdate.getDate() + '-' + (currentdate.getMonth() + 1) + '-' + currentdate.getFullYear()
     const administerPath = `${backEndPoints.ADMINIST_MAR}/${orderId.toString()}`
     const response = await api.put(administerPath, {
       initial: initial.toString(),
       time: period.toString(),
-      result: '',
-      date: currentday.toString(),
-      periodValue: currenttime.toString(),
+      result: result,
+      date: todayDate,
+      periodValue: '',
       CurrentMonth: currentMonth.toString(),
       residentID: residentid.toString(),
       day: day.toString()
     })
-    console.log(response)
     try {
-      if (response.status === 201) {
-        setMessaging(response.data.message)
-        setLoading1(false)
+      if (response.data !== null) {
+        setMessaging('Administered')
+        setLoading(false)
+      } else {
+        setTimeout(() => {
+          setMessaging(response.data.message)
+          setLoading(false)
+        }, 2000)
+      }
+    } catch (error) {
+      setMessaging('new order can not be added')
+      setLoading(false)
+    }
+  }
+  // ===LATE
+  const [linitial, setLinitial] = useState('')
+  const [lday, setLday] = useState('')
+  const [lperiod, setLperiod] = useState('')
+  const [why, setWhy] = useState('')
+  const LateAdministerOrder = async (orderId:any, result:any) => {
+    setLoading(true)
+    console.log(period)
+    const currentdate = new Date()
+    const currentMonth = currentdate.getMonth() + 1
+    const todayDate = currentdate.getDate() + '-' + (currentdate.getMonth() + 1) + '-' + currentdate.getFullYear()
+    const administerPath = `${backEndPoints.ADMINIST_MAR}/${orderId.toString()}`
+    const response = await api.put(administerPath, {
+      initial: linitial.toString(),
+      time: lperiod.toString(),
+      result: result,
+      date: todayDate,
+      periodValue: why,
+      CurrentMonth: currentMonth.toString(),
+      residentID: residentid.toString(),
+      day: lday.toString()
+    })
+    try {
+      if (response.data !== null) {
+        setMessaging('Administered')
+        setLoading(false)
       } else {
         setTimeout(() => {
           setMessaging(response.data.message)
@@ -189,27 +221,27 @@ export default function ViewResidents () {
                               visible={visible}
                               onOk={handleOk}
                               confirmLoading={confirmLoading}
-                              onCancel={() => setVisible2(false)}
+                              onCancel={() => setVisible(false)}
                               width={700}
                               footer={[
-                                <Button key="back" onClick={handleCancel}>
+                                <Button key="back" onClick={handleOk}>
                                   Return
                                 </Button>,
-                                <Button key="submit" type="primary" loading={loading} onClick={() => AdministerOrder(item.orderId)} >
+                                <Button key="submit" type="primary" loading={loading} onClick={() =>
+                                  AdministerOrder(item.orderId, 'AD')} >
                                   Administer
                                 </Button>
 
                               ]}
 
                           >
-                          <form>
+                           <form>
                           <Alert message={messaging}/>
                          <div className="grid">
 
                           <div className="p-2">
                             <label>initial</label>
                             <input type="text" value={initial} onChange={(e:any) => setInitial(e.target.value)} className="w-full p-2 border"/>
-                            <span className="text-red-600 text-xs">{errors.initial && errors.initial.message}</span>
                           </div>
 
                           <div className="p-2">
@@ -251,6 +283,7 @@ export default function ViewResidents () {
                           <div className="p-2">
                             <label>Period Value</label>
                             <select onChange={(e:any) => setPeriod(e.target.value)} className="w-full p-2 border">
+                              <option value="">Select Time</option>
                               <option value={item.morningtimes}> Morning: {item.morningtimes} </option>
                               <option value={item.noontimes}> Noon: {item.noontimes} </option>
                               <option value={item.nighttimes}> Night: {item.nighttimes} </option>
@@ -258,7 +291,7 @@ export default function ViewResidents () {
                             </select>
                           </div>
                           <div className="p-2">
-                            <input type="text" value={item.month} onChange={(e:any) => setCurrentMonth(e.target.value)} className="w-full p-2 border" hidden/>
+
                           </div>
                           <div className="p-2">
                           {/* {loading1
@@ -273,26 +306,35 @@ export default function ViewResidents () {
                           <button onClick={showModal} className="bg-yellow-600 w-full hover:bg-yellow-500 text-white font-bold p-1 m-1 rounded-xl">
                           Late
                           </button>
-                          <Modal title="Late To Administer" visible={isModalVisible} onOk={handleO} onCancel={handleCancel} width={700}>
+                          <Modal title="Late To Administer" visible={isModalVisible}
+                          onOk={handleO}
+                          onCancel={handleCancel} width={700}
+                          footer={[
+                            <Button key="back" onClick={handleOk}>
+                              Return
+                            </Button>,
+                            <Button key="submit" type="primary" loading={loading} onClick={() =>
+                              LateAdministerOrder(item.orderId, 'Q')} >
+                              Late Administer
+                            </Button>
+
+                          ]}
+                          >
                           <form>
                           <Alert message={messaging}/>
                          <div className="grid">
                           <div className="p-2">
-                             <input type="text" {...register('orderID', { required: '* This field is required' })} value={item.residentid.residentId} className="w-full p-2 border" hidden/>
-                          </div>
-                          <div className="p-2">
                             <label>initial</label>
-                            <input type="text" {...register('initial', { required: '* This field is required' })} className="w-full p-2 border"/>
-                            <span className="text-red-600 text-xs">{errors.initial && errors.initial.message}</span>
+                            <input type="text" value={linitial} onChange={(e:any) => setLinitial(e.target.value)} className="w-full p-2 border"/>
                           </div>
                           <div className="p-2">
                             <label>Why do you late (Result)</label>
-                            <input type="text" {...register('result', { required: '* This field is required' })} className="w-full p-2 border"/>
-                            <span className="text-red-600 text-xs">{errors.result && errors.result.message}</span>
+                            <input type="text"value={why} onChange={(e:any) => setWhy(e.target.value)} className="w-full p-2 border"/>
+
                           </div>
                           <div className="p-2">
                             <label>Day</label>
-                            <select {...register('day')} className="w-full p-2 border">
+                            <select onChange={(e:any) => setLday(e.target.value)} className="w-full p-2 border">
                               <option value="1">day 1</option>
                               <option value="2">day 2</option>
                               <option value="3">day 3</option>
@@ -328,19 +370,14 @@ export default function ViewResidents () {
                           </div>
                           <div className="p-2">
                             <label>Period Value</label>
-                            <select {...register('periodValue', { required: '* This field is required' })} className="w-full p-2 border">
+                            <select onChange={(e:any) => setLperiod(e.target.value)} className="w-full p-2 border">
                               <option value="morning"> Morning: {item.morningtimes} </option>
                               <option value="noon"> Noon: {item.noontimes} </option>
                               <option value="might"> Night: {item.nighttimes} </option>
                             </select>
                           </div>
                           <div className="p-2">
-                            <input type="text" {...register('CurrentMonth', { required: '* This field is required' })} value={item.month} className="w-full p-2 border" hidden/>
-                          </div>
-                          <div className="p-2">
-                          {loading1
-                            ? <button type="submit" className='w-full p-2 text-white bg-blue-400 cursor-pointer'>Saving...</button>
-                            : <button type="submit" className='w-full p-2 text-white bg-blue-400 hover:bg-blue-500 cursor-pointer'>Administer</button>}
+
                           </div>
                           </div>
                           </form>
