@@ -4,7 +4,6 @@ import { backEndPoints } from '../../../utils/enums'
 import { api } from '../../../utils/apiRequest'
 import { useParams } from 'react-router-dom'
 import { Page, Text, View, Document, StyleSheet, PDFViewer } from '@react-pdf/renderer'
-
 const styles = StyleSheet.create({
   page: {
     padding: 5,
@@ -57,6 +56,14 @@ const styles = StyleSheet.create({
   },
   tableCol: {
     width: '10%',
+    borderStyle: 'solid',
+    borderColor: 'green',
+    borderWidth: 1,
+    borderLeftWidth: 0,
+    borderTopWidth: 0
+  },
+  tableColData: {
+    width: '302%',
     borderStyle: 'solid',
     borderColor: 'green',
     borderWidth: 1,
@@ -137,6 +144,7 @@ const styles = StyleSheet.create({
 
 const MarComponents = (props:any) => {
   const [MedicalOrder, setMedicalOrder] = useState([])
+  console.log(MedicalOrder)
   const residentid = props.residentid
   console.log(residentid)
   useEffect(() => {
@@ -151,6 +159,37 @@ const MarComponents = (props:any) => {
       } catch (error) {}
     }
     getAllOrder()
+  }, [])
+
+  const [Orders, setOrders] = useState([])
+  console.log(Orders)
+  useEffect(() => {
+    const getOrder = async () => {
+      const urlPath = `${backEndPoints.RESIDENT_ORDERS}/${residentid}`
+      try {
+        const response = await api.get(urlPath)
+        if (response.data.data !== null) {
+          setOrders(response.data.data)
+        }
+      } catch (error) {}
+    }
+    getOrder()
+  }, [])
+  const [AdministerOrder, setAdministerOrder] = useState([])
+  const [OrderAdminId, AdministerOrderId] = useState()
+  const orderId = OrderAdminId
+  useEffect(() => {
+    const getAllAdministerOrder = async () => {
+      const urlPath = `${backEndPoints.CHECK_ADMINISTER}/${orderId}`
+      try {
+        const response = await api.get(urlPath)
+        console.log(response.data)
+        if (response.data !== null) {
+          setAdministerOrder(response.data)
+        }
+      } catch (error) {}
+    }
+    getAllAdministerOrder()
   }, [])
   const Mardata = [
     {
@@ -314,108 +353,122 @@ const MarComponents = (props:any) => {
             </View>
           </View>
           {
-    MedicalOrder.map((items:any, index) => {
+    Orders.map((items:any, index) => {
       return (
             <View key={index}>
             <View style={styles.tableRow}>
             <View style={styles.tableColTitle}>
-                <Text style={styles.tableCellContent}>{items.orderId}</Text>
+                <Text style={styles.tableCellContent}>{items.routineMedOrder}</Text>
             </View>
-            <View style={styles.tableCol}>
-                <Text style={styles.tableCellContentPink}>{items.time}</Text>
-            </View>
-            <View style={styles.tableCol}>
-                <Text style={styles.tableCellContentWhite}>{items.day1}</Text>
-            </View>
-            <View style={styles.tableCol}>
-                <Text style={styles.tableCellContentWhite}>{items.day2}</Text>
-            </View>
-            <View style={styles.tableCol}>
-                <Text style={styles.tableCellContentWhite}>{items.day3}</Text>
-            </View>
-            <View style={styles.tableCol}>
-                <Text style={styles.tableCellContentWhite}>{items.day4}</Text>
-            </View>
-            <View style={styles.tableCol}>
-                <Text style={styles.tableCellContentWhite}>{items.day5}</Text>
-            </View>
-            <View style={styles.tableCol}>
-                <Text style={styles.tableCellContentWhite}>{items.day6}</Text>
-            </View>
-            <View style={styles.tableCol}>
-                <Text style={styles.tableCellContentWhite}>{items.day7}</Text>
-            </View>
-            <View style={styles.tableCol}>
-                <Text style={styles.tableCellContentPink}>{items.day8}</Text>
-            </View>
-            <View style={styles.tableCol}>
-                <Text style={styles.tableCellContentPink}>{items.day9}</Text>
-            </View>
-            <View style={styles.tableCol}>
-                <Text style={styles.tableCellContentPink}>{items.day10}</Text>
-            </View>
-            <View style={styles.tableCol}>
-                <Text style={styles.tableCellContentPink}>{items.day11}</Text>
-            </View>
-            <View style={styles.tableCol}>
-                <Text style={styles.tableCellContentPink}>{items.day12}</Text>
-            </View>
-            <View style={styles.tableCol}>
-                <Text style={styles.tableCellContentWhite}>{items.day13}</Text>
-            </View>
-            <View style={styles.tableCol}>
-                <Text style={styles.tableCellContentWhite}>{items.day14}</Text>
-            </View>
-            <View style={styles.tableCol}>
-                <Text style={styles.tableCellContentWhite}>{items.day15}</Text>
-            </View>
-            <View style={styles.tableCol}>
-                <Text style={styles.tableCellContentWhite}>{items.day16}</Text>
-            </View>
-            <View style={styles.tableCol}>
-                <Text style={styles.tableCellContentWhite}>{items.day17}</Text>
-            </View>
-            <View style={styles.tableCol}>
-                <Text style={styles.tableCellContentPink}>{items.day18}</Text>
-            </View>
-            <View style={styles.tableCol}>
-                <Text style={styles.tableCellContentPink}>{items.day19}</Text>
-            </View>
-            <View style={styles.tableCol}>
-                <Text style={styles.tableCellContentPink}>{items.day20}</Text>
-            </View>
-            <View style={styles.tableCol}>
-                <Text style={styles.tableCellContentPink}>{items.day21}</Text>
-            </View>
-            <View style={styles.tableCol}>
-                <Text style={styles.tableCellContentPink}>{items.day22}</Text>
-            </View>
-            <View style={styles.tableCol}>
-                <Text style={styles.tableCellContentPink}>{items.day23}</Text>
-            </View>
-            <View style={styles.tableCol}>
-                <Text style={styles.tableCellContentPink}>{items.day24}</Text>
-            </View>
-            <View style={styles.tableCol}>
-                <Text style={styles.tableCellContentWhite}>{items.day25}</Text>
-            </View>
-            <View style={styles.tableCol}>
-                <Text style={styles.tableCellContentWhite}>{items.day26}</Text>
-            </View>
-            <View style={styles.tableCol}>
-                <Text style={styles.tableCellContentWhite}>{items.day27}</Text>
-            </View>
-            <View style={styles.tableCol}>
-                <Text style={styles.tableCellContentPink}>{items.day28}</Text>
-            </View>
-            <View style={styles.tableCol}>
-                <Text style={styles.tableCellContentPink}>{items.day29}</Text>
-            </View>
-            <View style={styles.tableCol}>
-                <Text style={styles.tableCellContentWhite}>{items.day30}</Text>
-            </View>
-            <View style={styles.tableCol}>
-                <Text style={styles.tableCellContentWhite}>{items.day31}</Text>
+            <View style={styles.tableColData}>
+            {() => AdministerOrderId(items.orderId)}
+          {
+    AdministerOrder.map((item:any, index) => {
+      return (
+        <View key={index}>
+              <View style={styles.tableRow}>
+                <View style={styles.tableCol}>
+                    <Text style={styles.tableCellContentWhite}>{item.time}</Text>
+                </View>
+                <View style={styles.tableCol}>
+                    <Text style={styles.tableCellContentWhite}>1</Text>
+                </View>
+                <View style={styles.tableCol}>
+                    <Text style={styles.tableCellContentWhite}>2</Text>
+                </View>
+                <View style={styles.tableCol}>
+                    <Text style={styles.tableCellContentWhite}>3</Text>
+                </View>
+                <View style={styles.tableCol}>
+                    <Text style={styles.tableCellContentWhite}>4</Text>
+                </View>
+                <View style={styles.tableCol}>
+                    <Text style={styles.tableCellContentWhite}>5</Text>
+                </View>
+                <View style={styles.tableCol}>
+                    <Text style={styles.tableCellContentWhite}>6</Text>
+                </View>
+                <View style={styles.tableCol}>
+                    <Text style={styles.tableCellContentWhite}>7</Text>
+                </View>
+                <View style={styles.tableCol}>
+                    <Text style={styles.tableCellContentWhite}>8</Text>
+                </View>
+                <View style={styles.tableCol}>
+                    <Text style={styles.tableCellContentWhite}>9</Text>
+                </View>
+                <View style={styles.tableCol}>
+                    <Text style={styles.tableCellContentWhite}>10</Text>
+                </View>
+                <View style={styles.tableCol}>
+                    <Text style={styles.tableCellContentWhite}>11</Text>
+                </View>
+                <View style={styles.tableCol}>
+                    <Text style={styles.tableCellContentWhite}>12</Text>
+                </View>
+                <View style={styles.tableCol}>
+                    <Text style={styles.tableCellContentWhite}>13</Text>
+                </View>
+                <View style={styles.tableCol}>
+                    <Text style={styles.tableCellContentWhite}>14</Text>
+                </View>
+                <View style={styles.tableCol}>
+                    <Text style={styles.tableCellContentWhite}>15</Text>
+                </View>
+                <View style={styles.tableCol}>
+                    <Text style={styles.tableCellContentWhite}>16</Text>
+                </View>
+                <View style={styles.tableCol}>
+                    <Text style={styles.tableCellContentWhite}>17</Text>
+                </View>
+                <View style={styles.tableCol}>
+                    <Text style={styles.tableCellContentWhite}>18</Text>
+                </View>
+                <View style={styles.tableCol}>
+                    <Text style={styles.tableCellContentWhite}>19</Text>
+                </View>
+                <View style={styles.tableCol}>
+                    <Text style={styles.tableCellContentWhite}>20</Text>
+                </View>
+                <View style={styles.tableCol}>
+                    <Text style={styles.tableCellContentWhite}>21</Text>
+                </View>
+                <View style={styles.tableCol}>
+                    <Text style={styles.tableCellContentWhite}>22</Text>
+                </View>
+                <View style={styles.tableCol}>
+                    <Text style={styles.tableCellContentWhite}>23</Text>
+                </View>
+                <View style={styles.tableCol}>
+                    <Text style={styles.tableCellContentWhite}>24</Text>
+                </View>
+                <View style={styles.tableCol}>
+                    <Text style={styles.tableCellContentWhite}>25</Text>
+                </View>
+                <View style={styles.tableCol}>
+                    <Text style={styles.tableCellContentWhite}>26</Text>
+                </View>
+                <View style={styles.tableCol}>
+                    <Text style={styles.tableCellContentWhite}>27</Text>
+                </View>
+                <View style={styles.tableCol}>
+                    <Text style={styles.tableCellContentWhite}>28</Text>
+                </View>
+                <View style={styles.tableCol}>
+                    <Text style={styles.tableCellContentWhite}>29</Text>
+                </View>
+                <View style={styles.tableCol}>
+                    <Text style={styles.tableCellContentWhite}>30</Text>
+                </View>
+                <View style={styles.tableCol}>
+                    <Text style={styles.tableCellContentWhite}>31</Text>
+                </View>
+              </View>
+              </View>
+      )
+    }
+    )
+        }
             </View>
         </View>
         </View>
@@ -591,7 +644,7 @@ const MarComponents = (props:any) => {
     Mardata.map((items:any, index) => (
         <View key={index} style={styles.tableRow}>
             <View style={styles.tableColB}>
-              <Text style={styles.tableCellContentWhite}>12/2/2021</Text>
+              <Text style={styles.tableCellContentWhite}>Sign</Text>
             </View>
             <View style={styles.tableColB}>
               <Text style={styles.tableCellContentWhite}>9:00</Text>
