@@ -1,14 +1,11 @@
 // eslint-disable-next-line no-use-before-define
-import React, { useState } from 'react'
-import { Tabs, Select } from 'antd'
-import Sig from './editsig'
-import { useApi } from '../../../utils/api'
-import { MedicationType } from '../../../utils/types'
-import { useHistory } from 'react-router-dom'
-import { useForm } from 'react-hook-form'
+import React, { useState, useEffect } from 'react'
+import { Tabs, Select, Spin } from 'antd'
+import { api } from '../../../utils/apiRequest'
 
-import { frontEndPoints } from '../../../utils/enums'
-import Alert from '../../alerts'
+// import { MedicationType } from '../../../utils/types'
+// import { useHistory } from 'react-router-dom'
+import { welinkTokens, backEndPoints } from '../../../utils/enums'
 const { TabPane } = Tabs
 const { Option } = Select
 
@@ -21,127 +18,70 @@ export default function Medicationdue () {
     children.push(<Option value={i.toString(36) + i} key={i.toString(36) + i}>{i.toString(36) + i}</Option>)
   }
 
-  function handleChange (value:any) {
-    console.log(`selected ${value}`)
-  }
-  const recent = [
-    {
-      nameMedication: 'parastemol',
-      typesMedication: 'bench',
-      dosage: '3',
-      physician: 'peter',
-      startDate: '13/11/2001',
-      endDate: '17/12/2001'
-    }
-  ]
-  const history = useHistory()
-  const { register, handleSubmit, formState: { errors } } = useForm<MedicationType>()
+  // const history = useHistory()
+
   const [loading, setLoading] = useState(false)
-  const [errorMessage, setErrormessage] = useState('')
-  const addMedication = async (data:any) => {
+  const [medication, setMedication] = useState([])
+
+  useEffect(() => {
     setLoading(true)
-    const medResponse = await useApi.medicationRequest(data.NameMedication, data.Dosage, data.MedicationType, data.StartDate, data.EndDate)
-    const mymedication = medResponse?.token || 'undefined'
-    console.log(medResponse)
-    if (mymedication === 'undefined') {
-      setErrormessage(medResponse.messages)
-      setLoading(false)
-    } else {
-      setTimeout(() => {
+    const getData = async () => {
+      const userId = localStorage.getItem(welinkTokens.userID) || null
+      const urlPath = `${backEndPoints.EXPIRED_ORDERS}/${userId}`
+      try {
+        const response = await api.get(urlPath)
+        if (response.data.data !== null) {
+          setLoading(false)
+          setMedication(response.data.data)
+        }
+      } catch (error) {
         setLoading(false)
-        history.push(frontEndPoints.MEDICATION)
-        setErrormessage(medResponse.message)
-      }, 2000)
+      }
     }
-    //
+    getData()
+  }, [])
+
+  if (loading) {
+    return (<>
+  <div className='justify-center mt-64 mx-auto items-center text-center'><Spin tip='Fetching.....'/></div></>)
   }
   return (
     <>
     <div className="px-2 py-2">
-    <h5 className="font-semibold text-blue-400 mt-4 text-2xl">Medication Due<span className="text-sm font-normal text-gray-400"> / Castro, Jennifer</span></h5>
+    <h5 className="font-semibold text-blue-400 mt-4 text-2xl">Expired orders<span className="text-sm font-normal text-gray-400"></span></h5>
        </div>
     <div className="mx-4">
     <Tabs defaultActiveKey="1" onChange={callback}>
     <TabPane tab="Medication Due" key="1">
-    <Alert message={errorMessage}/>
-      <form onSubmit={ handleSubmit((data) => { addMedication(data) })}>
-    <div className="p-4 mb-14 bg-white rounded-xl shadows-xl mx-4">
-    <div className="grid md:grid-cols-2 gap-4">
-          <div className="p-2">
-            <label className="text-md">Name of Medication</label>
-            <input type="text" {...register('NameMedication', { required: 'This field is required' })} className="w-full p-2 border"/>
-            <span className="text-red-600 text-xs">{errors.NameMedication && errors.NameMedication.message}</span>
-          </div>
-          <div className="p-2">
-            <label>Types of Medication (Optional)</label>
-            <select {...register('MedicationType', { required: false })} className="w-full p-2 borderl">
-            <option>Select here</option>
-              <option>Injection</option>
-              <option>Tablets</option>
-            </select>
-          </div>
-          <div className="p-2">
-            <label>Dosage ( Required)</label>
-          <input type="text" {...register('Dosage', { required: 'This field is required' })} className="w-full p-2 border"/>
-          <span className="text-red-600 text-xs">{errors.Dosage && errors.Dosage.message}</span>
-          </div>
-        <div className="p-2">
-          <label>Physician( Required)</label>
-          <Select
-            mode="multiple"
-            allowClear
-            style={{ width: '100%' }}
-            placeholder="Please select"
-            defaultValue={['Doctor Seth']}
-            onChange={handleChange}
-          >
-            {children}
-          </Select>
-        </div>
-          <div className="p-2">
-            <label>Start Date </label>
-            <input type="date" {...register('StartDate', { required: 'This field is required' })} className="w-full p-2 border"/>
-            <span className="text-red-600 text-xs">{errors.StartDate && errors.StartDate.message}</span>
-          </div>
-          <div className="p-2">
-            <label>End Date</label>
-            <input type="date" {...register('EndDate', { required: 'This field is required' })} className="w-full p-2 border"/>
-            <span className="text-red-600 text-xs">{errors.EndDate && errors.EndDate.message}</span>
-          </div>
-          <div className="mb-4">
-          {loading ? <span>Sending.....</span> : <input type="submit" value="SEND" className="bg-red-400 cursor-pointer appearance-none  rounded-full w-full py-2 px-4 ml-32 font-medium text-gray-600 leading-tight focus:outline-none hover:bg-green-400 focus:border-green-500" />}
-          </div>
-        </div>
+      <div className="p-4 mb-14 bg-white rounded-xl shadows-xl mx-4">
+         <div className="grid md:grid-cols-3 gap-3">
+          {medication.length > 0
+            ? medication.map((items:any, index) => {
+              return (
+              <div key={index} className="p-2 rounded-3xl shadow-xl">
+                 <div className="flex flex-wrap rounded-r-3xl ">
+                   <div className="bg-green-200 rounded-l-3xl flex justify-center p-8 w-1/3">
+                   <img className="h-full round" src="https://img.icons8.com/external-kiranshastry-lineal-color-kiranshastry/50/000000/external-medication-medical-kiranshastry-lineal-color-kiranshastry.png"/>
+                     </div>
+<div className="w-2/3">
+  <p className="p-2 text-md text-gray-600 font-bold">
+    {items.residentid.firstName} {items.residentid.lastName}</p>
+    <p className="px-2">{items.orderType}</p>
+    <p className="px-2">{items.residentid.residentSate}</p>
+    <p className="px-2 mx-2 bg-red-300 text-center text-gray-100 rounded-full w-32">{items.endDate}</p>
+</div>
+                   </div>
+              </div>
+              )
+            })
+            : <div>
+              No data found!
+              </div>}
+
+         </div>
       </div>
-      </form>
     </TabPane>
-    <TabPane tab="Add Sig" key="2">
-    <div>
-    <div className=""><Sig/></div>
-    <table className="rounded-t-lg w-full mx-auto bg-gray-200 text-gray-800">
-      <tr className="text-left border-b-2 border-blue-300">
-        <th className="px-4 py-3">Name of Medication</th>
-        <th className="px-4 py-3">Types of Medication</th>
-        <th className="px-4 py-3">Dosage</th>
-        <th className="px-4 py-3">Physician</th>
-        <th className="px-4 py-3">Start Date</th>
-        <th className="px-4 py-3">End Date</th>
-      </tr>
-      {
-    recent.map((items:any, index) => (
-      <tr key={index} className="bg-gray-100 hover:bg-gray-200 border-b border-blue-200">
-        <td className="px-4 py-3">{items.nameMedication}</td>
-        <td className="px-4 py-3">{items.typesMedication}</td>
-        <td className="px-4 py-3">{items.dosage}</td>
-        <td className="px-4 py-3">{items.physician}</td>
-        <td className="px-4 py-3">{items.startDate}</td>
-        <td className="px-4 py-3">{items.endDate}</td>
-        <td className="px-4 py-3"><button className="bg-blue-400 hover:bg-blue-500 p-2 rounded-lg">Review</button> <button className="bg-blue-400 hover:bg-blue-500 p-2 rounded-lg">Recent Admins</button></td>
-      </tr>))
-      }
-    </table>
-    </div>
-    </TabPane>
+
   </Tabs>
     </div>
     </>
