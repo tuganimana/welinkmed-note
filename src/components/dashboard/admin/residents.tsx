@@ -200,10 +200,8 @@ export default function ViewResidents () {
             </div>
             <div className="w-3/4 gap-1 grid">
                   <div className="flex flex-wrap">
-
                   <div className="p-3 flex flex-wrap  border-b-2 border-blue-400">
                     <div className="w-3/4  gap-1">
-                      <p className="font-bold text-lg text-gray-600">{item.orderId}</p>
                       <p className="font-bold text-lg text-gray-600">{item.routineMedOrder}</p>
                       <p className="font-bold text-xs text-black-400">{item.description}</p>
                       <p className="text-md"><span className="font-bold"><i className="fa fa-calendar  text-gray-400  rounded p-2"></i>Time Per Day:</span>{item.timesperday}</p>

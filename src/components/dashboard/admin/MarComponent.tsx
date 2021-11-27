@@ -5,6 +5,7 @@ import { api } from '../../../utils/apiRequest'
 import { useParams } from 'react-router-dom'
 import { Page, Text, View, Document, StyleSheet, PDFViewer } from '@react-pdf/renderer'
 import Administered from './mar/administered'
+import { useApi } from '../../../utils/api'
 const styles = StyleSheet.create({
   page: {
     padding: 5,
@@ -158,6 +159,28 @@ const MarComponents = (props:any) => {
       } catch (error) {}
     }
     getAllOrder()
+  }, [])
+  const [fullname, setFullname] = useState('')
+  const [dob, setDob] = useState('')
+  const [ResidentSate, setResidentSate] = useState('')
+  const [Religion, setReligion] = useState('')
+  const [AaritialStatus, setAaritialStatus] = useState('')
+  const [additionalPhysician, setadditionalPhysician] = useState('')
+  useEffect(() => {
+    useApi.getSingleresident(`/${residentid}`)
+      .then((res:any) => {
+        if (res) {
+          setFullname(`${res.data.firstName} ${res.data.lastName}`)
+          setDob(res.data.dateOfBirth)
+          setResidentSate(res.data.residentSate)
+          setReligion(res.data.religion)
+          setAaritialStatus(res.data.maritialStatus)
+          setadditionalPhysician(res.data.additionalPhysician)
+        }
+      })
+      .catch((error: any) => {
+        console.log(`${error}`)
+      })
   }, [])
 
   const [Orders, setOrders] = useState([])
@@ -349,7 +372,7 @@ const MarComponents = (props:any) => {
                 <Text style={styles.tableCellContent}>{items.routineMedOrder}</Text>
             </View>
             <View style={styles.tableColData}>
-           <Administered orderId={items.orderId}/>
+             <Administered orderId={items.orderId}/>
             </View>
         </View>
         </View>
@@ -444,21 +467,18 @@ const MarComponents = (props:any) => {
       </View>
       <View style={styles.content}>
         <View style={styles.contButton}>
-          <Text style={styles.buttontitle}>Resident: HODAL BIZIMNGU</Text>
-          <Text style={styles.buttontitle}>DOB: 4/22/1967</Text>
-          <Text style={styles.buttontitle}>Diet: None</Text>
+          <Text style={styles.buttontitle}>Resident: {fullname}</Text>
+          <Text style={styles.buttontitle}>DOB: {dob}</Text>
         </View>
         <View style={styles.contButton}>
-          <Text style={styles.buttontitle}>MedRecNo:</Text>
-          <Text style={styles.buttontitle}>Physician: Unknown</Text>
+          <Text style={styles.buttontitle}>Resident State: {ResidentSate}</Text>
+          <Text style={styles.buttontitle}>Physician:  {additionalPhysician}</Text>
         </View>
         <View style={styles.contButton}>
-          <Text style={styles.buttontitle}>Benchmark Valley Behavioral Home</Text>
-          <Text style={styles.buttontitle}>Allergies: None</Text>
+          <Text style={styles.buttontitle}>Maritial Status: {AaritialStatus}</Text>
         </View>
         <View style={styles.contButton}>
-          <Text style={styles.buttontitle}>Location: Benchmark Valley Behavioral Home Branham</Text>
-          <Text style={styles.buttontitle}>Diagnosis: None</Text>
+          <Text style={styles.buttontitle}>Location: {Religion} </Text>
         </View>
       </View>
       <View style={styles.content}>
@@ -502,54 +522,18 @@ const MarComponents = (props:any) => {
             <View style={styles.tableColB}>
               <Text style={styles.tableCell}>Ob</Text>
             </View>
-            <View style={styles.tableColB}>
-              <Text style={styles.tableCell}>Date</Text>
-            </View>
-            <View style={styles.tableColB}>
-              <Text style={styles.tableCell}>Time</Text>
-            </View>
-            <View style={styles.tableColB}>
-              <Text style={styles.tableCell}>Init</Text>
-            </View>
-            <View style={styles.tableColB}>
-              <Text style={styles.tableCell}>Drug-Strength-Dosage</Text>
-            </View>
-            <View style={styles.tableColB}>
-              <Text style={styles.tableCell}>Site</Text>
-            </View>
-            <View style={styles.tableColB}>
-              <Text style={styles.tableCell}>Ob</Text>
-            </View>
           </View>
           {
-    Mardata.map((items:any, index) => (
+    MedicalOrder.map((items:any, index) => (
         <View key={index} style={styles.tableRow}>
             <View style={styles.tableColB}>
-              <Text style={styles.tableCellContentWhite}>Sign</Text>
+              <Text style={styles.tableCellContentWhite}>{items.MedicalOrder}</Text>
             </View>
             <View style={styles.tableColB}>
-              <Text style={styles.tableCellContentWhite}>9:00</Text>
+              <Text style={styles.tableCellContentWhite}>{items.time}</Text>
             </View>
             <View style={styles.tableColB}>
-              <Text style={styles.tableCellContentWhite}>Init</Text>
-            </View>
-            <View style={styles.tableColB}>
-              <Text style={styles.tableCellContentWhite}>Drug</Text>
-            </View>
-            <View style={styles.tableColB}>
-              <Text style={styles.tableCellContentWhite}>Site</Text>
-            </View>
-            <View style={styles.tableColB}>
-              <Text style={styles.tableCellContentWhite}>Ob</Text>
-            </View>
-            <View style={styles.tableColB}>
-              <Text style={styles.tableCellContentWhite}>12/2/2021</Text>
-            </View>
-            <View style={styles.tableColB}>
-              <Text style={styles.tableCellContentWhite}>9:00</Text>
-            </View>
-            <View style={styles.tableColB}>
-              <Text style={styles.tableCellContentWhite}>Init</Text>
+              <Text style={styles.tableCellContentWhite}>{items.initial}</Text>
             </View>
             <View style={styles.tableColB}>
               <Text style={styles.tableCellContentWhite}>Drug</Text>
@@ -566,21 +550,18 @@ const MarComponents = (props:any) => {
       </View>
       <View style={styles.content}>
         <View style={styles.contButton}>
-          <Text style={styles.buttontitle}>Resident: HODAL BIZIMNGU</Text>
-          <Text style={styles.buttontitle}>DOB: 4/22/1967</Text>
-          <Text style={styles.buttontitle}>Diet: None</Text>
+          <Text style={styles.buttontitle}>Resident: {fullname}</Text>
+          <Text style={styles.buttontitle}>DOB: {dob}</Text>
         </View>
         <View style={styles.contButton}>
-          <Text style={styles.buttontitle}>MedRecNo:</Text>
-          <Text style={styles.buttontitle}>Physician: Unknown</Text>
+          <Text style={styles.buttontitle}>Resident State: {ResidentSate}</Text>
+          <Text style={styles.buttontitle}>Physician:  {additionalPhysician}</Text>
         </View>
         <View style={styles.contButton}>
-          <Text style={styles.buttontitle}>Benchmark Valley Behavioral Home</Text>
-          <Text style={styles.buttontitle}>Allergies: None</Text>
+          <Text style={styles.buttontitle}>Maritial Status: {AaritialStatus}</Text>
         </View>
         <View style={styles.contButton}>
-          <Text style={styles.buttontitle}>Location: Benchmark Valley Behavioral Home Branham</Text>
-          <Text style={styles.buttontitle}>Diagnosis: None</Text>
+          <Text style={styles.buttontitle}>Location: {Religion} </Text>
         </View>
       </View>
     </Page>
