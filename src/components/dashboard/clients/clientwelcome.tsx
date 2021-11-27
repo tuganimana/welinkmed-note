@@ -27,11 +27,6 @@ export default function ClientWelcome () {
             </div>
             <div className="mb-4 bg-white rounded-xl mx-2 ">
               <div className="grid  md:grid-cols-3 gap-4 p-3">
-             <a href={frontEndPoints.USER_MAINTENANCE}><div className="p-3 bg-blue-200 text-gray-600 flex flex-wrap font-bold rounded-xl shadow">
-                <div className="bg-white rounded-full h-8 w-8 items-center"><UserAddOutlined className="ml-2" /></div>
-                <span className="inline-block mt-2 mx-3"> Add user</span>
-                </div>
-                </a>
                 <a href={frontEndPoints.RESIDENT_ADD}><div className="p-3 bg-red-200 text-gray-600 flex flex-wrap font-bold rounded-xl shadow">
                 <div className="bg-white rounded-full h-8 w-8 items-center"><UserAddOutlined className="ml-2" /></div>
                 <span className="inline-block mt-2 mx-3"> Add residents</span>
