@@ -31,9 +31,8 @@ export default function Sidebar () {
     const getAllOrder = async () => {
       const userId = localStorage.getItem(welinkTokens.userID) || null
       const urlPath = `${backEndPoints.DUE_ORDERS}/${userId}`
-      const response = await api.get(urlPath)
-      console.log(response)
-      setDue(response.data.data.length)
+      const resDue = await api.get(urlPath)
+      setDue(resDue.data.data.length)
     }
     getData()
     getAllOrder()

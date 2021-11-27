@@ -50,7 +50,8 @@ export enum welinkTokens{
     userToken = 'welinkUserToken',
     accountType = 'accountType',
     username = 'userName',
-    userID='id'
+    userID='id',
+    organization='organization'
   }
 
 export enum accountCategory{

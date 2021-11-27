@@ -75,6 +75,7 @@ export default function ViewResidents () {
       const urlPath = `${backEndPoints.RESIDENT_ORDERS}/${residentid}`
       try {
         const response = await api.get(urlPath)
+        console.log(response)
         if (response.data.data !== null) {
           setLoading(false)
           setMedicalOrder(response.data.data)
@@ -90,12 +91,11 @@ export default function ViewResidents () {
   const [period, setPeriod] = useState('')
   const AdministerOrder = async (orderId:any, result:any) => {
     setLoading(true)
-    console.log(period)
     const currentdate = new Date()
     const currentMonth = currentdate.getMonth() + 1
     const todayDate = currentdate.getDate() + '-' + (currentdate.getMonth() + 1) + '-' + currentdate.getFullYear()
     const administerPath = `${backEndPoints.ADMINIST_MAR}/${orderId.toString()}`
-    const response = await api.put(administerPath, {
+    const resAdmin = await api.put(administerPath, {
       initial: initial.toString(),
       time: period.toString(),
       result: result,
@@ -106,12 +106,12 @@ export default function ViewResidents () {
       day: day.toString()
     })
     try {
-      if (response.data !== null) {
+      if (resAdmin.data !== null) {
         setMessaging('Administered')
         setLoading(false)
       } else {
         setTimeout(() => {
-          setMessaging(response.data.message)
+          setMessaging(resAdmin.data.message)
           setLoading(false)
         }, 2000)
       }

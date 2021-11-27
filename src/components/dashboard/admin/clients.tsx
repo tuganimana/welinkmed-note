@@ -83,8 +83,9 @@ export default function Residents () {
                           </a>
                         </div>
                         <div className=" text-center items-end ">
-                          <a href={urlPath}>
-                          <span className="text-center w-full cursor-pointer hover:bg-green-800 rounded-full px-4 py-2 bg-green-600 font-bold cursor-pointer text-xs  text-gray-100 mt-2">resident meds</span>
+                          <a href={urlOrder}>
+                          <span className="text-center w-full cursor-pointer hover:bg-green-800 rounded-full px-4 py-2 bg-green-600 font-bold cursor-pointer text-xs  text-gray-100 mt-2">
+                            Add Meds</span>
                           </a>
                         </div>
                        </div>
