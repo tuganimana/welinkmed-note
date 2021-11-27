@@ -4,16 +4,16 @@ import Chart from "chart.js/auto"
 import { Pie } from "react-chartjs-2"
 
 
-export default function PieChart() {
+export default function PieChart(props){
 	return (
 		<div className="w-3/4 flex items-center justify-center m-auto">
 			<Pie 
 			className="pt-2 pb-2"
 				data={{
-					labels: ['Missed Orders', 'Received', 'On Date'],
+					labels: ['Expired Orders', 'Due Order', 'On Date'],
 					datasets: [{
 						label: '# of Orders',
-						data: [12, 48, 40],
+						data: [12, props.due, props.expired],
 						backgroundColor: [
 							'rgba(252, 165, 165, 0.3)',
 							'rgba(52, 211, 153, 0.3)',

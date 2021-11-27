@@ -3,9 +3,9 @@ import React, { useState } from 'react'
 import { Tabs } from 'antd'
 import { useForm } from 'react-hook-form'
 import { RegisterType } from '../../../utils/types'
-import { useApi } from '../../../utils/api'
 import Alert from '../../alerts'
-import { welinkTokens } from '../../../utils/enums'
+import { welinkTokens, backEndPoints } from '../../../utils/enums'
+import { api } from '../../../utils/apiRequest'
 const { TabPane } = Tabs
 export default function UserMaintenance () {
   const { register, handleSubmit, formState: { errors } } = useForm<RegisterType>()
@@ -15,24 +15,23 @@ export default function UserMaintenance () {
   const [success, setSuccess] = useState(false)
   const registerUser = async (data:any) => {
     setLoading(true)
+    const dataBody = {
+      firstName: data.firstname,
+      lastName: data.lastname,
+      email: data.email,
+      password: data.password,
+      category: data.category,
+      organization: userId
+    }
     try {
-      const response = await useApi.UserRegisterRequest(
-        data.firstname,
-        data.lastname,
-        data.email,
-        data.password,
-        data.category,
-        data.origanization,
-        userId
-      )
-      console.log(response)
-      if (response !== 'undefined') {
-        setMessaging(response.message)
+      const response = await api.post(`${backEndPoints.REGISTER}`, dataBody)
+      if (response.data !== null) {
+        setMessaging(response.data.message)
         setLoading(true)
         setSuccess(false)
       }
       setTimeout(() => {
-        setMessaging(response.message)
+        setMessaging(response.data.message)
         setSuccess(false)
         setLoading(false)
       }, 2000)

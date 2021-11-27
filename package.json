@@ -40,6 +40,7 @@
     "build": "npm run lint;react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
+    "dev":"docker-compose -f docker-compose.dev.yml up",
     "lint": "tsc --pretty --noEmit && node_modules/.bin/eslint ./src --fix --ext .tsx,.jsx,.ts,.js --quiet"
   },
   "eslintConfig": {

@@ -29,7 +29,7 @@ class Api {
           }
         })
     } catch (err) {
-      throw new Error(`connect to api fails:${err.message}`)
+      throw new Error(`connect to api fails:${err}`)
     }
   }
 
@@ -55,8 +55,7 @@ class Api {
       }
       return request.data
     } catch (error) {
-      console.log(`There was an error connecting to the API: ${error.message}`)
-      throw new Error(error.message)
+      console.log(`There was an error connecting to the API: ${error}`)
     }
   }
 
@@ -81,7 +80,7 @@ class Api {
         responseType: 'json'
       })
     } catch (err) {
-      throw new Error(`Error-${err.message}`)
+      throw new Error(`Error-${err}`)
     }
   }
 
@@ -95,7 +94,7 @@ class Api {
       const res = await this.apiConnect('POST', backEndPoints.LOGIN, data)
       return res
     } catch (error) {
-      throw new Error(`Could not Login due to ${error.message}`)
+      throw new Error(`Could not Login due to ${error}`)
     }
   }
 
@@ -105,7 +104,7 @@ class Api {
       const res = await this.axiosConnect(axios.post, backEndPoints.CREATE_MEDICATION, { NameMedication, Dosage, MedicationType, StartDate, EndDate }, '')
       return res
     } catch (error) {
-      console.log(`failed to add medication: ${error.message}`)
+      console.log(`failed to add medication: ${error}`)
     }
   }
   // start RESIDENT API request
@@ -199,7 +198,7 @@ class Api {
       const res = await this.axiosConnect(axios.get, backEndPoints.CREATE_RESIDENT, {}, '')
       return res
     } catch (err) {
-      console.log(`failed to fetch : ${JSON.stringify(err.response)}`)
+      console.log(`failed to fetch : ${JSON.stringify(err)}`)
     }
   }
 
@@ -255,7 +254,7 @@ class Api {
       }, '')
       return res
     } catch (error) {
-      console.log(`failed to add new user: ${error.message}`)
+      console.log(`failed to add new user: ${error}`)
     }
   }
 
@@ -351,7 +350,7 @@ class Api {
       }, '')
       return res
     } catch (error) {
-      console.log(`failed to add ROutine to Order failed: ${error.message}`)
+      console.log(`failed to add ROutine to Order failed: ${error}`)
     }
   }
 
@@ -390,7 +389,7 @@ class Api {
       const res = await this.axiosConnect('GET', backEndPoints.ADDCLIENT, {}, '')
       return res
     } catch (err) {
-      console.log(`failed to fetch : ${err.message}`)
+      console.log('failed to fetch')
     }
   }
 
@@ -409,7 +408,7 @@ class Api {
       const res = await this.axiosConnect(axios.get, backEndPoints.EXPIRED_ORDERS, {}, addedby)
       return res
     } catch (error) {
-      console.log(`failed to fetch expired orders: ${error.message}`)
+      console.log('failed to fetch expired orders: ')
     }
   }
 
@@ -419,7 +418,7 @@ class Api {
       const res = await this.axiosConnect(axios.get, backEndPoints.DUE_ORDERS, {}, userId)
       return res
     } catch (error) {
-      console.log(`failed to fetch expired orders: ${error.message}`)
+      console.log('failed to fetch expired orders: ')
     }
   }
 
