@@ -1,6 +1,6 @@
 // eslint-disable-next-line no-use-before-define
 import React, { useState, useEffect } from 'react'
-import { Tabs, Input, Modal, Spin, Button } from 'antd'
+import { Tabs, Modal, Spin, Button } from 'antd'
 import { EditOutlined } from '@ant-design/icons'
 import { useParams } from 'react-router-dom'
 import Alert from '../../alerts'
@@ -26,15 +26,15 @@ export default function ViewResidents () {
       setConfirmLoading(false)
     }, 2000)
   }
-  const [visible2, setVisible2] = useState(false)
-  const [confirmLoading2, setConfirmLoading2] = useState(false)
-  const handleOk2 = () => {
-    setConfirmLoading2(true)
-    setTimeout(() => {
-      setVisible2(false)
-      setConfirmLoading2(false)
-    }, 2000)
-  }
+  // const [visible2, setVisible2] = useState(false)
+  // const [confirmLoading2, setConfirmLoading2] = useState(false)
+  // const handleOk2 = () => {
+  //   setConfirmLoading2(true)
+  //   setTimeout(() => {
+  //     setVisible2(false)
+  //     setConfirmLoading2(false)
+  //   }, 2000)
+  // }
   const [isModalVisible, setIsModalVisible] = useState(false)
   const showModal = () => {
     setIsModalVisible(true)
@@ -45,7 +45,17 @@ export default function ViewResidents () {
   const handleCancel = () => {
     setIsModalVisible(false)
   }
-  const { TextArea } = Input
+  const [DidNotModalVisible, setDidNotModalVisible] = useState(false)
+  const showModalNotAdmin = () => {
+    setDidNotModalVisible(true)
+  }
+  const handleOky = () => {
+    setDidNotModalVisible(false)
+  }
+  const handleCancl = () => {
+    setDidNotModalVisible(false)
+  }
+  // const { TextArea } = Input
   const urlPath = `${frontEndPoints.RESIDENT_EDIT}/${residentid}`
   const [fullname, setFullname] = useState('')
   const [profile, setProfile] = useState('')
@@ -145,6 +155,43 @@ export default function ViewResidents () {
     try {
       if (response.data !== null) {
         setMessaging('Administered')
+        setLoading(false)
+      } else {
+        setTimeout(() => {
+          setMessaging(response.data.message)
+          setLoading(false)
+        }, 2000)
+      }
+    } catch (error) {
+      setMessaging('new order can not be added')
+      setLoading(false)
+    }
+  }
+  // === Didn't administer
+  const [dinitial, setdInitial] = useState('')
+  const [dday, setdDay] = useState('')
+  const [dperiod, setdPeriod] = useState('')
+  const [dwhy, setdWhy] = useState('')
+  const DidNotAdministerOrder = async (orderId:any, result:any) => {
+    setLoading(true)
+    console.log(period)
+    const currentdate = new Date()
+    const currentMonth = currentdate.getMonth() + 1
+    const todayDate = currentdate.getDate() + '-' + (currentdate.getMonth() + 1) + '-' + currentdate.getFullYear()
+    const administerPath = `${backEndPoints.ADMINIST_MAR}/${orderId.toString()}`
+    const response = await api.put(administerPath, {
+      initial: dinitial.toString(),
+      time: dperiod.toString(),
+      result: result,
+      date: todayDate,
+      periodValue: dwhy,
+      CurrentMonth: currentMonth.toString(),
+      residentID: residentid.toString(),
+      day: dday.toString()
+    })
+    try {
+      if (response.data !== null) {
+        setMessaging('Submit Successfull')
         setLoading(false)
       } else {
         setTimeout(() => {
@@ -308,7 +355,7 @@ export default function ViewResidents () {
                           onOk={handleO}
                           onCancel={handleCancel} width={700}
                           footer={[
-                            <Button key="back" onClick={handleOk}>
+                            <Button key="back" onClick={handleO}>
                               Return
                             </Button>,
                             <Button key="submit" type="primary" loading={loading} onClick={() =>
@@ -395,38 +442,115 @@ export default function ViewResidents () {
         </div>
     </TabPane>
     <TabPane tab="Did not Administer" key="2">
-    <div className="flex flex-wrap md:w-2/3 p-1 bg-red-100  border-red-400 border-2 rounded-xl">
+    <div className="grid md:grid-cols-2 gap-4">
+    {
+              MedicalOrder.map((item:any, index) => {
+                return (
+        <div key={index} className="flex flex-wrap md:w-4/4 p-1 bg-red-100  border-red-400 border-2 rounded-xl">
             <div className="w-1/4  p-5 text-center align-center item-center">
                 <img src={pill1} alt=""/>
             </div>
-            <div className="w-2/4 gap-1 grid">
-            <span className="font-bold text-lg text-gray-600">AMOXLINE KoP 21 CaP</span>
-            <span className="font-bold text-xs text-black-400">Tare 1 Capsulle by mounth three times per day</span>
-            <span className="text-md"><span className="font-bold"><i className="fa fa-calendar  text-gray-400  rounded p-2"></i>Last Administed :</span> 4th May 2021 </span>
-            <span className="text-md"><span className="font-bold"><i className="fa fa-thumb-tack  text-gray-500  rounded p-2"></i>Last Quality:</span> 1 </span>
-            </div>
-            <div className="w-1/4 gap-1 grid">
-             <span className="font-bold text-lg text-gray-600">
-                 <button onClick={() => setVisible2(true)} className="bg-red-300 w-full hover:bg-red-400 text-white font-bold p-3 rounded-xl">
-                 Did not Administer</button>
-                <Modal
-                    title="Did not Administer"
-                    centered
-                    visible={visible2}
-                    onOk={handleOk2}
-                    confirmLoading={confirmLoading2}
-                    onCancel={() => setVisible2(false)}
-                    width={700}
-                >
-                <div className="grid">
-                <div className="p-2">
-                    <label>Why did not Administer (*required)</label>
-                    <TextArea rows={4} />
-                </div>
+            <div className="w-3/4 gap-1 grid">
+                  <div className="flex flex-wrap">
+                  <div className="p-3 flex flex-wrap">
+                    <div className="w-3/4  gap-1">
+                      <p className="font-bold text-lg text-gray-600">{item.routineMedOrder}</p>
+                      <p className="font-bold text-xs text-black-400">{item.description}</p>
+                      <p className="text-md"><span className="font-bold"><i className="fa fa-calendar  text-gray-400  rounded p-2"></i>Time Per Day:</span>{item.timesperday}</p>
+                      <span className="text-md"><span className="font-bold"><i className="fa fa-thumb-tack  text-gray-500  rounded p-2"></i>Dose Per Day:</span> {item.dosePerday} </span><br/>
+                      <span className="text-md"><span className="font-bold"><i className="fa fa-clock-o  text-gray-500  rounded p-2"></i></span><b>Morning:</b> {item.morningtimes} &nbsp;&nbsp; <b>Noon:</b> {item.noontimes} &nbsp;&nbsp; <b>Night:</b> {item.nighttimes}</span>
+                     </div>
+                    <div className="w-1/4">
+                      <span className="font-bold text-lg text-gray-600">
+                        <button onClick={showModalNotAdmin} className="bg-red-400 w-full hover:bg-red-500 text-white font-bold p-1 m-1 rounded-xl">
+                          Does Not
+                        </button>
+                        <Modal title="Doe not  Administer" visible={DidNotModalVisible}
+                          onOk={handleOky}
+                          onCancel={handleCancl} width={700}
+                          footer={[
+                            <Button key="back" onClick={handleCancl}>
+                              Return
+                            </Button>,
+                            <Button key="submit" type="primary" loading={loading} onClick={() =>
+                              DidNotAdministerOrder(item.orderId, 'Not')} >
+                              Does Not Administer
+                            </Button>
+
+                          ]}
+                          >
+                          <form>
+                          <Alert message={messaging}/>
+                         <div className="grid">
+                         <div className="p-2">
+                            <label>initial</label>
+                            <input type="text" value={dinitial} onChange={(e:any) => setdInitial(e.target.value)} className="w-full p-2 border"/>
+                          </div>
+
+                          <div className="p-2">
+                            <label>Day</label>
+                            <select onChange={(e:any) => setdDay(e.target.value)} className="w-full p-2 border">
+                              <option value="1">day 1</option>
+                              <option value="2">day 2</option>
+                              <option value="3">day 3</option>
+                              <option value="4">day 4</option>
+                              <option value="5">day 5</option>
+                              <option value="6">day 6</option>
+                              <option value="7">day 7</option>
+                              <option value="8">day 8</option>
+                              <option value="9">day 9</option>
+                              <option value="10">day 10</option>
+                              <option value="11">day 11</option>
+                              <option value="12">day 12</option>
+                              <option value="13">day 13</option>
+                              <option value="14">day 14</option>
+                              <option value="15">day 15</option>
+                              <option value="16">day 16</option>
+                              <option value="17">day 17</option>
+                              <option value="18">day 18</option>
+                              <option value="19">day 19</option>
+                              <option value="20">day 20</option>
+                              <option value="21">day 21</option>
+                              <option value="22">day 22</option>
+                              <option value="23">day 23</option>
+                              <option value="24">day 24</option>
+                              <option value="25">day 25</option>
+                              <option value="26">day 26</option>
+                              <option value="27">day 27</option>
+                              <option value="28">day 28</option>
+                              <option value="29">day 29</option>
+                              <option value="30">day 30</option>
+                              <option value="31">day 31</option>
+                            </select>
+                          </div>
+                          <div className="p-2">
+                            <label>Period Value</label>
+                            <select onChange={(e:any) => setdPeriod(e.target.value)} className="w-full p-2 border">
+                              <option value="">Select Time</option>
+                              <option value={item.morningtimes}> Morning: {item.morningtimes} </option>
+                              <option value={item.noontimes}> Noon: {item.noontimes} </option>
+                              <option value={item.nighttimes}> Night: {item.nighttimes} </option>
+                              <option value={item.timesperday}> Other: {item.timesperday} </option>
+                            </select>
+                          </div>
+                          <div className="p-2">
+                            <label>Why does not Administer</label>
+                            <textarea value={dwhy} onChange={(e:any) => setdWhy(e.target.value)} className="w-full p-2 border"></textarea>
+                          </div>
+                          </div>
+                          </form>
+                          </Modal>
+                      </span>
                     </div>
-                </Modal>
-             </span>
+                  </div>
+
+                  </div>
             </div>
+            </div>
+                )
+              }
+              )
+        }
         </div>
     </TabPane>
     <TabPane tab="Home Health" key="3">
