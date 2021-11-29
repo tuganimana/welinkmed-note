@@ -97,6 +97,7 @@ export default function UserMaintenanceRoot () {
             <span className="text-red-600 text-xs">{errors.category && errors.category.message}</span>
             <select {...register('category', { required: '* This field is required' })} className="w-full p-2 border">
             <option value="Root">Root</option>
+            <option value="Admin">Admin</option>
             </select>
           </div>
       </div>
