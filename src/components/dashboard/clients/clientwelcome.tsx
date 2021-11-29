@@ -1,7 +1,7 @@
 // eslint-disable-next-line no-use-before-define
 import React from 'react'
-import Residents from './clients'
-import { UserAddOutlined, DollarCircleOutlined, AreaChartOutlined, FolderAddOutlined, PlusOutlined } from '@ant-design/icons'
+import ResidentsUser from './clients'
+import { UserAddOutlined, DollarCircleOutlined, AreaChartOutlined, PlusOutlined } from '@ant-design/icons'
 import { Dropdown, Menu } from 'antd'
 import { frontEndPoints } from '../../../utils/enums'
 export default function ClientWelcome () {
@@ -27,16 +27,12 @@ export default function ClientWelcome () {
             </div>
             <div className="mb-4 bg-white rounded-xl mx-2 ">
               <div className="grid  md:grid-cols-3 gap-4 p-3">
-                <a href={frontEndPoints.RESIDENT_ADD}><div className="p-3 bg-red-200 text-gray-600 flex flex-wrap font-bold rounded-xl shadow">
+                <a href={frontEndPoints.RESIDENT_ADD_USER}><div className="p-3 bg-red-200 text-gray-600 flex flex-wrap font-bold rounded-xl shadow">
                 <div className="bg-white rounded-full h-8 w-8 items-center"><UserAddOutlined className="ml-2" /></div>
                 <span className="inline-block mt-2 mx-3"> Add residents</span>
                 </div>
                 </a>
-                <a href={frontEndPoints.ORDER}><div className="p-3 bg-green-200 text-gray-600 flex flex-wrap font-bold rounded-xl shadow">
-                <div className="bg-white rounded-full h-8 w-8 items-center"><FolderAddOutlined className="ml-2" /></div>
-                <span className="inline-block mt-2 mx-3"> Add order</span>
-                </div>
-                </a>
+
                 <div className="p-3 bg-gray-200 text-gray-600 flex flex-wrap font-bold rounded-xl shadow">
                 <div className="bg-white rounded-full h-8 w-8 items-center"><AreaChartOutlined className="ml-2" /></div>
                 <span className="inline-block mt-2 mx-3"> Reports</span>
@@ -48,7 +44,7 @@ export default function ClientWelcome () {
               </div>
             </div>
             <div className="">
-              <Residents/>
+              <ResidentsUser/>
             </div>
           </div>
           <div className="lg:w-2/6 w-full bg-white rounded-lg md:mt16 mt-4 grid">

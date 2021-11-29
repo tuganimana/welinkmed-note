@@ -59,16 +59,17 @@ export default function Sidebar () {
         <nav className="hidden md:flex-grow lg:flex-grow w-full md:block px-4 pb-4 md:pb-0 md:overflow-y-auto py-2">
           <a href="/user-dashboard" className="block p-2 mt-2 text-md font-bold text-gray-900 border-blue-500 mt-4 rounded-lg  hover:shadow-lg bg-blue-300  hover:bg-blue-200 focus:bg-red-200 focus:text-white hover:text-white text-gray-200 hover:text-gray-900 focus:text-gray-900 hover:bg-gray-200 focus:bg-gray-200 focus:outline-none focus:shadow-outline">
             <i className="fa fa-bar-chart mr-2 text-black bg-blue-200 rounded-full p-3"></i>Resident Due </a>
-          <a href="/user-dashboard" className="block p-2 mt-2 text-md font-bold text-gray-600 border-blue-500 mt-4 rounded-lg
+          <a href={frontEndPoints.DUE_ORDERS_USERS} className="block p-2 mt-2 text-md font-bold text-gray-600 border-blue-500 mt-4 rounded-lg
            hover:shadow-lg bg-blue-300  hover:bg-blue-200 focus:bg-red-200 focus:text-white
            hover:text-white text-gray-200 hover:text-gray-900 focus:text-gray-900
            hover:bg-gray-200 focus:bg-gray-200 focus:outline-none
            focus:shadow-outline">
             <i className="fa fa-medkit mr-2 text-black bg-green-200
              rounded-full p-3"></i>Due Orders <span className="float-right bg-yellow-200 rounded-full pr-2 pl-2">{due}</span> </a>
-          <a href="/user-dashboard" className="block p-2 mt-2 text-md font-bold text-gray-600 border-blue-500 mt-4 rounded-lg  hover:shadow-lg bg-blue-300  hover:bg-blue-200 focus:bg-red-200 focus:text-white hover:text-white text-gray-200 hover:text-gray-900 focus:text-gray-900 hover:bg-gray-200 focus:bg-gray-200 focus:outline-none focus:shadow-outline">
+          <a href="/user-dashboard" className="block p-2 mt-2 text-md font-bold text-gray-600 border-blue-500 mt-4 rounded-lg  hover:shadow-lg bg-blue-300  hover:bg-blue-200 focus:bg-red-200 focus:text-white hover:text-white text-gray-200 hover:text-gray-900 focus:text-gray-900
+          hover:bg-gray-200 focus:bg-gray-200 focus:outline-none focus:shadow-outline">
             <i className="fa fa-medkit  mr-2 text-black bg-red-400 rounded-full p-3"></i>Missed Orders <span className="float-right bg-yellow-200 rounded-full pr-2 pl-2">3</span> </a>
-          <a href="/user-medication-due" className="block p-2 mt-2 text-md font-bold text-gray-600 border-blue-500 rounded-lg hover:shadow-lg bg-blue-300 hover:bg-blue-200 hover:bg-red-200 focus:bg-red-200 focus:text-white hover:text-white text-gray-200 hover:text-gray-900 focus:text-gray-900 hover:bg-gray-200 focus:bg-gray-200 focus:outline-none focus:shadow-outline">
+          <a href={frontEndPoints.EXPIRED_ORDERS} className="block p-2 mt-2 text-md font-bold text-gray-600 border-blue-500 rounded-lg hover:shadow-lg bg-blue-300 hover:bg-blue-200 hover:bg-red-200 focus:bg-red-200 focus:text-white hover:text-white text-gray-200 hover:text-gray-900 focus:text-gray-900 hover:bg-gray-200 focus:bg-gray-200 focus:outline-none focus:shadow-outline">
             <i className="fa fa-hospital-o  mr-2 text-black bg-yellow-200 rounded-full p-3"></i>Expired Orders <span className="float-right bg-yellow-200 rounded-full pr-2 pl-2">{expired}</span></a>
        <hr className="mt-2"/>
        <a className="block p-2 mt-2 bg-blue-300 hover:bg-blue-200 text-md font-bold text-gray-600 border-blue-500 rounded-lg
@@ -105,8 +106,8 @@ export default function Sidebar () {
               <a href="/" className="text-sm leading-6 font-medium text-gray-600 hover:text-red-500 focus:outline-none focus:text-yellow-700 transition ease-in-out duration-150">
               Resident Due
               </a>
-              <a href="#" className="text-sm leading-6 font-medium text-gray-600 hover:text-red-500 focus:outline-none focus:text-yellow-700 transition ease-in-out duration-150">
-               Latest Orders
+              <a href={frontEndPoints.DUE_ORDERS_USERS} className="text-sm leading-6 font-medium text-gray-600 hover:text-red-500 focus:outline-none focus:text-yellow-700 transition ease-in-out duration-150">
+               Due Orders
               </a>
               <a href="#" className="text-sm leading-6 font-medium text-gray-600 hover:text-red-500 focus:outline-none focus:text-yellow-700 transition ease-in-out duration-150">
                Missed Orders

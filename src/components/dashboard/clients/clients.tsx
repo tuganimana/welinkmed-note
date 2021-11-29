@@ -8,7 +8,7 @@ import { useForm } from 'react-hook-form'
 import { SearchType } from '../../../utils/types'
 import { apiBaseUrl } from '../../../utils/env'
 import { api } from '../../../utils/apiRequest'
-export default function Residents () {
+export default function ResidentsUser () {
   const [clients, setRecents] = useState([])
   const [loading, setLoading] = useState(false)
   const [newclient, setCurrentClients] = useState(1)
@@ -63,8 +63,8 @@ export default function Residents () {
                 currentClients.map((items:any, index) => {
                   const urlPath = `${frontEndPoints.RESIDENT_INFO}/${items.residentId}`
                   const imagePath = `${apiBaseUrl}/${items.profile}`
-                  const urlOrder = `${frontEndPoints.ORDER}/${items.residentId}`
-                  const urlMar = `${frontEndPoints.MAR}/${items.residentId}`
+                  const urlOrder = `${frontEndPoints.ORDER_USERS}/${items.residentId}`
+                  const urlMar = `${frontEndPoints.MAR_USER}/${items.residentId}`
                   return (
                   // eslint-disable-next-line react/jsx-key
                   <div key={index} className="w-1/2 md:w-1/3  p-1">

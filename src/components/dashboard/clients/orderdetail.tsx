@@ -13,7 +13,7 @@ import Alert from '../../alerts'
 import { useParams } from 'react-router-dom'
 const { TabPane } = Tabs
 const { Option } = Select
-export default function Orderdetail () {
+export default function OrderdetailUser () {
   const { residentid } : any = useParams()
   const [visible, setVisible] = useState(false)
   const [confirmLoading, setConfirmLoading] = useState(false)

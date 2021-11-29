@@ -8,7 +8,7 @@ import { useApi } from '../../../utils/api'
 import Alert from '../../alerts'
 const jwt = require('jsonwebtoken')
 const { Option } = Select
-export default function Overview () {
+export default function OverviewUser () {
   const { register, handleSubmit, formState: { errors } } = useForm<ResidentType>()
   const [attendingPhysician, setAttending] = useState('')
   const [additional, setAdditional] = useState('')
