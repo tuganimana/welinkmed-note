@@ -2,30 +2,32 @@
 import React, { useEffect, useState } from 'react'
 import { Spin, Pagination } from 'antd'
 import ruser from '../../../images/users.png'
-import { useApi } from '../../../utils/api'
-import { frontEndPoints } from '../../../utils/enums'
+import { backEndPoints, frontEndPoints, welinkTokens } from '../../../utils/enums'
+
 import { useForm } from 'react-hook-form'
 import { SearchType } from '../../../utils/types'
 import { apiBaseUrl } from '../../../utils/env'
-export default function Residents () {
+import { api } from '../../../utils/apiRequest'
+export default function ResidentsUser () {
   const [clients, setRecents] = useState([])
   const [loading, setLoading] = useState(false)
   const [newclient, setCurrentClients] = useState(1)
   const [postsPerPage] = useState(12)
   const [search, setSearch] = useState('')
+
   const { register, handleSubmit, formState: { errors } } = useForm<SearchType>()
   useEffect(() => {
     setLoading(true)
-
-    useApi.allclientRequest().then((response) => {
-      if (response) {
+    const getResident = async () => {
+      const userID = localStorage.getItem(welinkTokens.organization)
+      const response = await api.get(`${backEndPoints.RESIDENT_ORGANIZATION}/${userID}`)
+      console.log(response)
+      if (response.status === 201) {
         setLoading(false)
-        setRecents(response.data)
+        setRecents(response.data.data)
       }
-    })
-      .catch((error) => {
-        console.log(`${error}`)
-      })
+    }
+    getResident()
   }, [])
   const indexOfLastPage = newclient * postsPerPage
   const indexOfFirstPost = indexOfLastPage - postsPerPage
@@ -61,6 +63,8 @@ export default function Residents () {
                 currentClients.map((items:any, index) => {
                   const urlPath = `${frontEndPoints.RESIDENT_INFO}/${items.residentId}`
                   const imagePath = `${apiBaseUrl}/${items.profile}`
+                  const urlOrder = `${frontEndPoints.ORDER_USERS}/${items.residentId}`
+                  const urlMar = `${frontEndPoints.MAR_USER}/${items.residentId}`
                   return (
                   // eslint-disable-next-line react/jsx-key
                   <div key={index} className="w-1/2 md:w-1/3  p-1">
@@ -71,16 +75,22 @@ export default function Residents () {
                          {items.profile === null ? <img src={ruser} alt="" className="rounded-l-xl w-full" /> : <img src={imagePath} alt="" className="rounded-l-xl w-full" />}
                          </a>
                        </div>
-                       <div className="w-full lg:w-1/2 grid p-1">
-                         <div className="">
-                      <img src="https://img.icons8.com/emoji/24/000000/pill-emoji.png" className="inset-x-0 float-right"/>
-                         </div>
-                         <span className="lg:text-xs text-center font-bold cursor-pointer text-gray-800 float-left">{items.firstName} {items.lastName}</span>
-                          <div className=" text-center items-end ">
-                            <a href={urlPath}>
-                            <span className="text-center w-full cursor-pointer hover:bg-green-800 rounded-full px-4 py-2 bg-green-600 font-bold cursor-pointer text-xs  text-gray-100 mt-2">client meds</span>
-                            </a>
-                          </div>
+                       <div className="w-full lg:w-1/2 grid gap-4 p-1">
+                        <div className="">
+                          <a href={urlOrder}><img src="https://img.icons8.com/emoji/24/000000/pill-emoji.png" className="inset-x-0 float-right"/></a>
+                        </div>
+                        <span className="lg:text-xs text-center font-bold cursor-pointer text-gray-800 float-left">{items.firstName} {items.lastName}</span>
+                        <div className=" text-center items-end ">
+                          <a href={urlMar}>
+                          <span className="text-center w-full cursor-pointer hover:bg-yellow-400 rounded-full px-4 py-2 bg-yellow-300 font-bold cursor-pointer text-xs  text-gray-900 mt-2">MAR</span>
+                          </a>
+                        </div>
+                        <div className=" text-center items-end ">
+                          <a href={urlOrder}>
+                          <span className="text-center w-full cursor-pointer hover:bg-green-800 rounded-full px-4 py-2 bg-green-600 font-bold cursor-pointer text-xs  text-gray-100 mt-2">
+                            Add Meds</span>
+                          </a>
+                        </div>
                        </div>
                     </div>
                   </div>

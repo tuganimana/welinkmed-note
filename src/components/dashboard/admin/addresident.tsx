@@ -1,9 +1,9 @@
 // eslint-disable-next-line no-use-before-define
 import React from 'react'
 import { Tabs } from 'antd'
-import Overview from './overview'
+import OverviewUser from './overview'
 const { TabPane } = Tabs
-export default function Addresident () {
+export default function AddresidentUser () {
   const callback = (key:any) => {
     console.log(key)
   }
@@ -15,7 +15,7 @@ export default function Addresident () {
     <div className="mx-4">
     <Tabs defaultActiveKey="1" onChange={callback}>
     <TabPane tab="Overview" key="1">
-     <Overview/>
+     <OverviewUser/>
     </TabPane>
     <TabPane tab="All residents" key="2">
     <div>

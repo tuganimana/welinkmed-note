@@ -52,11 +52,6 @@ export default function Welcome () {
                 <div className="bg-white rounded-full h-8 w-8 items-center"><AreaChartOutlined className="ml-2" /></div>
                 <span className="inline-block mt-2 mx-3"> Reports</span>
                 </div>
-                <a href={frontEndPoints.MAR} ><div className="p-3 bg-yellow-200 text-gray-600 flex flex-wrap font-bold rounded-xl shadow">
-                <div className="bg-white rounded-full h-8 w-8 items-center"><AreaChartOutlined className="ml-2" /></div>
-                <span className="inline-block mt-2 mx-3"> MAR</span>
-                </div>
-                </a>
                 <div className="p-3 bg-blue-200 text-gray-600 flex flex-wrap font-bold rounded-xl shadow">
                 <div className="bg-white rounded-full h-8 w-8 items-center"><DollarCircleOutlined size={40} className="ml-2" /></div>
                 <span className="inline-block mt-2 mx-3"> Payments</span>

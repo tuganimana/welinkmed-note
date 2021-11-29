@@ -9,7 +9,7 @@ import { welinkTokens, backEndPoints } from '../../../utils/enums'
 const { TabPane } = Tabs
 const { Option } = Select
 
-export default function Medicationdue () {
+export default function ExpiredOrderUser () {
   const callback = (key:any) => {
     console.log(key)
   }
@@ -26,7 +26,7 @@ export default function Medicationdue () {
   useEffect(() => {
     setLoading(true)
     const getData = async () => {
-      const userId = localStorage.getItem(welinkTokens.userID) || null
+      const userId = localStorage.getItem(welinkTokens.organization) || null
       const urlPath = `${backEndPoints.EXPIRED_ORDERS}/${userId}`
       try {
         const response = await api.get(urlPath)

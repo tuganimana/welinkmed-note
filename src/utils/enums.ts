@@ -1,6 +1,7 @@
 /* eslint-disable no-unused-vars */
 export enum frontEndPoints {
     RESIDENT_ADD ='/add-resident',
+    RESIDENT_ADD_USER ='/users/add-resident',
     DASHBOARD='/dashboard',
     USERADMIN='/user-dashboard',
     LOGIN='/signin',
@@ -13,10 +14,15 @@ export enum frontEndPoints {
     HOME='/',
     ROOT='/root-dashboard',
     RESIDENT_INFO='/resident-infos',
+    RESIDENT_INFO_USER='/users/resident-infos',
     RESIDENT_EDIT='/resident-edit',
     MAR ='/user-mar',
+    MAR_USER ='/user/user-mar',
     DUE_ORDERS='/due-orders',
-    RESIDENT_DUE='/resident-due'
+    DUE_ORDERS_USERS='/users/due-orders',
+    EXPIRED_ORDERS='/users/expired-orders',
+    RESIDENT_DUE='/resident-due',
+    ORDER_USERS='/users/order-detail'
 
  }
 
@@ -50,7 +56,8 @@ export enum welinkTokens{
     userToken = 'welinkUserToken',
     accountType = 'accountType',
     username = 'userName',
-    userID='id'
+    userID='id',
+    organization='organization'
   }
 
 export enum accountCategory{
