@@ -527,7 +527,7 @@ const MarComponents = (props:any) => {
     MedicalOrder.map((items:any, index) => (
         <View key={index} style={styles.tableRow}>
             <View style={styles.tableColB}>
-              <Text style={styles.tableCellContentWhite}>{items.MedicalOrder}</Text>
+              <Text style={styles.tableCellContentWhite}>{items.date}</Text>
             </View>
             <View style={styles.tableColB}>
               <Text style={styles.tableCellContentWhite}>{items.time}</Text>
