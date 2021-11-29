@@ -1,7 +1,7 @@
 // eslint-disable-next-line no-use-before-define
 import React from 'react'
 import ResidentsUser from './clients'
-import { UserAddOutlined, DollarCircleOutlined, AreaChartOutlined, PlusOutlined } from '@ant-design/icons'
+import { UserAddOutlined, PlusOutlined } from '@ant-design/icons'
 import { Dropdown, Menu } from 'antd'
 import { frontEndPoints } from '../../../utils/enums'
 export default function ClientWelcome () {
@@ -33,14 +33,14 @@ export default function ClientWelcome () {
                 </div>
                 </a>
 
-                <div className="p-3 bg-gray-200 text-gray-600 flex flex-wrap font-bold rounded-xl shadow">
+                {/* <div className="p-3 bg-gray-200 text-gray-600 flex flex-wrap font-bold rounded-xl shadow">
                 <div className="bg-white rounded-full h-8 w-8 items-center"><AreaChartOutlined className="ml-2" /></div>
                 <span className="inline-block mt-2 mx-3"> Reports</span>
                 </div>
                 <div className="p-3 bg-blue-200 text-gray-600 flex flex-wrap font-bold rounded-xl shadow">
                 <div className="bg-white rounded-full h-8 w-8 items-center"><DollarCircleOutlined size={40} className="ml-2" /></div>
                 <span className="inline-block mt-2 mx-3"> Payments</span>
-                </div>
+                </div> */}
               </div>
             </div>
             <div className="">
