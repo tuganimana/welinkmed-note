@@ -3,9 +3,9 @@ import React, { useState } from 'react'
 import { Select } from 'antd'
 import { useForm } from 'react-hook-form'
 import { ResidentType } from '../../../utils/types'
-import { welinkTokens } from '../../../utils/enums'
-import { useApi } from '../../../utils/api'
+import { backEndPoints, welinkTokens } from '../../../utils/enums'
 import Alert from '../../alerts'
+import { api } from '../../../utils/apiRequest'
 const jwt = require('jsonwebtoken')
 const { Option } = Select
 export default function OverviewUser () {
@@ -17,10 +17,10 @@ export default function OverviewUser () {
   const tokens = localStorage.getItem(welinkTokens.userToken) || null
   const decoded = jwt.decode(tokens)
   const [success, setSuccess] = useState(false)
-  const { id } = decoded
+  const { organizationID, id } = decoded
   const children = []
   children.push(<Option value="" key="1" >Select</Option>)
-
+  console.log(additional)
   function handleChange (value:any) {
     setAdditional(value)
   }
@@ -29,28 +29,30 @@ export default function OverviewUser () {
   }
   const registerResident = async (data:any) => {
     setLoading(true)
+    const currentdate = new Date()
+    const todayDate = currentdate.getDate() + '-' + (currentdate.getMonth() + 1) + '-' + currentdate.getFullYear()
+    const databody = {
+      firstName: data.firstName,
+      lastName: data.lastName,
+      residentSate: data.residentSate,
+      religion: data.religion,
+      maritialStatus: data.maritialStatus,
+      dateOfBirth: data.dateOfBirth,
+      email: data.email,
+      phonenumber: data.phoneNumber,
+      attendingPhysician: attendingPhysician,
+      userId: id,
+      organization: organizationID,
+      addedDate: todayDate
+    }
     try {
-      const response = await useApi.residentRegiterRequest(
-        data.firstName,
-        data.lastName,
-        data.residentSate,
-        data.religion,
-        data.maritialStatus,
-        data.dateOfBirth,
-        attendingPhysician,
-        data.addedDate,
-        additional,
-        data.admittingPhysician,
-        id
-      )
-      if (response === 'undefined') {
-        setMessaging(response.message)
+      const response = await api.post(`${backEndPoints.CREATE_RESIDENT}`, databody)
+      if (response.data.data !== null) {
+        setMessaging(response.data.message)
         setLoading(false)
-        setSuccess(true)
       }
       setTimeout(() => {
-        setMessaging(response.message)
-        setSuccess(true)
+        setMessaging(response.data.message)
         setLoading(false)
       }, 2000)
     } catch (error) {
