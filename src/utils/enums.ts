@@ -19,8 +19,8 @@ export enum frontEndPoints {
     MAR ='/user-mar',
     MAR_USER ='/user/user-mar',
     DUE_ORDERS='/due-orders',
-    DUE_ORDERS_USERS='/users/due-orders',
-    EXPIRED_ORDERS='/users/expired-orders',
+    DUE_ORDERS_USERS='/users/DueOrderUser',
+    EXPIRED_ORDERS='/users/ExpiredOrderUser',
     RESIDENT_DUE='/resident-due',
     ORDER_USERS='/users/order-detail'
 
