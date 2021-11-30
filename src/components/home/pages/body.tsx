@@ -2,49 +2,75 @@
 import React from 'react'
 import group from '../../../images/group2.jpg'
 import group1 from '../../../images/group1.jpg'
+import speed from '../../../images/speedometer.png'
+import eliminate from '../../../images/eliminate.png'
+import internetless from '../../../images/internetless.png'
+import reminder from '../../../images/reminder.png'
+import notification from '../../../images/notification.png'
+import identify from '../../../images/identify.png'
+import medicals from '../../../images/medicals.png'
+import document from '../../../images/document.png'
 import Slider from './slider'
 export default function Body () {
   const services = [
     {
       title: 'Document med administration with a few clicks',
       descrip: 'Document med administration with a few clicks',
-      caption: 'WelinkMed'
+      caption: 'WelinkMed',
+      image: document
     },
     {
       title: 'Document treatments, vital signs, and other care items with the same workflow',
       descrip: 'Document treatments, vital signs, and other care items with the same workflow',
-      caption: 'bench'
+      caption: 'bench',
+      image: medicals
     },
     {
       title: 'Eliminate missed/undocumented meds and missed PRN follow-ups',
       descrip: 'Eliminate missed/undocumented meds and missed PRN follow-ups',
-      caption: 'bench'
+      caption: 'bench',
+      image: eliminate
     },
     {
       title: 'Speed up med passes by up to 50%',
       descrip: 'Speed up med passes by up to 50%',
-      caption: 'bench'
+      caption: 'bench',
+      image: speed
     },
     {
       title: 'Pass meds without interruption, even if the internet is down',
       descrip: 'Pass meds without interruption, even if the internet is down',
-      caption: 'bench'
+      caption: 'bench',
+      image: internetless
     },
     {
       title: 'Safely identify residents by their pictures ',
-      descrip: 'Safely identify residents by their pictures ',
-      caption: 'bench'
+      descrip: 'Safely identify residents by their pictures',
+      caption: 'bench',
+      image: identify
+    },
+    {
+      title: 'Receive reminder alerts before meds are late',
+      descrip: 'Receive reminder alerts before meds are late',
+      caption: 'bench',
+      image: reminder
+    },
+    {
+      title: 'Send customized notifications to key personnel via email or text',
+      descrip: 'Send customized notifications to key personnel via email or text',
+      caption: 'bench',
+      image: notification
     }
   ]
   const ourwork = [
     {
       title: 'Take paperwork out of medication administration',
-      descrip: 'Enable health care providers and pharmacies to work together to ensure effective electronic medication management, reduce risk and improve resident care',
+      descrip: 'Enable health care providers and pharmacies to work together to ensure effective electronic medication management, reduce risk and improve resident care.',
       caption: 'bench'
     },
     {
       title: 'Ensure Safe Medication Intake',
-      descrip: 'Reduce risk with intuitive and streamlined eMAR that adheres to state regulations and promotes compliance',
+      descrip: 'Reduce risk with intuitive and streamlined eMAR that adheres to state regulations and promotes compliance.',
       caption: 'bench'
     },
     {
@@ -97,14 +123,17 @@ Welinkmed has dramatically reduced medication errors, paperwork inefficiencies a
        {
         services.map((serviceitem:any, index) => {
           return (
-            <div key={index} data-aos="zoom-in" className="w-full md:w-1/2 p-2" data-scrollreveal="enter top over 0.4s after 0.1s">
+            <div key={index} data-aos="zoom-in" className="w-full md:w-1/2 p-2 md:flex md:justify-center" data-scrollreveal="enter top over 0.4s after 0.1s">
              <div className="wrapper antialiased text-gray-900">
                <div>
-                 <img src={group} alt=" random imgee" className="w-full object-cover object-center rounded-3xl shadow-md" />
+                 {/* <img src={group} alt=" random imgee" className="w-full object-cover object-center rounded-3xl shadow-md" /> */}
+                 <div className="rounded-t-3xl w-60 bg-white flex items-center justify-center pt-4">
+                   <img className='h-12' src={serviceitem.image} alt="icon"/>
+                 </div>
                <div data-aos="fade-down"
-            data-aos-easing="linear"
-            data-aos-duration="500" className="relative -mt-8  ">
-                 <div className="bg-white p-4 item-center text-center rounded-b-3xl rounded-t-md  shadow-lg">
+              data-aos-easing="linear"
+              data-aos-duration="500" className="relative">
+                 <div className="bg-white p-4 item-center text-center rounded-b-3xl shadow-lg w-60">
                     <h4 className="mt-1 text-xl font-semibold capiltalized leading-tight truncate">{serviceitem.title}</h4>
                  <div className="mt-1">
                    <span className="text-gray-600 text-sm">
@@ -144,13 +173,13 @@ Welinkmed has dramatically reduced medication errors, paperwork inefficiencies a
           data-aos-duration="500" className="w-full md:w-1/3 p-2" data-scrollreveal="enter top over 0.4s after 0.1s">
             <div className="wrapper antialiased text-gray-900">
               <div data-aos="fade-left"
-     data-aos-anchor="#example-anchor"
-     data-aos-offset="500"
-     data-aos-duration="900">
+                data-aos-anchor="#example-anchor"
+                data-aos-offset="500"
+                data-aos-duration="900">
                 <img src={group1} alt=" random imgee" className="w-full object-cover object-center rounded-3xl shadow-xl" />
               <div className="relative px-6 -mt-16  ">
                 <div data-aos="zoom-in" className="bg-white opacity-95 rounded-xl grid p-3 item-center text-center shadow-lg">
-                  <span className="text-red-900 text-lg font-semibold">{workitem.title}</span>
+                  <span className="text-red-900 text-lg font-semibold pb-2">{workitem.title}</span>
                   <span className="text-xs font-normal text-gray-600">{workitem.descrip}</span>
                   <span className="text-md mt-2 text-red-800 font-medium">{workitem.caption}</span>
                 </div>
@@ -170,7 +199,9 @@ Welinkmed has dramatically reduced medication errors, paperwork inefficiencies a
           <div data-aos="fade-up"
      data-aos-duration="3000" className="md:max-w-7xl mx-auto grid gap-6 w-full pt-24 pb-24">
             <span className="text-4xl font-bold text-white">Welinkmed Is Customized to Meet Your Specific Needs</span>
-            <span className="text-md font-bold text-gray-100">Welinkmeds pricing is structured as a subscription fee. The cost will vary based on the modules you choose to implement, as well as the total number of service hours you have each month. If you are interested in more specific pricing, we would love to connect you with one of our client representatives who can assess your specific needs and provide you with a quote. </span>
+            <span className="text-md font-bold text-gray-100">
+            Welinkmed’s pricing is structured as a subscription fee. The cost will vary based on the modules you choose to implement, as well as the total number of service hours you have each month. If you&apos;re interested in more specific pricing, we’d love to connect you with one of our client representatives who can assess your specific needs and provide you with a quote.
+            </span>
             <span><button data-aos="zoom-out" className="bg-gray-100 hover:bg-gray-200 font-medium p-3 pl-6 pr-6 rounded-full">Get started</button></span>
           </div>
         </div>
