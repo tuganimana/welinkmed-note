@@ -1,6 +1,7 @@
 /* eslint-disable no-unused-vars */
 export enum frontEndPoints {
     RESIDENT_ADD ='/add-resident',
+    RESIDENT_ADD_USER ='/users/add-resident',
     DASHBOARD='/dashboard',
     USERADMIN='/user-dashboard',
     LOGIN='/signin',
@@ -13,10 +14,15 @@ export enum frontEndPoints {
     HOME='/',
     ROOT='/root-dashboard',
     RESIDENT_INFO='/resident-infos',
+    RESIDENT_INFO_USER='/users/resident-infos',
     RESIDENT_EDIT='/resident-edit',
     MAR ='/user-mar',
+    MAR_USER ='/user/user-mar',
     DUE_ORDERS='/due-orders',
-    RESIDENT_DUE='/resident-due'
+    DUE_ORDERS_USERS='/users/DueOrderUser',
+    EXPIRED_ORDERS='/users/ExpiredOrderUser',
+    RESIDENT_DUE='/resident-due',
+    ORDER_USERS='/users/order-detail'
 
  }
 

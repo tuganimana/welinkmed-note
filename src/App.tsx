@@ -29,6 +29,12 @@ import UserMaintenanceRoot from './components/dashboard/rootuser/usermaintenance
 import DueOrder from './components/dashboard/admin/dueorder'
 import ResidentView from './components/dashboard/admin/residentDue'
 import { frontEndPoints } from './utils/enums'
+import OrderdetailUser from './components/dashboard/clients/orderdetail'
+import MarComponentUser from './components/dashboard/clients/Marcomponents'
+import DueOrderUser from './components/dashboard/clients/dueorder'
+import ViewResidentsUser from './components/dashboard/clients/residents'
+import AddresidentUser from './components/dashboard/clients/addresident'
+import ExpiredOrderUser from './components/dashboard/clients/expiredorder'
 function App () {
   AOS.init()
   return (
@@ -117,6 +123,36 @@ function App () {
         <Route path="/addclient">
           <ClientDashboard>
             <Addclient/>
+          </ClientDashboard>
+        </Route>
+        <Route path="/users/order-detail/:residentid">
+          <ClientDashboard>
+            <OrderdetailUser/>
+          </ClientDashboard>
+        </Route>
+        <Route path="/user/user-mar/:residentid">
+          <ClientDashboard>
+            <MarComponentUser/>
+          </ClientDashboard>
+        </Route>
+        <Route path="/users/resident-infos/:residentid">
+          <ClientDashboard>
+            <ViewResidentsUser/>
+          </ClientDashboard>
+        </Route>
+        <Route path={frontEndPoints.DUE_ORDERS_USERS}>
+          <ClientDashboard>
+            <DueOrderUser/>
+          </ClientDashboard>
+        </Route>
+        <Route path={frontEndPoints.RESIDENT_ADD_USER}>
+          <ClientDashboard>
+            <AddresidentUser/>
+          </ClientDashboard>
+        </Route>
+        <Route path={frontEndPoints.EXPIRED_ORDERS}>
+          <ClientDashboard>
+            <ExpiredOrderUser/>
           </ClientDashboard>
         </Route>
         {/* =======================END POINT========================= */}

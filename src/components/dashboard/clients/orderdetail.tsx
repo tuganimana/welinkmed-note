@@ -13,7 +13,7 @@ import Alert from '../../alerts'
 import { useParams } from 'react-router-dom'
 const { TabPane } = Tabs
 const { Option } = Select
-export default function Orderdetail () {
+export default function OrderdetailUser () {
   const { residentid } : any = useParams()
   const [visible, setVisible] = useState(false)
   const [confirmLoading, setConfirmLoading] = useState(false)
@@ -170,7 +170,7 @@ export default function Orderdetail () {
             <span className="text-red-600 text-xs">{errors.lastRefill && errors.lastRefill.message}</span>
           </div>
           <div className="p-2">
-            <label>RX Number(optional)</label>
+            <label>RX Number</label>
             <input type="number" {...register('rxNumber', { required: '* This field is required' })} className="w-full p-2 border"/>
             <span className="text-red-600 text-xs">{errors.rxNumber && errors.rxNumber.message}</span>
           </div>
