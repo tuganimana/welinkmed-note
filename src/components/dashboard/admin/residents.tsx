@@ -45,6 +45,7 @@ export default function ViewResidents () {
   const handleCancel = () => {
     setIsModalVisible(false)
   }
+  // modal did not administer
   const [DidNotModalVisible, setDidNotModalVisible] = useState(false)
   const showModalNotAdmin = () => {
     setDidNotModalVisible(true)
@@ -54,6 +55,28 @@ export default function ViewResidents () {
   }
   const handleCancl = () => {
     setDidNotModalVisible(false)
+  }
+  // modal home administer
+  const [HomeModalVisible, setHomeModalVisible] = useState(false)
+  const showModalHome = () => {
+    setHomeModalVisible(true)
+  }
+  const handleOkyy = () => {
+    setHomeModalVisible(false)
+  }
+  const handleCancll = () => {
+    setHomeModalVisible(false)
+  }
+  // self  administer
+  const [SelfModalVisible, setSelfModalVisible] = useState(false)
+  const showModalSelf = () => {
+    setSelfModalVisible(true)
+  }
+  const handleOkyyy = () => {
+    setSelfModalVisible(false)
+  }
+  const handleCanclll = () => {
+    setSelfModalVisible(false)
   }
   // const { TextArea } = Input
   const urlPath = `${frontEndPoints.RESIDENT_EDIT}/${residentid}`
@@ -204,6 +227,78 @@ export default function ViewResidents () {
       setLoading(false)
     }
   }
+  // === Home health
+  const [hinitial, sethInitial] = useState('')
+  const [hday, sethDay] = useState('')
+  const [hperiod, sethPeriod] = useState('')
+  const HomeAdministerOrder = async (orderId:any, result:any) => {
+    setLoading(true)
+    console.log(period)
+    const currentdate = new Date()
+    const currentMonth = currentdate.getMonth() + 1
+    const todayDate = currentdate.getDate() + '-' + (currentdate.getMonth() + 1) + '-' + currentdate.getFullYear()
+    const administerPath = `${backEndPoints.ADMINIST_MAR}/${orderId.toString()}`
+    const response = await api.put(administerPath, {
+      initial: hinitial.toString(),
+      time: hperiod.toString(),
+      result: result,
+      date: todayDate,
+      periodValue: '',
+      CurrentMonth: currentMonth.toString(),
+      residentID: residentid.toString(),
+      day: hday.toString()
+    })
+    try {
+      if (response.data !== null) {
+        setMessaging('Submit Successfull')
+        setLoading(false)
+      } else {
+        setTimeout(() => {
+          setMessaging(response.data.message)
+          setLoading(false)
+        }, 2000)
+      }
+    } catch (error) {
+      setMessaging('new order can not be added')
+      setLoading(false)
+    }
+  }
+  // === self administer
+  const [sinitial, setsInitial] = useState('')
+  const [sday, setsDay] = useState('')
+  const [speriod, setsPeriod] = useState('')
+  const SelfAdministerOrder = async (orderId:any, result:any) => {
+    setLoading(true)
+    console.log(period)
+    const currentdate = new Date()
+    const currentMonth = currentdate.getMonth() + 1
+    const todayDate = currentdate.getDate() + '-' + (currentdate.getMonth() + 1) + '-' + currentdate.getFullYear()
+    const administerPath = `${backEndPoints.ADMINIST_MAR}/${orderId.toString()}`
+    const response = await api.put(administerPath, {
+      initial: sinitial.toString(),
+      time: speriod.toString(),
+      result: result,
+      date: todayDate,
+      periodValue: '',
+      CurrentMonth: currentMonth.toString(),
+      residentID: residentid.toString(),
+      day: sday.toString()
+    })
+    try {
+      if (response.data !== null) {
+        setMessaging('Submit Successfull')
+        setLoading(false)
+      } else {
+        setTimeout(() => {
+          setMessaging(response.data.message)
+          setLoading(false)
+        }, 2000)
+      }
+    } catch (error) {
+      setMessaging('new order can not be added')
+      setLoading(false)
+    }
+  }
 
   if (loading) return (<><div className='justify-center mt-64 mx-auto items-center text-center'><Spin tip='Fetching.....'/></div></>)
   return (
@@ -247,7 +342,7 @@ export default function ViewResidents () {
             </div>
             <div className="w-3/4 gap-1 grid">
                   <div className="flex flex-wrap">
-                  <div className="p-3 flex flex-wrap  border-b-2 border-blue-400">
+                  <div className="p-3 flex flex-wrap ">
                     <div className="w-3/4  gap-1">
                       <p className="font-bold text-lg text-gray-600">{item.routineMedOrder}</p>
                       <p className="font-bold text-xs text-black-400">{item.description}</p>
@@ -473,7 +568,7 @@ export default function ViewResidents () {
                               Return
                             </Button>,
                             <Button key="submit" type="primary" loading={loading} onClick={() =>
-                              DidNotAdministerOrder(item.orderId, 'Not')} >
+                              DidNotAdministerOrder(item.orderId, '/')} >
                               Does Not Administer
                             </Button>
 
@@ -554,34 +649,218 @@ export default function ViewResidents () {
         </div>
     </TabPane>
     <TabPane tab="Home Health" key="3">
-    <div className="flex flex-wrap md:w-2/3 p-1 bg-green-100  border-green-400 border-2 rounded-xl">
+    <div className="grid md:grid-cols-2 gap-4">
+    {
+              MedicalOrder.map((item:any, index) => {
+                return (
+        <div key={index} className="flex flex-wrap md:w-4/4 p-1 bg-green-100  border-green-400 border-2 rounded-xl">
             <div className="w-1/4  p-5 text-center align-center item-center">
-                <img src={pill2} alt="" className="rounded-full"/>
+                <img src={pill2} className="rounded-full" alt=""/>
             </div>
             <div className="w-3/4 gap-1 grid">
-            <span className="font-bold text-lg text-gray-600">Home Health</span>
-            <span className="font-bold text-xs text-black-400">Take Medical on time</span>
-            <span className="font-bold text-xs text-black-400">Socail Activity</span>
-            <span className="font-bold text-xs text-black-400">Sporty activity</span>
+                  <div className="flex flex-wrap">
+                  <div className="p-3 flex flex-wrap">
+                    <div className="w-3/4  gap-1">
+                      <p className="font-bold text-lg text-gray-600">{item.routineMedOrder}</p>
+                      <p className="font-bold text-xs text-black-400">{item.description}</p>
+                      <p className="text-md"><span className="font-bold"><i className="fa fa-calendar  text-gray-400  rounded p-2"></i>Time Per Day:</span>{item.timesperday}</p>
+                      <span className="text-md"><span className="font-bold"><i className="fa fa-thumb-tack  text-gray-500  rounded p-2"></i>Dose Per Day:</span> {item.dosePerday} </span><br/>
+                      <span className="text-md"><span className="font-bold"><i className="fa fa-clock-o  text-gray-500  rounded p-2"></i></span><b>Morning:</b> {item.morningtimes} &nbsp;&nbsp; <b>Noon:</b> {item.noontimes} &nbsp;&nbsp; <b>Night:</b> {item.nighttimes}</span>
+                     </div>
+                    <div className="w-1/4">
+                      <span className="font-bold text-lg text-gray-600">
+                        <button onClick={showModalHome} className="bg-green-400 w-full hover:bg-green-500 text-white font-bold p-1 m-1 rounded-xl">
+                          Home Health
+                        </button>
+                        <Modal title="Self Administer" visible={HomeModalVisible}
+                          onOk={handleOkyy}
+                          onCancel={handleCancll} width={700}
+                          footer={[
+                            <Button key="back" onClick={handleCancll}>
+                              Return
+                            </Button>,
+                            <Button key="submit" type="primary" loading={loading} onClick={() =>
+                              HomeAdministerOrder(item.orderId, 'H/H')} >
+                              Home health / Administer
+                            </Button>
+
+                          ]}
+                          >
+                          <form>
+                          <Alert message={messaging}/>
+                         <div className="grid">
+                         <div className="p-2">
+                            <label>initial</label>
+                            <input type="text" value={hinitial} onChange={(e:any) => sethInitial(e.target.value)} className="w-full p-2 border"/>
+                          </div>
+                          <div className="p-2">
+                            <label>Day</label>
+                            <select onChange={(e:any) => sethDay(e.target.value)} className="w-full p-2 border">
+                              <option value="1">day 1</option>
+                              <option value="2">day 2</option>
+                              <option value="3">day 3</option>
+                              <option value="4">day 4</option>
+                              <option value="5">day 5</option>
+                              <option value="6">day 6</option>
+                              <option value="7">day 7</option>
+                              <option value="8">day 8</option>
+                              <option value="9">day 9</option>
+                              <option value="10">day 10</option>
+                              <option value="11">day 11</option>
+                              <option value="12">day 12</option>
+                              <option value="13">day 13</option>
+                              <option value="14">day 14</option>
+                              <option value="15">day 15</option>
+                              <option value="16">day 16</option>
+                              <option value="17">day 17</option>
+                              <option value="18">day 18</option>
+                              <option value="19">day 19</option>
+                              <option value="20">day 20</option>
+                              <option value="21">day 21</option>
+                              <option value="22">day 22</option>
+                              <option value="23">day 23</option>
+                              <option value="24">day 24</option>
+                              <option value="25">day 25</option>
+                              <option value="26">day 26</option>
+                              <option value="27">day 27</option>
+                              <option value="28">day 28</option>
+                              <option value="29">day 29</option>
+                              <option value="30">day 30</option>
+                              <option value="31">day 31</option>
+                            </select>
+                          </div>
+                          <div className="p-2">
+                            <label>Period Value</label>
+                            <select onChange={(e:any) => sethPeriod(e.target.value)} className="w-full p-2 border">
+                              <option value="">Select Time</option>
+                              <option value={item.morningtimes}> Morning: {item.morningtimes} </option>
+                              <option value={item.noontimes}> Noon: {item.noontimes} </option>
+                              <option value={item.nighttimes}> Night: {item.nighttimes} </option>
+                              <option value={item.timesperday}> Other: {item.timesperday} </option>
+                            </select>
+                          </div>
+                          </div>
+                          </form>
+                          </Modal>
+                      </span>
+                    </div>
+                  </div>
+
+                  </div>
             </div>
+            </div>
+                )
+              }
+              )
+        }
         </div>
     </TabPane>
     <TabPane tab="Self Administration" key="4">
-
-    <div className="flex flex-wrap md:w-2/3 p-1 bg-blue-100  border-blue-100 border-2 rounded-xl">
+    <div className="grid md:grid-cols-2 gap-4">
+    {
+              MedicalOrder.map((item:any, index) => {
+                return (
+        <div key={index} className="flex flex-wrap md:w-4/4 p-1 bg-yellow-100  border-yellow-400 border-2 rounded-xl">
             <div className="w-1/4  p-5 text-center align-center item-center">
-                <img src={pill2} alt="" className="rounded-full"/>
+                <img src={pill2} className="rounded-full" alt=""/>
             </div>
             <div className="w-3/4 gap-1 grid">
-            <span className="font-bold text-lg text-gray-600">Self Administration</span>
-            <span className="font-bold text-xs text-black-400">Nehjds chjds hjsx nca jcxqw nmcsh xsjhw cnmscw chj xwqoiui cwiu csjhuiw
-                h xsjhw cnmscw chj xwqoiui cwiu csjhuiw
-                h xsjhw cnmscw chj xwqoiui cwiu csjhuiwh xsjhw cnmscw chj xwqoiui
-                cwiu csjhuiwh xsjhw cnmscw chj xwqoiui cwiu csjhuiwh xsjhw cnmscw chj xwqoiui cwiu csjhuiwh xsjhw cnmscw chj xwqoiui cwiu csjhuiwh xsjhw cnmscw chj xwqoiui cwiu csjhuiwh xsjhw cnmscw chj xwqoiui cwiu csjhuiwh xsjhw cnmscw chj xwqoiui cwiu csjhuiwh xsjhw cnmscw chj xwqoiui cwiu csjhuiwh xsjhw cnmscw chj xwqoiui cwiu csjhuiwh xsjhw cnmscw chj xwqoiui cwiu csjhuiwh xsjhw cnmscw chj
-                xwqoiui cwiu csjhuiwh xsjhw cnmscw chj
-                xwqoiui cwiu csjhuiw
-            </span>
+                  <div className="flex flex-wrap">
+                  <div className="p-3 flex flex-wrap">
+                    <div className="w-3/4  gap-1">
+                      <p className="font-bold text-lg text-gray-600">{item.routineMedOrder}</p>
+                      <p className="font-bold text-xs text-black-400">{item.description}</p>
+                      <p className="text-md"><span className="font-bold"><i className="fa fa-calendar  text-gray-400  rounded p-2"></i>Time Per Day:</span>{item.timesperday}</p>
+                      <span className="text-md"><span className="font-bold"><i className="fa fa-thumb-tack  text-gray-500  rounded p-2"></i>Dose Per Day:</span> {item.dosePerday} </span><br/>
+                      <span className="text-md"><span className="font-bold"><i className="fa fa-clock-o  text-gray-500  rounded p-2"></i></span><b>Morning:</b> {item.morningtimes} &nbsp;&nbsp; <b>Noon:</b> {item.noontimes} &nbsp;&nbsp; <b>Night:</b> {item.nighttimes}</span>
+                     </div>
+                    <div className="w-1/4">
+                      <span className="font-bold text-lg text-gray-600">
+                        <button onClick={showModalSelf} className="bg-yellow-500 w-full hover:bg-yellow-400 text-white font-bold p-1 m-1 rounded-xl">
+                          Self Administer
+                        </button>
+                        <Modal title="Self Administer Administer" visible={SelfModalVisible}
+                          onOk={handleOkyyy}
+                          onCancel={handleCanclll} width={700}
+                          footer={[
+                            <Button key="back" onClick={handleCanclll}>
+                              Return
+                            </Button>,
+                            <Button key="submit" type="primary" loading={loading} onClick={() =>
+                              SelfAdministerOrder(item.orderId, 'I/S')} >
+                              Self Administer
+                            </Button>
+
+                          ]}
+                          >
+                          <form>
+                          <Alert message={messaging}/>
+                         <div className="grid">
+                         <div className="p-2">
+                            <label>initial</label>
+                            <input type="text" value={sinitial} onChange={(e:any) => setsInitial(e.target.value)} className="w-full p-2 border"/>
+                          </div>
+
+                          <div className="p-2">
+                            <label>Day</label>
+                            <select onChange={(e:any) => setsDay(e.target.value)} className="w-full p-2 border">
+                              <option value="1">day 1</option>
+                              <option value="2">day 2</option>
+                              <option value="3">day 3</option>
+                              <option value="4">day 4</option>
+                              <option value="5">day 5</option>
+                              <option value="6">day 6</option>
+                              <option value="7">day 7</option>
+                              <option value="8">day 8</option>
+                              <option value="9">day 9</option>
+                              <option value="10">day 10</option>
+                              <option value="11">day 11</option>
+                              <option value="12">day 12</option>
+                              <option value="13">day 13</option>
+                              <option value="14">day 14</option>
+                              <option value="15">day 15</option>
+                              <option value="16">day 16</option>
+                              <option value="17">day 17</option>
+                              <option value="18">day 18</option>
+                              <option value="19">day 19</option>
+                              <option value="20">day 20</option>
+                              <option value="21">day 21</option>
+                              <option value="22">day 22</option>
+                              <option value="23">day 23</option>
+                              <option value="24">day 24</option>
+                              <option value="25">day 25</option>
+                              <option value="26">day 26</option>
+                              <option value="27">day 27</option>
+                              <option value="28">day 28</option>
+                              <option value="29">day 29</option>
+                              <option value="30">day 30</option>
+                              <option value="31">day 31</option>
+                            </select>
+                          </div>
+                          <div className="p-2">
+                            <label>Period Value</label>
+                            <select onChange={(e:any) => setsPeriod(e.target.value)} className="w-full p-2 border">
+                              <option value="">Select Time</option>
+                              <option value={item.morningtimes}> Morning: {item.morningtimes} </option>
+                              <option value={item.noontimes}> Noon: {item.noontimes} </option>
+                              <option value={item.nighttimes}> Night: {item.nighttimes} </option>
+                              <option value={item.timesperday}> Other: {item.timesperday} </option>
+                            </select>
+                          </div>
+                          </div>
+                          </form>
+                          </Modal>
+                      </span>
+                    </div>
+                  </div>
+
+                  </div>
             </div>
+            </div>
+                )
+              }
+              )
+        }
         </div>
     </TabPane>
   </Tabs>
