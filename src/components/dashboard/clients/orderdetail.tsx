@@ -170,7 +170,7 @@ export default function OrderdetailUser () {
             <span className="text-red-600 text-xs">{errors.lastRefill && errors.lastRefill.message}</span>
           </div>
           <div className="p-2">
-            <label>RX Number(optional)</label>
+            <label>RX Number</label>
             <input type="number" {...register('rxNumber', { required: '* This field is required' })} className="w-full p-2 border"/>
             <span className="text-red-600 text-xs">{errors.rxNumber && errors.rxNumber.message}</span>
           </div>

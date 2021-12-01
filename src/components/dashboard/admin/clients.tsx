@@ -18,7 +18,7 @@ export default function Residents () {
   useEffect(() => {
     setLoading(true)
     const getResident = async () => {
-      const userID = localStorage.getItem(welinkTokens.organization)
+      const userID = localStorage.getItem(welinkTokens.userID)
       const response = await api.get(`${backEndPoints.RESIDENT_ORGANIZATION}/${userID}`)
       if (response.status === 201) {
         setLoading(false)
