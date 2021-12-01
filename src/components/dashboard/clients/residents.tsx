@@ -95,6 +95,7 @@ export default function ViewResidentsUser () {
     const currentMonth = currentdate.getMonth() + 1
     const todayDate = currentdate.getDate() + '-' + (currentdate.getMonth() + 1) + '-' + currentdate.getFullYear()
     const administerPath = `${backEndPoints.ADMINIST_MAR}/${orderId.toString()}`
+    const signficationPath = `${backEndPoints.SIGNIFICATION}`
     const resAdmin = await api.put(administerPath, {
       initial: initial.toString(),
       time: period.toString(),
@@ -107,8 +108,23 @@ export default function ViewResidentsUser () {
     })
     try {
       if (resAdmin.data !== null) {
-        setMessaging('Administered')
-        setLoading(false)
+        const resSign = await api.post(signficationPath, {
+          orderId: orderId.toString(),
+          initial: initial.toString(),
+          name: fullname.toString(),
+          date: todayDate,
+          time: period.toString(),
+          residentID: residentid.toString()
+        })
+        try {
+          if (resSign.data !== null) {
+            setMessaging('Administer successfull')
+            setLoading(false)
+          }
+        } catch (error) {
+          setMessaging('Administed')
+          setLoading(false)
+        }
       } else {
         setTimeout(() => {
           setMessaging(resAdmin.data.message)
