@@ -1,15 +1,18 @@
 // eslint-disable-next-line no-use-before-define
 import React from 'react'
 import group from '../../../images/group2.jpg'
-import group1 from '../../../images/group1.jpg'
-import speed from '../../../images/speedometer.png'
-import eliminate from '../../../images/eliminate.png'
-import internetless from '../../../images/internetless.png'
-import reminder from '../../../images/reminder.png'
-import notification from '../../../images/notification.png'
-import identify from '../../../images/identify.png'
-import medicals from '../../../images/medicals.png'
-import document from '../../../images/document.png'
+// import group1 from '../../../images/group1.jpg'
+import speed from '../../../images/icons/speedometer.png'
+import eliminate from '../../../images/icons/eliminate.png'
+import internetless from '../../../images/icons/internetless.png'
+import reminder from '../../../images/icons/reminder.png'
+import notification from '../../../images/icons/notification.png'
+import identify from '../../../images/icons/identify.png'
+import medicals from '../../../images/icons/medicals.png'
+import document from '../../../images/icons/document.png'
+import nopaperwork from '../../../images/icons/nopaperwork.png'
+import safe from '../../../images/icons/safe.png'
+import paperdocs from '../../../images/icons/paperdocs.png'
 import Slider from './slider'
 export default function Body () {
   const services = [
@@ -66,17 +69,20 @@ export default function Body () {
     {
       title: 'Take paperwork out of medication administration',
       descrip: 'Enable health care providers and pharmacies to work together to ensure effective electronic medication management, reduce risk and improve resident care.',
-      caption: 'bench'
+      caption: 'bench',
+      image: nopaperwork
     },
     {
       title: 'Ensure Safe Medication Intake',
       descrip: 'Reduce risk with intuitive and streamlined eMAR that adheres to state regulations and promotes compliance.',
-      caption: 'bench'
+      caption: 'bench',
+      image: safe
     },
     {
       title: 'Reduce Paper Documentation',
       descrip: 'Cut associated processing time and expense with web-based records that eliminate manual medication reconciliation.',
-      caption: 'bench'
+      caption: 'bench',
+      image: paperdocs
     }
   ]
   return (
@@ -161,9 +167,9 @@ Welinkmed has dramatically reduced medication errors, paperwork inefficiencies a
 <div className="w-full h-96 bg-blue-400">
 <div className="md:pl-32 pb-6 md:pr-32 bg-gray-200">
         <div className="md:max-w-7xl mx-auto">
-          <div className="text-center pt-8  grid item-center">
+          <div className="text-center pt-8 pb-1 grid item-center">
             <span className="text-4xl text-red-700 font-bold">eMAR</span>
-            <span className="text-2xl p-4 text-gray-500 mt-4">Take paperwork out of medication administration</span>
+            <span className="text-base pt-1 pb-6 text-gray-500">Take paperwork out of medication administration</span>
           </div>
           <div data-aos-offset="200" data-aos-easing="ease-in-sine" data-aos-duration="700" className="flex flex-wrap">
           {
@@ -176,10 +182,13 @@ Welinkmed has dramatically reduced medication errors, paperwork inefficiencies a
                 data-aos-anchor="#example-anchor"
                 data-aos-offset="500"
                 data-aos-duration="900">
-                <img src={group1} alt=" random imgee" className="w-full object-cover object-center rounded-3xl shadow-xl" />
-              <div className="relative px-6 -mt-16  ">
+                {/* <img src={group1} alt=" random imgee" className="w-full object-cover object-center rounded-3xl shadow-xl" /> */}
+              <div className="relative px-6">
                 <div data-aos="zoom-in" className="bg-white opacity-95 rounded-xl grid p-3 item-center text-center shadow-lg">
-                  <span className="text-red-900 text-lg font-semibold pb-2">{workitem.title}</span>
+                  <div className="flex items-center justify-center pb-2">
+                    <img className='h-12' src={workitem.image} alt="services icon"/>
+                  </div>
+                  <span className="text-red-900 text-lg font-semibold pb-2 pt-1">{workitem.title}</span>
                   <span className="text-xs font-normal text-gray-600">{workitem.descrip}</span>
                   <span className="text-md mt-2 text-red-800 font-medium">{workitem.caption}</span>
                 </div>
