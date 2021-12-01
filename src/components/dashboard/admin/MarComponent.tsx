@@ -81,7 +81,7 @@ const styles = StyleSheet.create({
     borderTopWidth: 0
   },
   tableColSig: {
-    width: '12%',
+    width: '30%',
     borderStyle: 'solid',
     borderColor: 'red',
     borderWidth: 1,
@@ -97,7 +97,7 @@ const styles = StyleSheet.create({
     borderTopWidth: 0
   },
   tableColNit: {
-    width: '5%',
+    width: '40%',
     borderStyle: 'solid',
     borderColor: 'red',
     borderWidth: 1,
@@ -159,6 +159,19 @@ const MarComponents = (props:any) => {
       } catch (error) {}
     }
     getAllOrder()
+  }, [])
+  const [Signification, setSignification] = useState([])
+  useEffect(() => {
+    const getAllSign = async () => {
+      const urlSignPath = `${backEndPoints.SIGNIFICATION}/${residentid}`
+      try {
+        const response = await api.get(urlSignPath)
+        if (response.data !== null) {
+          setSignification(response.data)
+        }
+      } catch (error) {}
+    }
+    getAllSign()
   }, [])
   const [fullname, setFullname] = useState('')
   const [dob, setDob] = useState('')
@@ -228,6 +241,7 @@ const MarComponents = (props:any) => {
       freq: 'fre0'
     }
   ]
+  console.log(Mardata)
   return (<><Document >
     <Page size="A4" orientation="landscape" style={styles.page}>
       <View style={styles.content}>
@@ -389,74 +403,20 @@ const MarComponents = (props:any) => {
               <Text style={styles.tableCellNit}>NIT</Text>
             </View>
             <View style={styles.tableColSig}>
-                <Text style={styles.tableCellSig}>Full Signature And Title</Text>
-            </View>
-            <View style={styles.tableColNit}>
-              <Text style={styles.tableCellNit}>NIT</Text>
+                <Text style={styles.tableCellSig}>Full Name & Title</Text>
             </View>
             <View style={styles.tableColSig}>
-                <Text style={styles.tableCellSig}>Full Signature And Title</Text>
-            </View>
-            <View style={styles.tableColNit}>
-              <Text style={styles.tableCellNit}>NIT</Text>
-            </View>
-            <View style={styles.tableColSig}>
-                <Text style={styles.tableCellSig}>Full Signature And Title</Text>
-            </View>
-            <View style={styles.tableColNit}>
-              <Text style={styles.tableCellNit}>NIT</Text>
-            </View>
-            <View style={styles.tableColSig}>
-                <Text style={styles.tableCellSig}>Full Signature And Title</Text>
-            </View>
-            <View style={styles.tableColNit}>
-              <Text style={styles.tableCellNit}>NIT</Text>
-            </View>
-            <View style={styles.tableColSig}>
-                <Text style={styles.tableCellSig}>Full Signature And Title</Text>
-            </View>
-            <View style={styles.tableColNit}>
-              <Text style={styles.tableCellNit}>NIT</Text>
-            </View>
-            <View style={styles.tableColSig}>
-                <Text style={styles.tableCellSig}>Full Signature And Title</Text>
+                <Text style={styles.tableCellSig}>Full Signature</Text>
             </View>
           </View>
           {
-    Mardata.map((items:any, index) => (
+    Signification.map((items:any, index) => (
         <View key={index} style={styles.tableRow}>
         <View style={styles.tableColNit}>
-          <Text style={styles.tableCellContentWhite}>NIT</Text>
+          <Text style={styles.tableCellContentWhite}>{items.initial}</Text>
         </View>
         <View style={styles.tableColSig}>
-            <Text style={styles.tableCellContentWhite}>Signature </Text>
-        </View>
-        <View style={styles.tableColNit}>
-          <Text style={styles.tableCellContentWhite}>NIT</Text>
-        </View>
-        <View style={styles.tableColSig}>
-            <Text style={styles.tableCellContentWhite}>Signature</Text>
-        </View>
-        <View style={styles.tableColNit}>
-          <Text style={styles.tableCellContentWhite}>NIT</Text>
-        </View>
-        <View style={styles.tableColSig}>
-            <Text style={styles.tableCellContentWhite}>Signature</Text>
-        </View>
-        <View style={styles.tableColNit}>
-          <Text style={styles.tableCellContentWhite}>NIT</Text>
-        </View>
-        <View style={styles.tableColSig}>
-            <Text style={styles.tableCellContentWhite}>Signature</Text>
-        </View>
-        <View style={styles.tableColNit}>
-          <Text style={styles.tableCellContentWhite}>NIT</Text>
-        </View>
-        <View style={styles.tableColSig}>
-            <Text style={styles.tableCellContentWhite}>Signature</Text>
-        </View>
-        <View style={styles.tableColNit}>
-          <Text style={styles.tableCellContentWhite}>NIT</Text>
+            <Text style={styles.tableCellContentWhite}>{items.name} </Text>
         </View>
         <View style={styles.tableColSig}>
             <Text style={styles.tableCellContentWhite}>Signature</Text>
@@ -524,7 +484,7 @@ const MarComponents = (props:any) => {
             </View>
           </View>
           {
-    MedicalOrder.map((items:any, index) => (
+    Signification.map((items:any, index) => (
         <View key={index} style={styles.tableRow}>
             <View style={styles.tableColB}>
               <Text style={styles.tableCellContentWhite}>{items.date}</Text>
@@ -536,13 +496,13 @@ const MarComponents = (props:any) => {
               <Text style={styles.tableCellContentWhite}>{items.initial}</Text>
             </View>
             <View style={styles.tableColB}>
-              <Text style={styles.tableCellContentWhite}>Drug</Text>
+              <Text style={styles.tableCellContentWhite}>Drug-Strength-Dosage</Text>
             </View>
             <View style={styles.tableColB}>
               <Text style={styles.tableCellContentWhite}>Site</Text>
             </View>
             <View style={styles.tableColB}>
-              <Text style={styles.tableCellContentWhite}>Ob</Text>
+              <Text style={styles.tableCellContentWhite}>{items.name}</Text>
             </View>
           </View>))
       }
