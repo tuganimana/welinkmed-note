@@ -26,6 +26,7 @@ import Addclient from './components/dashboard/clients/addclient'
 import WelcomeRoot from './components/dashboard/welcomeroot'
 import DashboardRoot from './components/dashboard/rootuser/navbar'
 import UserMaintenanceRoot from './components/dashboard/rootuser/usermaintenance'
+import AdminDetailRoot from './components/dashboard/rootuser/admindetails'
 import DueOrder from './components/dashboard/admin/dueorder'
 import ResidentView from './components/dashboard/admin/residentDue'
 import { frontEndPoints } from './utils/enums'
@@ -61,6 +62,11 @@ function App () {
         <Route path="/root-maintenance">
           <DashboardRoot>
           <UserMaintenanceRoot/>
+          </DashboardRoot>
+        </Route>
+        <Route path="/root-admindetails">
+          <DashboardRoot>
+          <AdminDetailRoot/>
           </DashboardRoot>
         </Route>
   {/* END ROOT */}
