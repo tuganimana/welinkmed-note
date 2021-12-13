@@ -67,7 +67,7 @@ export default function AdminDetailRoot () {
 
                           ]}
                           >
-                          <p>welcome</p>
+                          <p>All Residents</p>
                           </Modal>
             </div></div>))
       }
