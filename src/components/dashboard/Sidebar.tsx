@@ -43,7 +43,7 @@ export default function Sidebar () {
       <div className="flex flex-col w-full md:w-full text-gray-700 bg-blue-400 text-gray-200 flex-shrink-0">
         <div className="flex-shrink-0 px-8 py-4 flex flex-row items-center justify-between py-4">
           <div className="">
-          <a href={frontEndPoints.DASHBOARD} className="text-lg mb-16 font-semibold tracking-widest text-gray-900 uppercase rounded-lg text-white focus:outline-none focus:shadow-outline">
+          <a href={frontEndPoints.ROOT} className="text-lg mb-16 font-semibold tracking-widest text-gray-900 uppercase rounded-lg text-white focus:outline-none focus:shadow-outline">
             <img src={Logo} alt="logo" />
              </a>
           </div>
