@@ -2,6 +2,7 @@
 import React, { useState, useEffect } from 'react'
 import { Tabs, Modal, Button } from 'antd'
 import { useApi } from '../../../utils/api'
+import AdminiResidents from './adminresident'
 const { TabPane } = Tabs
 export default function AdminDetailRoot () {
   const [ModalVisible, setModalVisible] = useState(false)
@@ -59,7 +60,7 @@ export default function AdminDetailRoot () {
                 </div>
                         <Modal title="All Resident" visible={ModalVisible}
                           onOk={handleOky}
-                          onCancel={handleCancl} width={700}
+                          onCancel={handleCancl} width={1300}
                           footer={[
                             <Button key="back" onClick={handleCancl}>
                               Return
@@ -67,7 +68,7 @@ export default function AdminDetailRoot () {
 
                           ]}
                           >
-                          <p>All Residents</p>
+                          <AdminiResidents userId={items.userId}/>
                           </Modal>
             </div></div>))
       }
