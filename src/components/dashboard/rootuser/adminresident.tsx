@@ -29,10 +29,6 @@ export default function AdminiResidents (props:any) {
             <th className="px-4 py-3">Drugs Medication</th>
             <th className="px-4 py-3">Medication Type</th>
             <th className="px-4 py-3">Health AZ</th>
-            <th className="px-4 py-3">Health</th>
-            <th className="px-4 py-3">user</th>
-            <th className="px-4 py-3">organization</th>
-            <th className="px-4 py-3">isDue</th>
           </tr>
           {
         clients.map((items:any, index) => (
@@ -48,9 +44,6 @@ export default function AdminiResidents (props:any) {
             <td className="px-4 py-3">{items.drugsMedication}</td>
             <td className="px-4 py-3">{items.medicationType}</td>
             <td className="px-4 py-3">{items.HealthAZ}</td>
-            <td className="px-4 py-3">{items.user}</td>
-            <td className="px-4 py-3">{items.organization}</td>
-            <td className="px-4 py-3">{items.isDue}</td>
             </tr>))
           }
         </table>
