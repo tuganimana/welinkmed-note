@@ -8,7 +8,6 @@ import Logo from '../../images/logo192.png'
 export default function Sidebar () {
   const history = useHistory()
   const [small, setSmall] = useState(false)
-  const [expired, setExpired] = useState(0)
   const [due, setDue] = useState(0)
   const handleClick = () => {
     setSmall(true)
@@ -22,25 +21,18 @@ export default function Sidebar () {
     history.push(frontEndPoints.LOGIN)
   }
   useEffect(() => {
-    const getData = async () => {
-      const userId = localStorage.getItem(welinkTokens.userID) || null
-      const urlPath = `${backEndPoints.EXPIRED_ORDERS}/${userId}`
-      const response = await api.get(urlPath)
-      setExpired(response.data.data.length)
-    }
     const getAllOrder = async () => {
       const userId = localStorage.getItem(welinkTokens.userID) || null
       const urlPath = `${backEndPoints.DUE_ORDERS}/${userId}`
       const resDue = await api.get(urlPath)
       setDue(resDue.data.data.length)
     }
-    getData()
     getAllOrder()
   }, [])
 
   return (<>
     <div className="md:flex flex-col md:flex-row md:min-h-screen w-full">
-      <div className="flex flex-col w-full md:w-full text-gray-700 bg-blue-400 text-gray-200 flex-shrink-0">
+      <div className="flex flex-col w-full md:w-full text-gray-700 bg-gray-400 text-gray-200 flex-shrink-0">
         <div className="flex-shrink-0 px-8 py-4 flex flex-row items-center justify-between py-4">
           <div className="">
           <a href={frontEndPoints.ROOT} className="text-lg mb-16 font-semibold tracking-widest text-gray-900 uppercase rounded-lg text-white focus:outline-none focus:shadow-outline">
@@ -58,20 +50,17 @@ export default function Sidebar () {
         </div>
         <hr className="text-2 text-gray-600 font-bold"/>
           <nav className="hidden md:flex-grow lg:flex-grow w-full md:block px-4 pb-4 md:pb-0 md:overflow-y-auto py-2">
-            <a href={frontEndPoints.RESIDENT_DUE} className="block p-2 mt-2 text-md font-bold text-gray-900 border-blue-500 mt-4 rounded-lg  hover:shadow-lg bg-blue-300  hover:bg-blue-200 focus:bg-red-200 focus:text-white hover:text-white text-gray-200 hover:text-gray-900 focus:text-gray-900 hover:bg-gray-200 focus:bg-gray-200 focus:outline-none focus:shadow-outline">
-              <i className="fa fa-bar-chart mr-2 text-black bg-blue-200 rounded-full p-3"></i>Resident Due </a>
-              <a href={frontEndPoints.DUE_ORDERS} className="block p-2 mt-2 text-md font-bold text-gray-600 border-blue-500 rounded-lg hover:shadow-lg bg-blue-300 hover:bg-blue-200 hover:bg-red-200 focus:bg-red-200 focus:text-white hover:text-white text-gray-200
+            <a href={frontEndPoints.ROOT} className="block p-2 mt-2 text-md font-bold text-gray-900 border-blue-500 mt-4 rounded-lg  hover:shadow-lg bg-gray-100  hover:bg-blue-200 focus:bg-red-200 focus:text-white hover:text-white text-gray-200 hover:text-gray-900 focus:text-gray-900 hover:bg-gray-200 focus:bg-gray-200 focus:outline-none focus:shadow-outline">
+              <i className="fa fa-line-chart mr-2 text-black bg-red-300 rounded-lg p-3"></i>Dashboard</a>
+              <a href={frontEndPoints.DUE_ORDERS} className="block p-2 mt-2 text-md font-bold text-gray-600 border-blue-500 rounded-lg hover:shadow-lg bg-gray-100 hover:bg-blue-200 hover:bg-red-200 focus:bg-red-200 focus:text-white hover:text-white text-gray-200
             hover:text-gray-900 focus:text-gray-900 hover:bg-gray-200 focus:bg-gray-200 focus:outline-none focus:shadow-outline">
-              <i className="fa fa-hospital-o  mr-2 text-black bg-yellow-200 rounded-full p-3"></i>Due  Orders<span className="float-right bg-red-200 rounded-full pr-2 pl-2">{due}</span></a>
-            <a href={frontEndPoints.DUE_ORDERS} className="block p-2 mt-2 text-md font-bold text-gray-600 border-blue-500 mt-4 rounded-lg  hover:shadow-lg bg-blue-300  hover:bg-blue-200
+              <i className="fa fa-users  mr-2 text-green-800 bg-green-300 rounded-lg p-3"></i>Accounts<span className="float-right bg-red-200 rounded-full pr-2 pl-2">{due}</span></a>
+            <a href={frontEndPoints.DUE_ORDERS} className="block p-2 mt-2 text-md font-bold text-gray-600 border-blue-500 mt-4 rounded-lg  hover:shadow-lg bg-gray-100  hover:bg-blue-200
             focus:bg-red-200 focus:text-white hover:text-white text-gray-200 hover:text-gray-900 focus:text-gray-900 hover:bg-gray-200 focus:bg-gray-200 focus:outline-none focus:shadow-outline">
-              <i className="fa fa-medkit  mr-2 text-black bg-red-400 rounded-full p-3"></i>Missed Orders <span className="float-right bg-yellow-200 rounded-full pr-2 pl-2">0</span> </a>
-            <a href="/medication-due" className="block p-2 mt-2 text-md font-bold text-gray-600 border-blue-500 rounded-lg hover:shadow-lg bg-blue-300 hover:bg-blue-200 hover:bg-red-200 focus:bg-red-200 focus:text-white hover:text-white text-gray-200
+              <i className="fa fa-credit-card-alt  mr-2 text-gray-900 bg-yellow-400 rounded-lg p-3"></i>Payments</a>
+            <a href="/medication-due" className="block p-2 mt-2 text-md font-bold text-gray-600 border-blue-500 rounded-lg hover:shadow-lg bg-gray-100 hover:bg-blue-200 hover:bg-red-200 focus:bg-red-200 focus:text-white hover:text-white text-gray-200
             hover:text-gray-900 focus:text-gray-900 hover:bg-gray-200 focus:bg-gray-200 focus:outline-none focus:shadow-outline">
-              <i className="fa fa-hospital-o  mr-2 text-black bg-yellow-200 rounded-full p-3"></i>Expired Orders<span className="float-right bg-red-200 rounded-full pr-2 pl-2">{expired}</span></a>
-         <hr className="mt-2"/>
-         <a className="block p-2 mt-2 bg-blue-300 hover:bg-blue-200 text-md font-bold text-gray-600 border-blue-500 rounded-lg hover:shadow-lg hover:bg-red-200 focus:bg-red-200 focus:text-white hover:text-white text-gray-200 hover:text-gray-900 focus:text-gray-900 hover:bg-gray-200 focus:bg-gray-200 focus:outline-none focus:shadow-outline">
-              <i className="fa fa-user  mr-2 text-black bg-yellow-200 rounded-full p-3"></i>Profile </a>
+              <i className="fa fa-cogs  mr-2 text-gray-100 bg-gray-900 rounded-lg p-3"></i>Settings</a>
           </nav>
           <div className="items-end">
           <nav className="hidden md:flex-grow lg:flex-grow w-full md:block px-4 pb-4 md:pb-0 md:overflow-y-auto py-2">
