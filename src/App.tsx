@@ -27,6 +27,9 @@ import WelcomeRoot from './components/dashboard/welcomeroot'
 import DashboardRoot from './components/dashboard/rootuser/navbar'
 import UserMaintenanceRoot from './components/dashboard/rootuser/usermaintenance'
 import AdminDetailRoot from './components/dashboard/rootuser/admindetails'
+import AddresidentRoot from './components/dashboard/rootuser/addresident'
+import PaymentsRoot from './components/dashboard/rootuser/payments'
+import ReportRoot from './components/dashboard/rootuser/report'
 import DueOrder from './components/dashboard/admin/dueorder'
 import ResidentView from './components/dashboard/admin/residentDue'
 import { frontEndPoints } from './utils/enums'
@@ -67,6 +70,21 @@ function App () {
         <Route path="/root-admindetails">
           <DashboardRoot>
           <AdminDetailRoot/>
+          </DashboardRoot>
+        </Route>
+        <Route path="/root-addresident">
+          <DashboardRoot>
+          <AddresidentRoot/>
+          </DashboardRoot>
+        </Route>
+        <Route path="/root-payment">
+          <DashboardRoot>
+          <PaymentsRoot/>
+          </DashboardRoot>
+        </Route>
+        <Route path="/root-report">
+          <DashboardRoot>
+          <ReportRoot/>
           </DashboardRoot>
         </Route>
   {/* END ROOT */}

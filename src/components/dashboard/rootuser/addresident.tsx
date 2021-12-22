@@ -3,7 +3,7 @@ import React from 'react'
 import { Tabs } from 'antd'
 import Overview from './overview'
 const { TabPane } = Tabs
-export default function Addresident () {
+export default function AddresidentRoot () {
   const callback = (key:any) => {
     console.log(key)
   }
