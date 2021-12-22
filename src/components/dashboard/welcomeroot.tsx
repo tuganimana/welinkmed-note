@@ -29,8 +29,8 @@ export default function WelcomeRoot () {
         <div className="flex flex-wrap">
           <div className="lg:w-4/6 w-full p-2 grid">
             <div className="hidden top-navbar w-full lg:inline-flex lg:flex-grow lg:w-auto" id="navigation">
-        <div className="lg:inline-flex lg:flex-row lg:ml-auto lg:w-auto w-full lg:items-center items-start  flex flex-col lg:h-auto">
-        </div>
+            <div className="lg:inline-flex lg:flex-row lg:ml-auto lg:w-auto w-full lg:items-center items-start  flex flex-col lg:h-auto">
+            </div>
             </div>
             <div className="mb-4 bg-gray-200 rounded-xl mx-2 ">
               <div className="grid  md:grid-cols-3 gap-4 p-3">
@@ -42,7 +42,7 @@ export default function WelcomeRoot () {
                   </div>
                 </div>
               </a>
-              <a href={frontEndPoints.ROOT_ADMINDETAILS}>
+              <a href={frontEndPoints.ROOT_ADDRESIDENT}>
                 <div className="p-3 bg-green-500 text-gray-600 flex flex-wrap  text-center font-bold rounded-xl shadow">
                   <i className="fa fa-user-plus text-white ml-20 text-3xl rounded-lg p-2"></i>
                   <div className="w-full bg-white hover:bg-gray-200 rounded-full shadow-xl p-2 items-center">
@@ -50,7 +50,7 @@ export default function WelcomeRoot () {
                   </div>
                 </div>
               </a>
-              <a href={frontEndPoints.ROOT_ADMINDETAILS}>
+              <a href={frontEndPoints.ROOT_REPORT}>
                 <div className="p-3 bg-indigo-300 text-gray-600 flex flex-wrap  text-center font-bold rounded-xl shadow">
                   <i className="fa fa-file-text text-white ml-20 text-3xl font-bold rounded-lg p-2"></i>
                   <div className="w-full bg-white hover:bg-gray-200 rounded-full shadow-xl p-2 items-center">
@@ -58,7 +58,7 @@ export default function WelcomeRoot () {
                   </div>
                 </div>
               </a>
-              <a href={frontEndPoints.ROOT_ADMINDETAILS}>
+              <a href={frontEndPoints.ROOT_PAYMENT}>
                 <div className="p-3 bg-yellow-400 text-gray-600 flex flex-wrap text-center font-bold rounded-xl shadow">
                   <i className="fa fa-credit-card text-white ml-20 text-3xl font-bold rounded-lg p-2"></i>
                   <div className="w-full bg-white hover:bg-gray-200 rounded-full shadow-xl p-2 items-center">
