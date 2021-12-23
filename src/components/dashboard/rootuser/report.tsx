@@ -139,7 +139,7 @@ export default function PaymentsRoot () {
               <div className="py-2">
               <span className="font-bold">All Payments Request</span>
               </div>
-    <table className="table-auto rounded-t-xl  bg-blue-200 text-gray-800">
+    <table className="table-auto rounded-t-xl bg-blue-200 text-gray-800">
                 <tr className="text-left  border-b-2 border-blue-300">
                   <th className="px-4 py-3">Organization</th>
                   <th className="px-4 py-3">Resident</th>
