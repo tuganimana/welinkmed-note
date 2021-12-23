@@ -1,6 +1,6 @@
 // eslint-disable-next-line no-use-before-define
 import React from 'react'
-import Sidebar from '../Sidebar'
+import Sidebar from '../Sidebarroot'
 import Topbar from './Topbar'
 import { useHistory } from 'react-router-dom'
 
