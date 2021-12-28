@@ -1,13 +1,35 @@
 // eslint-disable-next-line no-use-before-define
 import React, { useState, useEffect } from 'react'
-import { Tabs, Select } from 'antd'
+import { Tabs, Select, Modal, Button } from 'antd'
 import { useApi } from '../../../utils/api'
 import { backEndPoints, welinkTokens } from '../../../utils/enums'
 import { api } from '../../../utils/apiRequest'
 import PieChart from './../charts/Chart'
+import Residents from './report/resident'
+import Users from './report/user'
 const { Option } = Select
 const { TabPane } = Tabs
 export default function PaymentsRoot () {
+  const [ModalVisible, setModalVisible] = useState(false)
+  const showModalClient = () => {
+    setModalVisible(true)
+  }
+  const handleOky = () => {
+    setModalVisible(false)
+  }
+  const handleCancl = () => {
+    setModalVisible(false)
+  }
+  const [OrgModalVisible, setOrgModalVisible] = useState(false)
+  const showModalOrg = () => {
+    setOrgModalVisible(true)
+  }
+  const handleOkye = () => {
+    setOrgModalVisible(false)
+  }
+  const handleCancle = () => {
+    setOrgModalVisible(false)
+  }
   const [due, setDue] = useState(0)
   const [expired, setExpired] = useState(0)
   useEffect(() => {
@@ -76,55 +98,78 @@ export default function PaymentsRoot () {
               </div>
               <div className="flex flex-wrap">
                 <div className="sm:w-1/3 p-1 cursor-pointer">
-                    <div className="p-3 bg-green-500 text-gray-600 flex flex-wrap font-bold rounded">
+                    <div onClick={showModalClient} className="p-3 bg-green-500 hover:bg-green-600 text-gray-600 flex flex-wrap font-bold rounded">
                         <div className="w-1/3 p-2"><i className="fa fa-users text-xl text-white"></i></div>
                         <div className="w-2/3 p-2"><span className="text-center text-white">All residents</span></div>
                     </div>
+                    <Modal title="All Resident" visible={ModalVisible}
+                          onOk={handleOky}
+                          onCancel={handleCancl} width={1300}
+                          footer={[
+                            <Button key="back" onClick={handleCancl}>
+                              Return
+                            </Button>
+
+                          ]}
+                          >
+                          <Residents/>
+                    </Modal>
                 </div>
                 <div className="sm:w-1/3 p-1 cursor-pointer">
-                    <div className="p-3 bg-green-400 text-gray-600 flex flex-wrap font-bold rounded">
+                    <div onClick={showModalOrg} className="p-3 bg-green-400 hover:bg-green-500 text-gray-600 flex flex-wrap font-bold rounded">
                         <div className="w-1/3 p-2"><i className="fa fa-home text-xl text-gray-100"></i></div>
                         <div className="w-2/3 p-2"><span className="text-center text-gray-100">All Organization</span></div>
                     </div>
+                    <Modal title="All Resident" visible={OrgModalVisible}
+                          onOk={handleOkye}
+                          onCancel={handleCancle} width={1300}
+                          footer={[
+                            <Button key="back" onClick={handleCancle}>
+                              Return
+                            </Button>
+                          ]}
+                          >
+                          <Users/>
+                    </Modal>
                 </div>
                 <div className="sm:w-1/3 p-1 cursor-pointer">
-                    <div className="p-3 bg-green-200 text-gray-600 flex flex-wrap font-bold rounded">
+                    <div className="p-3 bg-green-200 hover:bg-green-300 text-gray-600 flex flex-wrap font-bold rounded">
                         <div className="w-1/3 p-2"><i className="fa fa-user-circle-o text-xl text-gray-600"></i></div>
                         <div className="w-2/3 p-2"><span className="text-center text-gray-600">All Users</span></div>
                     </div>
                 </div>
                 <div className="sm:w-1/3 p-1 cursor-pointer">
-                    <div className="p-3 bg-blue-300 text-gray-600 flex flex-wrap font-bold rounded">
+                    <div className="p-3 bg-blue-300 hover:bg-blue-400 text-gray-600 flex flex-wrap font-bold rounded">
                         <div className="w-1/3 p-2"><i className="fa fa-medkit text-xl text-gray800"></i></div>
                         <div className="w-2/3 p-2"><span className="text-center text-gray800">Orders</span></div>
                     </div>
                 </div>
                 <div className="sm:w-1/3 p-1 cursor-pointer">
-                    <div className="p-3 bg-red-200 text-gray-600 flex flex-wrap font-bold rounded">
+                    <div className="p-3 bg-red-200 hover:bg-red-300 text-gray-600 flex flex-wrap font-bold rounded">
                         <div className="w-1/3 p-2"><i className="fa fa-medkit text-xl text-gray800"></i></div>
                         <div className="w-2/3 p-2"><span className="text-center text-gray800">Missed Orders</span></div>
                     </div>
                 </div>
                 <div className="sm:w-1/3 p-1 cursor-pointer">
-                    <div className="p-3 bg-yellow-300 text-gray-600 flex flex-wrap font-bold rounded">
+                    <div className="p-3 bg-yellow-300 hover:bg-yellow-400 text-gray-600 flex flex-wrap font-bold rounded">
                         <div className="w-1/3 p-2"><i className="fa fa-medkit text-xl text-gray-800"></i></div>
                         <div className="w-2/3 p-2"><span className="text-center text-gray800">Due Orders</span></div>
                     </div>
                 </div>
                 <div className="sm:w-1/3 p-1 cursor-pointer">
-                    <div className="p-3 bg-indigo-400 text-gray-600 flex flex-wrap font-bold rounded">
+                    <div className="p-3 bg-indigo-400 hover:bg-indigo-500 text-gray-600 flex flex-wrap font-bold rounded">
                         <div className="w-1/3 p-2"><i className="fa fa-credit-card text-xl text-white"></i></div>
                         <div className="w-2/3 p-2"><span className="text-center text-white">All Payment Apllied</span></div>
                     </div>
                 </div>
                 <div className="sm:w-1/3 p-1 cursor-pointer">
-                    <div className="p-3 bg-purple-200 text-gray-600 flex flex-wrap font-bold rounded">
+                    <div className="p-3 bg-purple-200 hover:bg-purple-300 text-gray-600 flex flex-wrap font-bold rounded">
                         <div className="w-1/3 p-2"><i className="fa fa-credit-card text-xl text-gray800"></i></div>
                         <div className="w-2/3 p-2"><span className="text-center text-gray800">Approved Payments </span></div>
                     </div>
                 </div>
                 <div className="sm:w-1/3 p-1 cursor-pointer">
-                    <div className="p-3 bg-red-200 text-gray-600 flex flex-wrap font-bold rounded">
+                    <div className="p-3 bg-red-200 hover:bg-red-300 text-gray-600 flex flex-wrap font-bold rounded">
                         <div className="w-1/3 p-2"><i className="fa fa-credit-card text-xl text-gray800"></i></div>
                         <div className="w-2/3 p-2"><span className="text-center text-gray800">None Approved Payments</span></div>
                     </div>
