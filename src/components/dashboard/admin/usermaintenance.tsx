@@ -1,5 +1,5 @@
 // eslint-disable-next-line no-use-before-define
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Tabs } from 'antd'
 import { useForm } from 'react-hook-form'
 import { RegisterType } from '../../../utils/types'
@@ -44,18 +44,19 @@ export default function UserMaintenance () {
   const callback = (key:any) => {
     console.log(key)
   }
-  const recent = [
-    {
-      id: '1',
-      profile: 'photo.jg',
-      firstname: 'Alexander',
-      lastname: 'Martin',
-      gender: 'Male',
-      dob: '17/5/1989',
-      phone: '+1 230 403 500',
-      email: 'alexabdel@gmail.com'
+  const [recent, setRecents] = useState([])
+  console.log(recent)
+  useEffect(() => {
+    setLoading(true)
+    const getUser = async () => {
+      const response = await api.get(`${backEndPoints.REGISTER}`)
+      if (response.status === 201) {
+        setLoading(false)
+        setRecents(response.data)
+      }
     }
-  ]
+    getUser()
+  }, [])
   return (
     <>
      <div className="px-2 py-2">
@@ -212,24 +213,19 @@ export default function UserMaintenance () {
     <table className="rounded-t-lg w-full mx-auto bg-gray-200 text-gray-800">
       <tr className="text-left border-b-2 border-blue-300">
         <th className="px-4 py-3">#</th>
-        <th className="px-4 py-3">Profile</th>
         <th className="px-4 py-3">First Name</th>
         <th className="px-4 py-3">Last Name</th>
-        <th className="px-4 py-3">Gender</th>
-        <th className="px-4 py-3">Dob</th>
+        <th className="px-4 py-3">category</th>
         <th className="px-4 py-3">Phone</th>
         <th className="px-4 py-3">Email</th>
-        <th className="px-4 py-3">Action</th>
       </tr>
       {
     recent.map((items:any, index) => (
     <tr key={index} className="bg-gray-100 hover:bg-gray-200 border-b border-blue-200">
-        <td className="px-4 py-3">{items.id}</td>
-        <td className="px-4 py-3">{items.profile}</td>
+        <td className="px-4 py-3">{items.userId}</td>
         <td className="px-4 py-3">{items.firstname}</td>
         <td className="px-4 py-3">{items.lastname}</td>
-        <td className="px-4 py-3">{items.gender}</td>
-        <td className="px-4 py-3">{items.dob}</td>
+        <td className="px-4 py-3">{items.category}</td>
         <td className="px-4 py-3">{items.phone}</td>
         <td className="px-4 py-3">{items.email}</td>
         <td className="px-4 py-3">

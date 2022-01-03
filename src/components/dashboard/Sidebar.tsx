@@ -4,15 +4,12 @@ import { LogoutOutlined } from '@ant-design/icons'
 import { useHistory } from 'react-router-dom'
 import { welinkTokens, frontEndPoints, backEndPoints } from '../../utils/enums'
 import { api } from '../../utils/apiRequest'
+import Logo from '../../images/logo192.png'
 export default function Sidebar () {
-  const mytoken = localStorage.getItem(welinkTokens.userToken)
-  const jwt = require('jsonwebtoken')
-  const decod = jwt.decode(mytoken)
-  const { firstName, organizationID } = decod || 'undefined'
+  const [due, setDue] = useState(0)
+  const [expired, setExpired] = useState(0)
   const history = useHistory()
   const [small, setSmall] = useState(false)
-  const [expired, setExpired] = useState(0)
-  const [due, setDue] = useState(0)
   const handleClick = () => {
     setSmall(true)
   }
@@ -25,25 +22,30 @@ export default function Sidebar () {
     history.push(frontEndPoints.LOGIN)
   }
   useEffect(() => {
+    const getExpired = async () => {
+      const userId = localStorage.getItem(welinkTokens.userID) || null
+      const urlPath = `${backEndPoints.DUE_ORDERS}/${userId}`
+      const response = await api.get(urlPath)
+
+      setDue(response.data.data.length)
+    }
+    getExpired()
     const getData = async () => {
-      const urlPath = `${backEndPoints.EXPIRED_ORDERS}/${organizationID}`
+      const userId = localStorage.getItem(welinkTokens.userID) || null
+      const urlPath = `${backEndPoints.EXPIRED_ORDERS}/${userId}`
       const response = await api.get(urlPath)
       setExpired(response.data.data.length)
     }
-    const getAllOrder = async () => {
-      const urlPath = `${backEndPoints.DUE_ORDERS}/${organizationID}`
-      const resDue = await api.get(urlPath)
-      setDue(resDue.data.data.length)
-    }
     getData()
-    getAllOrder()
   }, [])
   return (<>
   <div className="md:flex flex-col md:flex-row md:min-h-screen w-full">
     <div className="flex flex-col w-full md:w-full text-gray-700 bg-blue-400 text-gray-200 flex-shrink-0">
       <div className="flex-shrink-0 px-8 py-4 flex flex-row items-center justify-between py-4">
         <div className="">
-        <a href={frontEndPoints.USERADMIN} className="text-lg mb-16 font-semibold tracking-widest text-gray-900  rounded-lg text-white focus:outline-none focus:shadow-outline">Welcome {firstName} </a>
+        <a href="/dashboard" className="text-lg mb-16 font-semibold tracking-widest text-gray-100  rounded-lg text-white focus:outline-none focus:shadow-outline">
+        <img src={Logo} alt="logo" />
+        </a>
         </div>
         <div className="md:hidden">
         <button type="button" onClick={handleClick} className="inline-flex items-center justify-center p-2 rounded-md text-white hover:text-yellow-600 hover:bg-yellow-100 focus:outline-none focus:bg-yellow-100 focus:text-yellow-600 transition duration-150 ease-in-out">
@@ -56,19 +58,19 @@ export default function Sidebar () {
       </div>
       <hr className="text-2 text-gray-600 font-bold"/>
         <nav className="hidden md:flex-grow lg:flex-grow w-full md:block px-4 pb-4 md:pb-0 md:overflow-y-auto py-2">
-          <a href="/user-dashboard" className="block p-2 mt-2 text-md font-bold text-gray-900 border-blue-500 mt-4 rounded-lg  hover:shadow-lg bg-blue-300  hover:bg-blue-200 focus:bg-red-200 focus:text-white hover:text-white text-gray-200 hover:text-gray-900 focus:text-gray-900 hover:bg-gray-200 focus:bg-gray-200 focus:outline-none focus:shadow-outline">
+          <a href="/resident-due" className="block p-2 mt-2 text-md font-bold text-gray-900 border-blue-500 mt-4 rounded-lg  hover:shadow-lg bg-blue-300  hover:bg-blue-200 focus:bg-red-200 focus:text-white hover:text-white text-gray-200 hover:text-gray-900 focus:text-gray-900 hover:bg-gray-200 focus:bg-gray-200 focus:outline-none focus:shadow-outline">
             <i className="fa fa-bar-chart mr-2 text-black bg-blue-200 rounded-full p-3"></i>Resident Due </a>
-          <a href={frontEndPoints.DUE_ORDERS_USERS} className="block p-2 mt-2 text-md font-bold text-gray-600 border-blue-500 mt-4 rounded-lg
+          <a href="/due-orders" className="block p-2 mt-2 text-md font-bold text-gray-600 border-blue-500 mt-4 rounded-lg
            hover:shadow-lg bg-blue-300  hover:bg-blue-200 focus:bg-red-200 focus:text-white
            hover:text-white text-gray-200 hover:text-gray-900 focus:text-gray-900
            hover:bg-gray-200 focus:bg-gray-200 focus:outline-none
            focus:shadow-outline">
             <i className="fa fa-medkit mr-2 text-black bg-green-200
              rounded-full p-3"></i>Due Orders <span className="float-right bg-yellow-200 rounded-full pr-2 pl-2">{due}</span> </a>
-          <a href="/user-dashboard" className="block p-2 mt-2 text-md font-bold text-gray-600 border-blue-500 mt-4 rounded-lg  hover:shadow-lg bg-blue-300  hover:bg-blue-200 focus:bg-red-200 focus:text-white hover:text-white text-gray-200 hover:text-gray-900 focus:text-gray-900
+          <a href="/due-orders" className="block p-2 mt-2 text-md font-bold text-gray-600 border-blue-500 mt-4 rounded-lg  hover:shadow-lg bg-blue-300  hover:bg-blue-200 focus:bg-red-200 focus:text-white hover:text-white text-gray-200 hover:text-gray-900 focus:text-gray-900
           hover:bg-gray-200 focus:bg-gray-200 focus:outline-none focus:shadow-outline">
-            <i className="fa fa-medkit  mr-2 text-black bg-red-400 rounded-full p-3"></i>Missed Orders <span className="float-right bg-yellow-200 rounded-full pr-2 pl-2">0</span> </a>
-          <a href={frontEndPoints.EXPIRED_ORDERS} className="block p-2 mt-2 text-md
+            <i className="fa fa-medkit  mr-2 text-black bg-red-400 rounded-full p-3"></i>Missed Orders </a>
+          <a href="/expired" className="block p-2 mt-2 text-md
           font-bold text-gray-600 border-blue-500
            rounded-lg hover:shadow-lg bg-blue-300
             hover:bg-blue-200 hover:bg-red-200
@@ -76,8 +78,8 @@ export default function Sidebar () {
               hover:text-gray-900 focus:text-gray-900 hover:bg-gray-200
                focus:bg-gray-200 focus:outline-none focus:shadow-outline">
             <i className="fa fa-hospital-o  mr-2 text-black bg-yellow-200 rounded-full p-3"></i>Expired Orders <span className="float-right bg-yellow-200 rounded-full pr-2 pl-2">{expired}</span></a>
-       <hr className="mt-2"/>
-       <a className="block p-2 mt-2 bg-blue-300 hover:bg-blue-200 text-md font-bold text-gray-600 border-blue-500 rounded-lg
+          <hr className="mt-2"/>
+       <a href="/dashboard" className="block p-2 mt-2 bg-blue-300 hover:bg-blue-200 text-md font-bold text-gray-600 border-blue-500 rounded-lg
         hover:shadow-lg hover:bg-red-200 focus:bg-red-200 focus:text-white hover:text-white text-gray-200 hover:text-gray-900 focus:text-gray-900 hover:bg-gray-200 focus:bg-gray-200
         focus:outline-none focus:shadow-outline">
             <i className="fa fa-user  mr-2 text-black bg-yellow-200 rounded-full p-3"></i>Profile </a>

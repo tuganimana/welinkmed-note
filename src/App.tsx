@@ -32,6 +32,7 @@ import PaymentsRoot from './components/dashboard/rootuser/payments'
 import ReportRoot from './components/dashboard/rootuser/report'
 import DueOrder from './components/dashboard/admin/dueorder'
 import ResidentView from './components/dashboard/admin/residentDue'
+import ExpiredOrder from './components/dashboard/admin/expiredorder'
 import { frontEndPoints } from './utils/enums'
 import OrderdetailUser from './components/dashboard/clients/orderdetail'
 import MarComponentUser from './components/dashboard/clients/Marcomponents'
@@ -136,6 +137,11 @@ function App () {
         <Route path={frontEndPoints.RESIDENT_DUE}>
           <Dashboard>
              <ResidentView/>
+          </Dashboard>
+        </Route>
+        <Route path="/expired">
+          <Dashboard>
+            <ExpiredOrder/>
           </Dashboard>
         </Route>
         {/* ========================================START CLIENT EDNPOINT============================ */}
