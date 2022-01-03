@@ -48,6 +48,14 @@ export default function Welcome () {
                 <span className="inline-block mt-2 mx-3"> Add residents</span>
                 </div>
                 </a>
+                {/* <div className="p-3 bg-gray-200 text-gray-600 flex flex-wrap font-bold rounded-xl shadow">
+                <div className="bg-white rounded-full h-8 w-8 items-center"><AreaChartOutlined className="ml-2" /></div>
+                <span className="inline-block mt-2 mx-3"> Reports</span>
+                </div>
+                <div className="p-3 bg-blue-200 text-gray-600 flex flex-wrap font-bold rounded-xl shadow">
+                <div className="bg-white rounded-full h-8 w-8 items-center"><DollarCircleOutlined size={40} className="ml-2" /></div>
+                <span className="inline-block mt-2 mx-3"> Payments</span>
+                </div> */}
               </div>
             </div>
             <div className="">
