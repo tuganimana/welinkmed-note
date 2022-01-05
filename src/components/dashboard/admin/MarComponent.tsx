@@ -6,6 +6,7 @@ import { useParams } from 'react-router-dom'
 import { Page, Text, View, Document, StyleSheet, PDFViewer } from '@react-pdf/renderer'
 import Administered from './mar/administered'
 import { useApi } from '../../../utils/api'
+
 const styles = StyleSheet.create({
   page: {
     padding: 5,
@@ -197,7 +198,6 @@ const MarComponents = (props:any) => {
   }, [])
 
   const [Orders, setOrders] = useState([])
-
   // const [OrderAdminId, AdministerOrderId] = useState()
   // const orderId = OrderAdminId
   // console.log(orderId)
