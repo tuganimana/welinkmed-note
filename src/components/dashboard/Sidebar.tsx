@@ -80,7 +80,8 @@ export default function Sidebar () {
             <i className="fa fa-hospital-o  mr-2 text-black bg-yellow-200 rounded-full p-3"></i>Expired Orders <span className="float-right bg-yellow-200 rounded-full pr-2 pl-2">{expired}</span></a>
           <hr className="mt-2"/>
        <a href="/dashboard" className="block p-2 mt-2 bg-blue-300 hover:bg-blue-200 text-md font-bold text-gray-600 border-blue-500 rounded-lg
-        hover:shadow-lg hover:bg-red-200 focus:bg-red-200 focus:text-white hover:text-white text-gray-200 hover:text-gray-900 focus:text-gray-900 hover:bg-gray-200 focus:bg-gray-200
+        hover:shadow-lg hover:bg-red
+        -200 focus:bg-red-200 focus:text-white hover:text-white text-gray-200 hover:text-gray-900 focus:text-gray-900 hover:bg-gray-200 focus:bg-gray-200
         focus:outline-none focus:shadow-outline">
             <i className="fa fa-user  mr-2 text-black bg-yellow-200 rounded-full p-3"></i>Profile </a>
         </nav>
@@ -94,7 +95,7 @@ export default function Sidebar () {
           data-aos-easing="linear"
           data-aos-duration="500" className="relative bg-gray-100 top-0 inset-x-0 p-2 transition transform origin-top-right md:hidden">
           <div className="">
-        <div className="rounded-md divide-y-2 ">
+        <div className="rounded-md divide-y-2">
           <div className="pt-5 pb-6 px-5 space-y-6">
             <div className="flex items-center justify-between">
               <div>
