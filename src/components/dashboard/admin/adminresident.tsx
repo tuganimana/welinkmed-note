@@ -22,10 +22,10 @@ export default function AdminiResidents (props:any) {
         {messaging}
         <table className="rounded-t-lg table-auto  bg-gray-200 text-gray-800">
           <tr className="text-left border-b-2 border-blue-300">
-            <th className="px-4 py-3">Full Name</th>
+            <th className="px-4 py-3">Full Names</th>
             <th className="px-4 py-3">Date of Birth</th>
             <th className="px-4 py-3">Maritial Status</th>
-            <th className="px-4 py-3">resident State</th>
+            <th className="px-4 py-3">Resident State</th>
             <th className="px-4 py-3">Religion</th>
             <th className="px-4 py-3">addedDate</th>
             <th className="px-4 py-3">Admitting Physician</th>
