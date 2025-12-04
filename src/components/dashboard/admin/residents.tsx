@@ -2,7 +2,7 @@
 import React, { useState, useEffect } from 'react'
 import { Tabs, Modal, Spin, Button } from 'antd'
 import { EditOutlined } from '@ant-design/icons'
-import { useParams } from 'react-router-dom'
+import { useParams } from 'next/navigation'
 import Alert from '../../alerts'
 import ruser from '../../../images/users.png'
 import pill from '../../../images/Pills.jpg'

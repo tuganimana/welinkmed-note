@@ -1,7 +1,7 @@
 // eslint-disable-next-line no-use-before-define
 import React, { useState, useEffect } from 'react'
 import { LogoutOutlined } from '@ant-design/icons'
-import { useHistory } from 'react-router-dom'
+import { useRouter } from 'next/navigation'
 import { welinkTokens, frontEndPoints, backEndPoints } from '../../../utils/enums'
 import { api } from '../../../utils/apiRequest'
 export default function Sidebar () {
@@ -9,7 +9,7 @@ export default function Sidebar () {
   const jwt = require('jsonwebtoken')
   const decod = jwt.decode(mytoken)
   const { firstName, organizationID } = decod || 'undefined'
-  const history = useHistory()
+  const router = useRouter()
   const [small, setSmall] = useState(false)
   const [expired, setExpired] = useState(0)
   const [due, setDue] = useState(0)
@@ -22,7 +22,7 @@ export default function Sidebar () {
   const handleLogout = () => {
     localStorage.removeItem(welinkTokens.userToken)
     localStorage.removeItem(welinkTokens.accountType)
-    history.push(frontEndPoints.LOGIN)
+    router.push(frontEndPoints.LOGIN)
   }
   useEffect(() => {
     const getData = async () => {

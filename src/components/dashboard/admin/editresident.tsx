@@ -3,7 +3,7 @@ import React, { useState } from 'react'
 import { Tabs, Spin } from 'antd'
 
 import { useApi } from '../../../utils/api'
-import { useParams } from 'react-router-dom'
+import { useParams } from 'next/navigation'
 import Alert from '../../alerts'
 import Editresidents from './updateresident'
 const { TabPane } = Tabs

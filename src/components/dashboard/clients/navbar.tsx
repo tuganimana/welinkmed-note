@@ -2,16 +2,16 @@
 import React from 'react'
 import Sidebar from './Sidebar'
 import Topbar from './Topbar'
-import { useHistory } from 'react-router-dom'
+import { useRouter } from 'next/navigation'
 import { frontEndPoints, welinkTokens, accountCategory } from '../../../utils/enums'
 export default function ClientDashboard (props: any) {
-  const history = useHistory()
+  const router = useRouter()
   const accountType = localStorage.getItem(welinkTokens.accountType)
   const token = localStorage.getItem(welinkTokens.userToken)
   if (accountType === null || accountType !== accountCategory.CLIENTS || token === null) {
     localStorage.removeItem(welinkTokens.userToken)
     localStorage.removeItem(welinkTokens.accountType)
-    history.push(frontEndPoints.LOGIN)
+    router.push(frontEndPoints.LOGIN)
   }
   return (
         <div className="lg:flex w-full bg-lightBlue">

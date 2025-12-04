@@ -2,7 +2,7 @@
 import React, { useState, useEffect } from 'react'
 import { backEndPoints } from '../../../utils/enums'
 import { api } from '../../../utils/apiRequest'
-import { useParams } from 'react-router-dom'
+import { useParams } from 'next/navigation'
 import { Page, Text, View, Document, StyleSheet, PDFViewer } from '@react-pdf/renderer'
 import Administered from './mar/administered'
 import { useApi } from '../../../utils/api'

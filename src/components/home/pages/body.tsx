@@ -90,70 +90,84 @@ export default function Body () {
   <div className="w-full h-auto">
   <Slider/>
   </div>
-  <div className="w-full h-auto bg-gray-200">
-    {/* PART 1 */}
-   <div className="bg-gray-200 w-full h-auto">
-   <div className="md:p-8 bg-gray-200">
-     <div className="grid md:grid-cols-2 gap-3">
-       <div data-aos="zoom-out-right" className="p-4">
-           <div className="">
-             <img src={group} className="rounded-3xl w-full shadow-2xl" alt=""/>
+  {/* About Section - Modernized */}
+  <div className="w-full h-auto bg-gradient-to-br from-gray-50 to-white">
+    <div className="px-4 py-16 mx-auto max-w-7xl md:px-8 lg:px-16 md:py-24">
+     <div className="grid gap-8 items-center md:grid-cols-2 lg:gap-12">
+       <div data-aos="zoom-out-right" className="order-2 md:order-1">
+           <div className="relative group">
+             <div className="absolute -inset-1 bg-gradient-to-r from-red-600 to-blue-600 rounded-3xl opacity-25 blur transition duration-1000 group-hover:opacity-40"></div>
+             <img src={group} className="relative rounded-3xl w-full shadow-2xl transform transition duration-300 group-hover:scale-[1.02]" alt="About WeLinkMed"/>
            </div>
        </div>
-        <div className="p-2">
-        {/* <div data-aos="zoom-out-left" className="p-4"> */}
-         <p className="font-bold w-24 pt-2 text-4xl md:mt-8 border-t-2 border-blue-400 mb-4">About</p>
-         <p data-aos="zoom-out-right" className="text-md text-gray-600 leading-loose py-4 font-medium">
-         Access Medication Information
-                   Securely in Real Time
-A Complete Medication Management Solution
-Welinkmed has dramatically reduced medication errors, paperwork inefficiencies and administrative duties. Our portfolio of customers includes senior living facilities, group homes, correctional facilities, behavioral health providers and more.
-
-         </p>
-         <p> <button className="bg-red-800 hover:bg-red-700 p-2 pr-8 pl-8 text-white rounded-3xl">Read More</button></p>
+        <div className="order-1 p-4 md:order-2 md:p-8">
+         <div className="mb-6">
+           <span className="inline-block pt-2 mb-4 text-5xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-red-600 to-blue-600 md:text-6xl">About</span>
+           <div className="mt-2 w-20 h-1 bg-gradient-to-r from-red-600 to-blue-600 rounded-full"></div>
+         </div>
+         <div data-aos="zoom-out-left" className="space-y-4">
+           <h2 className="text-2xl font-bold leading-tight text-gray-800 md:text-3xl">
+             Access Medication Information Securely in Real Time
+           </h2>
+           <p className="text-base font-medium leading-relaxed text-gray-600 md:text-lg">
+             A Complete Medication Management Solution
+           </p>
+           <p className="text-sm leading-relaxed text-gray-600 md:text-base">
+             Welinkmed has dramatically reduced medication errors, paperwork inefficiencies and administrative duties. Our portfolio of customers includes senior living facilities, group homes, correctional facilities, behavioral health providers and more.
+           </p>
+         </div>
+         <div className="mt-8">
+           <button className="relative px-8 py-3 font-semibold text-white bg-gradient-to-r from-red-600 to-red-700 rounded-full shadow-lg transition-all duration-300 transform group hover:from-red-700 hover:to-red-800 hover:shadow-xl hover:scale-105">
+             <span className="relative z-10">Read More</span>
+             <div className="absolute inset-0 bg-gradient-to-r from-red-700 to-red-800 rounded-full opacity-0 transition-opacity duration-300 group-hover:opacity-100"></div>
+           </button>
+         </div>
        </div>
     </div>
   </div>
   </div>
-    {/* PART 2 */}
-
-   <div className="bgImageWeb1 bg-fixed">
-  <div className="bg-red-900 bg-opacity-70">
-   <div className="w-full md:pl-24 md:pr-24 flex flex-wrap">
-       <div className="w-ful md:w-1/2 p-4 md:p-4">
-           <div data-aos="flip-up" className="text-center md:mt-16 py-24">
-             <span className="text-white font-bold  text-5xl">Our Service, <br/> We Provide To community!</span>
+    {/* Services Section - Modernized */}
+   <div className="bg-fixed bg-center bg-cover bgImageWeb1">
+  <div className="bg-gradient-to-br backdrop-blur-sm from-red-900/80 via-red-800/75 to-blue-900/70">
+   <div className="px-4 py-16 mx-auto max-w-7xl md:px-8 lg:px-16 md:py-24">
+       <div className="mb-12 w-full md:mb-16">
+           <div data-aos="flip-up" className="py-8 text-center md:py-12">
+             <h2 className="mb-4 text-4xl font-bold leading-tight text-white md:text-5xl lg:text-6xl">
+               Our Services
+             </h2>
+             <p className="text-xl font-medium text-gray-100 md:text-2xl">
+               We Provide To Community!
+             </p>
+             <div className="mx-auto mt-4 w-24 h-1 bg-white rounded-full"></div>
            </div>
        </div>
-       <div className="w-ful md:w-1/2 flex flex-wrap p-4">
+       <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-4 lg:gap-8">
        {
         services.map((serviceitem:any, index) => {
           return (
-            <div key={index} data-aos="zoom-in" className="w-full md:w-1/2 p-2 md:flex md:justify-center" data-scrollreveal="enter top over 0.4s after 0.1s">
-             <div className="wrapper antialiased text-gray-900">
-               <div>
-                 {/* <img src={group} alt=" random imgee" className="w-full object-cover object-center rounded-3xl shadow-md" /> */}
-                 <div className="rounded-t-3xl w-60 bg-white flex items-center justify-center pt-4">
-                   <img className='h-12' src={serviceitem.image} alt="icon"/>
+            <div key={index} data-aos="zoom-in" data-aos-delay={index * 100} className="w-full">
+             <div className="overflow-hidden relative h-full bg-white rounded-2xl shadow-xl transition-all duration-300 transform group hover:shadow-2xl hover:-translate-y-2">
+               <div className="absolute inset-0 bg-gradient-to-br from-red-50 to-blue-50 opacity-0 transition-opacity duration-300 group-hover:opacity-100"></div>
+               <div className="flex relative flex-col items-center p-6 h-full text-center">
+                 <div className="p-4 mb-4 bg-gradient-to-br from-red-100 to-blue-100 rounded-2xl transition-transform duration-300 group-hover:scale-110">
+                   <img className='object-contain w-12 h-12' src={serviceitem.image} alt="icon"/>
                  </div>
-               <div data-aos="fade-down"
-              data-aos-easing="linear"
-              data-aos-duration="500" className="relative">
-                 <div className="bg-white p-4 item-center text-center rounded-b-3xl shadow-lg w-60">
-                    <h4 className="mt-1 text-xl font-semibold capiltalized leading-tight truncate">{serviceitem.title}</h4>
-                 <div className="mt-1">
-                   <span className="text-gray-600 text-sm">
-                      {serviceitem.descrip}
-                    </span>
-                 </div>
-                 <div className="mt-2">
-                   <a href="" className="bg-red-700 hover:bg-red-600 rounded pr-6 pl-6 pt-1 pb-1 shadow-xl text-white font-medium hover:text-white w-full">View more</a>
-                 </div>
-                 </div>
+               <div className="flex-1">
+                 <h4 className="mb-3 text-lg font-bold leading-tight text-gray-800 transition-colors duration-300 group-hover:text-red-600">
+                   {serviceitem.title}
+                 </h4>
+                 <p className="mb-4 text-sm leading-relaxed text-gray-600">
+                   {serviceitem.descrip}
+                 </p>
                </div>
+                 <div className="mt-auto w-full">
+                   <button className="w-full bg-gradient-to-r from-red-600 to-red-700 hover:from-red-700 hover:to-red-800 text-white font-medium py-2.5 px-4 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105">
+                     View More
+                   </button>
+                 </div>
                </div>
               </div>
-             </div>
+            </div>
           )
         })
         }
@@ -163,147 +177,232 @@ Welinkmed has dramatically reduced medication errors, paperwork inefficiencies a
 
   </div>
   </div>
-{/*  */}
-<div className="w-full h-96 bg-blue-400">
-<div className="md:pl-32 pb-6 md:pr-32 bg-gray-200">
-        <div className="md:max-w-7xl mx-auto">
-          <div className="text-center pt-8 pb-1 grid item-center">
-            <span className="text-4xl text-red-700 font-bold">eMAR</span>
-            <span className="text-base pt-1 pb-6 text-gray-500">Take paperwork out of medication administration</span>
-          </div>
-          <div data-aos-offset="200" data-aos-easing="ease-in-sine" data-aos-duration="700" className="flex flex-wrap">
-          {
+{/* eMAR Section - Modernized */}
+<div className="w-full bg-gradient-to-br from-gray-50 via-white to-blue-50">
+<div className="px-4 py-16 mx-auto max-w-7xl md:px-8 lg:px-16 md:py-24">
+        <div className="mb-12 text-center md:mb-16">
+          <h2 className="mb-4 text-4xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-red-600 to-blue-600 md:text-5xl">
+            eMAR
+          </h2>
+          <p className="text-lg font-medium text-gray-600 md:text-xl">
+            Take paperwork out of medication administration
+          </p>
+          <div className="mx-auto mt-4 w-24 h-1 bg-gradient-to-r from-red-600 to-blue-600 rounded-full"></div>
+        </div>
+        <div className="grid grid-cols-1 gap-6 md:grid-cols-3 lg:gap-8">
+        {
         ourwork.map((workitem:any, index) => {
           return (
-          <div key={index} data-aos="fade-up"
-          data-aos-duration="500" className="w-full md:w-1/3 p-2" data-scrollreveal="enter top over 0.4s after 0.1s">
-            <div className="wrapper antialiased text-gray-900">
-              <div data-aos="fade-left"
-                data-aos-anchor="#example-anchor"
-                data-aos-offset="500"
-                data-aos-duration="900">
-                {/* <img src={group1} alt=" random imgee" className="w-full object-cover object-center rounded-3xl shadow-xl" /> */}
-              <div className="relative px-6">
-                <div data-aos="zoom-in" className="bg-white opacity-95 rounded-xl grid p-3 item-center text-center shadow-lg">
-                  <div className="flex items-center justify-center pb-2">
-                    <img className='h-12' src={workitem.image} alt="services icon"/>
-                  </div>
-                  <span className="text-red-900 text-lg font-semibold pb-2 pt-1">{workitem.title}</span>
-                  <span className="text-xs font-normal text-gray-600">{workitem.descrip}</span>
-                  <span className="text-md mt-2 text-red-800 font-medium">{workitem.caption}</span>
+          <div key={index} data-aos="fade-up" data-aos-delay={index * 150} data-aos-duration="500" className="group">
+            <div className="p-8 h-full bg-white rounded-2xl border border-gray-100 shadow-lg transition-all duration-300 transform hover:shadow-2xl hover:-translate-y-2 hover:border-red-200">
+              <div className="flex flex-col items-center h-full text-center">
+                <div className="p-5 mb-6 bg-gradient-to-br from-red-100 to-blue-100 rounded-2xl transition-all duration-300 group-hover:scale-110 group-hover:rotate-3">
+                  <img className='object-contain w-14 h-14' src={workitem.image} alt="services icon"/>
                 </div>
-              </div>
-              </div>
+                <h3 className="mb-4 text-xl font-bold text-gray-800 transition-colors duration-300 group-hover:text-red-600">
+                  {workitem.title}
+                </h3>
+                <p className="flex-1 mb-4 text-sm leading-relaxed text-gray-600">
+                  {workitem.descrip}
+                </p>
               </div>
             </div>
+          </div>
           )
         })
         }
-          </div>
-          </div>
+        </div>
       </div>
+</div>
 
-      <div className="bgImageWeb2">
-        <div className="md:pl-32 md:pr-32 p-2 bg-red-800 bg-opacity-70">
-          <div data-aos="fade-up"
-     data-aos-duration="3000" className="md:max-w-7xl mx-auto grid gap-6 w-full pt-24 pb-24">
-            <span className="text-4xl font-bold text-white">Welinkmed Is Customized to Meet Your Specific Needs</span>
-            <span className="text-md font-bold text-gray-100">
-            Welinkmed’s pricing is structured as a subscription fee. The cost will vary based on the modules you choose to implement, as well as the total number of service hours you have each month. If you&apos;re interested in more specific pricing, we’d love to connect you with one of our client representatives who can assess your specific needs and provide you with a quote.
-            </span>
-            <span><button data-aos="zoom-out" className="bg-gray-100 hover:bg-gray-200 font-medium p-3 pl-6 pr-6 rounded-full">Get started</button></span>
+      {/* CTA Section - Modernized */}
+      <div className="bg-fixed bg-center bg-cover bgImageWeb2">
+        <div className="bg-gradient-to-br backdrop-blur-sm from-red-900/85 via-red-800/80 to-blue-900/75">
+          <div className="px-4 py-20 mx-auto max-w-7xl md:px-8 lg:px-16 md:py-32">
+            <div data-aos="fade-up" data-aos-duration="1000" className="mx-auto space-y-6 max-w-4xl text-center">
+              <h2 className="text-4xl font-bold leading-tight text-white md:text-5xl lg:text-6xl">
+                Welinkmed Is Customized to Meet Your Specific Needs
+              </h2>
+              <p className="text-lg font-medium leading-relaxed text-gray-100 md:text-xl">
+                Welinkmed's pricing is structured as a subscription fee. The cost will vary based on the modules you choose to implement, as well as the total number of service hours you have each month. If you're interested in more specific pricing, we'd love to connect you with one of our client representatives who can assess your specific needs and provide you with a quote.
+              </p>
+              <div className="pt-4">
+                <button data-aos="zoom-out" className="relative px-10 py-4 text-lg font-bold text-red-600 bg-white rounded-full shadow-2xl transition-all duration-300 transform group hover:bg-gray-50 hover:shadow-3xl hover:scale-110">
+                  <span className="relative z-10">Get Started</span>
+                  <div className="absolute inset-0 bg-gradient-to-r from-white to-gray-50 rounded-full opacity-0 transition-opacity duration-300 group-hover:opacity-100"></div>
+                </button>
+              </div>
+            </div>
           </div>
         </div>
       </div>
 
-      <div className="md:pr-32 xm:pr-2  md:pl-32 bg-gray-200">
-        <div className="md:max-w-7xl mx-auto">
-          <div className="text-center pt-8 grid item-center">
-            <span className="text-4xl text-red-700 font-bold">Contact Us</span>
-            <span className="text-lg text-gray-500 mt-4">For more infomation , You can use the following to text to us, Thank you.....!</span>
+      {/* Contact Section - Modernized */}
+      <div className="w-full bg-gradient-to-br from-gray-50 to-white">
+        <div className="px-4 py-16 mx-auto max-w-7xl md:px-8 lg:px-16 md:py-24">
+          <div className="mb-12 text-center md:mb-16">
+            <h2 className="mb-4 text-4xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-red-600 to-blue-600 md:text-5xl">
+              Contact Us
+            </h2>
+            <p className="text-lg font-medium text-gray-600 md:text-xl">
+              For more information, you can use the following to reach out to us. Thank you!
+            </p>
+            <div className="mx-auto mt-4 w-24 h-1 bg-gradient-to-r from-red-600 to-blue-600 rounded-full"></div>
           </div>
-          <div className="flex flex-wrap">
-            <div className="w-full md:w-1/2 p-2">
-              <div className="p-6 grid gap-2 bg-gray-100 rounded">
-                <span data-aos="zoom-out-up" className="text-xl font-bold text-blue-400"><i className="fa fa-facebook mr-3 text-blue-800 rounded-xl  p-4 text-md"></i> We link Med</span>
-                <span data-aos="zoom-out-up" className="text-xl font-bold text-green-400"><i className="fa fa-phone mr-3  text-green-400 rounded-xl  p-4 text-md"></i> +1 234 568 434 542</span>
-                <span data-aos="zoom-out-up" className="text-xl font-bold text-blue-300"><i className="fa fa-twitter mr-3 text-blue-400 rounded-xl p-4 text-md"></i> We link Med</span>
-                <span data-aos="zoom-out-up" className="text-xl font-bold text-blue-300"><i className="fa fa-linkedin mr-3 text-blue-300 rounded-xl p-4 text-md"></i> We link Med</span>
+          <div className="grid grid-cols-1 gap-8 lg:grid-cols-2 lg:gap-12">
+            {/* Contact Info */}
+            <div className="space-y-4">
+              <div className="p-8 bg-white rounded-2xl shadow-lg transition-shadow duration-300 hover:shadow-xl">
+                <h3 className="mb-6 text-2xl font-bold text-gray-800">Get In Touch</h3>
+                <div className="space-y-4">
+                  <a href="tel:+1234568434542" data-aos="zoom-out-up" className="flex items-center p-4 bg-gradient-to-r from-green-50 to-green-100 rounded-xl transition-all duration-300 hover:from-green-100 hover:to-green-200 group">
+                    <div className="flex flex-shrink-0 justify-center items-center mr-4 w-12 h-12 bg-green-500 rounded-full transition-transform duration-300 group-hover:scale-110">
+                      <i className="text-white fa fa-phone"></i>
+                    </div>
+                    <div>
+                      <p className="text-sm text-gray-500">Phone</p>
+                      <p className="text-lg font-bold text-gray-800">+1 234 568 434 542</p>
+                    </div>
+                  </a>
+                  <a href="#" data-aos="zoom-out-up" className="flex items-center p-4 bg-gradient-to-r from-blue-50 to-blue-100 rounded-xl transition-all duration-300 hover:from-blue-100 hover:to-blue-200 group">
+                    <div className="flex flex-shrink-0 justify-center items-center mr-4 w-12 h-12 bg-blue-600 rounded-full transition-transform duration-300 group-hover:scale-110">
+                      <i className="text-white fa fa-facebook"></i>
+                    </div>
+                    <div>
+                      <p className="text-sm text-gray-500">Facebook</p>
+                      <p className="text-lg font-bold text-gray-800">WeLink Med</p>
+                    </div>
+                  </a>
+                  <a href="#" data-aos="zoom-out-up" className="flex items-center p-4 bg-gradient-to-r from-blue-50 to-cyan-100 rounded-xl transition-all duration-300 hover:from-cyan-100 hover:to-cyan-200 group">
+                    <div className="flex flex-shrink-0 justify-center items-center mr-4 w-12 h-12 bg-cyan-500 rounded-full transition-transform duration-300 group-hover:scale-110">
+                      <i className="text-white fa fa-twitter"></i>
+                    </div>
+                    <div>
+                      <p className="text-sm text-gray-500">Twitter</p>
+                      <p className="text-lg font-bold text-gray-800">@WeLinkMed</p>
+                    </div>
+                  </a>
+                  <a href="#" data-aos="zoom-out-up" className="flex items-center p-4 bg-gradient-to-r from-blue-50 to-indigo-100 rounded-xl transition-all duration-300 hover:from-indigo-100 hover:to-indigo-200 group">
+                    <div className="flex flex-shrink-0 justify-center items-center mr-4 w-12 h-12 bg-indigo-600 rounded-full transition-transform duration-300 group-hover:scale-110">
+                      <i className="text-white fa fa-linkedin"></i>
+                    </div>
+                    <div>
+                      <p className="text-sm text-gray-500">LinkedIn</p>
+                      <p className="text-lg font-bold text-gray-800">WeLink Med</p>
+                    </div>
+                  </a>
+                </div>
               </div>
             </div>
-            <div className="w-full md:w-1/2 p-2">
-              <div className="p-6 bg-gray-100 rounded">
-                <h2 className="text-3xl font-semibold text-red-800">Message</h2>
-                <form data-aos="zoom-out-up" action="#">
-                  <div className="w-full mt-3">
-                    <input type="text" placeholder="Full Name" className="bg-white rounded appearance-none border-2 border-red-200  w-full py-4 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-red-300 "/>
+            {/* Contact Form */}
+            <div>
+              <div className="p-8 bg-white rounded-2xl shadow-lg transition-shadow duration-300 hover:shadow-xl">
+                <h2 className="mb-6 text-3xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-red-600 to-blue-600">Send Us a Message</h2>
+                <form data-aos="zoom-out-up" action="#" className="space-y-4">
+                  <div>
+                    <input type="text" placeholder="Full Name" className="px-5 py-4 w-full leading-tight text-gray-700 bg-gray-50 rounded-xl border-2 border-gray-200 transition-all duration-300 focus:outline-none focus:bg-white focus:border-red-400 hover:border-red-300"/>
                   </div>
-                  <div className="w-full mt-3">
-                    <input type="text" placeholder="Phone number" className="bg-white rounded appearance-none border-2 border-red-200  w-full py-4 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-red-300 "/>
+                  <div>
+                    <input type="tel" placeholder="Phone Number" className="px-5 py-4 w-full leading-tight text-gray-700 bg-gray-50 rounded-xl border-2 border-gray-200 transition-all duration-300 focus:outline-none focus:bg-white focus:border-red-400 hover:border-red-300"/>
                   </div>
-                  <div className="w-full mt-3">
-                    <input type="text" placeholder="Email Address" className="bg-white rounded appearance-none border-2 border-red-200 w-full py-4 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-red-300 "/>
+                  <div>
+                    <input type="email" placeholder="Email Address" className="px-5 py-4 w-full leading-tight text-gray-700 bg-gray-50 rounded-xl border-2 border-gray-200 transition-all duration-300 focus:outline-none focus:bg-white focus:border-red-400 hover:border-red-300"/>
                   </div>
-                  <div className="w-full mt-3">
-                    <textarea placeholder="Text You Message Here..." className="bg-white rounded appearance-none border-2 border-red-200  w-full py-4 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-red-300 "></textarea>
+                  <div>
+                    <textarea rows={4} placeholder="Your Message Here..." className="px-5 py-4 w-full leading-tight text-gray-700 bg-gray-50 rounded-xl border-2 border-gray-200 transition-all duration-300 resize-none focus:outline-none focus:bg-white focus:border-red-400 hover:border-red-300"></textarea>
                   </div>
-                  <div className="w-full mt-3">
-                    <input type="submit" value="Send Message" className="bg-red-800 text-white font-medium text-lg rounded-xl hover:bg-red-700 cursor-pointer w-full py-4 px-4 leading-tight focus:outline-none focus:bg-white focus:border-red-300 "/>
+                  <div>
+                    <button type="submit" className="px-6 py-4 w-full text-lg font-bold text-white bg-gradient-to-r from-red-600 to-red-700 rounded-xl shadow-lg transition-all duration-300 transform hover:from-red-700 hover:to-red-800 hover:shadow-xl hover:scale-105">
+                      Send Message
+                    </button>
                   </div>
                 </form>
               </div>
             </div>
           </div>
-          </div>
+        </div>
       </div>
 
-      <footer className="bgImageWeb1 footer relative border-b-2">
-        <div className="bg-red-700 bg-opacity-80 pt-1 ">
-        <div className="container mx-auto px-16">
-            <div data-aos="fade-up"
-     data-aos-duration="900" className="sm:flex sm:mt-8">
-                <div className="mt-8 sm:mt-0 sm:w-full sm:px-8 flex flex-col md:flex-row justify-between">
-                    <div className="flex flex-col p-24">
-                        <span className="font-bold text-gray-100 text-xl uppercase mb-2">We Link Med Logon</span>
-                    </div>
-                    <div className="flex flex-col">
-                        <span className="font-bold text-gray-100 text-xl uppercase mt-4 md:mt-0 mb-2">Pages</span>
-                        <span className="my-2"><a href="#" className="text-gray-100 text-md hover:text-blue-500">Home</a></span>
-                        <span className="my-2"><a href="#" className="text-gray-100  text-md hover:text-blue-500">About us</a></span>
-                        <span className="my-2"><a href="#" className="text-gray-100 text-md hover:text-blue-500">Career</a></span>
-                        <span className="my-2"><a href="#" className="text-gray-100 text-md hover:text-blue-500">Contact us</a></span>
-                        <span className="my-2"><a href="#" className="text-gray-100 text-md hover:text-blue-500">Pricing</a></span>
-                    </div>
-                    <div className="flex flex-col">
-                        <span className="font-bold text-gray-100 text-xl uppercase mt-4 md:mt-0 mb-2">WelinkMed</span>
-                        <span className="my-2"><a href="#" className="text-gray-100 text-md hover:text-blue-500">Good</a></span>
-                        <span className="my-2"><a href="#" className="text-gray-100 text-md hover:text-blue-500">Creative</a></span>
-                        <span className="my-2"><a href="#" className="text-gray-100 text-md hover:text-blue-500">Achiver Goals</a></span>
-                        <span className="my-2"><a href="#" className="text-gray-100 text-md hover:text-blue-500">Get JOb</a></span>
-                    </div>
-                    <div className="flex flex-col">
-                        <span className="font-bold text-gray-100 text-xl uppercase mt-4 md:mt-0 mb-2">More infomation</span>
-                        <span className="my-2"><a href="#" className="text-gray-100  hover:text-white text-md"><i className="fa fa-phone bg-green-200 p-2 text-black rounded"></i>  +1 230 545 78 789 </a></span>
-                        <span className="my-2"><a href="#" className="text-gray-100  hover:text-white text-md"><i className="fa fa-facebook bg-blue-500 p-2 text-black rounded"></i> We Link Med </a></span>
-                        <span className="my-2"><a href="#" className="text-gray-100  hover:text-white text-md"><i className="fa fa-twitter bg-blue-300 p-2 text-black rounded"></i>  We Link Med </a></span>
-                        <span className="my-2"><a href="#" className="text-gray-100  hover:text-white text-md"><i className="fa fa-linkedin bg-blue-400 p-2 text-black rounded"></i> We Link Med </a></span>
-                    </div>
+      {/* Footer - Modernized */}
+      <footer className="relative bg-fixed bg-center bg-cover bgImageWeb1">
+        <div className="bg-gradient-to-br backdrop-blur-sm from-red-900/90 via-red-800/85 to-blue-900/80">
+        <div className="px-4 py-12 mx-auto max-w-7xl md:px-8 lg:px-16 md:py-16">
+            <div data-aos="fade-up" data-aos-duration="900" className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-4 md:gap-12">
+                {/* Brand */}
+                <div className="lg:col-span-1">
+                    <h3 className="mb-4 text-2xl font-bold text-white">WeLink Med</h3>
+                    <p className="text-sm leading-relaxed text-gray-300">
+                      Complete Medication Management Solution for healthcare facilities.
+                    </p>
+                </div>
+                {/* Pages */}
+                <div>
+                    <h4 className="mb-4 text-lg font-bold text-white uppercase">Pages</h4>
+                    <ul className="space-y-2">
+                        <li><a href="#" className="inline-block text-sm text-gray-300 transition-colors duration-300 hover:text-white hover:translate-x-1">Home</a></li>
+                        <li><a href="#" className="inline-block text-sm text-gray-300 transition-colors duration-300 hover:text-white hover:translate-x-1">About Us</a></li>
+                        <li><a href="#" className="inline-block text-sm text-gray-300 transition-colors duration-300 hover:text-white hover:translate-x-1">Career</a></li>
+                        <li><a href="#" className="inline-block text-sm text-gray-300 transition-colors duration-300 hover:text-white hover:translate-x-1">Contact Us</a></li>
+                        <li><a href="#" className="inline-block text-sm text-gray-300 transition-colors duration-300 hover:text-white hover:translate-x-1">Pricing</a></li>
+                    </ul>
+                </div>
+                {/* Services */}
+                <div>
+                    <h4 className="mb-4 text-lg font-bold text-white uppercase">Services</h4>
+                    <ul className="space-y-2">
+                        <li><a href="#" className="inline-block text-sm text-gray-300 transition-colors duration-300 hover:text-white hover:translate-x-1">eMAR</a></li>
+                        <li><a href="#" className="inline-block text-sm text-gray-300 transition-colors duration-300 hover:text-white hover:translate-x-1">Medication Management</a></li>
+                        <li><a href="#" className="inline-block text-sm text-gray-300 transition-colors duration-300 hover:text-white hover:translate-x-1">Documentation</a></li>
+                        <li><a href="#" className="inline-block text-sm text-gray-300 transition-colors duration-300 hover:text-white hover:translate-x-1">Support</a></li>
+                    </ul>
+                </div>
+                {/* Contact Info */}
+                <div>
+                    <h4 className="mb-4 text-lg font-bold text-white uppercase">Contact</h4>
+                    <ul className="space-y-3">
+                        <li>
+                            <a href="tel:+123054578789" className="flex items-center text-gray-300 transition-colors duration-300 hover:text-white group">
+                                <i className="flex justify-center items-center mr-3 w-8 h-8 bg-green-500 rounded-full transition-transform duration-300 fa fa-phone group-hover:scale-110"></i>
+                                <span className="text-sm">+1 230 545 78 789</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#" className="flex items-center text-gray-300 transition-colors duration-300 hover:text-white group">
+                                <i className="flex justify-center items-center mr-3 w-8 h-8 bg-blue-600 rounded-full transition-transform duration-300 fa fa-facebook group-hover:scale-110"></i>
+                                <span className="text-sm">WeLink Med</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#" className="flex items-center text-gray-300 transition-colors duration-300 hover:text-white group">
+                                <i className="flex justify-center items-center mr-3 w-8 h-8 bg-cyan-500 rounded-full transition-transform duration-300 fa fa-twitter group-hover:scale-110"></i>
+                                <span className="text-sm">@WeLinkMed</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#" className="flex items-center text-gray-300 transition-colors duration-300 hover:text-white group">
+                                <i className="flex justify-center items-center mr-3 w-8 h-8 bg-indigo-600 rounded-full transition-transform duration-300 fa fa-linkedin group-hover:scale-110"></i>
+                                <span className="text-sm">WeLink Med</span>
+                            </a>
+                        </li>
+                    </ul>
                 </div>
             </div>
         </div>
-        <div className="container mx-auto px-16">
-            <div className="mt-16 border-t-2 border-gray-300 flex flex-col items-center">
-                <div className="sm:w-2/3 text-center py-6">
-                    <p className="text-sm text-gray-100 font-bold mb-2">
-                        © 2020 by we link med
+        {/* Footer Bottom */}
+        <div className="border-t border-gray-600/50">
+            <div className="px-4 py-6 mx-auto max-w-7xl md:px-8 lg:px-16">
+                <div className="flex flex-col justify-between items-center md:flex-row">
+                    <p className="mb-2 text-sm text-gray-300 md:mb-0">
+                        © {new Date().getFullYear()} WeLink Med. All rights reserved.
                     </p>
+                    <div className="flex space-x-6">
+                        <a href="#" className="text-sm text-gray-300 transition-colors duration-300 hover:text-white">Privacy Policy</a>
+                        <a href="#" className="text-sm text-gray-300 transition-colors duration-300 hover:text-white">Terms of Service</a>
+                    </div>
                 </div>
             </div>
         </div>
         </div>
     </footer>
-
-  </div>
-  </div>
   </>)
 }

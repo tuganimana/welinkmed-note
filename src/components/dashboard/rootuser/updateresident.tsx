@@ -6,7 +6,7 @@ import { ResidentType } from '../../../utils/types'
 import { welinkTokens } from '../../../utils/enums'
 import { useApi } from '../../../utils/api'
 import Alert from '../../alerts'
-import { useParams } from 'react-router-dom'
+import { useParams } from 'next/navigation'
 const jwt = require('jsonwebtoken')
 const { Option } = Select
 export default function Editresidents () {

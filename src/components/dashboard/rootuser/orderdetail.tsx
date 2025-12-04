@@ -9,7 +9,7 @@ import { useApi } from '../../../utils/api'
 import Sig from './editsig'
 import Allorders from './orderall'
 import Alert from '../../alerts'
-import { useParams } from 'react-router-dom'
+import { useParams } from 'next/navigation'
 const { TabPane } = Tabs
 const { Option } = Select
 export default function Orderdetail () {

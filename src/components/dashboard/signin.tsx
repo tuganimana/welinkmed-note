@@ -1,33 +1,36 @@
 // eslint-disable-next-line no-use-before-define
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import '../../css/dashboard.css'
 import { useForm } from 'react-hook-form'
 import { LoginType } from '../../utils/types'
-import { useHistory } from 'react-router-dom'
+import { useRouter } from 'next/navigation'
 import { Spin } from 'antd'
 import { frontEndPoints, welinkTokens, accountCategory } from '../../utils/enums'
 import { useApi } from '../../utils/api'
 import Alert from '../alerts'
 export default function Signin () {
-  const history = useHistory()
+  const router = useRouter()
   const { register, handleSubmit, formState: { errors } } = useForm<LoginType>()
   const [loading, setLoading] = useState(false)
   const [errorMessage, setErrormessage] = useState('')
-  const existingToken = localStorage.getItem(welinkTokens.userToken)
-  if (existingToken) {
-    const category = localStorage.getItem(welinkTokens.accountType)
-    switch (category) {
-      case accountCategory.ADMIN:
-        history.push(frontEndPoints.DASHBOARD)
-        break
-      case accountCategory.CLIENTS:
-        history.push(frontEndPoints.USERADMIN)
-        break
-      case accountCategory.ROOT:
-        history.push(frontEndPoints.ROOT)
-        break
+  
+  useEffect(() => {
+    const existingToken = localStorage.getItem(welinkTokens.userToken)
+    if (existingToken) {
+      const category = localStorage.getItem(welinkTokens.accountType)
+      switch (category) {
+        case accountCategory.ADMIN:
+          router.push(frontEndPoints.DASHBOARD)
+          break
+        case accountCategory.CLIENTS:
+          router.push(frontEndPoints.USERADMIN)
+          break
+        case accountCategory.ROOT:
+          router.push(frontEndPoints.ROOT)
+          break
+      }
     }
-  }
+  }, [router])
   const handleLogin = async (data:LoginType) => {
     setLoading(true)
     try {
@@ -48,13 +51,13 @@ export default function Signin () {
         setTimeout(() => {
           setLoading(false)
           if (accountType === accountCategory.ADMIN) {
-            history.push(frontEndPoints.DASHBOARD)
+            router.push(frontEndPoints.DASHBOARD)
             setErrormessage(api.message)
           } else if (accountType === accountCategory.CLIENTS) {
-            history.push(frontEndPoints.USERADMIN)
+            router.push(frontEndPoints.USERADMIN)
             setErrormessage(api.message)
           } else if (accountType === accountCategory.ROOT) {
-            history.push(frontEndPoints.ROOT)
+            router.push(frontEndPoints.ROOT)
             setErrormessage(api.data.message)
           }
         }, 2000)

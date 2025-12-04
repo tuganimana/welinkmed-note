@@ -1,12 +1,12 @@
 // eslint-disable-next-line no-use-before-define
 import React, { useState, useEffect } from 'react'
 import { LogoutOutlined } from '@ant-design/icons'
-import { useHistory } from 'react-router-dom'
+import { useRouter } from 'next/navigation'
 import { welinkTokens, frontEndPoints, backEndPoints } from '../../utils/enums'
 import { api } from '../../utils/apiRequest'
 import Logo from '../../images/logo192.png'
 export default function Sidebar () {
-  const history = useHistory()
+  const router = useRouter()
   const [small, setSmall] = useState(false)
   const [due, setDue] = useState(0)
   const handleClick = () => {
@@ -18,7 +18,7 @@ export default function Sidebar () {
   const handleLogout = () => {
     localStorage.removeItem(welinkTokens.userToken)
     localStorage.removeItem(welinkTokens.accountType)
-    history.push(frontEndPoints.LOGIN)
+    router.push(frontEndPoints.LOGIN)
   }
   useEffect(() => {
     const getAllOrder = async () => {
