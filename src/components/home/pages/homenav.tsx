@@ -1,5 +1,6 @@
 // eslint-disable-next-line no-use-before-define
 import React, { useState } from 'react'
+import Link from 'next/link'
 import { frontEndPoints } from '../../../utils/enums'
 import '../../../css/tailwind.css'
 export default function Homenav () {
@@ -17,11 +18,11 @@ export default function Homenav () {
   <div data-aos="fade-down" data-aos-easing="linear" data-aos-duration="700" className="">
     <div className="flex justify-between items-center">
       <div className="flex-shrink-0">
-        <a href="/" className="flex items-center no-underline group">
+        <Link href="/" className="flex items-center no-underline group">
           <h3 className="text-2xl md:text-3xl text-white no-underline font-bold bg-gradient-to-r from-white to-gray-200 bg-clip-text text-transparent group-hover:from-red-200 group-hover:to-white transition-all duration-300">
             WeLink<span className="text-red-400">Med</span>
           </h3>
-        </a>
+        </Link>
       </div>
       <div className="md:hidden">
         <button type="button" onClick={handleClick} className="inline-flex items-center justify-center p-2 rounded-lg text-white hover:bg-white/10 focus:outline-none focus:bg-white/10 transition duration-150 ease-in-out">
@@ -31,26 +32,26 @@ export default function Homenav () {
         </button>
       </div>
       <nav className="hidden md:flex items-center space-x-8">
-        <a href="/" className="text-base font-medium text-white/90 hover:text-white no-underline transition-all duration-300 relative group">
+        <Link href="/" className="text-base font-medium text-white/90 hover:text-white no-underline transition-all duration-300 relative group">
           Home
           <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-white group-hover:w-full transition-all duration-300"></span>
-        </a>
-        <a href="/" className="text-base font-medium text-white/90 hover:text-white no-underline transition-all duration-300 relative group">
+        </Link>
+        <Link href="/" className="text-base font-medium text-white/90 hover:text-white no-underline transition-all duration-300 relative group">
           About Us
           <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-white group-hover:w-full transition-all duration-300"></span>
-        </a>
-        <a href="/" className="text-base font-medium text-white/90 hover:text-white no-underline transition-all duration-300 relative group">
+        </Link>
+        <Link href="/" className="text-base font-medium text-white/90 hover:text-white no-underline transition-all duration-300 relative group">
           Services
           <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-white group-hover:w-full transition-all duration-300"></span>
-        </a>
-        <a href="/" className="text-base font-medium text-white/90 hover:text-white no-underline transition-all duration-300 relative group">
+        </Link>
+        <Link href="/" className="text-base font-medium text-white/90 hover:text-white no-underline transition-all duration-300 relative group">
           Career
           <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-white group-hover:w-full transition-all duration-300"></span>
-        </a>
-        <a href="/" className="text-base font-medium text-white/90 hover:text-white no-underline transition-all duration-300 relative group">
+        </Link>
+        <Link href="/" className="text-base font-medium text-white/90 hover:text-white no-underline transition-all duration-300 relative group">
           Vision
           <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-white group-hover:w-full transition-all duration-300"></span>
-        </a>
+        </Link>
         <a href={frontEndPoints.LOGIN} className="bg-gradient-to-r from-red-600 to-red-700 hover:from-red-700 hover:to-red-800 px-6 py-2.5 rounded-full text-base font-semibold text-white no-underline shadow-lg hover:shadow-xl transform transition-all duration-300 hover:scale-105">
           Free Trial
         </a>
@@ -73,9 +74,9 @@ export default function Homenav () {
             </button>
           </div>
           <nav className="flex-1 p-6 space-y-4 overflow-y-auto">
-            <a href="/" onClick={handleSmall} className="block text-base font-medium text-gray-700 hover:text-red-600 py-2 transition-colors duration-300">
+            <Link href="/" onClick={handleSmall} className="block text-base font-medium text-gray-700 hover:text-red-600 py-2 transition-colors duration-300">
               Home
-            </a>
+            </Link>
             <a href="#" onClick={handleSmall} className="block text-base font-medium text-gray-700 hover:text-red-600 py-2 transition-colors duration-300">
               About Us
             </a>

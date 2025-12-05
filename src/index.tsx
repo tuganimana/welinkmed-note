@@ -1,4 +1,5 @@
 // eslint-disable-next-line no-use-before-define
+/* eslint-disable react/no-deprecated */
 import React from 'react'
 import ReactDOM from 'react-dom'
 import './index.css'

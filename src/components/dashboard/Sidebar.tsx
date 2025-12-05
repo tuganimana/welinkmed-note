@@ -2,6 +2,7 @@
 import React, { useState, useEffect } from 'react'
 import { LogoutOutlined } from '@ant-design/icons'
 import { useRouter } from 'next/navigation'
+import Link from 'next/link'
 import { welinkTokens, frontEndPoints, backEndPoints } from '../../utils/enums'
 import { api } from '../../utils/apiRequest'
 import Logo from '../../images/logo192.png'
@@ -111,9 +112,9 @@ export default function Sidebar () {
           </div>
           <div>
             <nav className="grid gap-y-5">
-              <a href="/" className="text-sm leading-6 font-medium text-gray-600 hover:text-red-500 focus:outline-none focus:text-yellow-700 transition ease-in-out duration-150">
+              <Link href="/" className="text-sm leading-6 font-medium text-gray-600 hover:text-red-500 focus:outline-none focus:text-yellow-700 transition ease-in-out duration-150">
               Resident Due
-              </a>
+              </Link>
               <a href={frontEndPoints.DUE_ORDERS_USERS} className="text-sm leading-6 font-medium text-gray-600 hover:text-red-500 focus:outline-none focus:text-yellow-700 transition ease-in-out duration-150">
                Due Orders
               </a>

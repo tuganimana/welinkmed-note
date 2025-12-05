@@ -224,7 +224,7 @@ export default function Body () {
                 Welinkmed Is Customized to Meet Your Specific Needs
               </h2>
               <p className="text-lg font-medium leading-relaxed text-gray-100 md:text-xl">
-                Welinkmed's pricing is structured as a subscription fee. The cost will vary based on the modules you choose to implement, as well as the total number of service hours you have each month. If you're interested in more specific pricing, we'd love to connect you with one of our client representatives who can assess your specific needs and provide you with a quote.
+                Welinkmed&apos;s pricing is structured as a subscription fee. The cost will vary based on the modules you choose to implement, as well as the total number of service hours you have each month. If you&apos;re interested in more specific pricing, we&apos;d love to connect you with one of our client representatives who can assess your specific needs and provide you with a quote.
               </p>
               <div className="pt-4">
                 <button data-aos="zoom-out" className="relative px-10 py-4 text-lg font-bold text-red-600 bg-white rounded-full shadow-2xl transition-all duration-300 transform group hover:bg-gray-50 hover:shadow-3xl hover:scale-110">

@@ -2,12 +2,13 @@
 import React from 'react'
 import { Menu, Dropdown } from 'antd'
 import { DownOutlined, SearchOutlined } from '@ant-design/icons'
+import Link from 'next/link'
 import { frontEndPoints } from '../../../utils/enums'
 export default function Topbar () {
   const menu = (
   <Menu>
     <Menu.Item key="0">
-      <a href="/">Resident maintenance</a>
+      <Link href="/">Resident maintenance</Link>
     </Menu.Item>
     <Menu.Item key="0">
       <a href={frontEndPoints.USER_MAINTENANCE}>User maintenance</a>

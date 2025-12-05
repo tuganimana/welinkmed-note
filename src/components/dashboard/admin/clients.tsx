@@ -69,7 +69,7 @@ export default function Residents () {
                        <div className="w-full lg:w-1/2">
 
                          <a href={urlPath}>
-                         {items.profile === null ? <img src={ruser} alt="" className="rounded-l-xl w-full" /> : <img src={imagePath} alt="" className="rounded-l-xl w-full" />}
+                         {items.profile === null ? <img src={typeof ruser === 'string' ? ruser : ruser.src} alt="" className="rounded-l-xl w-full" /> : <img src={imagePath} alt="" className="rounded-l-xl w-full" />}
                          </a>
                        </div>
                        <div className="w-full lg:w-1/2 grid gap-4 p-1">
